@@ -1,7 +1,16 @@
-import React, { useState, useMemo } from 'react';
-import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy, Lock, Unlock, ChevronDown, ChevronUp } from 'lucide-react';
 import careerExportData from '../data/career_export.json';
 import { generateDMReply, isLLMAvailable } from '../utils/llm';
+import { LEGENDS, LEGEND_TIERS, Legend, LegendTier } from '../data/legends';
+import {
+  isLegendUnlocked,
+  getLegendConversation,
+  saveLegendConversation,
+  getUnlockedLegends,
+  getClosestLockedLegends,
+  LegendConversation,
+} from '../utils/legendUnlock';
 
 interface FeedPost {
   id: string;
@@ -24,14 +33,38 @@ interface DirectMessage {
   content: string;
   timeAgo: string;
   read: boolean;
+  legendId?: string;
 }
 
-const MOCK_DMS: DirectMessage[] = [
-  { id: 'dm1', sender: 'Thierry Henry', handle: '@TitiHenry', flag: '\u{1F1EB}\u{E0067}', role: 'legend', content: 'I have been watching your progress closely. 16 assists shows real vision. Keep developing that final ball -- you have the potential to be one of the greats.', timeAgo: '1h', read: false },
-  { id: 'dm2', sender: 'Jorge Mendes', handle: '@JorgeMendes', flag: '\u{1F1F5}\u{E0067}', role: 'agent', content: 'There will be interest from top clubs. Let us discuss your future. My office is always open.', timeAgo: '3h', read: false },
-  { id: 'dm3', sender: 'Your Coach', handle: '@SpeziaCoach', flag: '\u{1F1EE}\u{E0067}', role: 'coach', content: 'Good work this season. Avg rating of 7.67 shows real improvement. Focus on defensive contribution next.', timeAgo: '6h', read: true },
-  { id: 'dm4', sender: 'Gary Lineker', handle: '@GaryLineker', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', role: 'legend', content: 'Young man, your performances have caught my eye. The football world is watching. Keep your head down and keep working.', timeAgo: '1d', read: true },
-  { id: 'dm5', sender: 'Your Agent', handle: '@PlayerAgent', flag: '\u{1F1FA}\u{E0067}', role: 'agent', content: 'Season review: Excellent debut. 4G 16A with avg rating 7.67. Market value will increase significantly.', timeAgo: '2d', read: true },
+// Generate DMs from unlocked legends
+function generateLegendDMs(hofPoints: number): DirectMessage[] {
+  const dms: DirectMessage[] = [];
+  const unlockedLegends = getUnlockedLegends(hofPoints);
+
+  for (const legend of unlockedLegends) {
+    const conversation = getLegendConversation(legend.id);
+    if (conversation && conversation.messages.length > 0) {
+      const lastMessage = conversation.messages[conversation.messages.length - 1];
+      dms.push({
+        id: `legend_${legend.id}`,
+        sender: legend.name,
+        handle: legend.handle,
+        flag: legend.flag,
+        role: legend.tier === 'bronze' ? (legend.id === 'your_coach' ? 'coach' : 'agent') : 'legend',
+        content: lastMessage.content,
+        timeAgo: 'Recently',
+        read: true,
+        legendId: legend.id,
+      });
+    }
+  }
+
+  return dms;
+}
+
+// Static agent/coach DMs
+const STATIC_DMS: DirectMessage[] = [
+  { id: 'dm_agent', sender: 'Your Agent', handle: '@PlayerAgent', flag: '\u{1F1FA}\u{E0067}', role: 'agent', content: 'Season review: Excellent debut. 4G 16A with avg rating 7.67. Market value will increase significantly.', timeAgo: '2d', read: true },
 ];
 
 function seededRandom(seed: string): number {
@@ -189,6 +222,16 @@ const DMDetail: React.FC<{ dm: DirectMessage; onClose: () => void }> = ({ dm, on
     coach: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
   };
 
+  // Load conversation history for legend DMs
+  useEffect(() => {
+    if (dm.legendId) {
+      const conversation = getLegendConversation(dm.legendId);
+      if (conversation) {
+        setMessages(conversation.messages);
+      }
+    }
+  }, [dm.legendId]);
+
   const handleSend = async () => {
     if (!reply.trim() || loading) return;
     const userMessage = reply.trim();
@@ -203,6 +246,15 @@ const DMDetail: React.FC<{ dm: DirectMessage; onClose: () => void }> = ({ dm, on
       const avgRating = seasons.length > 0
         ? (seasons.reduce((s: number, x: any) => s + (parseFloat(x.avgRating) || 0), 0) / seasons.length).toFixed(1)
         : '0.0';
+
+      // Get personality token for legend
+      let personalityToken: string | undefined;
+      if (dm.legendId) {
+        const legend = LEGENDS.find(l => l.id === dm.legendId);
+        if (legend) {
+          personalityToken = legend.personalityToken;
+        }
+      }
 
       const response = await generateDMReply(
         dm.sender,
@@ -219,9 +271,22 @@ const DMDetail: React.FC<{ dm: DirectMessage; onClose: () => void }> = ({ dm, on
           club: profile.currentClub || 'Spezia',
           age: seasons.length > 0 ? (seasons[0].age || 14) : 14,
         },
-        messages
+        messages,
+        personalityToken
       );
-      setMessages(prev => [...prev, { role: 'assistant', content: response, timeAgo: 'Just now' }]);
+      setMessages(prev => {
+        const newMessages = [...prev, { role: 'assistant' as const, content: response, timeAgo: 'Just now' }];
+        // Save conversation for legend DMs
+        if (dm.legendId) {
+          saveLegendConversation(dm.legendId, {
+            legendId: dm.legendId,
+            messages: newMessages,
+            lastActivity: Date.now(),
+            unlockedAt: Date.now(),
+          });
+        }
+        return newMessages;
+      });
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Thank you for your message. Keep working hard.', timeAgo: 'Just now' }]);
     }
@@ -312,13 +377,57 @@ export const SocialMediaView: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<'feed' | 'dms'>('feed');
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [selectedDM, setSelectedDM] = useState<DirectMessage | null>(null);
+  const [expandedTiers, setExpandedTiers] = useState<Set<LegendTier>>(new Set(['bronze']));
 
   const posts = useMemo(() => {
     const data = careerExportData as any;
     return generatePosts(data);
   }, []);
 
-  const unreadCount = MOCK_DMS.filter(d => !d.read).length;
+  // Get HoF points from localStorage (same key as HallOfFameView)
+  const hofPoints = useMemo(() => {
+    try {
+      return parseInt(localStorage.getItem('career_legacy_points') || '0', 10);
+    } catch {
+      return 0;
+    }
+  }, []);
+
+  // Generate all DMs (legend + static)
+  const allDMs = useMemo(() => {
+    const legendDMs = generateLegendDMs(hofPoints);
+    return [...legendDMs, ...STATIC_DMS];
+  }, [hofPoints]);
+
+  const unreadCount = allDMs.filter(d => !d.read).length;
+
+  // Get legend unlock statuses by tier
+  const legendStatusesByTier = useMemo(() => {
+    const byTier: Record<LegendTier, Array<{ legend: Legend; unlocked: boolean; pointsNeeded: number }>> = {
+      bronze: [], silver: [], gold: [], platinum: [], diamond: [],
+    };
+    for (const legend of LEGENDS) {
+      const unlocked = isLegendUnlocked(legend, hofPoints);
+      byTier[legend.tier].push({
+        legend,
+        unlocked,
+        pointsNeeded: Math.max(0, legend.hofPointsRequired - hofPoints),
+      });
+    }
+    return byTier;
+  }, [hofPoints]);
+
+  const toggleTier = (tier: LegendTier) => {
+    setExpandedTiers(prev => {
+      const next = new Set(prev);
+      if (next.has(tier)) {
+        next.delete(tier);
+      } else {
+        next.add(tier);
+      }
+      return next;
+    });
+  };
 
   const toggleLike = (postId: string) => {
     setLikedPosts(prev => {
@@ -390,8 +499,96 @@ export const SocialMediaView: React.FC = () => {
       )}
 
       {activeSubTab === 'dms' && (
-        <div className="space-y-3">
-          {MOCK_DMS.map(dm => <DMCard key={dm.id} dm={dm} onClick={() => setSelectedDM(dm)} />)}
+        <div className="space-y-4">
+          {/* Legend Tiers */}
+          {(Object.keys(legendStatusesByTier) as LegendTier[]).map(tier => {
+            const tierInfo = LEGEND_TIERS[tier];
+            const legends = legendStatusesByTier[tier];
+            const isExpanded = expandedTiers.has(tier);
+            const unlockedCount = legends.filter(l => l.unlocked).length;
+
+            return (
+              <div key={tier} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => toggleTier(tier)}
+                  className={`w-full p-4 flex items-center justify-between cursor-pointer ${tierInfo.bgColor} hover:opacity-90 transition-opacity`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full ${tierInfo.bgColor} border ${tierInfo.borderColor} flex items-center justify-center`}>
+                      {tier === 'diamond' && <span className="text-purple-400">&#9830;</span>}
+                      {tier === 'platinum' && <span className="text-cyan-400">&#9830;</span>}
+                      {tier === 'gold' && <span className="text-yellow-400">&#9830;</span>}
+                      {tier === 'silver' && <span className="text-zinc-300">&#9830;</span>}
+                      {tier === 'bronze' && <span className="text-amber-600">&#9830;</span>}
+                    </div>
+                    <div className="text-left">
+                      <span className={`text-sm font-bold ${tierInfo.color}`}>{tierInfo.label} Tier</span>
+                      <span className="text-xs text-zinc-500 ml-2">
+                        {unlockedCount}/{legends.length} unlocked
+                      </span>
+                    </div>
+                  </div>
+                  {isExpanded ? <ChevronUp className="w-4 h-4 text-zinc-500" /> : <ChevronDown className="w-4 h-4 text-zinc-500" />}
+                </button>
+
+                {isExpanded && (
+                  <div className="p-3 space-y-2">
+                    {legends.map(({ legend, unlocked, pointsNeeded }) => (
+                      <div
+                        key={legend.id}
+                        className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                          unlocked
+                            ? 'bg-zinc-800/50 hover:bg-zinc-800 cursor-pointer'
+                            : 'bg-zinc-900/50 opacity-60'
+                        }`}
+                        onClick={() => {
+                          if (unlocked) {
+                            const dm = allDMs.find(d => d.legendId === legend.id);
+                            if (dm) setSelectedDM(dm);
+                          }
+                        }}
+                      >
+                        <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-lg flex-shrink-0">
+                          {legend.flag}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-white">{legend.name}</span>
+                            {unlocked ? (
+                              <Unlock className="w-3 h-3 text-green-400" />
+                            ) : (
+                              <Lock className="w-3 h-3 text-zinc-500" />
+                            )}
+                          </div>
+                          <p className="text-xs text-zinc-500">
+                            {unlocked
+                              ? `${legend.position} • ${legend.nationality}`
+                              : `Unlock at ${legend.hofPointsRequired} HoF points (${pointsNeeded} needed)`
+                            }
+                          </p>
+                        </div>
+                        {unlocked && (
+                          <div className="text-xs text-zinc-600">
+                            {allDMs.find(d => d.legendId === legend.id) ? 'Message' : 'New'}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {/* Static Agent/Coach DMs */}
+          <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-3">
+            <div className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3 px-1">Other Messages</div>
+            <div className="space-y-2">
+              {STATIC_DMS.map(dm => (
+                <DMCard key={dm.id} dm={dm} onClick={() => setSelectedDM(dm)} />
+              ))}
+            </div>
+          </div>
         </div>
       )}
 

@@ -37,11 +37,13 @@ export async function generateDMReply(
     club: string;
     age: number;
   },
-  chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
+  chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>,
+  personalityToken?: string
 ): Promise<string> {
-  const systemPrompt = `You are roleplaying as ${senderName}, a famous football ${senderRole}.
-
-Your persona:
+  // Use personality token if available, otherwise fall back to role-based prompt
+  const personaSection = personalityToken
+    ? `Your personality and speaking style:\n${personalityToken}`
+    : `Your persona:
 ${senderRole === 'legend' ? `- You are a legendary retired footballer who gives genuine, heartfelt advice to young players.
 - You speak from experience and are encouraging but honest.
 - You reference your own career when relevant.` : ''}
@@ -50,7 +52,11 @@ ${senderRole === 'agent' ? `- You are a top football agent who represents elite 
 - You talk about market value, transfers, and career moves.` : ''}
 ${senderRole === 'coach' ? `- You are a professional football coach managing Spezia.
 - You are direct, constructive, and focused on development.
-- You balance praise with areas for improvement.` : ''}
+- You balance praise with areas for improvement.` : ''}`;
+
+  const systemPrompt = `You are roleplaying as ${senderName}.
+
+${personaSection}
 
 The young player you are messaging:
 - Name: ${playerData.name}
@@ -61,7 +67,8 @@ The young player you are messaging:
 - Average Rating: ${playerData.avgRating}
 - MOTM Awards: ${playerData.motm}
 
-Keep your response under 100 words. Be authentic and specific to this player's situation.`;
+Keep your response under 100 words. Be authentic and specific to this player's situation.
+Stay completely in character. Never break character or mention being an AI.`;
 
   const messages: LLMMessage[] = [
     { role: 'system', content: systemPrompt },
@@ -98,7 +105,16 @@ Keep your response under 100 words. Be authentic and specific to this player's s
   }
 }
 
-function getFallbackReply(role: string): string {
+function getFallbackReply(role: string, senderName?: string): string {
+  // Generic fallbacks that work for any role
+  const genericReplies: string[] = [
+    'Thank you for your message. Keep working hard and never stop believing in yourself.',
+    'I appreciate the kind words. The road to greatness is long but you are on the right path.',
+    'That means a lot. Keep pushing to improve every day. I am watching your progress.',
+    'Well said. Focus on what you can control and the rest will follow.',
+    'I like your attitude. Stay hungry, stay humble. The best is yet to come.',
+  ];
+
   const replies: Record<string, string[]> = {
     legend: [
       'Thank you for your message. Keep working hard and never stop believing in yourself.',
@@ -116,6 +132,7 @@ function getFallbackReply(role: string): string {
       'Your training performances have been excellent. Keep it going.',
     ],
   };
-  const options = replies[legend] || replies.legend;
+
+  const options = replies[role] || genericReplies;
   return options[Math.floor(Math.random() * options.length)];
 }
