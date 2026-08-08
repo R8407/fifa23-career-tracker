@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Flame, MessageCircle, Heart, Share2 } from 'lucide-react';
+import { Flame, MessageCircle, Heart, Share2, Loader2 } from 'lucide-react';
 import careerExportData from '../data/career_export.json';
+import { generateLLMPunditCards, generateLLMFanComments, getStaticFanComments, PunditCard, FanComment } from '../utils/newsLlm';
 
 interface NewsItem {
   id: string;
@@ -12,18 +13,6 @@ interface NewsItem {
   image?: string;
 }
 
-interface PunditCard {
-  id: string;
-  pundit: string;
-  network: string;
-  flag: string;
-  role: string;
-  headline: string;
-  detail: string;
-  gradient: string;
-  priority: 'high' | 'medium';
-}
-
 const PUNDITS = [
   { name: 'Thierry Henry', network: 'CBS Sports', flag: '\u{1F1EB}\u{1F1F7}', role: 'Analyst' },
   { name: 'Jamie Carragher', network: 'CBS Sports', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', role: 'Pundit' },
@@ -33,14 +22,6 @@ const PUNDITS = [
   { name: 'Alex Scott', network: 'BBC', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', role: 'Pundit' },
   { name: 'Rio Ferdinand', network: 'TNT Sports', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', role: 'Pundit' },
   { name: 'Patrice Evra', network: 'CBS Sports', flag: '\u{1F1EB}\u{E0067}', role: 'Pundit' },
-];
-
-const FAN_COMMENTS = [
-  { name: 'Marco T.', flag: '\u{1F1EE}\u{E0067}', text: 'This guy is the REAL DEAL!' },
-  { name: 'Liam O\'Brien', flag: '\u{1F1EE}\u{E0067}', text: 'Best young player in the world right now!' },
-  { name: 'Carlos Mendoza', flag: '\u{1F1EA}\u{E0067}', text: 'POV: You chose the right career mode save' },
-  { name: 'Jean-Pierre D.', flag: '\u{1F1EB}\u{E0067}', text: 'Future Ballon d\'Or winner right here' },
-  { name: 'Tommy Wright', flag: '\u{1F3F4}\u{E0067}\u{E0073}\u{E0063}\u{E007F}', text: 'This career mode save is a movie' },
 ];
 
 const GRADIENTS: Record<string, string> = {
@@ -76,7 +57,7 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return result;
 }
 
-function generatePunditCards(data: any): PunditCard[] {
+function generateTemplatePunditCards(data: any): PunditCard[] {
   const cards: PunditCard[] = [];
   const profile = data.my_player_profile || {};
   const goals = data.total_goals || 0;
@@ -95,9 +76,7 @@ function generatePunditCards(data: any): PunditCard[] {
   const seasonAssists = latestSeason ? (latestSeason.assists || 0) : 0;
   const seed = Math.floor(Date.now() / 60000);
 
-  // TEMPLATES: Each returns a PunditCard or null
   const templates: (() => PunditCard | null)[] = [
-    // 1. Record chase — Spezia all-time goals
     () => {
       const rec = RECORDS[0];
       const remaining = rec.value - goals;
@@ -105,7 +84,6 @@ function generatePunditCards(data: any): PunditCard[] {
       if (remaining <= 10) return { id: 'rec-spezia-goals-chase', pundit: PUNDITS[1].name, network: PUNDITS[1].network, flag: PUNDITS[1].flag, role: PUNDITS[1].role, headline: `${remaining} GOALS FROM SPEZIA'S ALL-TIME RECORD!`, detail: `${goals} goals scored, ${remaining} more to surpass ${rec.holder}'s record of ${rec.value}. The chase is ON!`, gradient: GRADIENTS.milestone, priority: 'high' };
       return null;
     },
-    // 2. Record chase — Spezia single season goals
     () => {
       const rec = RECORDS[1];
       const remaining = rec.value - seasonGoals;
@@ -113,7 +91,6 @@ function generatePunditCards(data: any): PunditCard[] {
       if (remaining <= 4) return { id: 'rec-spezia-ssg-chase', pundit: PUNDITS[3].name, network: PUNDITS[3].network, flag: PUNDITS[3].flag, role: PUNDITS[3].role, headline: `${remaining} GOALS FROM SPEZIA'S SEASON RECORD!`, detail: `${seasonGoals} goals this season, ${remaining} more to beat ${rec.holder} (${rec.value}). Can he do it?`, gradient: GRADIENTS.milestone, priority: 'high' };
       return null;
     },
-    // 3. Record chase — Spezia single season assists
     () => {
       const rec = RECORDS[2];
       const remaining = rec.value - seasonAssists;
@@ -121,7 +98,6 @@ function generatePunditCards(data: any): PunditCard[] {
       if (remaining <= 3) return { id: 'rec-spezia-ssa-chase', pundit: PUNDITS[5].name, network: PUNDITS[5].network, flag: PUNDITS[5].flag, role: PUNDITS[5].role, headline: `${remaining} ASSISTS FROM SPEZIA'S SEASON RECORD!`, detail: `${seasonAssists} assists this season, ${remaining} more to beat ${rec.holder} (${rec.value}). Pure vision!`, gradient: GRADIENTS.milestone, priority: 'high' };
       return null;
     },
-    // 4. Record chase — Serie A season assists (Totti)
     () => {
       const rec = RECORDS[3];
       const remaining = rec.value - seasonAssists;
@@ -129,7 +105,6 @@ function generatePunditCards(data: any): PunditCard[] {
       if (seasonAssists >= rec.value) return { id: 'rec-seria-assists-broken', pundit: PUNDITS[0].name, network: PUNDITS[0].network, flag: PUNDITS[0].flag, role: PUNDITS[0].role, headline: `SURPASSES TOTTI IN SERIE A ASSISTS!`, detail: `${seasonAssists} assists this season -- breaking Totti's record of ${rec.value}! Football immortality!`, gradient: GRADIENTS.record, priority: 'high' };
       return null;
     },
-    // 5. Milestone — goal count
     () => {
       const milestones = [10, 25, 50, 100, 150, 200];
       for (let i = milestones.length - 1; i >= 0; i--) {
@@ -142,7 +117,6 @@ function generatePunditCards(data: any): PunditCard[] {
       }
       return null;
     },
-    // 6. Milestone — assist count
     () => {
       const milestones = [10, 25, 50, 100];
       for (let i = milestones.length - 1; i >= 0; i--) {
@@ -155,7 +129,6 @@ function generatePunditCards(data: any): PunditCard[] {
       }
       return null;
     },
-    // 7. OVR growth
     () => {
       if (ovr >= 65) {
         const p = PUNDITS[0];
@@ -163,7 +136,6 @@ function generatePunditCards(data: any): PunditCard[] {
       }
       return null;
     },
-    // 8. MOTM awards
     () => {
       if (motmTotal > 0) {
         const p = PUNDITS[2];
@@ -171,7 +143,6 @@ function generatePunditCards(data: any): PunditCard[] {
       }
       return null;
     },
-    // 9. Appearance milestone
     () => {
       const milestones = [10, 25, 50, 100];
       for (let i = milestones.length - 1; i >= 0; i--) {
@@ -184,7 +155,6 @@ function generatePunditCards(data: any): PunditCard[] {
       }
       return null;
     },
-    // 10-11. Pundit hot takes (rotating opinions)
     () => {
       const takes = [
         { headline: `THE MOST EXCITING YOUNG PLAYER IN WORLD FOOTBALL`, detail: `${playerName} at ${ovr} OVR with ${pot} potential. The ceiling is absolutely unlimited!` },
@@ -194,7 +164,6 @@ function generatePunditCards(data: any): PunditCard[] {
       const p = PUNDITS[(seed * 7) % PUNDITS.length];
       return { id: `hot-take-${seed % 2}`, pundit: p.name, network: p.network, flag: p.flag, role: p.role, headline: take.headline, detail: take.detail, gradient: GRADIENTS.default, priority: 'medium' };
     },
-    // 12-13. Club legend angle
     () => {
       const takes = [
         { headline: `SPEZIA'S GREATEST EVER PLAYER?`, detail: `With ${goals} goals and ${assists} assists, ${playerName} is rewriting Spezia's history books!` },
@@ -204,7 +173,6 @@ function generatePunditCards(data: any): PunditCard[] {
       const p = PUNDITS[(seed * 3) % PUNDITS.length];
       return { id: `club-legend-${(seed + 1) % 2}`, pundit: p.name, network: p.network, flag: p.flag, role: p.role, headline: take.headline, detail: take.detail, gradient: GRADIENTS.legend, priority: 'medium' };
     },
-    // 14-15. Wales international angle
     () => {
       const takes = [
         { headline: `WALES' GOLDEN BOY`, detail: `${playerName} is carrying Welsh football on his shoulders. A national treasure!` },
@@ -214,7 +182,6 @@ function generatePunditCards(data: any): PunditCard[] {
       const p = PUNDITS[(seed * 5) % PUNDITS.length];
       return { id: `wales-${(seed + 2) % 2}`, pundit: p.name, network: p.network, flag: p.flag, role: p.role, headline: take.headline, detail: take.detail, gradient: GRADIENTS.default, priority: 'medium' };
     },
-    // 16-17. Performance analysis
     () => {
       const takes = [
         { headline: `THE NUMBERS DON'T LIE -- ${avgRating} AVG RATING`, detail: `${avgRating} average match rating this season. The consistency is what separates good from great!` },
@@ -224,7 +191,6 @@ function generatePunditCards(data: any): PunditCard[] {
       const p = PUNDITS[(seed * 11) % PUNDITS.length];
       return { id: `perf-${(seed + 3) % 2}`, pundit: p.name, network: p.network, flag: p.flag, role: p.role, headline: take.headline, detail: take.detail, gradient: GRADIENTS.high, priority: 'medium' };
     },
-    // 18-19. Transfer market / value
     () => {
       const takes = [
         { headline: `EVERY TOP CLUB IN EUROPE IS WATCHING`, detail: `${playerName} at ${ovr} OVR. The transfer rumors will only get louder!` },
@@ -234,7 +200,6 @@ function generatePunditCards(data: any): PunditCard[] {
       const p = PUNDITS[(seed * 13) % PUNDITS.length];
       return { id: `transfer-${(seed + 4) % 2}`, pundit: p.name, network: p.network, flag: p.flag, role: p.role, headline: take.headline, detail: take.detail, gradient: GRADIENTS.default, priority: 'medium' };
     },
-    // 20. Next record proximity (generic)
     () => {
       const nextGoalMilestone = [10, 25, 50, 100, 150, 200].find(m => goals < m);
       if (nextGoalMilestone) {
@@ -246,13 +211,11 @@ function generatePunditCards(data: any): PunditCard[] {
     },
   ];
 
-  // Run templates and collect valid cards
   for (const template of templates) {
     const card = template();
     if (card) cards.push(card);
   }
 
-  // Shuffle based on current minute for variety (changes every 60s)
   const shuffled = seededShuffle(cards, seed);
   return shuffled;
 }
@@ -288,7 +251,7 @@ const PunditSlide: React.FC<{ card: PunditCard }> = ({ card }) => (
   </div>
 );
 
-const NewsTicker: React.FC<{ cards: PunditCard[] }> = ({ cards }) => {
+const NewsTicker: React.FC<{ cards: PunditCard[]; loading: boolean }> = ({ cards, loading }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -306,6 +269,17 @@ const NewsTicker: React.FC<{ cards: PunditCard[] }> = ({ cards }) => {
     animId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animId);
   }, [isPaused, cards.length]);
+
+  if (loading) {
+    return (
+      <div className="relative overflow-hidden bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl h-44 flex items-center justify-center">
+        <div className="flex items-center gap-2 text-zinc-500">
+          <Loader2 className="w-4 h-4 animate-spin" />
+          <span className="text-xs">Generating pundit takes...</span>
+        </div>
+      </div>
+    );
+  }
 
   if (cards.length === 0) return null;
 
@@ -329,16 +303,46 @@ const NewsTicker: React.FC<{ cards: PunditCard[] }> = ({ cards }) => {
 
 export const NewsFeed: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [punditCards, setPunditCards] = useState<PunditCard[]>([]);
+  const [punditLoading, setPunditLoading] = useState(true);
+  const [fanCommentsMap, setFanCommentsMap] = useState<Record<string, FanComment[]>>({});
+  const [fanLoadingMap, setFanLoadingMap] = useState<Record<string, boolean>>({});
 
   const newsItems = useMemo(() => {
     const data = careerExportData as any;
     return (data.news || []) as NewsItem[];
   }, []);
 
-  const punditCards = useMemo(() => {
-    const data = careerExportData as any;
-    return generatePunditCards(data);
+  useEffect(() => {
+    const loadPunditCards = async () => {
+      setPunditLoading(true);
+      const data = careerExportData as any;
+
+      const llmCards = await generateLLMPunditCards(data);
+      if (llmCards.length > 0) {
+        setPunditCards(llmCards);
+      } else {
+        setPunditCards(generateTemplatePunditCards(data));
+      }
+      setPunditLoading(false);
+    };
+
+    loadPunditCards();
   }, []);
+
+  const loadFanComments = async (newsId: string, headline: string, details: string) => {
+    if (fanCommentsMap[newsId] || fanLoadingMap[newsId]) return;
+
+    setFanLoadingMap(prev => ({ ...prev, [newsId]: true }));
+
+    const llmComments = await generateLLMFanComments(headline, details);
+    if (llmComments.length > 0) {
+      setFanCommentsMap(prev => ({ ...prev, [newsId]: llmComments }));
+    } else {
+      setFanCommentsMap(prev => ({ ...prev, [newsId]: getStaticFanComments() }));
+    }
+    setFanLoadingMap(prev => ({ ...prev, [newsId]: false }));
+  };
 
   const categories = useMemo(() => {
     const cats = new Set(newsItems.map(n => n.category));
@@ -369,7 +373,7 @@ export const NewsFeed: React.FC = () => {
             <span className="text-xs font-bold text-zinc-400 uppercase">Pundit Reactions</span>
             <span className="text-[10px] text-zinc-600">&bull; Hover to pause</span>
           </div>
-          <NewsTicker cards={punditCards} />
+          <NewsTicker cards={punditCards} loading={punditLoading} />
         </div>
       )}
 
@@ -394,53 +398,64 @@ export const NewsFeed: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredNews.map((item, idx) => (
-            <div key={item.id || idx} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all">
-              <div className="p-6">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 bg-amber-500/10 text-amber-400 text-xs font-bold rounded uppercase border border-amber-500/30">
-                    {item.category}
-                  </span>
-                  {item.priority === 'high' && (
-                    <span className="px-1.5 py-0.5 bg-red-500 text-white text-[8px] font-black rounded-full uppercase animate-pulse">BREAKING</span>
-                  )}
+          {filteredNews.map((item, idx) => {
+            const newsId = item.id || String(idx);
+            const comments = fanCommentsMap[newsId] || getStaticFanComments();
+            const isLoading = fanLoadingMap[newsId] || false;
+
+            if (!fanCommentsMap[newsId] && !fanLoadingMap[newsId]) {
+              loadFanComments(newsId, item.headline, item.details);
+            }
+
+            return (
+              <div key={newsId} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all">
+                <div className="p-6">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 bg-amber-500/10 text-amber-400 text-xs font-bold rounded uppercase border border-amber-500/30">
+                      {item.category}
+                    </span>
+                    {item.priority === 'high' && (
+                      <span className="px-1.5 py-0.5 bg-red-500 text-white text-[8px] font-black rounded-full uppercase animate-pulse">BREAKING</span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mt-3">{item.headline}</h3>
+                  <p className="text-sm text-zinc-400 mt-2">{item.details}</p>
+                  <p className="text-[10px] text-zinc-600 mt-2">{item.timestamp}</p>
                 </div>
-                <h3 className="text-lg font-bold text-white mt-3">{item.headline}</h3>
-                <p className="text-sm text-zinc-400 mt-2">{item.details}</p>
-                <p className="text-[10px] text-zinc-600 mt-2">{item.timestamp}</p>
-              </div>
-              <div className="border-t border-zinc-800 p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <MessageCircle className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs font-bold text-zinc-400 uppercase">Fan Reactions</span>
-                </div>
-                <div className="space-y-2">
-                  {FAN_COMMENTS.map((fan, i) => (
-                    <div key={i} className="flex gap-3 p-3 rounded-xl bg-zinc-800/50">
-                      <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center flex-shrink-0 text-sm">
-                        {fan.flag}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-xs font-bold text-zinc-300">{fan.name}</span>
-                        <p className="text-xs text-zinc-400 mt-0.5">{fan.text}</p>
-                        <div className="flex items-center gap-3 mt-2">
-                          <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-amber-400 transition-colors">
-                            <Heart className="w-3 h-3" /> Like
-                          </button>
-                          <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-blue-400 transition-colors">
-                            <MessageCircle className="w-3 h-3" /> Reply
-                          </button>
-                          <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-green-400 transition-colors">
-                            <Share2 className="w-3 h-3" /> Share
-                          </button>
+                <div className="border-t border-zinc-800 p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <MessageCircle className="w-4 h-4 text-amber-400" />
+                    <span className="text-xs font-bold text-zinc-400 uppercase">Fan Reactions</span>
+                    {isLoading && <Loader2 className="w-3 h-3 text-amber-400 animate-spin" />}
+                  </div>
+                  <div className="space-y-2">
+                    {comments.map((fan, i) => (
+                      <div key={i} className="flex gap-3 p-3 rounded-xl bg-zinc-800/50">
+                        <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center flex-shrink-0 text-sm">
+                          {fan.flag}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs font-bold text-zinc-300">{fan.name}</span>
+                          <p className="text-xs text-zinc-400 mt-0.5">{fan.text}</p>
+                          <div className="flex items-center gap-3 mt-2">
+                            <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-amber-400 transition-colors">
+                              <Heart className="w-3 h-3" /> Like
+                            </button>
+                            <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-blue-400 transition-colors">
+                              <MessageCircle className="w-3 h-3" /> Reply
+                            </button>
+                            <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-green-400 transition-colors">
+                              <Share2 className="w-3 h-3" /> Share
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy, Lock, Unlock, ChevronDown, ChevronUp, PenLine } from 'lucide-react';
+import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy, Lock, Unlock, ChevronDown, ChevronUp, PenLine, Smile } from 'lucide-react';
 import careerExportData from '../data/career_export.json';
 import { generateDMReply, isLLMAvailable } from '../utils/llm';
 import { LEGENDS, LEGEND_TIERS, Legend, LegendTier } from '../data/legends';
@@ -333,6 +333,9 @@ const DMDetail: React.FC<{ dm: DirectMessage; onClose: () => void }> = ({ dm, on
   const [reply, setReply] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const QUICK_EMOJIS = ['⚽', '🔥', '💪', '🙌', '😤', '😂', '🤯', '🏆', '🎯', '❤️', '💯', '🙏', '👑', '💀', '🫡', '🤝'];
 
   const roleColors: Record<string, string> = {
     legend: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
@@ -467,7 +470,30 @@ const DMDetail: React.FC<{ dm: DirectMessage; onClose: () => void }> = ({ dm, on
         </div>
 
         <div className="p-4 border-t border-zinc-800">
+          {/* Emoji Picker */}
+          {showEmojiPicker && (
+            <div className="mb-3 p-2 bg-zinc-800 border border-zinc-700 rounded-xl flex flex-wrap gap-1">
+              {QUICK_EMOJIS.map(emoji => (
+                <button
+                  key={emoji}
+                  onClick={() => {
+                    setReply(prev => prev + emoji);
+                    setShowEmojiPicker(false);
+                  }}
+                  className="w-8 h-8 flex items-center justify-center text-lg hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer"
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="flex gap-2">
+            <button
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              className="px-2 py-2 text-zinc-500 hover:text-amber-400 transition-colors cursor-pointer"
+            >
+              <Smile className="w-5 h-5" />
+            </button>
             <input
               type="text"
               value={reply}

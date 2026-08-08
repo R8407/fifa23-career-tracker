@@ -1,6 +1,6 @@
 import { buildPlayerContext } from './playerContext';
 
-const LLM_BASE_URL = 'http://localhost:8080';
+const LLM_BASE_URL = '/llm-api';
 
 interface LLMMessage {
   role: 'system' | 'user' | 'assistant';
@@ -55,29 +55,19 @@ function buildFocusedContext(context: ReturnType<typeof buildPlayerContext>, sen
   const lines: string[] = [];
   const career = findCareer(senderName);
 
-  // 1. User player info
-  lines.push('## YOUR PLAYER (the person you are messaging)');
-  lines.push(`Name: ${context.userPlayer.name}`);
-  lines.push(`Team: ${context.userPlayer.team} | Position: ${context.userPlayer.position} | Age: ${context.userPlayer.age}`);
-  lines.push(`Overall: ${context.userPlayer.overall} OVR | Avg Rating: ${context.userPlayer.avgRating}`);
-  lines.push(`Season: ${context.userPlayer.goals} goals, ${context.userPlayer.assists} assists in ${context.userPlayer.appearances} apps`);
-  lines.push('');
+  // 1. User player info (compact)
+  lines.push(`Player: ${context.userPlayer.name}, ${context.userPlayer.team}, ${context.userPlayer.position}, ${context.userPlayer.overall} OVR, age ${context.userPlayer.age}`);
+  lines.push(`Stats: ${context.userPlayer.goals}G ${context.userPlayer.assists}A in ${context.userPlayer.appearances} apps, avg ${context.userPlayer.avgRating}`);
 
-  // 2. Legend's own career
+  // 2. Legend's own career (compact)
   if (career) {
-    lines.push(`## YOUR CAREER (as ${senderName})`);
-    lines.push(`Position: ${career.position} | Nationality: ${career.nationality}`);
-    lines.push(`Clubs: ${career.clubs.join(', ') || 'N/A'}`);
-    lines.push(`International: ${career.caps || 0} caps, ${career.goals || 0} goals for ${career.nationality}`);
-    lines.push(`UCL: ${career.ucl} | Ballon d'Or: ${career.ballon}`);
-    lines.push(`Trophies: ${career.titles.join(', ') || 'None'}`);
-    lines.push('');
+    lines.push(`${senderName}: ${career.position}, ${career.nationality}, UCL:${career.ucl}, Ballon d'Or:${career.ballon}, clubs: ${career.clubs.slice(0, 3).join(', ')}`);
   }
 
-  // 3. Elite players (86+ from career export)
-  lines.push('## TOP PLAYERS (86+ rated in your league)');
-  context.elitePlayers.slice(0, 15).forEach(p => {
-    lines.push(`- ${p.name} (${p.position}, ${p.overall} OVR, ${p.team}) - ${p.goals}G ${p.assists}A`);
+  // 3. Top players (compact, only 5)
+  lines.push('Top players:');
+  context.elitePlayers.slice(0, 5).forEach(p => {
+    lines.push(`- ${p.name} (${p.overall} OVR, ${p.team}) ${p.goals}G ${p.assists}A`);
   });
 
   return lines.join('\n');
@@ -121,26 +111,23 @@ export async function generateDMReply(
     ? personalityToken.split('\n').filter((l: string) => l.trim()).slice(0, 3).join(' ')
     : `You are ${senderName}.`;
 
-  const systemPrompt = `You are ${senderName}. Answer naturally using the data below. Max 40 words. No meta-text.
-
-${focusedDB}`;
+  const systemPrompt = `You are ${senderName}. Reply naturally in under 30 words. Use 1 emoji.`;
 
   const messages: LLMMessage[] = [
     { role: 'system', content: systemPrompt },
     { role: 'assistant', content: originalMessage },
+    { role: 'user', content: `${playerReply}\n\nContext: ${focusedDB}` },
   ];
 
   if (chatHistory) {
-    for (const msg of chatHistory.slice(-4)) {
-      messages.push({ role: msg.role === 'user' ? 'user' : 'assistant', content: msg.content });
+    for (const msg of chatHistory.slice(-3)) {
+      messages.splice(-1, 0, { role: msg.role === 'user' ? 'user' : 'assistant', content: msg.content });
     }
   }
 
-  messages.push({ role: 'user', content: playerReply });
-
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
+    const timeout = setTimeout(() => controller.abort(), 60000);
 
     const res = await fetch(`${LLM_BASE_URL}/v1/chat/completions`, {
       method: 'POST',
@@ -149,7 +136,7 @@ ${focusedDB}`;
         model: 'phi3',
         messages,
         temperature: 0.7,
-        max_tokens: 120,
+        max_tokens: 150,
         stream: false,
       }),
       signal: controller.signal,
@@ -170,6 +157,9 @@ ${focusedDB}`;
       .replace(/\|/g, '')
       // Remove answer prefixes
       .replace(/^-+\s*answer:?.*$/gm, '')
+      // Remove meta-text Phi-3 likes to add
+      .split(/\(Note:/i)[0]
+      .split(/As\s+(Cristiano|Lionel|Rio|Gary|Thierry|Ronaldinho|Andrea|Zinedine|Paolo|Xavi|Kylian|Erling|Jude|Sergio|Jorge|David)/i)[0]
       // Remove everything after system prompt markers
       .split(/##\s*DATABASE/i)[0]
       .split(/##\s*YOUR PLAYER/i)[0]
@@ -198,19 +188,23 @@ ${focusedDB}`;
 function getFallbackReply(role: string): string {
   const replies: Record<string, string[]> = {
     legend: [
-      'Keep working hard. The best is yet to come.',
-      'I see something special in you.',
-      'Focus on what you can control.',
+      'Keep working hard. The best is yet to come ⚽🔥',
+      'I see something special in you 💪',
+      'Focus on what you can control 🎯',
+      'The grind never stops. Keep going 🏆',
+      'Trust the process, young king 👑',
     ],
     agent: [
-      'Your value is increasing with every game.',
-      'We have options on the table.',
-      'Focus on your performances.',
+      'Your value is increasing with every game 💰',
+      'We have options on the table 📋',
+      'Focus on your performances ⚽',
+      'Big moves coming. Stay ready 🔥',
     ],
     coach: [
-      'Good attitude. Keep this up.',
-      'Stay focused and disciplined.',
-      'I am pleased with your development.',
+      'Good attitude. Keep this up 💪',
+      'Stay focused and disciplined 🎯',
+      'I am pleased with your development ⚽',
+      'You are growing every day. Proud of you 🙌',
     ],
   };
   const options = replies[role] || replies.legend;
