@@ -162,19 +162,86 @@ function getStatBasedFallback(
   const ovr = user.overall ?? 65;
   const team = user.team || 'Spezia';
   const age = user.age ?? 14;
-  const topPlayer = elite[0] || { name: 'Ronaldo', overall: 90, goals: 20 };
 
   const postLower = post.toLowerCase();
-  const isDelusional = postLower.includes('messi') || postLower.includes('better than') ||
-    postLower.includes('ronaldo') || postLower.includes('goat') || postLower.includes('best ever');
 
-  const comments = isDelusional ? [
-    `${name} has ${goals} goals and ${assists} assists... Messi has 8 Ballon d'Ors. Sit down.`,
-    `${ovr} OVR at ${team}. Messi was running Barcelona at this age. Not even close.`,
-    `${assists} assists is nice but comparing to Messi is actually insane. Different planet.`,
-    `Bro said he is better than Messi with ${goals} career goals. I cannot breathe.`,
-    `${name} is good but Messi scored 91 goals in one calendar year. Let that sink in.`,
-  ] : [
+  // Detect who they're comparing themselves to
+  const mentionedLegends: string[] = [];
+  if (postLower.includes('messi')) mentionedLegends.push('Messi');
+  if (postLower.includes('ronaldo') || postLower.includes('cr7')) mentionedLegends.push('Ronaldo');
+  if (postLower.includes('haaland')) mentionedLegends.push('Haaland');
+  if (postLower.includes('mbappe') || postLower.includes('mbappé')) mentionedLegends.push('Mbappé');
+  if (postLower.includes('neymar')) mentionedLegends.push('Neymar');
+  if (postLower.includes('henry')) mentionedLegends.push('Henry');
+  if (postLower.includes('zidane')) mentionedLegends.push('Zidane');
+  if (postLower.includes('pirlo')) mentionedLegends.push('Pirlo');
+
+  // Check if comparing to someone specific
+  const isComparison = mentionedLegends.length > 0 ||
+    postLower.includes('better than') || postLower.includes('goat') ||
+    postLower.includes('best ever') || postLower.includes('greatest');
+
+  // Find the matched elite player stats from DB
+  const findLegend = (searchName: string) =>
+    elite.find(p => p.name.toLowerCase().includes(searchName.toLowerCase())) || null;
+
+  if (isComparison && mentionedLegends.length > 0) {
+    // Build comments that reference the ACTUAL legend mentioned
+    const legendName = mentionedLegends[0];
+    const legendStats = findLegend(legendName);
+
+    const legendFacts: Record<string, string[]> = {
+      'Messi': [
+        `${name} has ${goals} goals. Messi scored 91 in ONE year. Different species.`,
+        `${assists} assists is cute. Messi has 8 Ballon d'Ors and 4 Champions Leagues. Sit down.`,
+        `${ovr} OVR at ${team}? Messi won his first Ballon d'Or at 22. You're not close.`,
+        `Bro said better than Messi with ${goals} career goals. The audacity.`,
+        `Messi has 800+ career goals. ${name} has ${goals}. Math isn't mathing.`,
+      ],
+      'Ronaldo': [
+        `${name} has ${goals} goals. Ronaldo has 900+. The gap is OCEANIC.`,
+        `${assists} assists vs Ronaldo's 200+ Champions League goals. Delete this.`,
+        `${ovr} OVR at ${team}. Ronaldo was at Manchester United winning Ballon d'Ors at this age.`,
+        `${goals} goals and you're comparing to CR7? Ronaldo would eat you alive.`,
+        `Ronaldo has 5 UCL titles, 5 Ballon d'Ors. ${name} has ${goals} goals. Log off.`,
+      ],
+      'Haaland': [
+        `${name} has ${goals} goals. Haaland scored 52 in his debut season. Pipe down.`,
+        `${assists} assists? Haaland has more goals than that in HALF a season.`,
+        `${ovr} OVR at ${team}. Haaland was already at Dortmund dominating at your age.`,
+        `${goals}G ${assists}A vs Haaland's 52 goals in 2022/23. Not the same tier.`,
+        `Haaland broke the PL scoring record in year one. ${name} plays for Spezia. Be real.`,
+      ],
+      'Mbappé': [
+        `${name} has ${goals} goals. Mbappé has a World Cup winner's medal. Pipe down.`,
+        `${assists} assists is nothing when Mbappé has 200+ career goals already.`,
+        `${ovr} OVR at ${team}. Mbappé was at Monaco tearing up the league at your age.`,
+        `${goals} goals vs Mbappé's 250+ career goals. Different stratosphere.`,
+        `Mbappé won a World Cup at 19. ${name} plays in Serie A. Not comparable.`,
+      ],
+    };
+
+    // Use legend-specific comments if we have them, otherwise generic
+    const comments = legendFacts[legendName] || [
+      `${name} has ${goals} goals. ${legendName} has way more than that. Know your place.`,
+      `${assists} assists is good but ${legendName} is a different level entirely.`,
+      `${ovr} OVR at ${team} and you're comparing yourself to ${legendName}? Be humble.`,
+      `${goals}G ${assists}A and you think you're better than ${legendName}? The stats say otherwise.`,
+      `${legendName} has accomplished more by age 20 than ${name} will in his career. Facts.`,
+    ];
+
+    return comments.map((text, i) => ({
+      name: FAN_PERSONAS[i].name,
+      handle: FAN_PERSONAS[i].handle,
+      flag: FAN_PERSONAS[i].flag,
+      text,
+      likes: jitter(baseLikes, Math.floor(baseLikes * 0.15)),
+      shares: jitter(baseShares, Math.floor(baseShares * 0.15)),
+    }));
+  }
+
+  // Non-comparison post: hype with real stats
+  const hypeComments = [
     `${goals} goals and ${assists} assists at ${age} years old. This kid is something special.`,
     `${name} at ${ovr} OVR doing this at ${team}. Give this man his flowers.`,
     `${assists} assists — name another youngster with better output. I will wait.`,
@@ -182,7 +249,7 @@ function getStatBasedFallback(
     `${age} years old with ${goals}G ${assists}A. The ceiling is SCARY.`,
   ];
 
-  return comments.map((text, i) => ({
+  return hypeComments.map((text, i) => ({
     name: FAN_PERSONAS[i].name,
     handle: FAN_PERSONAS[i].handle,
     flag: FAN_PERSONAS[i].flag,
