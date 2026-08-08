@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* Ken Burns effect - slow zoom and pan */
+@keyframes kenburns {
+  0% { transform: scale(1) translate(0, 0); }
+  25% { transform: scale(1.05) translate(-1%, -1%); }
+  50% { transform: scale(1.1) translate(0%, -2%); }
+  75% { transform: scale(1.05) translate(1%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.animate-kenburns {
+  animation: kenburns 8s ease-in-out infinite;
+}
+
+/* Scan line effect */
+@keyframes scan {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Trophy 3D perspective */
+.trophy-3d {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+.trophy-3d:hover {
+  transform: rotateY(-5deg) rotateX(5deg) translateY(-8px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Trophy shelf glow */
+.trophy-glow {
+  position: relative;
+}
+
+.trophy-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(234, 179, 8, 0.4) 0%, transparent 70%);
+  filter: blur(4px);
+}
+
+/* Glass cabinet reflection */
+.glass-reflect {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-reflect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.glass-reflect:hover::before {
+  left: 150%;
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); }
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}

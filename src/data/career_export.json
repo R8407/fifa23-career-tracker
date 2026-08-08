@@ -1,0 +1,145 @@
+{
+  "my_player_id": "235735",
+  "my_team_id": "113974",
+  "my_player_profile": {
+    "playerid": "235735",
+    "firstname": "Ethan",
+    "lastname": "Ampadu",
+    "commonname": "",
+    "overallrating": "67",
+    "potential": "81",
+    "height": "181",
+    "weight": "75",
+    "preferredfoot": "1",
+    "birthdate": "155198",
+    "preferredposition1": "23",
+    "nationality": "Wales",
+    "currentClub": "Spezia"
+  },
+  "my_squad": [
+    { "playerid": "235735", "firstname": "Ethan", "lastname": "Ampadu", "overallrating": "67", "potential": "81", "jerseynumber": "7", "squad_position": "RW", "leaguegoals": "4", "leagueappearances": "22" },
+    { "playerid": "1001", "firstname": "Marco", "lastname": "Di Paola", "overallrating": "74", "potential": "78", "jerseynumber": "1", "squad_position": "GK", "leaguegoals": "0", "leagueappearances": "28" },
+    { "playerid": "1002", "firstname": "Emerson", "lastname": "Palmieri", "overallrating": "78", "potential": "82", "jerseynumber": "3", "squad_position": "LB", "leaguegoals": "2", "leagueappearances": "30" },
+    { "playerid": "1003", "firstname": "Duje", "lastname": "Caleta-Car", "overallrating": "80", "potential": "84", "jerseynumber": "4", "squad_position": "CB", "leaguegoals": "1", "leagueappearances": "32" },
+    { "playerid": "1004", "firstname": "Jakub", "lastname": "Kiwior", "overallrating": "76", "potential": "82", "jerseynumber": "5", "squad_position": "CB", "leaguegoals": "0", "leagueappearances": "26" },
+    { "playerid": "1005", "firstname": "Salvatore", "lastname": "Esposito", "overallrating": "79", "potential": "85", "jerseynumber": "8", "squad_position": "CM", "leaguegoals": "3", "leagueappearances": "31" }
+  ],
+  "elite_players_86_plus": [
+    { "playerid": "2001", "firstname": "Kylian", "lastname": "Mbappé", "overallrating": "92", "potential": "95", "teamname": "Paris Saint-Germain", "preferredposition1": "19" },
+    { "playerid": "2002", "firstname": "Erling", "lastname": "Haaland", "overallrating": "91", "potential": "94", "teamname": "Manchester City", "preferredposition1": "19" },
+    { "playerid": "2003", "firstname": "Jude", "lastname": "Bellingham", "overallrating": "90", "potential": "94", "teamname": "Real Madrid", "preferredposition1": "15" },
+    { "playerid": "2004", "firstname": "Vinícius", "lastname": "Júnior", "overallrating": "90", "potential": "94", "teamname": "Real Madrid", "preferredposition1": "17" },
+    { "playerid": "2005", "firstname": "Bukayo", "lastname": "Saka", "overallrating": "89", "potential": "93", "teamname": "Arsenal", "preferredposition1": "23" }
+  ],
+  "top_scorers_by_league": {
+    "Premier League": [
+      { "playerid": "3001", "firstname": "Erling", "lastname": "Haaland", "overallrating": "91", "teamname": "Manchester City", "leaguegoals": "36", "leagueappearances": "35" },
+      { "playerid": "3002", "firstname": "Mohamed", "lastname": "Salah", "overallrating": "88", "teamname": "Liverpool", "leaguegoals": "24", "leagueappearances": "34" }
+    ],
+    "La Liga": [
+      { "playerid": "3003", "firstname": "Robert", "lastname": "Lewandowski", "overallrating": "88", "teamname": "FC Barcelona", "leaguegoals": "26", "leagueappearances": "33" }
+    ],
+    "Serie A": [
+      { "playerid": "3004", "firstname": "Lautaro", "lastname": "Martínez", "overallrating": "87", "teamname": "Inter Milan", "leaguegoals": "24", "leagueappearances": "32" }
+    ]
+  },
+  "seasons": [
+    {
+      "id": "s2324",
+      "season": "2023/2024",
+      "age": "14",
+      "club": "Spezia",
+      "league": "Serie A",
+      "apps": 22,
+      "goals": 4,
+      "assists": 16,
+      "avgRating": "7.67",
+      "yellowCards": 3,
+      "redCards": 0,
+      "motm": 7,
+      "trophies": [],
+      "individualAwards": [],
+      "highlights": "First professional season at Spezia. Broke the club's single-season assists record with 16 assists.",
+      "xG": 3.8,
+      "xA": 12.5,
+      "keyPassesPerGame": 2.8,
+      "dribblesPerGame": 3.1
+    }
+  ],
+  "total_goals": 4,
+  "total_assists": 16,
+  "total_appearances": 22,
+  "wage": "€15,000/week",
+  "market_value": "€2.5M",
+  "trophies": [
+    {
+      "id": "t_motm",
+      "title": "Man of the Match Awards",
+      "category": "Individual",
+      "quantity": 7,
+      "iconType": "manofmatch",
+      "tier": "Gold",
+      "yearsWon": ["2023/2024"],
+      "description": "Man of the Match awards earned through exceptional performances."
+    },
+    {
+      "id": "t_ballondor",
+      "title": "Ballon d'Or",
+      "category": "Individual",
+      "quantity": 0,
+      "iconType": "ballondor",
+      "tier": "Diamond",
+      "yearsWon": [],
+      "description": "The most prestigious individual award in football."
+    },
+    {
+      "id": "t_ucl",
+      "title": "UEFA Champions League",
+      "category": "Club",
+      "quantity": 0,
+      "iconType": "champions",
+      "tier": "Platinum",
+      "yearsWon": [],
+      "description": "Europe's premier club competition."
+    },
+    {
+      "id": "t_league",
+      "title": "League Champion",
+      "category": "Club",
+      "quantity": 0,
+      "iconType": "league",
+      "tier": "Gold",
+      "yearsWon": [],
+      "description": "Domestic league title."
+    }
+  ],
+  "news": [
+    {
+      "id": "demo_news_1",
+      "timestamp": "2024-05-15 14:30",
+      "category": "milestone",
+      "headline": "Ethan Ampadu Breaks Spezia's All-Time Season Assists Record!",
+      "details": "With 16 assists in his debut season, Ethan Ampadu has shattered the previous record of 6 assists held by Daniele Verde. A historic achievement for the 14-year-old Welsh prodigy.",
+      "priority": "high",
+      "image": "milestone"
+    },
+    {
+      "id": "demo_news_2",
+      "timestamp": "2024-05-10 09:15",
+      "category": "performance",
+      "headline": "Ampadu's Creativity Rivals Dennis Bergkamp!",
+      "details": "With 16 career assists, Ethan Ampadu is showing the vision and passing ability that made Dennis Bergkamp a legend. The young Welshman is building a similar legacy of beautiful football.",
+      "priority": "medium",
+      "image": "legend_comparison"
+    },
+    {
+      "id": "demo_news_3",
+      "timestamp": "2024-04-28 18:45",
+      "category": "growth",
+      "headline": "Ethan Ampadu Improves to 67 OVR!",
+      "details": "Hard work paying off. Ethan Ampadu continues to develop as a player, now rated 67 overall with 81 potential. The trajectory is skyward.",
+      "priority": "medium",
+      "image": "rating"
+    }
+  ]
+}

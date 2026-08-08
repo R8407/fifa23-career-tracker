@@ -1,0 +1,6 @@
+{
+  "name": "Career Legacy Hub",
+  "description": "A football career legacy simulator and analytics museum tracking player achievements, records, and immortality against legend benchmarks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
