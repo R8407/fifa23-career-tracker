@@ -8,138 +8,4894 @@
     "commonname": "",
     "overallrating": "67",
     "potential": "81",
-    "height": "181",
-    "weight": "75",
+    "height": "173",
+    "weight": "78",
     "preferredfoot": "1",
     "birthdate": "155198",
     "preferredposition1": "23",
-    "nationality": "Wales",
+    "nationality": "45",
+    "finishing": "62",
+    "shotpower": "59",
+    "longshots": "61",
+    "volleys": "36",
+    "penalties": "22",
+    "vision": "48",
+    "crossing": "46",
+    "shortpassing": "74",
+    "longpassing": "69",
+    "curve": "56",
+    "agility": "73",
+    "balance": "68",
+    "reactions": "72",
+    "ballcontrol": "78",
+    "dribbling": "74",
+    "composure": "52",
+    "interceptions": "52",
+    "headingaccuracy": "67",
+    "defensiveawareness": "58",
+    "standingtackle": "58",
+    "slidingtackle": "54",
+    "stamina": "70",
+    "strength": "65",
+    "jumping": "86",
+    "aggression": "60",
+    "acceleration": "68",
+    "sprintspeed": "62",
     "currentClub": "Spezia"
   },
   "my_squad": [
-    { "playerid": "235735", "firstname": "Ethan", "lastname": "Ampadu", "overallrating": "67", "potential": "81", "jerseynumber": "7", "squad_position": "RW", "leaguegoals": "4", "leagueappearances": "22" },
-    { "playerid": "1001", "firstname": "Marco", "lastname": "Di Paola", "overallrating": "74", "potential": "78", "jerseynumber": "1", "squad_position": "GK", "leaguegoals": "0", "leagueappearances": "28" },
-    { "playerid": "1002", "firstname": "Emerson", "lastname": "Palmieri", "overallrating": "78", "potential": "82", "jerseynumber": "3", "squad_position": "LB", "leaguegoals": "2", "leagueappearances": "30" },
-    { "playerid": "1003", "firstname": "Duje", "lastname": "Caleta-Car", "overallrating": "80", "potential": "84", "jerseynumber": "4", "squad_position": "CB", "leaguegoals": "1", "leagueappearances": "32" },
-    { "playerid": "1004", "firstname": "Jakub", "lastname": "Kiwior", "overallrating": "76", "potential": "82", "jerseynumber": "5", "squad_position": "CB", "leaguegoals": "0", "leagueappearances": "26" },
-    { "playerid": "1005", "firstname": "Salvatore", "lastname": "Esposito", "overallrating": "79", "potential": "85", "jerseynumber": "8", "squad_position": "CM", "leaguegoals": "3", "leagueappearances": "31" }
+    {
+      "squad_position": "ST",
+      "jerseynumber": "13",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "211784",
+      "firstname": "Neal",
+      "lastname": "Maupay",
+      "commonname": null,
+      "overallrating": "77",
+      "potential": "78",
+      "height": "173",
+      "weight": "69",
+      "preferredfoot": "1",
+      "birthdate": "151150",
+      "preferredposition1": "25",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "GK",
+      "jerseynumber": "69",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "215502",
+      "firstname": "Bartłomiej",
+      "lastname": "Drągowski",
+      "commonname": null,
+      "overallrating": "77",
+      "potential": "79",
+      "height": "191",
+      "weight": "74",
+      "preferredfoot": "1",
+      "birthdate": "151520",
+      "preferredposition1": "0",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CM",
+      "jerseynumber": "77",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "239732",
+      "firstname": "Szymon",
+      "lastname": "Żurkowski",
+      "commonname": null,
+      "overallrating": "77",
+      "potential": "81",
+      "height": "185",
+      "weight": "77",
+      "preferredfoot": "1",
+      "birthdate": "151557",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "10",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "225844",
+      "firstname": "Daniele",
+      "lastname": "Verde",
+      "commonname": null,
+      "overallrating": "76",
+      "potential": "76",
+      "height": "168",
+      "weight": "64",
+      "preferredfoot": "2",
+      "birthdate": "151095",
+      "preferredposition1": "23",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "14",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "239964",
+      "firstname": "Eldor",
+      "lastname": "Shomurodov",
+      "commonname": null,
+      "overallrating": "75",
+      "potential": "75",
+      "height": "190",
+      "weight": "76",
+      "preferredfoot": "1",
+      "birthdate": "150738",
+      "preferredposition1": "25",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "LW",
+      "jerseynumber": "9",
+      "form": "3",
+      "leaguegoals": "5",
+      "leagueappearances": "0",
+      "playerid": "222467",
+      "firstname": "Iván",
+      "lastname": "López Álvarez",
+      "commonname": "Ivi López",
+      "overallrating": "75",
+      "potential": "76",
+      "height": "174",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "150373",
+      "preferredposition1": "21",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CB",
+      "jerseynumber": "3",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "233230",
+      "firstname": "Kevin",
+      "lastname": "Mac Allister",
+      "commonname": null,
+      "overallrating": "75",
+      "potential": "77",
+      "height": "175",
+      "weight": "72",
+      "preferredfoot": "1",
+      "birthdate": "151600",
+      "preferredposition1": "5",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "27",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "231235",
+      "firstname": "Kelvin",
+      "lastname": "Amian",
+      "commonname": null,
+      "overallrating": "74",
+      "potential": "77",
+      "height": "180",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "151693",
+      "preferredposition1": "2",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CB",
+      "jerseynumber": "29",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "220477",
+      "firstname": "Mattia",
+      "lastname": "Caldara",
+      "commonname": null,
+      "overallrating": "74",
+      "potential": "74",
+      "height": "187",
+      "weight": "80",
+      "preferredfoot": "1",
+      "birthdate": "150318",
+      "preferredposition1": "5",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "20",
+      "form": "3",
+      "leaguegoals": "2",
+      "leagueappearances": "0",
+      "playerid": "225189",
+      "firstname": "Simone",
+      "lastname": "Bastoni",
+      "commonname": null,
+      "overallrating": "73",
+      "potential": "75",
+      "height": "181",
+      "weight": "74",
+      "preferredfoot": "2",
+      "birthdate": "151233",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "LM",
+      "jerseynumber": "11",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "220491",
+      "firstname": "Emmanuel",
+      "lastname": "Gyasi",
+      "commonname": null,
+      "overallrating": "73",
+      "potential": "73",
+      "height": "181",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "150204",
+      "preferredposition1": "12",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "8",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "181318",
+      "firstname": "Albin",
+      "lastname": "Ekdal",
+      "commonname": null,
+      "overallrating": "73",
+      "potential": "74",
+      "height": "186",
+      "weight": "82",
+      "preferredfoot": "1",
+      "birthdate": "148576",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "43",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "237040",
+      "firstname": "Dimitrios",
+      "lastname": "Nikolaou",
+      "commonname": null,
+      "overallrating": "72",
+      "potential": "77",
+      "height": "188",
+      "weight": "92",
+      "preferredfoot": "2",
+      "birthdate": "151879",
+      "preferredposition1": "5",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CAM",
+      "jerseynumber": "15",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "211818",
+      "firstname": "Kevin",
+      "lastname": "Möhwald",
+      "commonname": null,
+      "overallrating": "71",
+      "potential": "71",
+      "height": "182",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150012",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "24",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "228698",
+      "firstname": "Viktor",
+      "lastname": "Kovalenko",
+      "commonname": null,
+      "overallrating": "71",
+      "potential": "73",
+      "height": "182",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150968",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "1",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "190778",
+      "firstname": "Jeroen",
+      "lastname": "Zoet",
+      "commonname": null,
+      "overallrating": "71",
+      "potential": "71",
+      "height": "189",
+      "weight": "88",
+      "preferredfoot": "1",
+      "birthdate": "149103",
+      "preferredposition1": "0",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "6",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "198220",
+      "firstname": "Mehdi",
+      "lastname": "Bourabia",
+      "commonname": null,
+      "overallrating": "70",
+      "potential": "70",
+      "height": "183",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "149316",
+      "preferredposition1": "10",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "25",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "252290",
+      "firstname": "Salvatore",
+      "lastname": "Esposito",
+      "commonname": null,
+      "overallrating": "70",
+      "potential": "79",
+      "height": "178",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "152665",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CDM",
+      "jerseynumber": "7",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "197777",
+      "firstname": "Jacopo",
+      "lastname": "Sala",
+      "commonname": null,
+      "overallrating": "69",
+      "potential": "69",
+      "height": "181",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "149436",
+      "preferredposition1": "10",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "2",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "246656",
+      "firstname": "Emil",
+      "lastname": "Holm",
+      "commonname": null,
+      "overallrating": "68",
+      "potential": "76",
+      "height": "191",
+      "weight": "83",
+      "preferredfoot": "1",
+      "birthdate": "152518",
+      "preferredposition1": "12",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CB",
+      "jerseynumber": "55",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "243185",
+      "firstname": "Przemysław",
+      "lastname": "Wiśniewski",
+      "commonname": null,
+      "overallrating": "68",
+      "potential": "73",
+      "height": "195",
+      "weight": "91",
+      "preferredfoot": "1",
+      "birthdate": "151862",
+      "preferredposition1": "5",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "21",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "246282",
+      "firstname": "Salvador",
+      "lastname": "Ferrer Canals",
+      "commonname": "Salva Ferrer",
+      "overallrating": "68",
+      "potential": "71",
+      "height": "184",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "151675",
+      "preferredposition1": "2",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CM",
+      "jerseynumber": "46",
+      "form": "3",
+      "leaguegoals": "4",
+      "leagueappearances": "22",
+      "playerid": "235735",
+      "firstname": "Ethan",
+      "lastname": "Ampadu",
+      "commonname": null,
+      "overallrating": "67",
+      "potential": "81",
+      "height": "173",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "155198",
+      "preferredposition1": "23",
+      "isUserPlayer": true
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "30",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "255611",
+      "firstname": "Daniel",
+      "lastname": "Maldini",
+      "commonname": null,
+      "overallrating": "67",
+      "potential": "78",
+      "height": "185",
+      "weight": "66",
+      "preferredfoot": "1",
+      "birthdate": "153034",
+      "preferredposition1": "18",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "19",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "273653",
+      "firstname": null,
+      "lastname": null,
+      "commonname": null,
+      "overallrating": "67",
+      "potential": "74",
+      "height": "186",
+      "weight": "80",
+      "preferredfoot": "2",
+      "birthdate": "153051",
+      "preferredposition1": "25",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "72",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "273652",
+      "firstname": null,
+      "lastname": null,
+      "commonname": null,
+      "overallrating": "64",
+      "potential": "78",
+      "height": "176",
+      "weight": "74",
+      "preferredfoot": "1",
+      "birthdate": "153590",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "22",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "139668",
+      "firstname": "Federico",
+      "lastname": "Marchetti",
+      "commonname": null,
+      "overallrating": "63",
+      "potential": "65",
+      "height": "188",
+      "weight": "83",
+      "preferredfoot": "2",
+      "birthdate": "146213",
+      "preferredposition1": "0",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "40",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "264460",
+      "firstname": "Petar",
+      "lastname": "Zovko",
+      "commonname": null,
+      "overallrating": "60",
+      "potential": "73",
+      "height": "192",
+      "weight": "80",
+      "preferredfoot": "2",
+      "birthdate": "153199",
+      "preferredposition1": "0",
+      "isUserPlayer": false
+    }
   ],
   "elite_players_86_plus": [
-    { "playerid": "2001", "firstname": "Kylian", "lastname": "Mbappé", "overallrating": "92", "potential": "95", "teamname": "Paris Saint-Germain", "preferredposition1": "19" },
-    { "playerid": "2002", "firstname": "Erling", "lastname": "Haaland", "overallrating": "91", "potential": "94", "teamname": "Manchester City", "preferredposition1": "19" },
-    { "playerid": "2003", "firstname": "Jude", "lastname": "Bellingham", "overallrating": "90", "potential": "94", "teamname": "Real Madrid", "preferredposition1": "15" },
-    { "playerid": "2004", "firstname": "Vinícius", "lastname": "Júnior", "overallrating": "90", "potential": "94", "teamname": "Real Madrid", "preferredposition1": "17" },
-    { "playerid": "2005", "firstname": "Bukayo", "lastname": "Saka", "overallrating": "89", "potential": "93", "teamname": "Arsenal", "preferredposition1": "23" }
+    {
+      "playerid": "231747",
+      "firstname": "Kylian",
+      "lastname": "Mbappé",
+      "commonname": null,
+      "overallrating": "92",
+      "potential": "95",
+      "height": "182",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "152008",
+      "preferredposition1": "25",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "158023",
+      "firstname": "Lionel",
+      "lastname": "Messi",
+      "commonname": null,
+      "overallrating": "91",
+      "potential": "91",
+      "height": "169",
+      "weight": "67",
+      "preferredfoot": "2",
+      "birthdate": "147811",
+      "preferredposition1": "23",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "192985",
+      "firstname": "Kevin",
+      "lastname": "De Bruyne",
+      "commonname": null,
+      "overallrating": "91",
+      "potential": "91",
+      "height": "181",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "149276",
+      "preferredposition1": "14",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "188545",
+      "firstname": "Robert",
+      "lastname": "Lewandowski",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "148235",
+      "preferredposition1": "25",
+      "teamname": "FC Barcelona"
+    },
+    {
+      "playerid": "192119",
+      "firstname": "Thibaut",
+      "lastname": "Courtois",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "91",
+      "height": "199",
+      "weight": "96",
+      "preferredfoot": "2",
+      "birthdate": "149594",
+      "preferredposition1": "0",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "200389",
+      "firstname": "Jan",
+      "lastname": "Oblak",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "90",
+      "height": "188",
+      "weight": "87",
+      "preferredfoot": "1",
+      "birthdate": "149835",
+      "preferredposition1": "0",
+      "teamname": "Atlético de Madrid"
+    },
+    {
+      "playerid": "212831",
+      "firstname": "Alisson",
+      "lastname": "Ramses Becker",
+      "commonname": "Alisson",
+      "overallrating": "90",
+      "potential": "90",
+      "height": "193",
+      "weight": "91",
+      "preferredfoot": "1",
+      "birthdate": "149738",
+      "preferredposition1": "0",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "239085",
+      "firstname": "Erling",
+      "lastname": "Haaland",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "94",
+      "height": "195",
+      "weight": "94",
+      "preferredfoot": "2",
+      "birthdate": "152587",
+      "preferredposition1": "25",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "165153",
+      "firstname": "Karim",
+      "lastname": "Benzema",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "147989",
+      "preferredposition1": "21",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "167495",
+      "firstname": "Manuel",
+      "lastname": "Neuer",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "193",
+      "weight": "93",
+      "preferredfoot": "1",
+      "birthdate": "147357",
+      "preferredposition1": "0",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "190871",
+      "firstname": "Neymar",
+      "lastname": "da Silva Santos Jr.",
+      "commonname": "Neymar Jr",
+      "overallrating": "89",
+      "potential": "89",
+      "height": "175",
+      "weight": "68",
+      "preferredfoot": "1",
+      "birthdate": "149498",
+      "preferredposition1": "27",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "192448",
+      "firstname": "Marc-André",
+      "lastname": "ter Stegen",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "187",
+      "weight": "85",
+      "preferredfoot": "1",
+      "birthdate": "149583",
+      "preferredposition1": "0",
+      "teamname": "FC Barcelona"
+    },
+    {
+      "playerid": "200145",
+      "firstname": "Carlos Henrique",
+      "lastname": "Venancio Casimiro",
+      "commonname": "Casemiro",
+      "overallrating": "89",
+      "potential": "89",
+      "height": "185",
+      "weight": "84",
+      "preferredfoot": "1",
+      "birthdate": "149516",
+      "preferredposition1": "10",
+      "teamname": "Manchester Utd"
+    },
+    {
+      "playerid": "202126",
+      "firstname": "Harry",
+      "lastname": "Kane",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "188",
+      "weight": "89",
+      "preferredfoot": "1",
+      "birthdate": "150037",
+      "preferredposition1": "25",
+      "teamname": "Spurs"
+    },
+    {
+      "playerid": "203376",
+      "firstname": "Virgil",
+      "lastname": "van Dijk",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "193",
+      "weight": "92",
+      "preferredfoot": "1",
+      "birthdate": "149286",
+      "preferredposition1": "5",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "208722",
+      "firstname": "Sadio",
+      "lastname": "Mané",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "174",
+      "weight": "69",
+      "preferredfoot": "1",
+      "birthdate": "149563",
+      "preferredposition1": "21",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "209331",
+      "firstname": "Mohamed",
+      "lastname": "Salah",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "89",
+      "height": "175",
+      "weight": "71",
+      "preferredfoot": "2",
+      "birthdate": "149629",
+      "preferredposition1": "23",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "210257",
+      "firstname": "Ederson",
+      "lastname": "Santana de Moraes",
+      "commonname": "Ederson",
+      "overallrating": "89",
+      "potential": "91",
+      "height": "188",
+      "weight": "86",
+      "preferredfoot": "2",
+      "birthdate": "150057",
+      "preferredposition1": "0",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "212622",
+      "firstname": "Joshua",
+      "lastname": "Kimmich",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "90",
+      "height": "177",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150597",
+      "preferredposition1": "10",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "230621",
+      "firstname": "Gianluigi",
+      "lastname": "Donnarumma",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "92",
+      "height": "196",
+      "weight": "90",
+      "preferredfoot": "1",
+      "birthdate": "152075",
+      "preferredposition1": "0",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "20801",
+      "firstname": "C. Ronaldo",
+      "lastname": "dos Santos Aveiro",
+      "commonname": "Cristiano Ronaldo",
+      "overallrating": "88",
+      "potential": "88",
+      "height": "187",
+      "weight": "83",
+      "preferredfoot": "1",
+      "birthdate": "146942",
+      "preferredposition1": "25",
+      "teamname": "Al Nassr"
+    },
+    {
+      "playerid": "182521",
+      "firstname": "Toni",
+      "lastname": "Kroos",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "88",
+      "height": "183",
+      "weight": "76",
+      "preferredfoot": "1",
+      "birthdate": "148736",
+      "preferredposition1": "14",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "200104",
+      "firstname": "Heung Min",
+      "lastname": "Son",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "88",
+      "height": "183",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "149652",
+      "preferredposition1": "27",
+      "teamname": "Spurs"
+    },
+    {
+      "playerid": "207865",
+      "firstname": "Marcos",
+      "lastname": "Aoás Corrêa",
+      "commonname": "Marquinhos",
+      "overallrating": "88",
+      "potential": "90",
+      "height": "183",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150327",
+      "preferredposition1": "5",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "209658",
+      "firstname": "Leon",
+      "lastname": "Goretzka",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "88",
+      "height": "189",
+      "weight": "82",
+      "preferredfoot": "1",
+      "birthdate": "150595",
+      "preferredposition1": "14",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "215698",
+      "firstname": "Mike",
+      "lastname": "Maignan",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "90",
+      "height": "191",
+      "weight": "89",
+      "preferredfoot": "1",
+      "birthdate": "150742",
+      "preferredposition1": "0",
+      "teamname": "Milan"
+    },
+    {
+      "playerid": "215914",
+      "firstname": "N'Golo",
+      "lastname": "Kanté",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "88",
+      "height": "168",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "149185",
+      "preferredposition1": "10",
+      "teamname": "Inter"
+    },
+    {
+      "playerid": "218667",
+      "firstname": "Bernardo Mota",
+      "lastname": "Carvalho e Silva",
+      "commonname": "Bernardo Silva",
+      "overallrating": "88",
+      "potential": "88",
+      "height": "173",
+      "weight": "64",
+      "preferredfoot": "2",
+      "birthdate": "150415",
+      "preferredposition1": "18",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "228702",
+      "firstname": "Frenkie",
+      "lastname": "de Jong",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "92",
+      "height": "180",
+      "weight": "74",
+      "preferredfoot": "1",
+      "birthdate": "151421",
+      "preferredposition1": "14",
+      "teamname": "FC Barcelona"
+    },
+    {
+      "playerid": "231866",
+      "firstname": "Rodrigo",
+      "lastname": "Hernández Cascante",
+      "commonname": "Rodri",
+      "overallrating": "88",
+      "potential": "89",
+      "height": "191",
+      "weight": "82",
+      "preferredfoot": "1",
+      "birthdate": "151097",
+      "preferredposition1": "10",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "239818",
+      "firstname": "Rúben Santos",
+      "lastname": "Gato Alves Dias",
+      "commonname": "Rúben Dias",
+      "overallrating": "88",
+      "potential": "91",
+      "height": "187",
+      "weight": "82",
+      "preferredfoot": "1",
+      "birthdate": "151423",
+      "preferredposition1": "5",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "193041",
+      "firstname": "Keylor",
+      "lastname": "Navas",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "185",
+      "weight": "80",
+      "preferredfoot": "1",
+      "birthdate": "147620",
+      "preferredposition1": "0",
+      "teamname": "Nott'm Forest"
+    },
+    {
+      "playerid": "193080",
+      "firstname": "David",
+      "lastname": "De Gea Quintana",
+      "commonname": "De Gea",
+      "overallrating": "87",
+      "potential": "87",
+      "height": "192",
+      "weight": "76",
+      "preferredfoot": "1",
+      "birthdate": "149043",
+      "preferredposition1": "0",
+      "teamname": "Manchester Utd"
+    },
+    {
+      "playerid": "199556",
+      "firstname": "Marco",
+      "lastname": "Verratti",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "165",
+      "weight": "60",
+      "preferredfoot": "1",
+      "birthdate": "149772",
+      "preferredposition1": "14",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "205452",
+      "firstname": "Antonio",
+      "lastname": "Rüdiger",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "88",
+      "height": "190",
+      "weight": "85",
+      "preferredfoot": "1",
+      "birthdate": "149890",
+      "preferredposition1": "5",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "210514",
+      "firstname": "João Pedro",
+      "lastname": "Cavaco Cancelo",
+      "commonname": "João Cancelo",
+      "overallrating": "87",
+      "potential": "87",
+      "height": "182",
+      "weight": "74",
+      "preferredfoot": "1",
+      "birthdate": "150340",
+      "preferredposition1": "7",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "216267",
+      "firstname": "Andrew",
+      "lastname": "Robertson",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "178",
+      "weight": "64",
+      "preferredfoot": "2",
+      "birthdate": "150263",
+      "preferredposition1": "7",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "224232",
+      "firstname": "Nicolò",
+      "lastname": "Barella",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "89",
+      "height": "175",
+      "weight": "68",
+      "preferredfoot": "1",
+      "birthdate": "151327",
+      "preferredposition1": "14",
+      "teamname": "Inter"
+    },
+    {
+      "playerid": "231281",
+      "firstname": "Trent",
+      "lastname": "Alexander-Arnold",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "89",
+      "height": "180",
+      "weight": "69",
+      "preferredfoot": "1",
+      "birthdate": "151934",
+      "preferredposition1": "3",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "231478",
+      "firstname": "Lautaro",
+      "lastname": "Martínez",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "89",
+      "height": "174",
+      "weight": "72",
+      "preferredfoot": "1",
+      "birthdate": "151523",
+      "preferredposition1": "25",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "232363",
+      "firstname": "Milan",
+      "lastname": "Škriniar",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "187",
+      "weight": "80",
+      "preferredfoot": "1",
+      "birthdate": "150600",
+      "preferredposition1": "5",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "232411",
+      "firstname": "Christopher",
+      "lastname": "Nkunku",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "89",
+      "height": "175",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "151607",
+      "preferredposition1": "21",
+      "teamname": "RB Leipzig"
+    },
+    {
+      "playerid": "238794",
+      "firstname": "Vinícius José",
+      "lastname": "de Oliveira Júnior",
+      "commonname": "Vinícius Jr.",
+      "overallrating": "87",
+      "potential": "92",
+      "height": "176",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "152578",
+      "preferredposition1": "27",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "239053",
+      "firstname": "Federico",
+      "lastname": "Valverde",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "91",
+      "height": "182",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "151857",
+      "preferredposition1": "14",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "177003",
+      "firstname": "Luka",
+      "lastname": "Modrić",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "88",
+      "height": "172",
+      "weight": "66",
+      "preferredfoot": "1",
+      "birthdate": "147158",
+      "preferredposition1": "14",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "177683",
+      "firstname": "Yann",
+      "lastname": "Sommer",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "183",
+      "weight": "79",
+      "preferredfoot": "1",
+      "birthdate": "148353",
+      "preferredposition1": "0",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "186153",
+      "firstname": "Wojciech",
+      "lastname": "Szczęsny",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "195",
+      "weight": "90",
+      "preferredfoot": "1",
+      "birthdate": "148840",
+      "preferredposition1": "0",
+      "teamname": "Juventus"
+    },
+    {
+      "playerid": "188943",
+      "firstname": "Kevin",
+      "lastname": "Trapp",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "189",
+      "weight": "84",
+      "preferredfoot": "1",
+      "birthdate": "148921",
+      "preferredposition1": "0",
+      "teamname": "Frankfurt"
+    },
+    {
+      "playerid": "189509",
+      "firstname": "Thiago",
+      "lastname": "Alcântara",
+      "commonname": "Thiago",
+      "overallrating": "86",
+      "potential": "86",
+      "height": "174",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "149198",
+      "preferredposition1": "14",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "197445",
+      "firstname": "David",
+      "lastname": "Alaba",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "180",
+      "weight": "78",
+      "preferredfoot": "2",
+      "birthdate": "149638",
+      "preferredposition1": "5",
+      "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "201024",
+      "firstname": "Kalidou",
+      "lastname": "Koulibaly",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "186",
+      "weight": "89",
+      "preferredfoot": "1",
+      "birthdate": "149268",
+      "preferredposition1": "5",
+      "teamname": "Chelsea"
+    },
+    {
+      "playerid": "209499",
+      "firstname": "Fábio",
+      "lastname": "Henrique Tavares",
+      "commonname": "Fabinho",
+      "overallrating": "86",
+      "potential": "86",
+      "height": "188",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "150124",
+      "preferredposition1": "10",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "211110",
+      "firstname": "Paulo",
+      "lastname": "Dybala",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "177",
+      "weight": "75",
+      "preferredfoot": "2",
+      "birthdate": "150147",
+      "preferredposition1": "21",
+      "teamname": "Roma FC"
+    },
+    {
+      "playerid": "212190",
+      "firstname": "Niklas",
+      "lastname": "Süle",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "87",
+      "height": "195",
+      "weight": "99",
+      "preferredfoot": "1",
+      "birthdate": "150804",
+      "preferredposition1": "5",
+      "teamname": "Borussia Dortmund"
+    },
+    {
+      "playerid": "212198",
+      "firstname": "Bruno Miguel",
+      "lastname": "Borges Fernandes",
+      "commonname": "Bruno Fernandes",
+      "overallrating": "86",
+      "potential": "86",
+      "height": "179",
+      "weight": "69",
+      "preferredfoot": "1",
+      "birthdate": "150444",
+      "preferredposition1": "18",
+      "teamname": "Manchester Utd"
+    },
+    {
+      "playerid": "212218",
+      "firstname": "Aymeric",
+      "lastname": "Laporte",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "87",
+      "height": "191",
+      "weight": "85",
+      "preferredfoot": "2",
+      "birthdate": "150340",
+      "preferredposition1": "5",
+      "teamname": "Spurs"
+    },
+    {
+      "playerid": "213345",
+      "firstname": "Kingsley",
+      "lastname": "Coman",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "181",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "151088",
+      "preferredposition1": "12",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "216352",
+      "firstname": "Marcelo",
+      "lastname": "Brozović",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "181",
+      "weight": "68",
+      "preferredfoot": "1",
+      "birthdate": "149783",
+      "preferredposition1": "10",
+      "teamname": "Inter"
+    },
+    {
+      "playerid": "222665",
+      "firstname": "Martin",
+      "lastname": "Ødegaard",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "89",
+      "height": "178",
+      "weight": "68",
+      "preferredfoot": "2",
+      "birthdate": "152005",
+      "preferredposition1": "18",
+      "teamname": "Arsenal"
+    },
+    {
+      "playerid": "223848",
+      "firstname": "Sergej",
+      "lastname": "Milinković-Savić",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "87",
+      "height": "192",
+      "weight": "76",
+      "preferredfoot": "1",
+      "birthdate": "150616",
+      "preferredposition1": "14",
+      "teamname": "Latium"
+    },
+    {
+      "playerid": "224458",
+      "firstname": "Diogo José",
+      "lastname": "Teixeira da Silva",
+      "commonname": "Diogo Jota",
+      "overallrating": "86",
+      "potential": "88",
+      "height": "178",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "151262",
+      "preferredposition1": "21",
+      "teamname": "Liverpool"
+    },
+    {
+      "playerid": "232656",
+      "firstname": "Theo",
+      "lastname": "Hernández",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "90",
+      "height": "184",
+      "weight": "81",
+      "preferredfoot": "2",
+      "birthdate": "151568",
+      "preferredposition1": "7",
+      "teamname": "Milan"
+    },
+    {
+      "playerid": "234642",
+      "firstname": "Édouard",
+      "lastname": "Mendy",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "197",
+      "weight": "86",
+      "preferredfoot": "1",
+      "birthdate": "149523",
+      "preferredposition1": "0",
+      "teamname": "Chelsea"
+    },
+    {
+      "playerid": "235073",
+      "firstname": "Gregor",
+      "lastname": "Kobel",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "89",
+      "height": "195",
+      "weight": "88",
+      "preferredfoot": "1",
+      "birthdate": "151629",
+      "preferredposition1": "0",
+      "teamname": "Borussia Dortmund"
+    },
+    {
+      "playerid": "235243",
+      "firstname": "Matthijs",
+      "lastname": "de Ligt",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "89",
+      "height": "189",
+      "weight": "89",
+      "preferredfoot": "1",
+      "birthdate": "152243",
+      "preferredposition1": "5",
+      "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "237692",
+      "firstname": "Phil",
+      "lastname": "Foden",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "92",
+      "height": "171",
+      "weight": "69",
+      "preferredfoot": "2",
+      "birthdate": "152533",
+      "preferredposition1": "27",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "238074",
+      "firstname": "Reece",
+      "lastname": "James",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "88",
+      "height": "178",
+      "weight": "87",
+      "preferredfoot": "1",
+      "birthdate": "152361",
+      "preferredposition1": "2",
+      "teamname": "Chelsea"
+    },
+    {
+      "playerid": "251854",
+      "firstname": "Pedro",
+      "lastname": "González López",
+      "commonname": "Pedri",
+      "overallrating": "86",
+      "potential": "92",
+      "height": "174",
+      "weight": "61",
+      "preferredfoot": "1",
+      "birthdate": "153444",
+      "preferredposition1": "14",
+      "teamname": "FC Barcelona"
+    },
+    {
+      "playerid": "252371",
+      "firstname": "Jude",
+      "lastname": "Bellingham",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "91",
+      "height": "186",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "153660",
+      "preferredposition1": "14",
+      "teamname": "Borussia Dortmund"
+    }
   ],
   "top_scorers_by_league": {
-    "Premier League": [
-      { "playerid": "3001", "firstname": "Erling", "lastname": "Haaland", "overallrating": "91", "teamname": "Manchester City", "leaguegoals": "36", "leagueappearances": "35" },
-      { "playerid": "3002", "firstname": "Mohamed", "lastname": "Salah", "overallrating": "88", "teamname": "Liverpool", "leaguegoals": "24", "leagueappearances": "34" }
-    ],
     "La Liga": [
-      { "playerid": "3003", "firstname": "Robert", "lastname": "Lewandowski", "overallrating": "88", "teamname": "FC Barcelona", "leaguegoals": "26", "leagueappearances": "33" }
+      {
+        "playerid": "188545",
+        "firstname": "Robert",
+        "lastname": "Lewandowski",
+        "commonname": null,
+        "overallrating": "90",
+        "potential": "91",
+        "height": "185",
+        "weight": "81",
+        "preferredfoot": "1",
+        "birthdate": "148235",
+        "preferredposition1": "25",
+        "teamname": "FC Barcelona",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "173608",
+        "firstname": "José Luis",
+        "lastname": null,
+        "commonname": "Joselu",
+        "overallrating": "80",
+        "potential": "81",
+        "height": "192",
+        "weight": "80",
+        "preferredfoot": "1",
+        "birthdate": "148818",
+        "preferredposition1": "25",
+        "teamname": "RCD Espanyol",
+        "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "241788",
+        "firstname": "Mehdi",
+        "lastname": "Taremi",
+        "commonname": null,
+        "overallrating": "82",
+        "potential": "82",
+        "height": "185",
+        "weight": "83",
+        "preferredfoot": "1",
+        "birthdate": "149662",
+        "preferredposition1": "29",
+        "teamname": "Villarreal CF",
+        "leaguegoals": "10",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "169792",
+        "firstname": "Jay",
+        "lastname": "Rodriguez",
+        "commonname": null,
+        "overallrating": "74",
+        "potential": "74",
+        "height": "185",
+        "weight": "84",
+        "preferredfoot": "1",
+        "birthdate": "148577",
+        "preferredposition1": "29",
+        "teamname": "Getafe CF",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      }
     ],
     "Serie A": [
-      { "playerid": "3004", "firstname": "Lautaro", "lastname": "Martínez", "overallrating": "87", "teamname": "Inter Milan", "leaguegoals": "24", "leagueappearances": "32" }
+      {
+        "playerid": "230899",
+        "firstname": "Ademola",
+        "lastname": "Lookman",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "81",
+        "height": "174",
+        "weight": "71",
+        "preferredfoot": "1",
+        "birthdate": "151582",
+        "preferredposition1": "16",
+        "teamname": "Bergamo Calcio",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "199451",
+        "firstname": "Wissam",
+        "lastname": "Ben Yedder",
+        "commonname": null,
+        "overallrating": "83",
+        "potential": "84",
+        "height": "170",
+        "weight": "68",
+        "preferredfoot": "1",
+        "birthdate": "148956",
+        "preferredposition1": "25",
+        "teamname": "Milan",
+        "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "228093",
+        "firstname": "Marcus",
+        "lastname": "Thuram",
+        "commonname": null,
+        "overallrating": "81",
+        "potential": "84",
+        "height": "192",
+        "weight": "88",
+        "preferredfoot": "1",
+        "birthdate": "151507",
+        "preferredposition1": "25",
+        "teamname": "Napoli FC",
+        "leaguegoals": "10",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "241721",
+        "firstname": "Rafael",
+        "lastname": "da Conceição Leão",
+        "commonname": "Rafael Leão",
+        "overallrating": "85",
+        "potential": "90",
+        "height": "188",
+        "weight": "81",
+        "preferredfoot": "1",
+        "birthdate": "152180",
+        "preferredposition1": "27",
+        "teamname": "Milan",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      }
+    ],
+    "Premier League": [
+      {
+        "playerid": "239085",
+        "firstname": "Erling",
+        "lastname": "Haaland",
+        "commonname": null,
+        "overallrating": "90",
+        "potential": "94",
+        "height": "195",
+        "weight": "94",
+        "preferredfoot": "2",
+        "birthdate": "152587",
+        "preferredposition1": "25",
+        "teamname": "Manchester City",
+        "leaguegoals": "25",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "202126",
+        "firstname": "Harry",
+        "lastname": "Kane",
+        "commonname": null,
+        "overallrating": "89",
+        "potential": "89",
+        "height": "188",
+        "weight": "89",
+        "preferredfoot": "1",
+        "birthdate": "150037",
+        "preferredposition1": "25",
+        "teamname": "Spurs",
+        "leaguegoals": "16",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "232293",
+        "firstname": "Victor",
+        "lastname": "Osimhen",
+        "commonname": null,
+        "overallrating": "85",
+        "potential": "90",
+        "height": "185",
+        "weight": "78",
+        "preferredfoot": "1",
+        "birthdate": "152017",
+        "preferredposition1": "29",
+        "teamname": "Manchester Utd",
+        "leaguegoals": "14",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "212228",
+        "firstname": "Ivan",
+        "lastname": "Toney",
+        "commonname": null,
+        "overallrating": "80",
+        "potential": "81",
+        "height": "187",
+        "weight": "76",
+        "preferredfoot": "1",
+        "birthdate": "150999",
+        "preferredposition1": "24",
+        "teamname": "Brentford",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      }
+    ],
+    "Bundesliga": [
+      {
+        "playerid": "205431",
+        "firstname": "Niclas",
+        "lastname": "Füllkrug",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "78",
+        "height": "188",
+        "weight": "83",
+        "preferredfoot": "1",
+        "birthdate": "149868",
+        "preferredposition1": "29",
+        "teamname": "TSG Hoffenheim",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "232411",
+        "firstname": "Christopher",
+        "lastname": "Nkunku",
+        "commonname": null,
+        "overallrating": "87",
+        "potential": "89",
+        "height": "175",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "151607",
+        "preferredposition1": "26",
+        "teamname": "RB Leipzig",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "231478",
+        "firstname": "Lautaro",
+        "lastname": "Martínez",
+        "commonname": null,
+        "overallrating": "87",
+        "potential": "89",
+        "height": "174",
+        "weight": "72",
+        "preferredfoot": "1",
+        "birthdate": "151523",
+        "preferredposition1": "29",
+        "teamname": "FC Bayern München",
+        "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "256790",
+        "firstname": "Jamal",
+        "lastname": "Musiala",
+        "commonname": null,
+        "overallrating": "84",
+        "potential": "92",
+        "height": "184",
+        "weight": "72",
+        "preferredfoot": "1",
+        "birthdate": "153537",
+        "preferredposition1": "18",
+        "teamname": "FC Bayern München",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      }
+    ],
+    "Ligue 1": [
+      {
+        "playerid": "231747",
+        "firstname": "Kylian",
+        "lastname": "Mbappé",
+        "commonname": null,
+        "overallrating": "92",
+        "potential": "95",
+        "height": "182",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "152008",
+        "preferredposition1": "26",
+        "teamname": "Paris SG",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "243630",
+        "firstname": "Jonathan",
+        "lastname": "David",
+        "commonname": null,
+        "overallrating": "80",
+        "potential": "85",
+        "height": "177",
+        "weight": "77",
+        "preferredfoot": "1",
+        "birthdate": "152398",
+        "preferredposition1": "24",
+        "teamname": "LOSC Lille",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "193301",
+        "firstname": "Alexandre",
+        "lastname": "Lacazette",
+        "commonname": null,
+        "overallrating": "82",
+        "potential": "82",
+        "height": "175",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "149245",
+        "preferredposition1": "25",
+        "teamname": "OL",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "255000",
+        "firstname": "Terem",
+        "lastname": "Moffi",
+        "commonname": null,
+        "overallrating": "76",
+        "potential": "80",
+        "height": "188",
+        "weight": "89",
+        "preferredfoot": "2",
+        "birthdate": "152164",
+        "preferredposition1": "28",
+        "teamname": "OGC Nice",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      }
+    ]
+  },
+  "league_teams": {
+    "1": [
+      {
+        "teamid": "269",
+        "teamname": "Brøndby IF"
+      },
+      {
+        "teamid": "270",
+        "teamname": "Silkeborg IF"
+      },
+      {
+        "teamid": "271",
+        "teamname": "AGF"
+      },
+      {
+        "teamid": "272",
+        "teamname": "Odense BK"
+      },
+      {
+        "teamid": "819",
+        "teamname": "F.C. København"
+      },
+      {
+        "teamid": "820",
+        "teamname": "AaB"
+      },
+      {
+        "teamid": "1443",
+        "teamname": "Viborg FF"
+      },
+      {
+        "teamid": "1446",
+        "teamname": "AC Horsens"
+      },
+      {
+        "teamid": "1516",
+        "teamname": "FC Midtjylland"
+      },
+      {
+        "teamid": "1786",
+        "teamname": "Randers FC"
+      },
+      {
+        "teamid": "1788",
+        "teamname": "FC Nordsjælland"
+      },
+      {
+        "teamid": "15001",
+        "teamname": "Lyngby BK"
+      }
+    ],
+    "4": [
+      {
+        "teamid": "229",
+        "teamname": "RSC Anderlecht"
+      },
+      {
+        "teamid": "230",
+        "teamname": "Royal Antwerp FC"
+      },
+      {
+        "teamid": "231",
+        "teamname": "Club Brugge"
+      },
+      {
+        "teamid": "232",
+        "teamname": "Standard Liège"
+      },
+      {
+        "teamid": "670",
+        "teamname": "Sp. Charleroi"
+      },
+      {
+        "teamid": "673",
+        "teamname": "KRC Genk"
+      },
+      {
+        "teamid": "674",
+        "teamname": "KAA Gent"
+      },
+      {
+        "teamid": "680",
+        "teamname": "STVV"
+      },
+      {
+        "teamid": "681",
+        "teamname": "KVC Westerlo"
+      },
+      {
+        "teamid": "682",
+        "teamname": "KV Oostende"
+      },
+      {
+        "teamid": "1750",
+        "teamname": "Cercle Brugge"
+      },
+      {
+        "teamid": "2013",
+        "teamname": "KAS Eupen"
+      },
+      {
+        "teamid": "2014",
+        "teamname": "R. Union St.-G."
+      },
+      {
+        "teamid": "15005",
+        "teamname": "Zulte Waregem"
+      },
+      {
+        "teamid": "100081",
+        "teamname": "KV Kortrijk"
+      },
+      {
+        "teamid": "100087",
+        "teamname": "OH Leuven"
+      },
+      {
+        "teamid": "110724",
+        "teamname": "KV Mechelen"
+      },
+      {
+        "teamid": "112695",
+        "teamname": "RFC Seraing"
+      }
+    ],
+    "10": [
+      {
+        "teamid": "245",
+        "teamname": "Ajax"
+      },
+      {
+        "teamid": "246",
+        "teamname": "Feyenoord"
+      },
+      {
+        "teamid": "247",
+        "teamname": "PSV"
+      },
+      {
+        "teamid": "634",
+        "teamname": "Fortuna Sittard"
+      },
+      {
+        "teamid": "645",
+        "teamname": "FC Volendam"
+      },
+      {
+        "teamid": "647",
+        "teamname": "SC Cambuur"
+      },
+      {
+        "teamid": "1903",
+        "teamname": "FC Utrecht"
+      },
+      {
+        "teamid": "1905",
+        "teamname": "RKC Waalwijk"
+      },
+      {
+        "teamid": "1906",
+        "teamname": "AZ"
+      },
+      {
+        "teamid": "1908",
+        "teamname": "FC Twente"
+      },
+      {
+        "teamid": "1909",
+        "teamname": "Vitesse"
+      },
+      {
+        "teamid": "1910",
+        "teamname": "N.E.C. Nijmegen"
+      },
+      {
+        "teamid": "1913",
+        "teamname": "sc Heerenveen"
+      },
+      {
+        "teamid": "1915",
+        "teamname": "FC Groningen"
+      },
+      {
+        "teamid": "1971",
+        "teamname": "Excelsior"
+      },
+      {
+        "teamid": "100628",
+        "teamname": "FC Emmen"
+      },
+      {
+        "teamid": "100632",
+        "teamname": "Go Ahead Eagles"
+      },
+      {
+        "teamid": "100646",
+        "teamname": "Sparta Rotterdam"
+      }
+    ],
+    "13": [
+      {
+        "teamid": "1",
+        "teamname": "Arsenal"
+      },
+      {
+        "teamid": "2",
+        "teamname": "Aston Villa"
+      },
+      {
+        "teamid": "5",
+        "teamname": "Chelsea"
+      },
+      {
+        "teamid": "7",
+        "teamname": "Everton"
+      },
+      {
+        "teamid": "8",
+        "teamname": "Leeds United"
+      },
+      {
+        "teamid": "9",
+        "teamname": "Liverpool"
+      },
+      {
+        "teamid": "10",
+        "teamname": "Manchester City"
+      },
+      {
+        "teamid": "11",
+        "teamname": "Manchester Utd"
+      },
+      {
+        "teamid": "13",
+        "teamname": "Newcastle Utd"
+      },
+      {
+        "teamid": "14",
+        "teamname": "Nott'm Forest"
+      },
+      {
+        "teamid": "17",
+        "teamname": "Southampton"
+      },
+      {
+        "teamid": "18",
+        "teamname": "Spurs"
+      },
+      {
+        "teamid": "19",
+        "teamname": "West Ham"
+      },
+      {
+        "teamid": "95",
+        "teamname": "Leicester City"
+      },
+      {
+        "teamid": "110",
+        "teamname": "Wolves"
+      },
+      {
+        "teamid": "144",
+        "teamname": "Fulham"
+      },
+      {
+        "teamid": "1799",
+        "teamname": "Crystal Palace"
+      },
+      {
+        "teamid": "1808",
+        "teamname": "Brighton"
+      },
+      {
+        "teamid": "1925",
+        "teamname": "Brentford"
+      },
+      {
+        "teamid": "1943",
+        "teamname": "AFC Bournemouth"
+      }
+    ],
+    "14": [
+      {
+        "teamid": "3",
+        "teamname": "Blackburn Rovers"
+      },
+      {
+        "teamid": "12",
+        "teamname": "Middlesbrough"
+      },
+      {
+        "teamid": "15",
+        "teamname": "QPR"
+      },
+      {
+        "teamid": "88",
+        "teamname": "Birmingham City"
+      },
+      {
+        "teamid": "97",
+        "teamname": "Millwall"
+      },
+      {
+        "teamid": "106",
+        "teamname": "Sunderland"
+      },
+      {
+        "teamid": "109",
+        "teamname": "West Brom"
+      },
+      {
+        "teamid": "1792",
+        "teamname": "Norwich"
+      },
+      {
+        "teamid": "1793",
+        "teamname": "Reading"
+      },
+      {
+        "teamid": "1794",
+        "teamname": "Sheffield Utd"
+      },
+      {
+        "teamid": "1795",
+        "teamname": "Watford"
+      },
+      {
+        "teamid": "1796",
+        "teamname": "Burnley"
+      },
+      {
+        "teamid": "1797",
+        "teamname": "Rotherham Utd"
+      },
+      {
+        "teamid": "1800",
+        "teamname": "Coventry City"
+      },
+      {
+        "teamid": "1801",
+        "teamname": "Preston"
+      },
+      {
+        "teamid": "1806",
+        "teamname": "Stoke City"
+      },
+      {
+        "teamid": "1917",
+        "teamname": "Wigan Athletic"
+      },
+      {
+        "teamid": "1919",
+        "teamname": "Bristol City"
+      },
+      {
+        "teamid": "1923",
+        "teamname": "Luton Town"
+      },
+      {
+        "teamid": "1926",
+        "teamname": "Blackpool"
+      },
+      {
+        "teamid": "1939",
+        "teamname": "Huddersfield"
+      },
+      {
+        "teamid": "1952",
+        "teamname": "Hull City"
+      },
+      {
+        "teamid": "1960",
+        "teamname": "Swansea City"
+      },
+      {
+        "teamid": "1961",
+        "teamname": "Cardiff City"
+      }
+    ],
+    "16": [
+      {
+        "teamid": "57",
+        "teamname": "AJ Auxerre"
+      },
+      {
+        "teamid": "64",
+        "teamname": "RC Lens"
+      },
+      {
+        "teamid": "65",
+        "teamname": "LOSC Lille"
+      },
+      {
+        "teamid": "66",
+        "teamname": "OL"
+      },
+      {
+        "teamid": "69",
+        "teamname": "AS Monaco"
+      },
+      {
+        "teamid": "70",
+        "teamname": "Montpellier"
+      },
+      {
+        "teamid": "71",
+        "teamname": "FC Nantes"
+      },
+      {
+        "teamid": "72",
+        "teamname": "OGC Nice"
+      },
+      {
+        "teamid": "73",
+        "teamname": "Paris SG"
+      },
+      {
+        "teamid": "74",
+        "teamname": "Stade Rennais FC"
+      },
+      {
+        "teamid": "76",
+        "teamname": "Strasbourg"
+      },
+      {
+        "teamid": "217",
+        "teamname": "FC Lorient"
+      },
+      {
+        "teamid": "219",
+        "teamname": "OM"
+      },
+      {
+        "teamid": "294",
+        "teamname": "ESTAC Troyes"
+      },
+      {
+        "teamid": "378",
+        "teamname": "Stade Brestois 29"
+      },
+      {
+        "teamid": "379",
+        "teamname": "Stade de Reims"
+      },
+      {
+        "teamid": "614",
+        "teamname": "AC Ajaccio"
+      },
+      {
+        "teamid": "1530",
+        "teamname": "Angers SCO"
+      },
+      {
+        "teamid": "1809",
+        "teamname": "Toulouse FC"
+      },
+      {
+        "teamid": "1815",
+        "teamname": "Clermont Foot 63"
+      }
+    ],
+    "17": [
+      {
+        "teamid": "58",
+        "teamname": "SC Bastia"
+      },
+      {
+        "teamid": "59",
+        "teamname": "Bordeaux"
+      },
+      {
+        "teamid": "62",
+        "teamname": "En Avant Guingamp"
+      },
+      {
+        "teamid": "68",
+        "teamname": "FC Metz"
+      },
+      {
+        "teamid": "210",
+        "teamname": "SM Caen"
+      },
+      {
+        "teamid": "224",
+        "teamname": "Nîmes Olympique"
+      },
+      {
+        "teamid": "226",
+        "teamname": "FCSM"
+      },
+      {
+        "teamid": "1738",
+        "teamname": "Havre AC"
+      },
+      {
+        "teamid": "1805",
+        "teamname": "Grenoble Foot 38"
+      },
+      {
+        "teamid": "1813",
+        "teamname": "Niort"
+      },
+      {
+        "teamid": "1814",
+        "teamname": "Stade Lavallois"
+      },
+      {
+        "teamid": "1816",
+        "teamname": "Amiens SC"
+      },
+      {
+        "teamid": "1819",
+        "teamname": "AS Saint-Étienne"
+      },
+      {
+        "teamid": "110321",
+        "teamname": "Pau FC"
+      },
+      {
+        "teamid": "110456",
+        "teamname": "Valenciennes FC"
+      },
+      {
+        "teamid": "110569",
+        "teamname": "Dijon FCO"
+      },
+      {
+        "teamid": "111659",
+        "teamname": "Rodez AF"
+      },
+      {
+        "teamid": "111817",
+        "teamname": "Paris FC"
+      },
+      {
+        "teamid": "112552",
+        "teamname": "Quevilly Rouen"
+      },
+      {
+        "teamid": "115494",
+        "teamname": "FC Annecy"
+      }
+    ],
+    "19": [
+      {
+        "teamid": "21",
+        "teamname": "FC Bayern München"
+      },
+      {
+        "teamid": "22",
+        "teamname": "Borussia Dortmund"
+      },
+      {
+        "teamid": "23",
+        "teamname": "M'gladbach"
+      },
+      {
+        "teamid": "25",
+        "teamname": "SC Freiburg"
+      },
+      {
+        "teamid": "31",
+        "teamname": "1. FC Köln"
+      },
+      {
+        "teamid": "32",
+        "teamname": "Leverkusen"
+      },
+      {
+        "teamid": "34",
+        "teamname": "FC Schalke 04"
+      },
+      {
+        "teamid": "36",
+        "teamname": "VfB Stuttgart"
+      },
+      {
+        "teamid": "38",
+        "teamname": "SV Werder Bremen"
+      },
+      {
+        "teamid": "160",
+        "teamname": "VfL Bochum"
+      },
+      {
+        "teamid": "166",
+        "teamname": "Hertha Berlin"
+      },
+      {
+        "teamid": "169",
+        "teamname": "1. FSV Mainz 05"
+      },
+      {
+        "teamid": "175",
+        "teamname": "VfL Wolfsburg"
+      },
+      {
+        "teamid": "1824",
+        "teamname": "Frankfurt"
+      },
+      {
+        "teamid": "1831",
+        "teamname": "Union Berlin"
+      },
+      {
+        "teamid": "10029",
+        "teamname": "TSG Hoffenheim"
+      },
+      {
+        "teamid": "100409",
+        "teamname": "FC Augsburg"
+      },
+      {
+        "teamid": "112172",
+        "teamname": "RB Leipzig"
+      }
+    ],
+    "20": [
+      {
+        "teamid": "27",
+        "teamname": "Hansa Rostock"
+      },
+      {
+        "teamid": "28",
+        "teamname": "Hamburger SV"
+      },
+      {
+        "teamid": "29",
+        "teamname": "Kaiserslautern"
+      },
+      {
+        "teamid": "159",
+        "teamname": "Arminia Bielefeld"
+      },
+      {
+        "teamid": "165",
+        "teamname": "Fürth "
+      },
+      {
+        "teamid": "171",
+        "teamname": "1. FC Nürnberg"
+      },
+      {
+        "teamid": "485",
+        "teamname": "Hannover 96"
+      },
+      {
+        "teamid": "543",
+        "teamname": "Jahn Regensburg"
+      },
+      {
+        "teamid": "576",
+        "teamname": "Holstein Kiel"
+      },
+      {
+        "teamid": "1832",
+        "teamname": "Karlsruher SC"
+      },
+      {
+        "teamid": "10030",
+        "teamname": "SC Paderborn 07"
+      },
+      {
+        "teamid": "110178",
+        "teamname": "SV Sandhausen"
+      },
+      {
+        "teamid": "110329",
+        "teamname": "FC St. Pauli"
+      },
+      {
+        "teamid": "110500",
+        "teamname": "Braunschweig"
+      },
+      {
+        "teamid": "110502",
+        "teamname": "SV Darmstadt 98"
+      },
+      {
+        "teamid": "110588",
+        "teamname": "1. FC Magdeburg"
+      },
+      {
+        "teamid": "110636",
+        "teamname": "Düsseldorf"
+      },
+      {
+        "teamid": "111235",
+        "teamname": "Heidenheim"
+      }
+    ],
+    "31": [
+      {
+        "teamid": "44",
+        "teamname": "Inter"
+      },
+      {
+        "teamid": "45",
+        "teamname": "Juventus"
+      },
+      {
+        "teamid": "47",
+        "teamname": "Milan"
+      },
+      {
+        "teamid": "54",
+        "teamname": "Torino"
+      },
+      {
+        "teamid": "55",
+        "teamname": "Udinese"
+      },
+      {
+        "teamid": "189",
+        "teamname": "Bologna"
+      },
+      {
+        "teamid": "206",
+        "teamname": "Hellas Verona"
+      },
+      {
+        "teamid": "347",
+        "teamname": "Lecce"
+      },
+      {
+        "teamid": "1746",
+        "teamname": "Empoli"
+      },
+      {
+        "teamid": "1837",
+        "teamname": "Sampdoria"
+      },
+      {
+        "teamid": "110373",
+        "teamname": "Salernitana"
+      },
+      {
+        "teamid": "110374",
+        "teamname": "Fiorentina"
+      },
+      {
+        "teamid": "111434",
+        "teamname": "Cremonese"
+      },
+      {
+        "teamid": "111811",
+        "teamname": "Monza"
+      },
+      {
+        "teamid": "111974",
+        "teamname": "Sassuolo"
+      },
+      {
+        "teamid": "113974",
+        "teamname": "Spezia"
+      },
+      {
+        "teamid": "114912",
+        "teamname": "Roma FC"
+      },
+      {
+        "teamid": "115841",
+        "teamname": "Latium"
+      },
+      {
+        "teamid": "115845",
+        "teamname": "Bergamo Calcio"
+      },
+      {
+        "teamid": "116365",
+        "teamname": "Napoli FC"
+      }
+    ],
+    "32": [
+      {
+        "teamid": "50",
+        "teamname": "Parma"
+      },
+      {
+        "teamid": "190",
+        "teamname": "Brescia"
+      },
+      {
+        "teamid": "199",
+        "teamname": "Perugia"
+      },
+      {
+        "teamid": "203",
+        "teamname": "Reggina"
+      },
+      {
+        "teamid": "205",
+        "teamname": "Venezia"
+      },
+      {
+        "teamid": "570",
+        "teamname": "Ternana"
+      },
+      {
+        "teamid": "1744",
+        "teamname": "Modena"
+      },
+      {
+        "teamid": "1745",
+        "teamname": "Como"
+      },
+      {
+        "teamid": "1842",
+        "teamname": "Cagliari"
+      },
+      {
+        "teamid": "1843",
+        "teamname": "Palermo"
+      },
+      {
+        "teamid": "1847",
+        "teamname": "Ascoli"
+      },
+      {
+        "teamid": "1848",
+        "teamname": "Bari"
+      },
+      {
+        "teamid": "110556",
+        "teamname": "Genoa"
+      },
+      {
+        "teamid": "110738",
+        "teamname": "Pisa"
+      },
+      {
+        "teamid": "111657",
+        "teamname": "Frosinone"
+      },
+      {
+        "teamid": "111993",
+        "teamname": "Cittadella"
+      },
+      {
+        "teamid": "112026",
+        "teamname": "Benevento"
+      },
+      {
+        "teamid": "112168",
+        "teamname": "Cosenza"
+      },
+      {
+        "teamid": "112494",
+        "teamname": "Südtirol"
+      },
+      {
+        "teamid": "112791",
+        "teamname": "SPAL"
+      }
+    ],
+    "39": [
+      {
+        "teamid": "687",
+        "teamname": "Columbus Crew"
+      },
+      {
+        "teamid": "688",
+        "teamname": "D.C. United"
+      },
+      {
+        "teamid": "689",
+        "teamname": "Red Bulls"
+      },
+      {
+        "teamid": "691",
+        "teamname": "New England"
+      },
+      {
+        "teamid": "693",
+        "teamname": "Chicago Fire FC"
+      },
+      {
+        "teamid": "694",
+        "teamname": "Colorado Rapids"
+      },
+      {
+        "teamid": "695",
+        "teamname": "FC Dallas"
+      },
+      {
+        "teamid": "696",
+        "teamname": "Sporting KC"
+      },
+      {
+        "teamid": "697",
+        "teamname": "LA Galaxy"
+      },
+      {
+        "teamid": "698",
+        "teamname": "Houston Dynamo"
+      },
+      {
+        "teamid": "101112",
+        "teamname": "Whitecaps FC"
+      },
+      {
+        "teamid": "111065",
+        "teamname": "Real Salt Lake"
+      },
+      {
+        "teamid": "111138",
+        "teamname": "Minnesota United"
+      },
+      {
+        "teamid": "111139",
+        "teamname": "CF Montréal"
+      },
+      {
+        "teamid": "111140",
+        "teamname": "Portland Timbers"
+      },
+      {
+        "teamid": "111144",
+        "teamname": "Sounders FC"
+      },
+      {
+        "teamid": "111651",
+        "teamname": "Toronto FC"
+      },
+      {
+        "teamid": "111928",
+        "teamname": "SJ Earthquakes"
+      },
+      {
+        "teamid": "112134",
+        "teamname": "Philadelphia"
+      },
+      {
+        "teamid": "112606",
+        "teamname": "Orlando City"
+      },
+      {
+        "teamid": "112828",
+        "teamname": "New York City FC"
+      },
+      {
+        "teamid": "112885",
+        "teamname": "Atlanta United"
+      },
+      {
+        "teamid": "112893",
+        "teamname": "Inter Miami CF"
+      },
+      {
+        "teamid": "112996",
+        "teamname": "LAFC"
+      },
+      {
+        "teamid": "113149",
+        "teamname": "FC Cincinnati"
+      },
+      {
+        "teamid": "114161",
+        "teamname": "Austin FC"
+      },
+      {
+        "teamid": "114162",
+        "teamname": "Nashville SC"
+      },
+      {
+        "teamid": "114640",
+        "teamname": "Charlotte FC"
+      }
+    ],
+    "41": [
+      {
+        "teamid": "298",
+        "teamname": "Rosenborg BK"
+      },
+      {
+        "teamid": "299",
+        "teamname": "Lillestrøm SK"
+      },
+      {
+        "teamid": "300",
+        "teamname": "Viking FK"
+      },
+      {
+        "teamid": "417",
+        "teamname": "Molde FK"
+      },
+      {
+        "teamid": "418",
+        "teamname": "Tromsø IL"
+      },
+      {
+        "teamid": "918",
+        "teamname": "FK Bodø/Glimt"
+      },
+      {
+        "teamid": "920",
+        "teamname": "Vålerenga Fotball"
+      },
+      {
+        "teamid": "922",
+        "teamname": "Strømsgodset IF"
+      },
+      {
+        "teamid": "1456",
+        "teamname": "Odds BK"
+      },
+      {
+        "teamid": "1463",
+        "teamname": "FK Haugesund"
+      },
+      {
+        "teamid": "1755",
+        "teamname": "Aalesunds FK"
+      },
+      {
+        "teamid": "1756",
+        "teamname": "HamKam Fotball"
+      },
+      {
+        "teamid": "1757",
+        "teamname": "Sandefjord"
+      },
+      {
+        "teamid": "112199",
+        "teamname": "Sarpsborg 08"
+      },
+      {
+        "teamid": "113459",
+        "teamname": "Kristiansund BK"
+      },
+      {
+        "teamid": "115489",
+        "teamname": "FK Jerv"
+      }
+    ],
+    "50": [
+      {
+        "teamid": "77",
+        "teamname": "Aberdeen"
+      },
+      {
+        "teamid": "78",
+        "teamname": "Celtic"
+      },
+      {
+        "teamid": "80",
+        "teamname": "Hearts"
+      },
+      {
+        "teamid": "81",
+        "teamname": "Hibernian"
+      },
+      {
+        "teamid": "82",
+        "teamname": "Kilmarnock"
+      },
+      {
+        "teamid": "83",
+        "teamname": "Motherwell"
+      },
+      {
+        "teamid": "86",
+        "teamname": "Rangers"
+      },
+      {
+        "teamid": "181",
+        "teamname": "Dundee United"
+      },
+      {
+        "teamid": "621",
+        "teamname": "Livingston"
+      },
+      {
+        "teamid": "631",
+        "teamname": "Ross County"
+      },
+      {
+        "teamid": "100804",
+        "teamname": "St. Johnstone"
+      },
+      {
+        "teamid": "100805",
+        "teamname": "St. Mirren"
+      }
+    ],
+    "53": [
+      {
+        "teamid": "240",
+        "teamname": "Atlético de Madrid"
+      },
+      {
+        "teamid": "241",
+        "teamname": "FC Barcelona"
+      },
+      {
+        "teamid": "243",
+        "teamname": "Real Madrid"
+      },
+      {
+        "teamid": "448",
+        "teamname": "Athletic Club"
+      },
+      {
+        "teamid": "449",
+        "teamname": "Real Betis"
+      },
+      {
+        "teamid": "450",
+        "teamname": "RC Celta"
+      },
+      {
+        "teamid": "452",
+        "teamname": "RCD Espanyol"
+      },
+      {
+        "teamid": "453",
+        "teamname": "RCD Mallorca"
+      },
+      {
+        "teamid": "457",
+        "teamname": "Real Sociedad"
+      },
+      {
+        "teamid": "461",
+        "teamname": "Valencia CF"
+      },
+      {
+        "teamid": "462",
+        "teamname": "R. Valladolid CF"
+      },
+      {
+        "teamid": "468",
+        "teamname": "Elche CF"
+      },
+      {
+        "teamid": "479",
+        "teamname": "CA Osasuna"
+      },
+      {
+        "teamid": "480",
+        "teamname": "Rayo Vallecano"
+      },
+      {
+        "teamid": "481",
+        "teamname": "Sevilla FC"
+      },
+      {
+        "teamid": "483",
+        "teamname": "Villarreal CF"
+      },
+      {
+        "teamid": "1860",
+        "teamname": "Getafe CF"
+      },
+      {
+        "teamid": "1861",
+        "teamname": "UD Almería"
+      },
+      {
+        "teamid": "1968",
+        "teamname": "Cádiz CF"
+      },
+      {
+        "teamid": "110062",
+        "teamname": "Girona FC"
+      }
+    ],
+    "54": [
+      {
+        "teamid": "244",
+        "teamname": "Real Zaragoza"
+      },
+      {
+        "teamid": "260",
+        "teamname": "CD Tenerife"
+      },
+      {
+        "teamid": "456",
+        "teamname": "R. Racing Club"
+      },
+      {
+        "teamid": "459",
+        "teamname": "R. Sporting"
+      },
+      {
+        "teamid": "463",
+        "teamname": "D. Alavés"
+      },
+      {
+        "teamid": "467",
+        "teamname": "SD Eibar"
+      },
+      {
+        "teamid": "472",
+        "teamname": "UD Las Palmas"
+      },
+      {
+        "teamid": "573",
+        "teamname": "Málaga CF"
+      },
+      {
+        "teamid": "1853",
+        "teamname": "Levante UD"
+      },
+      {
+        "teamid": "1854",
+        "teamname": "Albacete BP"
+      },
+      {
+        "teamid": "2023",
+        "teamname": "SD Ponferradina"
+      },
+      {
+        "teamid": "10846",
+        "teamname": "Burgos CF"
+      },
+      {
+        "teamid": "100851",
+        "teamname": "FC Cartagena"
+      },
+      {
+        "teamid": "100888",
+        "teamname": "CD Leganés"
+      },
+      {
+        "teamid": "110069",
+        "teamname": "CD Mirandés"
+      },
+      {
+        "teamid": "110827",
+        "teamname": "R. Oviedo"
+      },
+      {
+        "teamid": "110831",
+        "teamname": "CD Lugo"
+      },
+      {
+        "teamid": "110832",
+        "teamname": "Granada CF"
+      },
+      {
+        "teamid": "110839",
+        "teamname": "SD Huesca"
+      },
+      {
+        "teamid": "110902",
+        "teamname": "Villarreal CF B"
+      },
+      {
+        "teamid": "113981",
+        "teamname": "UD Ibiza"
+      },
+      {
+        "teamid": "114554",
+        "teamname": "FC Andorra"
+      }
+    ],
+    "56": [
+      {
+        "teamid": "319",
+        "teamname": "IFK Göteborg"
+      },
+      {
+        "teamid": "320",
+        "teamname": "Malmö FF"
+      },
+      {
+        "teamid": "432",
+        "teamname": "Helsingborgs IF"
+      },
+      {
+        "teamid": "433",
+        "teamname": "AIK"
+      },
+      {
+        "teamid": "700",
+        "teamname": "IF Elfsborg"
+      },
+      {
+        "teamid": "702",
+        "teamname": "IFK Norrköping"
+      },
+      {
+        "teamid": "708",
+        "teamname": "Hammarby IF"
+      },
+      {
+        "teamid": "710",
+        "teamname": "Djurgårdens IF"
+      },
+      {
+        "teamid": "711",
+        "teamname": "BK Häcken"
+      },
+      {
+        "teamid": "1439",
+        "teamname": "Kalmar FF"
+      },
+      {
+        "teamid": "1596",
+        "teamname": "GIF Sundsvall"
+      },
+      {
+        "teamid": "112072",
+        "teamname": "Mjällby AIF"
+      },
+      {
+        "teamid": "112126",
+        "teamname": "IFK Värnamo"
+      },
+      {
+        "teamid": "113458",
+        "teamname": "IK Sirius"
+      },
+      {
+        "teamid": "113743",
+        "teamname": "Varbergs BoIS"
+      },
+      {
+        "teamid": "113892",
+        "teamname": "Degerfors IF"
+      }
+    ],
+    "60": [
+      {
+        "teamid": "4",
+        "teamname": "Bolton"
+      },
+      {
+        "teamid": "89",
+        "teamname": "Charlton Ath"
+      },
+      {
+        "teamid": "91",
+        "teamname": "Derby County"
+      },
+      {
+        "teamid": "94",
+        "teamname": "Ipswich"
+      },
+      {
+        "teamid": "127",
+        "teamname": "Shrewsbury"
+      },
+      {
+        "teamid": "143",
+        "teamname": "Exeter City"
+      },
+      {
+        "teamid": "149",
+        "teamname": "Lincoln City"
+      },
+      {
+        "teamid": "357",
+        "teamname": "Morecambe"
+      },
+      {
+        "teamid": "561",
+        "teamname": "Forest Green"
+      },
+      {
+        "teamid": "1790",
+        "teamname": "Portsmouth"
+      },
+      {
+        "teamid": "1798",
+        "teamname": "MK Dons"
+      },
+      {
+        "teamid": "1807",
+        "teamname": "Sheffield Wed"
+      },
+      {
+        "teamid": "1928",
+        "teamname": "Port Vale"
+      },
+      {
+        "teamid": "1929",
+        "teamname": "Plymouth Argyle"
+      },
+      {
+        "teamid": "1932",
+        "teamname": "Barnsley"
+      },
+      {
+        "teamid": "1933",
+        "teamname": "Wycombe"
+      },
+      {
+        "teamid": "1936",
+        "teamname": "Cheltenham Town"
+      },
+      {
+        "teamid": "1938",
+        "teamname": "Peterborough"
+      },
+      {
+        "teamid": "1944",
+        "teamname": "Cambridge Utd"
+      },
+      {
+        "teamid": "1951",
+        "teamname": "Oxford United"
+      },
+      {
+        "teamid": "1962",
+        "teamname": "Bristol Rovers"
+      },
+      {
+        "teamid": "15015",
+        "teamname": "Burton Albion"
+      },
+      {
+        "teamid": "110313",
+        "teamname": "Accrington"
+      },
+      {
+        "teamid": "112260",
+        "teamname": "Fleetwood Town"
+      }
+    ],
+    "61": [
+      {
+        "teamid": "92",
+        "teamname": "Grimsby Town"
+      },
+      {
+        "teamid": "121",
+        "teamname": "Crewe Alexandra"
+      },
+      {
+        "teamid": "142",
+        "teamname": "Doncaster"
+      },
+      {
+        "teamid": "361",
+        "teamname": "Stevenage"
+      },
+      {
+        "teamid": "381",
+        "teamname": "Barrow"
+      },
+      {
+        "teamid": "1480",
+        "teamname": "Carlisle United"
+      },
+      {
+        "teamid": "1802",
+        "teamname": "Gillingham"
+      },
+      {
+        "teamid": "1803",
+        "teamname": "Walsall"
+      },
+      {
+        "teamid": "1804",
+        "teamname": "Bradford City"
+      },
+      {
+        "teamid": "1930",
+        "teamname": "Northampton"
+      },
+      {
+        "teamid": "1931",
+        "teamname": "Stockport"
+      },
+      {
+        "teamid": "1934",
+        "teamname": "Swindon Town"
+      },
+      {
+        "teamid": "1935",
+        "teamname": "Colchester"
+      },
+      {
+        "teamid": "1940",
+        "teamname": "Mansfield Town"
+      },
+      {
+        "teamid": "1941",
+        "teamname": "Hartlepool"
+      },
+      {
+        "teamid": "1955",
+        "teamname": "Rochdale"
+      },
+      {
+        "teamid": "1958",
+        "teamname": "Leyton Orient"
+      },
+      {
+        "teamid": "15048",
+        "teamname": "Tranmere Rovers"
+      },
+      {
+        "teamid": "110799",
+        "teamname": "Sutton United"
+      },
+      {
+        "teamid": "110890",
+        "teamname": "Crawley Town"
+      },
+      {
+        "teamid": "112222",
+        "teamname": "Harrogate Town"
+      },
+      {
+        "teamid": "112254",
+        "teamname": "Newport County"
+      },
+      {
+        "teamid": "112259",
+        "teamname": "AFC Wimbledon"
+      },
+      {
+        "teamid": "113926",
+        "teamname": "Salford City"
+      }
+    ],
+    "65": [
+      {
+        "teamid": "305",
+        "teamname": "Bohemian FC"
+      },
+      {
+        "teamid": "306",
+        "teamname": "Shamrock Rovers"
+      },
+      {
+        "teamid": "423",
+        "teamname": "St. Pats"
+      },
+      {
+        "teamid": "445",
+        "teamname": "Derry City"
+      },
+      {
+        "teamid": "563",
+        "teamname": "Sligo Rovers"
+      },
+      {
+        "teamid": "834",
+        "teamname": "Shelbourne"
+      },
+      {
+        "teamid": "837",
+        "teamname": "Dundalk"
+      },
+      {
+        "teamid": "1572",
+        "teamname": "Drogheda United"
+      },
+      {
+        "teamid": "111131",
+        "teamname": "Finn Harps"
+      },
+      {
+        "teamid": "111132",
+        "teamname": "UCD AFC"
+      }
+    ],
+    "66": [
+      {
+        "teamid": "301",
+        "teamname": "Widzew Łódź"
+      },
+      {
+        "teamid": "420",
+        "teamname": "Górnik Zabrze"
+      },
+      {
+        "teamid": "873",
+        "teamname": "Lech Poznań"
+      },
+      {
+        "teamid": "1569",
+        "teamname": "Wisła Płock"
+      },
+      {
+        "teamid": "1871",
+        "teamname": "Legia Warszawa"
+      },
+      {
+        "teamid": "110745",
+        "teamname": "Jagiellonia"
+      },
+      {
+        "teamid": "110746",
+        "teamname": "Pogoń Szczecin"
+      },
+      {
+        "teamid": "110747",
+        "teamname": "Cracovia"
+      },
+      {
+        "teamid": "110749",
+        "teamname": "Zagłębie Lubin"
+      },
+      {
+        "teamid": "111083",
+        "teamname": "Korona Kielce"
+      },
+      {
+        "teamid": "111086",
+        "teamname": "Piast Gliwice"
+      },
+      {
+        "teamid": "111088",
+        "teamname": "Radomiak Radom"
+      },
+      {
+        "teamid": "111091",
+        "teamname": "Lechia Gdańsk"
+      },
+      {
+        "teamid": "111092",
+        "teamname": "Śląsk Wrocław"
+      },
+      {
+        "teamid": "112505",
+        "teamname": "Miedź Legnica"
+      },
+      {
+        "teamid": "112511",
+        "teamname": "Warta Poznań"
+      },
+      {
+        "teamid": "114004",
+        "teamname": "Stal Mielec"
+      },
+      {
+        "teamid": "114326",
+        "teamname": "Raków"
+      }
+    ],
+    "68": [
+      {
+        "teamid": "325",
+        "teamname": "Galatasaray"
+      },
+      {
+        "teamid": "326",
+        "teamname": "Fenerbahçe"
+      },
+      {
+        "teamid": "327",
+        "teamname": "Beşiktaş"
+      },
+      {
+        "teamid": "436",
+        "teamname": "Trabzonspor"
+      },
+      {
+        "teamid": "741",
+        "teamname": "Antalyaspor"
+      },
+      {
+        "teamid": "746",
+        "teamname": "İstanbulspor"
+      },
+      {
+        "teamid": "101007",
+        "teamname": "MKE Ankaragücü"
+      },
+      {
+        "teamid": "101014",
+        "teamname": "Başakşehir"
+      },
+      {
+        "teamid": "101016",
+        "teamname": "Adana Demirspor"
+      },
+      {
+        "teamid": "101020",
+        "teamname": "Kayserispor"
+      },
+      {
+        "teamid": "101028",
+        "teamname": "Hatayspor"
+      },
+      {
+        "teamid": "101033",
+        "teamname": "Konyaspor"
+      },
+      {
+        "teamid": "101041",
+        "teamname": "Sivasspor"
+      },
+      {
+        "teamid": "110776",
+        "teamname": "Gaziantep"
+      },
+      {
+        "teamid": "111117",
+        "teamname": "Karagümrük SK"
+      },
+      {
+        "teamid": "111339",
+        "teamname": "Kasımpaşa"
+      },
+      {
+        "teamid": "112120",
+        "teamname": "Giresunspor"
+      },
+      {
+        "teamid": "113142",
+        "teamname": "Alanyaspor"
+      },
+      {
+        "teamid": "113796",
+        "teamname": "Ümraniyespor"
+      }
+    ],
+    "76": [
+      {
+        "teamid": "211",
+        "teamname": "Dinamo Zagreb"
+      },
+      {
+        "teamid": "263",
+        "teamname": "Hajduk Split"
+      },
+      {
+        "teamid": "266",
+        "teamname": "Slavia Praha"
+      },
+      {
+        "teamid": "267",
+        "teamname": "Sparta Praha"
+      },
+      {
+        "teamid": "278",
+        "teamname": "AEK Athens"
+      },
+      {
+        "teamid": "393",
+        "teamname": "PAOK FC"
+      },
+      {
+        "teamid": "1874",
+        "teamname": "Ferencvárosi TC"
+      },
+      {
+        "teamid": "1884",
+        "teamname": "Panathinaikos"
+      },
+      {
+        "teamid": "1947",
+        "teamname": "Wrexham AFC"
+      },
+      {
+        "teamid": "100135",
+        "teamname": "Apoel FC"
+      },
+      {
+        "teamid": "100325",
+        "teamname": "HJK Helsinki"
+      },
+      {
+        "teamid": "101047",
+        "teamname": "Dynamo Kyiv"
+      },
+      {
+        "teamid": "101059",
+        "teamname": "Shakhtar Donetsk"
+      },
+      {
+        "teamid": "101100",
+        "teamname": "Atl. Nacional"
+      },
+      {
+        "teamid": "110468",
+        "teamname": "Viktoria Plzeň"
+      },
+      {
+        "teamid": "110929",
+        "teamname": "Kaizer Chiefs"
+      },
+      {
+        "teamid": "110930",
+        "teamname": "Orlando Pirates"
+      },
+      {
+        "teamid": "110935",
+        "teamname": "Mamelodi Sundowns"
+      },
+      {
+        "teamid": "111701",
+        "teamname": "Al Ain FC"
+      }
+    ],
+    "78": [
+      {
+        "teamid": "1318",
+        "teamname": "England"
+      },
+      {
+        "teamid": "1322",
+        "teamname": "Austria"
+      },
+      {
+        "teamid": "1325",
+        "teamname": "Belgium"
+      },
+      {
+        "teamid": "1328",
+        "teamname": "Croatia"
+      },
+      {
+        "teamid": "1330",
+        "teamname": "Czech Republic"
+      },
+      {
+        "teamid": "1331",
+        "teamname": "Denmark"
+      },
+      {
+        "teamid": "1334",
+        "teamname": "Finland"
+      },
+      {
+        "teamid": "1335",
+        "teamname": "France"
+      },
+      {
+        "teamid": "1337",
+        "teamname": "Germany"
+      },
+      {
+        "teamid": "1341",
+        "teamname": "Iceland"
+      },
+      {
+        "teamid": "1343",
+        "teamname": "Italy"
+      },
+      {
+        "teamid": "1352",
+        "teamname": "Norway"
+      },
+      {
+        "teamid": "1353",
+        "teamname": "Poland"
+      },
+      {
+        "teamid": "1354",
+        "teamname": "Portugal"
+      },
+      {
+        "teamid": "1355",
+        "teamname": "Ireland"
+      },
+      {
+        "teamid": "1356",
+        "teamname": "Romania"
+      },
+      {
+        "teamid": "1359",
+        "teamname": "Scotland"
+      },
+      {
+        "teamid": "1362",
+        "teamname": "Spain"
+      },
+      {
+        "teamid": "1363",
+        "teamname": "Sweden"
+      },
+      {
+        "teamid": "1366",
+        "teamname": "Ukraine"
+      },
+      {
+        "teamid": "1367",
+        "teamname": "Wales"
+      },
+      {
+        "teamid": "1369",
+        "teamname": "Argentina"
+      },
+      {
+        "teamid": "1370",
+        "teamname": "Brazil"
+      },
+      {
+        "teamid": "1386",
+        "teamname": "Mexico"
+      },
+      {
+        "teamid": "1387",
+        "teamname": "United States"
+      },
+      {
+        "teamid": "1413",
+        "teamname": "China PR"
+      },
+      {
+        "teamid": "1415",
+        "teamname": "Australia"
+      },
+      {
+        "teamid": "1886",
+        "teamname": "Hungary"
+      },
+      {
+        "teamid": "105035",
+        "teamname": "Netherlands"
+      },
+      {
+        "teamid": "110081",
+        "teamname": "Northern Ireland"
+      },
+      {
+        "teamid": "111111",
+        "teamname": "Morocco"
+      },
+      {
+        "teamid": "111455",
+        "teamname": "Canada"
+      },
+      {
+        "teamid": "111462",
+        "teamname": "Ghana"
+      },
+      {
+        "teamid": "111473",
+        "teamname": "New Zealand"
+      },
+      {
+        "teamid": "111527",
+        "teamname": "Qatar"
+      }
+    ],
+    "80": [
+      {
+        "teamid": "191",
+        "teamname": "RB Salzburg"
+      },
+      {
+        "teamid": "209",
+        "teamname": "SK Sturm Graz"
+      },
+      {
+        "teamid": "252",
+        "teamname": "LASK"
+      },
+      {
+        "teamid": "254",
+        "teamname": "SK Rapid Wien"
+      },
+      {
+        "teamid": "256",
+        "teamname": "FK Austria Wien"
+      },
+      {
+        "teamid": "780",
+        "teamname": "SV Ried"
+      },
+      {
+        "teamid": "781",
+        "teamname": "SC Austria"
+      },
+      {
+        "teamid": "1787",
+        "teamname": "Austria Klagenfurt"
+      },
+      {
+        "teamid": "2017",
+        "teamname": "TSV Hartberg"
+      },
+      {
+        "teamid": "15009",
+        "teamname": "SCR Altach"
+      },
+      {
+        "teamid": "15040",
+        "teamname": "WSG Tirol"
+      },
+      {
+        "teamid": "111822",
+        "teamname": "Wolfsberger AC"
+      }
+    ],
+    "83": [
+      {
+        "teamid": "981",
+        "teamname": "Seongnam FC"
+      },
+      {
+        "teamid": "982",
+        "teamname": "FC Seoul"
+      },
+      {
+        "teamid": "983",
+        "teamname": "Suwon Samsung"
+      },
+      {
+        "teamid": "1473",
+        "teamname": "Ulsan Hyundai"
+      },
+      {
+        "teamid": "1474",
+        "teamname": "Pohang Steelers"
+      },
+      {
+        "teamid": "1477",
+        "teamname": "Jeonbuk Hyundai"
+      },
+      {
+        "teamid": "1478",
+        "teamname": "Jeju United"
+      },
+      {
+        "teamid": "2055",
+        "teamname": "Gimcheon Sangmu"
+      },
+      {
+        "teamid": "2056",
+        "teamname": "Daegu FC"
+      },
+      {
+        "teamid": "110765",
+        "teamname": "Incheon United"
+      },
+      {
+        "teamid": "112115",
+        "teamname": "Gangwon FC"
+      },
+      {
+        "teamid": "112558",
+        "teamname": "Suwon FC"
+      }
+    ],
+    "189": [
+      {
+        "teamid": "322",
+        "teamname": "Grasshopper Club"
+      },
+      {
+        "teamid": "324",
+        "teamname": "Servette FC"
+      },
+      {
+        "teamid": "894",
+        "teamname": "FC Zürich"
+      },
+      {
+        "teamid": "896",
+        "teamname": "FC Basel 1893"
+      },
+      {
+        "teamid": "897",
+        "teamname": "FC Luzern"
+      },
+      {
+        "teamid": "898",
+        "teamname": "FC St. Gallen"
+      },
+      {
+        "teamid": "900",
+        "teamname": "BSC Young Boys"
+      },
+      {
+        "teamid": "1713",
+        "teamname": "FC Winterthur"
+      },
+      {
+        "teamid": "10032",
+        "teamname": "FC Lugano"
+      },
+      {
+        "teamid": "110770",
+        "teamname": "FC Sion"
+      }
+    ],
+    "308": [
+      {
+        "teamid": "234",
+        "teamname": "SL Benfica"
+      },
+      {
+        "teamid": "236",
+        "teamname": "FC Porto"
+      },
+      {
+        "teamid": "237",
+        "teamname": "Sporting CP"
+      },
+      {
+        "teamid": "518",
+        "teamname": "GD Chaves"
+      },
+      {
+        "teamid": "744",
+        "teamname": "Rio Ave FC"
+      },
+      {
+        "teamid": "1438",
+        "teamname": "Santa Clara"
+      },
+      {
+        "teamid": "1887",
+        "teamname": "Vitória SC"
+      },
+      {
+        "teamid": "1888",
+        "teamname": "Gil Vicente"
+      },
+      {
+        "teamid": "1892",
+        "teamname": "Paços Ferreira"
+      },
+      {
+        "teamid": "1893",
+        "teamname": "Marítimo"
+      },
+      {
+        "teamid": "1896",
+        "teamname": "SC Braga"
+      },
+      {
+        "teamid": "1898",
+        "teamname": "Boavista FC"
+      },
+      {
+        "teamid": "10020",
+        "teamname": "Estoril Praia"
+      },
+      {
+        "teamid": "10031",
+        "teamname": "Portimonense SC"
+      },
+      {
+        "teamid": "111539",
+        "teamname": "FC Vizela"
+      },
+      {
+        "teamid": "112513",
+        "teamname": "Arouca"
+      },
+      {
+        "teamid": "112809",
+        "teamname": "FC Famalicão"
+      },
+      {
+        "teamid": "114510",
+        "teamname": "Casa Pia AC"
+      }
+    ],
+    "330": [
+      {
+        "teamid": "308",
+        "teamname": "Univ. Craiova"
+      },
+      {
+        "teamid": "310",
+        "teamname": "FC Rapid 1923"
+      },
+      {
+        "teamid": "100759",
+        "teamname": "FC Argeș"
+      },
+      {
+        "teamid": "100761",
+        "teamname": "FCSB"
+      },
+      {
+        "teamid": "110075",
+        "teamname": "Farul Constanța"
+      },
+      {
+        "teamid": "110078",
+        "teamname": "FC Petrolul"
+      },
+      {
+        "teamid": "110750",
+        "teamname": "UTA Arad"
+      },
+      {
+        "teamid": "110751",
+        "teamname": "FC Univ. Cluj"
+      },
+      {
+        "teamid": "110752",
+        "teamname": "FC Botoșani"
+      },
+      {
+        "teamid": "113182",
+        "teamname": "FC Voluntari"
+      },
+      {
+        "teamid": "113378",
+        "teamname": "Sepsi OSK"
+      },
+      {
+        "teamid": "113380",
+        "teamname": "CS Mioveni"
+      },
+      {
+        "teamid": "113387",
+        "teamname": "AFC Chindia"
+      },
+      {
+        "teamid": "114147",
+        "teamname": "FC Hermannstadt"
+      },
+      {
+        "teamid": "114385",
+        "teamname": "CFR 1907 Cluj"
+      },
+      {
+        "teamid": "115716",
+        "teamname": "FCU 1948"
+      }
+    ],
+    "350": [
+      {
+        "teamid": "605",
+        "teamname": "Al Hilal"
+      },
+      {
+        "teamid": "607",
+        "teamname": "Al Ittihad"
+      },
+      {
+        "teamid": "111674",
+        "teamname": "Al Shabab"
+      },
+      {
+        "teamid": "112096",
+        "teamname": "Ettifaq FC"
+      },
+      {
+        "teamid": "112139",
+        "teamname": "Al Nassr"
+      },
+      {
+        "teamid": "112390",
+        "teamname": "Al Fateh"
+      },
+      {
+        "teamid": "112392",
+        "teamname": "Al Raed"
+      },
+      {
+        "teamid": "112393",
+        "teamname": "Al Taawoun"
+      },
+      {
+        "teamid": "112408",
+        "teamname": "Al Wehda"
+      },
+      {
+        "teamid": "112572",
+        "teamname": "Al Tai"
+      },
+      {
+        "teamid": "112883",
+        "teamname": "Al Khaleej"
+      },
+      {
+        "teamid": "112990",
+        "teamname": "Al Batin"
+      },
+      {
+        "teamid": "113057",
+        "teamname": "Al Fayha"
+      },
+      {
+        "teamid": "113058",
+        "teamname": "Abha Club"
+      },
+      {
+        "teamid": "113217",
+        "teamname": "Damac FC"
+      },
+      {
+        "teamid": "113345",
+        "teamname": "Al Adalah"
+      }
+    ],
+    "351": [
+      {
+        "teamid": "111393",
+        "teamname": "Adelaide United"
+      },
+      {
+        "teamid": "111395",
+        "teamname": "Brisbane Roar"
+      },
+      {
+        "teamid": "111396",
+        "teamname": "Central Coast"
+      },
+      {
+        "teamid": "111397",
+        "teamname": "Melb. Victory"
+      },
+      {
+        "teamid": "111398",
+        "teamname": "Newcastle Jets"
+      },
+      {
+        "teamid": "111399",
+        "teamname": "Perth Glory"
+      },
+      {
+        "teamid": "111400",
+        "teamname": "Sydney FC"
+      },
+      {
+        "teamid": "111766",
+        "teamname": "Well. Phoenix"
+      },
+      {
+        "teamid": "112224",
+        "teamname": "Melbourne City"
+      },
+      {
+        "teamid": "112427",
+        "teamname": "WS Wanderers"
+      },
+      {
+        "teamid": "114023",
+        "teamname": "Western United"
+      },
+      {
+        "teamid": "114604",
+        "teamname": "Macarthur FC"
+      }
+    ],
+    "353": [
+      {
+        "teamid": "1013",
+        "teamname": "San Lorenzo"
+      },
+      {
+        "teamid": "1876",
+        "teamname": "River Plate"
+      },
+      {
+        "teamid": "1877",
+        "teamname": "Boca Juniors"
+      },
+      {
+        "teamid": "101083",
+        "teamname": "Estudiantes"
+      },
+      {
+        "teamid": "101084",
+        "teamname": "Gimnasia"
+      },
+      {
+        "teamid": "101085",
+        "teamname": "Racing Club"
+      },
+      {
+        "teamid": "101088",
+        "teamname": "Vélez Sarsfield"
+      },
+      {
+        "teamid": "110093",
+        "teamname": "Independiente"
+      },
+      {
+        "teamid": "110394",
+        "teamname": "Arsenal"
+      },
+      {
+        "teamid": "110395",
+        "teamname": "Lanús"
+      },
+      {
+        "teamid": "110396",
+        "teamname": "Newell's"
+      },
+      {
+        "teamid": "110404",
+        "teamname": "Banfield"
+      },
+      {
+        "teamid": "110406",
+        "teamname": "Colón"
+      },
+      {
+        "teamid": "110580",
+        "teamname": "Rosario Central "
+      },
+      {
+        "teamid": "110581",
+        "teamname": "Patronato"
+      },
+      {
+        "teamid": "111019",
+        "teamname": "Argentinos Jrs."
+      },
+      {
+        "teamid": "111706",
+        "teamname": "Godoy Cruz"
+      },
+      {
+        "teamid": "111707",
+        "teamname": "Aldosivi"
+      },
+      {
+        "teamid": "111708",
+        "teamname": "Atlético Tucumán"
+      },
+      {
+        "teamid": "111710",
+        "teamname": "Defensa"
+      },
+      {
+        "teamid": "111711",
+        "teamname": "Huracán"
+      },
+      {
+        "teamid": "111715",
+        "teamname": "Tigre"
+      },
+      {
+        "teamid": "111716",
+        "teamname": "Unión"
+      },
+      {
+        "teamid": "112670",
+        "teamname": "Talleres"
+      },
+      {
+        "teamid": "112689",
+        "teamname": "Platense"
+      },
+      {
+        "teamid": "112713",
+        "teamname": "Sarmiento"
+      },
+      {
+        "teamid": "112965",
+        "teamname": "Central Córdoba"
+      },
+      {
+        "teamid": "113044",
+        "teamname": "Barracas Central"
+      }
+    ],
+    "382": [
+      {
+        "teamid": "111592",
+        "teamname": "Free Agents"
+      }
+    ],
+    "1003": [
+      {
+        "teamid": "383",
+        "teamname": "Palmeiras"
+      },
+      {
+        "teamid": "1035",
+        "teamname": "Atlético Mineiro"
+      },
+      {
+        "teamid": "1039",
+        "teamname": "Athletico-PR"
+      },
+      {
+        "teamid": "1041",
+        "teamname": "Corinthians"
+      },
+      {
+        "teamid": "1043",
+        "teamname": "Flamengo"
+      },
+      {
+        "teamid": "101102",
+        "teamname": "Deportivo Cali"
+      },
+      {
+        "teamid": "101108",
+        "teamname": "Olimpia"
+      },
+      {
+        "teamid": "101110",
+        "teamname": "Peñarol"
+      },
+      {
+        "teamid": "110969",
+        "teamname": "The Strongest"
+      },
+      {
+        "teamid": "110975",
+        "teamname": "Uni. Católica"
+      },
+      {
+        "teamid": "110980",
+        "teamname": "Colo-Colo"
+      },
+      {
+        "teamid": "110984",
+        "teamname": "CS Emelec"
+      },
+      {
+        "teamid": "110989",
+        "teamname": "Caracas FC"
+      },
+      {
+        "teamid": "110990",
+        "teamname": "Dep. Táchira"
+      },
+      {
+        "teamid": "111008",
+        "teamname": "Libertad"
+      },
+      {
+        "teamid": "111010",
+        "teamname": "Alianza Lima"
+      },
+      {
+        "teamid": "111013",
+        "teamname": "Sporting Cristal"
+      },
+      {
+        "teamid": "111052",
+        "teamname": "Fortaleza"
+      },
+      {
+        "teamid": "111325",
+        "teamname": "Nacional"
+      },
+      {
+        "teamid": "111722",
+        "teamname": "Deportes Tolima"
+      },
+      {
+        "teamid": "112001",
+        "teamname": "América-MG"
+      },
+      {
+        "teamid": "112472",
+        "teamname": "RB Bragantino"
+      },
+      {
+        "teamid": "112716",
+        "teamname": "Cerro Porteño"
+      },
+      {
+        "teamid": "112908",
+        "teamname": "IDV"
+      },
+      {
+        "teamid": "114577",
+        "teamname": "Always Ready"
+      },
+      {
+        "teamid": "115517",
+        "teamname": "Ind. Petrolero"
+      }
+    ],
+    "1014": [
+      {
+        "teamid": "567",
+        "teamname": "Fluminense"
+      },
+      {
+        "teamid": "598",
+        "teamname": "São Paulo"
+      },
+      {
+        "teamid": "1048",
+        "teamname": "Internacional"
+      },
+      {
+        "teamid": "1053",
+        "teamname": "Santos"
+      },
+      {
+        "teamid": "101099",
+        "teamname": "América de Cali"
+      },
+      {
+        "teamid": "101101",
+        "teamname": "Junior"
+      },
+      {
+        "teamid": "101103",
+        "teamname": "Indep. Medellín"
+      },
+      {
+        "teamid": "110970",
+        "teamname": "O. Petrolero"
+      },
+      {
+        "teamid": "110974",
+        "teamname": "Wilstermann"
+      },
+      {
+        "teamid": "110977",
+        "teamname": "Unión Española"
+      },
+      {
+        "teamid": "110981",
+        "teamname": "Barcelona SC"
+      },
+      {
+        "teamid": "110986",
+        "teamname": "LDU Quito"
+      },
+      {
+        "teamid": "111001",
+        "teamname": "Wanderers"
+      },
+      {
+        "teamid": "111011",
+        "teamname": "Cienciano"
+      },
+      {
+        "teamid": "111016",
+        "teamname": "Sport Boys"
+      },
+      {
+        "teamid": "111059",
+        "teamname": "Ceará SC"
+      },
+      {
+        "teamid": "111326",
+        "teamname": "Liverpool"
+      },
+      {
+        "teamid": "111332",
+        "teamname": "Est. de Mérida"
+      },
+      {
+        "teamid": "111334",
+        "teamname": "Melgar"
+      },
+      {
+        "teamid": "112080",
+        "teamname": "Sol de América"
+      },
+      {
+        "teamid": "112119",
+        "teamname": "Atlético-GO"
+      },
+      {
+        "teamid": "112184",
+        "teamname": "River Plate"
+      },
+      {
+        "teamid": "112523",
+        "teamname": "La Equidad"
+      },
+      {
+        "teamid": "112533",
+        "teamname": "Antofagasta"
+      },
+      {
+        "teamid": "112535",
+        "teamname": "Unión La Calera"
+      },
+      {
+        "teamid": "112584",
+        "teamname": "Everton de Viña"
+      },
+      {
+        "teamid": "112585",
+        "teamname": "Ñublense"
+      },
+      {
+        "teamid": "112671",
+        "teamname": "Club Nacional"
+      },
+      {
+        "teamid": "112853",
+        "teamname": "Dep. La Guaira"
+      },
+      {
+        "teamid": "112914",
+        "teamname": "Metropolitanos"
+      },
+      {
+        "teamid": "114512",
+        "teamname": "Ayacucho"
+      },
+      {
+        "teamid": "114579",
+        "teamname": "Royal Pari"
+      },
+      {
+        "teamid": "114580",
+        "teamname": "Delfín SC"
+      },
+      {
+        "teamid": "114581",
+        "teamname": "U. Católica"
+      },
+      {
+        "teamid": "114600",
+        "teamname": "Guabirá"
+      },
+      {
+        "teamid": "114615",
+        "teamname": "Mushuc Runa"
+      },
+      {
+        "teamid": "114688",
+        "teamname": "Guaireña"
+      },
+      {
+        "teamid": "115487",
+        "teamname": "9 de Octubre FC"
+      },
+      {
+        "teamid": "115530",
+        "teamname": "Cuiabá"
+      },
+      {
+        "teamid": "115536",
+        "teamname": "Cerro Largo"
+      },
+      {
+        "teamid": "115694",
+        "teamname": "Hnos. Colmenárez"
+      },
+      {
+        "teamid": "116007",
+        "teamname": "Gral. Caballero"
+      }
+    ],
+    "2012": [
+      {
+        "teamid": "110955",
+        "teamname": "Shanghai Shenhua"
+      },
+      {
+        "teamid": "111724",
+        "teamname": "Shandong Taishan"
+      },
+      {
+        "teamid": "111768",
+        "teamname": "Beijing Guoan"
+      },
+      {
+        "teamid": "111769",
+        "teamname": "Changchun Yatai"
+      },
+      {
+        "teamid": "111773",
+        "teamname": "Shenzhen FC"
+      },
+      {
+        "teamid": "111774",
+        "teamname": "Tianjin JMT FC"
+      },
+      {
+        "teamid": "111779",
+        "teamname": "Henan SSLM FC"
+      },
+      {
+        "teamid": "111839",
+        "teamname": "Guangzhou FC"
+      },
+      {
+        "teamid": "112163",
+        "teamname": "Zhejiang Pro"
+      },
+      {
+        "teamid": "112378",
+        "teamname": "Dalian Pro"
+      },
+      {
+        "teamid": "112429",
+        "teamname": "Guangzhou City"
+      },
+      {
+        "teamid": "112540",
+        "teamname": "Shanghai Port"
+      },
+      {
+        "teamid": "112541",
+        "teamname": "Wuhan FC"
+      },
+      {
+        "teamid": "112978",
+        "teamname": "Hebei FC"
+      },
+      {
+        "teamid": "112985",
+        "teamname": "Cangzhou FC"
+      },
+      {
+        "teamid": "114628",
+        "teamname": "Meizhou Hakka"
+      },
+      {
+        "teamid": "116360",
+        "teamname": "Rongcheng FC"
+      },
+      {
+        "teamid": "116361",
+        "teamname": "Wuhan 3 Towns"
+      }
+    ],
+    "2028": [
+      {
+        "teamid": "112264",
+        "teamname": "*TeamName_Abbr15_112264"
+      }
+    ],
+    "2076": [
+      {
+        "teamid": "33",
+        "teamname": "1860 München"
+      },
+      {
+        "teamid": "487",
+        "teamname": "VfL Osnabrück"
+      },
+      {
+        "teamid": "492",
+        "teamname": "Wehen Wiesbaden"
+      },
+      {
+        "teamid": "503",
+        "teamname": "Dynamo Dresden"
+      },
+      {
+        "teamid": "506",
+        "teamname": "FC Erzgebirge Aue"
+      },
+      {
+        "teamid": "523",
+        "teamname": "Saarbrücken"
+      },
+      {
+        "teamid": "526",
+        "teamname": "Rot-Weiss Essen"
+      },
+      {
+        "teamid": "580",
+        "teamname": "SV Elversberg"
+      },
+      {
+        "teamid": "1825",
+        "teamname": "MSV Duisburg"
+      },
+      {
+        "teamid": "110194",
+        "teamname": "SpVgg Bayreuth"
+      },
+      {
+        "teamid": "110482",
+        "teamname": "Hallescher FC"
+      },
+      {
+        "teamid": "110501",
+        "teamname": "SC Verl"
+      },
+      {
+        "teamid": "110532",
+        "teamname": "SV Waldhof"
+      },
+      {
+        "teamid": "110587",
+        "teamname": "VfB Oldenburg"
+      },
+      {
+        "teamid": "110592",
+        "teamname": "FSV Zwickau"
+      },
+      {
+        "teamid": "110597",
+        "teamname": "SV Meppen"
+      },
+      {
+        "teamid": "110645",
+        "teamname": "Viktoria Köln"
+      },
+      {
+        "teamid": "110676",
+        "teamname": "B. Dortmund II"
+      },
+      {
+        "teamid": "110691",
+        "teamname": "SC Freiburg II"
+      },
+      {
+        "teamid": "111239",
+        "teamname": "FC Ingolstadt 04"
+      }
+    ],
+    "2149": [
+      {
+        "teamid": "111629",
+        "teamname": "East Bengal"
+      },
+      {
+        "teamid": "113040",
+        "teamname": "NorthEast United"
+      },
+      {
+        "teamid": "113146",
+        "teamname": "ATK Mohun Bagan"
+      },
+      {
+        "teamid": "113257",
+        "teamname": "Odisha FC"
+      },
+      {
+        "teamid": "113297",
+        "teamname": "Chennaiyin FC"
+      },
+      {
+        "teamid": "113298",
+        "teamname": "FC Goa"
+      },
+      {
+        "teamid": "113299",
+        "teamname": "Kerala Blasters"
+      },
+      {
+        "teamid": "113300",
+        "teamname": "Mumbai City FC"
+      },
+      {
+        "teamid": "113301",
+        "teamname": "Hyderabad FC"
+      },
+      {
+        "teamid": "113302",
+        "teamname": "Bengaluru FC"
+      },
+      {
+        "teamid": "114168",
+        "teamname": "Jamshedpur FC"
+      }
     ]
   },
   "seasons": [
     {
-      "id": "s2324",
+      "id": "season_1",
       "season": "2023/2024",
-      "age": "14",
+      "age": 15,
       "club": "Spezia",
       "league": "Serie A",
+      "clubBadgeColor": "bg-zinc-800",
       "apps": 22,
       "goals": 4,
       "assists": 16,
-      "avgRating": "7.67",
-      "yellowCards": 3,
+      "avgRating": 7.67,
+      "yellowCards": 0,
       "redCards": 0,
-      "motm": 7,
       "trophies": [],
       "individualAwards": [],
-      "highlights": "First professional season at Spezia. Broke the club's single-season assists record with 16 assists.",
-      "xG": 3.8,
-      "xA": 12.5,
-      "keyPassesPerGame": 2.8,
-      "dribblesPerGame": 3.1
+      "highlights": "4 goals, 16 assists in 22 appearances",
+      "xG": 0,
+      "xA": 0,
+      "keyPassesPerGame": 0,
+      "dribblesPerGame": 0,
+      "motm": 7
     }
   ],
   "total_goals": 4,
   "total_assists": 16,
   "total_appearances": 22,
-  "wage": "€15,000/week",
-  "market_value": "€2.5M",
+  "wage": 9800,
+  "market_value": 6000000,
   "trophies": [
     {
       "id": "t_motm",
       "title": "Man of the Match Awards",
       "category": "Individual",
-      "quantity": 7,
-      "iconType": "manofmatch",
-      "tier": "Gold",
-      "yearsWon": ["2023/2024"],
-      "description": "Man of the Match awards earned through exceptional performances."
+      "quantity": 10,
+      "yearsWon": [
+        "2023/2024"
+      ],
+      "description": "Awarded 10 times for outstanding match performances.",
+      "tier": "Platinum",
+      "iconType": "manofmatch"
     },
     {
       "id": "t_ballondor",
       "title": "Ballon d'Or",
       "category": "Individual",
       "quantity": 0,
-      "iconType": "ballondor",
-      "tier": "Diamond",
       "yearsWon": [],
-      "description": "The most prestigious individual award in football."
+      "description": "Awarded to the world's best footballer.",
+      "tier": "Diamond",
+      "iconType": "ballondor"
     },
     {
       "id": "t_ucl",
       "title": "UEFA Champions League",
       "category": "Club",
       "quantity": 0,
-      "iconType": "champions",
-      "tier": "Platinum",
       "yearsWon": [],
-      "description": "Europe's premier club competition."
+      "description": "The pinnacle of European club football.",
+      "tier": "Diamond",
+      "iconType": "champions"
     },
     {
       "id": "t_league",
       "title": "League Champion",
       "category": "Club",
       "quantity": 0,
-      "iconType": "league",
-      "tier": "Gold",
       "yearsWon": [],
-      "description": "Domestic league title."
+      "description": "Domestic league title winner.",
+      "tier": "Platinum",
+      "iconType": "league"
     }
   ],
   "news": [
     {
-      "id": "demo_news_1",
-      "timestamp": "2024-05-15 14:30",
-      "category": "milestone",
-      "headline": "Ethan Ampadu Breaks Spezia's All-Time Season Assists Record!",
-      "details": "With 16 assists in his debut season, Ethan Ampadu has shattered the previous record of 6 assists held by Daniele Verde. A historic achievement for the 14-year-old Welsh prodigy.",
-      "priority": "high",
-      "image": "milestone"
-    },
-    {
-      "id": "demo_news_2",
-      "timestamp": "2024-05-10 09:15",
+      "id": "news_b1c234fc_2026-08-08 02:29",
+      "timestamp": "2026-08-08 02:29",
       "category": "performance",
-      "headline": "Ampadu's Creativity Rivals Dennis Bergkamp!",
-      "details": "With 16 career assists, Ethan Ampadu is showing the vision and passing ability that made Dennis Bergkamp a legend. The young Welshman is building a similar legacy of beautiful football.",
+      "icon": "🎨",
+      "headline": "Ethan Ampadu's creativity rivals Dennis Bergkamp!",
+      "details": "With 12 career assists, Ethan Ampadu is showing the vision and passing ability that made Dennis Bergkamp a legend. The Dutch maestro had 120 goals and countless assists in his Arsenal career. Ethan Ampadu is building a similar legacy of beautiful football!",
       "priority": "medium",
       "image": "legend_comparison"
-    },
-    {
-      "id": "demo_news_3",
-      "timestamp": "2024-04-28 18:45",
-      "category": "growth",
-      "headline": "Ethan Ampadu Improves to 67 OVR!",
-      "details": "Hard work paying off. Ethan Ampadu continues to develop as a player, now rated 67 overall with 81 potential. The trajectory is skyward.",
-      "priority": "medium",
-      "image": "rating"
     }
   ]
 }
