@@ -1,0 +1,52 @@
+{
+  "user_player": {
+    "name": "Ethan Ampadu",
+    "team": "Spezia",
+    "position": "RW",
+    "overall": 67,
+    "potential": 81,
+    "age": 15,
+    "goals": 4,
+    "assists": 16,
+    "appearances": 22,
+    "avgRating": 7.67
+  },
+  "elite_players": [
+    {"name": "Kylian Mbappé", "position": "ST", "overall": 92, "team": "Paris SG", "goals": 29, "assists": 7, "appearances": 34},
+    {"name": "Lionel Messi", "position": "RW", "overall": 91, "team": "Paris SG", "goals": 16, "assists": 16, "appearances": 32},
+    {"name": "Erling Haaland", "position": "ST", "overall": 91, "team": "Man City", "goals": 25, "assists": 8, "appearances": 35},
+    {"name": "Kevin De Bruyne", "position": "CAM", "overall": 91, "team": "Man City", "goals": 7, "assists": 18, "appearances": 32},
+    {"name": "Robert Lewandowski", "position": "ST", "overall": 90, "team": "Barcelona", "goals": 23, "assists": 7, "appearances": 34},
+    {"name": "Vinícius Jr.", "position": "LW", "overall": 90, "team": "Real Madrid", "goals": 16, "assists": 9, "appearances": 33},
+    {"name": "Harry Kane", "position": "ST", "overall": 89, "team": "Tottenham", "goals": 30, "assists": 5, "appearances": 38},
+    {"name": "Mohamed Salah", "position": "RW", "overall": 88, "team": "Liverpool", "goals": 19, "assists": 12, "appearances": 36},
+    {"name": "Bernardo Silva", "position": "CAM", "overall": 88, "team": "Man City", "goals": 7, "assists": 10, "appearances": 35},
+    {"name": "Jude Bellingham", "position": "CAM", "overall": 87, "team": "Real Madrid", "goals": 8, "assists": 5, "appearances": 32},
+    {"name": "Bukayo Saka", "position": "RW", "overall": 86, "team": "Arsenal", "goals": 14, "assists": 11, "appearances": 37},
+    {"name": "Marcus Rashford", "position": "ST", "overall": 83, "team": "Man United", "goals": 17, "assists": 5, "appearances": 35},
+    {"name": "Phil Foden", "position": "CAM", "overall": 85, "team": "Man City", "goals": 12, "assists": 9, "appearances": 34},
+    {"name": "Jamal Musiala", "position": "CAM", "overall": 84, "team": "Bayern Munich", "goals": 10, "assists": 8, "appearances": 31},
+    {"name": "Victor Osimhen", "position": "ST", "overall": 85, "team": "Napoli", "goals": 26, "assists": 5, "appearances": 33}
+  ],
+  "top_scorers": {
+    "Premier League": [
+      {"name": "Erling Haaland", "position": "ST", "overall": 91, "team": "Man City", "goals": 25, "assists": 8, "appearances": 35},
+      {"name": "Harry Kane", "position": "ST", "overall": 89, "team": "Tottenham", "goals": 30, "assists": 5, "appearances": 38},
+      {"name": "Mohamed Salah", "position": "RW", "overall": 88, "team": "Liverpool", "goals": 19, "assists": 12, "appearances": 36}
+    ],
+    "La Liga": [
+      {"name": "Robert Lewandowski", "position": "ST", "overall": 90, "team": "Barcelona", "goals": 23, "assists": 7, "appearances": 34},
+      {"name": "Vinícius Jr.", "position": "LW", "overall": 90, "team": "Real Madrid", "goals": 16, "assists": 9, "appearances": 33}
+    ],
+    "Serie A": [
+      {"name": "Victor Osimhen", "position": "ST", "overall": 85, "team": "Napoli", "goals": 26, "assists": 5, "appearances": 33}
+    ],
+    "Bundesliga": [
+      {"name": "Jamal Musiala", "position": "CAM", "overall": 84, "team": "Bayern Munich", "goals": 10, "assists": 8, "appearances": 31}
+    ],
+    "Ligue 1": [
+      {"name": "Kylian Mbappé", "position": "ST", "overall": 92, "team": "Paris SG", "goals": 29, "assists": 7, "appearances": 34},
+      {"name": "Lionel Messi", "position": "RW", "overall": 91, "team": "Paris SG", "goals": 16, "assists": 16, "appearances": 32}
+    ]
+  }
+}

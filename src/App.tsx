@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlayerData, SeasonData } from './types';
 import { INITIAL_PLAYER } from './data/mockData';
 import { getMergedPlayerData } from './utils/dataAdapter';
@@ -188,6 +188,24 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isIconicModalOpen, setIsIconicModalOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<{ title: string; subtitle: string; bonusPoints: number } | null>(null);
+  const [notifications, setNotifications] = useState<Record<string, boolean>>({});
+
+  // Check for unread notifications
+  useEffect(() => {
+    const checkNotifications = () => {
+      try {
+        const unreadNews = localStorage.getItem('career_news_unread');
+        const unreadSocial = localStorage.getItem('career_social_unread');
+        setNotifications({
+          news: unreadNews === 'true',
+          social: unreadSocial === 'true',
+        });
+      } catch {}
+    };
+    checkNotifications();
+    const interval = setInterval(checkNotifications, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleToggleSound = () => {
     const next = !soundEnabled;
@@ -320,7 +338,7 @@ export default function App() {
       {/* Main Container */}
       <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row">
         {/* Sidebar Navigation */}
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} notifications={notifications} />
 
         {/* Dynamic View Panel */}
         <main className="flex-1 p-4 lg:p-8 overflow-y-auto min-w-0">

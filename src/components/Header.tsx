@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Trophy, Volume2, VolumeX, Sparkles, UserPen, Flame, Zap, Upload } from 'lucide-react';
 import { PlayerData } from '../types';
 import { audioEngine } from '../utils/audio';
@@ -23,6 +23,32 @@ export const Header: React.FC<HeaderProps> = ({
   activeTab
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [hofPoints, setHofPoints] = useState<number>(() => {
+    try {
+      const stored = parseInt(localStorage.getItem('career_legacy_points') || '0', 10);
+      if (stored < 80) {
+        localStorage.setItem('career_legacy_points', '80');
+        return 80;
+      }
+      return stored;
+    } catch { return 80; }
+  });
+
+  // Sync HoF points
+  useEffect(() => {
+    const interval = setInterval(() => {
+      try {
+        const stored = parseInt(localStorage.getItem('career_legacy_points') || '0', 10);
+        if (stored < 80) {
+          localStorage.setItem('career_legacy_points', '80');
+          setHofPoints(80);
+        } else {
+          setHofPoints(stored);
+        }
+      } catch {}
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
   // Calculate total career goals & assists
   const totalGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
@@ -47,14 +73,8 @@ export const Header: React.FC<HeaderProps> = ({
                 CAREER LEGACY <span className="text-amber-400">HUB</span>
               </h1>
               <span className="px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full">
-                MUSEUM ARCHIVE
+                {hofPoints} HoF Pts
               </span>
-              {player.isLoadedFromExportDB && (
-                <span className="px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  CAREER_EXPORT DB
-                </span>
-              )}
             </div>
             <p className="text-xs text-zinc-400 flex items-center gap-1.5 font-medium">
               <span>{player.nationalityFlag} {player.name}</span>

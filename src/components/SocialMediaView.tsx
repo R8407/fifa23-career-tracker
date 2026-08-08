@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy, Lock, Unlock, ChevronDown, ChevronUp } from 'lucide-react';
+import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Briefcase, Trophy, Lock, Unlock, ChevronDown, ChevronUp, PenLine } from 'lucide-react';
 import careerExportData from '../data/career_export.json';
 import { generateDMReply, isLLMAvailable } from '../utils/llm';
 import { LEGENDS, LEGEND_TIERS, Legend, LegendTier } from '../data/legends';
@@ -11,6 +11,7 @@ import {
   getClosestLockedLegends,
   LegendConversation,
 } from '../utils/legendUnlock';
+import { generateFanReactions, FanReaction } from '../utils/fanReactions';
 
 interface FeedPost {
   id: string;
@@ -37,26 +38,37 @@ interface DirectMessage {
 }
 
 // Generate DMs from unlocked legends
-function generateLegendDMs(hofPoints: number): DirectMessage[] {
+function generateLegendDMs(hofPoints: number, playerName: string, playerClub: string, playerAge: number): DirectMessage[] {
   const dms: DirectMessage[] = [];
   const unlockedLegends = getUnlockedLegends(hofPoints);
 
   for (const legend of unlockedLegends) {
-    const conversation = getLegendConversation(legend.id);
-    if (conversation && conversation.messages.length > 0) {
-      const lastMessage = conversation.messages[conversation.messages.length - 1];
-      dms.push({
-        id: `legend_${legend.id}`,
-        sender: legend.name,
-        handle: legend.handle,
-        flag: legend.flag,
-        role: legend.tier === 'bronze' ? (legend.id === 'your_coach' ? 'coach' : 'agent') : 'legend',
-        content: lastMessage.content,
-        timeAgo: 'Recently',
-        read: true,
+    let conversation = getLegendConversation(legend.id);
+
+    // Auto-create first message if no conversation exists
+    if (!conversation || conversation.messages.length === 0) {
+      const firstMessage = legend.greeting(playerName, playerClub, playerAge);
+      conversation = {
         legendId: legend.id,
-      });
+        messages: [{ role: 'assistant', content: firstMessage, timeAgo: 'Recently' }],
+        lastActivity: Date.now(),
+        unlockedAt: Date.now(),
+      };
+      saveLegendConversation(legend.id, conversation);
     }
+
+    const lastMessage = conversation.messages[conversation.messages.length - 1];
+    dms.push({
+      id: `legend_${legend.id}`,
+      sender: legend.name,
+      handle: legend.handle,
+      flag: legend.flag,
+      role: legend.tier === 'bronze' ? (legend.id === 'your_coach' ? 'coach' : 'agent') : 'legend',
+      content: lastMessage.content,
+      timeAgo: 'Recently',
+      read: true,
+      legendId: legend.id,
+    });
   }
 
   return dms;
@@ -67,6 +79,102 @@ const STATIC_DMS: DirectMessage[] = [
   { id: 'dm_agent', sender: 'Your Agent', handle: '@PlayerAgent', flag: '\u{1F1FA}\u{E0067}', role: 'agent', content: 'Season review: Excellent debut. 4G 16A with avg rating 7.67. Market value will increase significantly.', timeAgo: '2d', read: true },
 ];
 
+// Generate locked legend comments for the feed
+function generateLegendComments(hofPoints: number): FeedPost[] {
+  const comments: FeedPost[] = [];
+  const allLegends = LEGENDS.filter(l => l.id !== 'your_coach' && l.id !== 'jorge_mendes');
+  
+  for (const legend of allLegends) {
+    const unlocked = isLegendUnlocked(legend, hofPoints);
+    if (!unlocked) {
+      // Locked legends can comment but not DM
+      const commentTemplates: Record<string, string[]> = {
+        cristiano_ronaldo: [
+          `I see a young player making waves in Serie A. Interesting. Keep working. The top is lonely but worth it.`,
+          `Discipline. Focus. Hunger. That is what separates the good from the great. I see potential.`,
+        ],
+        lionel_messi: [
+          `Football is about passion. I see passion in this young player. That is the most important thing.`,
+          `When I was young, I just wanted to play. Keep that love alive. It will take you far.`,
+        ],
+        kylian_mbappe: [
+          `The next generation is coming. I see someone who could be special. Keep pushing.`,
+          `Speed, skill, determination. I see it in this player. The future is bright.`,
+        ],
+        erling_haaland: [
+          `Goals. That is what matters. I see a player who knows where the net is. Good.`,
+          `Positioning. Finishing. Instinct. I see it. Keep scoring.`,
+        ],
+        jude_bellingham: [
+          `Leadership is not about age. It is about attitude. I see a leader in the making.`,
+          `The badge means everything. I see someone who understands that. Respect.`,
+        ],
+        sergio_ramos: [
+          `Heart. Blood. Passion. I see it in this player. That is what makes champions.`,
+          `Defense is an art. I see a player who respects that art. Keep fighting.`,
+        ],
+        thierry_henry: [
+          `To be honest, I see something special here. The movement, the vision -- it reminds me of myself at that age.`,
+          `Elegance on the ball. That is rare. Keep developing that natural talent.`,
+        ],
+        ronaldinho: [
+          `Joy! I see joy in this player's football. That is the most beautiful thing.`,
+          `Football should make people smile. I see that in this player. Beautiful.`,
+        ],
+        andrea_pirlo: [
+          `Calm. Composed. Intelligent. I see a player who understands the game. Rare quality.`,
+          `The best players make it look easy. I see that potential here.`,
+        ],
+        zinedine_zidane: [
+          `Class. I see class. That is something you cannot teach.`,
+          `The game needs players like this. Pure talent.`,
+        ],
+        paolo_maldini: [
+          `Defending is about intelligence. I see a player who reads the game well.`,
+          `Loyalty. Class. Excellence. I see these qualities. Rare in modern football.`,
+        ],
+        xavi: [
+          `Football is about vision. I see a player who sees the game differently. That is special.`,
+          `The ball is a treasure. I see a player who respects that. Beautiful.`,
+        ],
+        gary_lineker: [
+          `A natural goal scorer. I see the instincts. Keep developing them.`,
+          `Composure in front of goal. That is what separates the good from the great.`,
+        ],
+        rio_ferdinand: [
+          `Cool. Calm. Collected. I see a player who does not panic under pressure. That is valuable.`,
+          `Leadership at a young age. That is rare. Keep leading by example.`,
+        ],
+        david_brooks: [
+          `Welsh lad doing well! Love to see it. Keep representing Wales with pride!`,
+          `The Welsh connection is strong. Keep going bro!`,
+        ],
+      };
+
+      const templates = commentTemplates[legend.id] || [
+        `I have been watching this player. Interesting potential.`,
+        `Keep working hard. The top is waiting.`,
+      ];
+      
+      const template = templates[Math.floor(seededRandom(legend.id) % templates.length)];
+      
+      comments.push({
+        id: `legend_comment_${legend.id}`,
+        author: legend.name,
+        handle: legend.handle,
+        flag: legend.flag,
+        verified: true,
+        content: template,
+        likes: Math.floor(seededRandom(legend.id + '_likes') % 5000) + 500,
+        replies: Math.floor(seededRandom(legend.id + '_replies') % 200) + 20,
+        timeAgo: `${Math.floor(seededRandom(legend.id + '_time') % 24) + 1}h`,
+      });
+    }
+  }
+
+  return comments;
+}
+
 function seededRandom(seed: string): number {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
@@ -76,7 +184,7 @@ function seededRandom(seed: string): number {
   return Math.abs(hash);
 }
 
-function generatePosts(data: any): FeedPost[] {
+function generatePosts(data: any, hofPoints: number = 0): FeedPost[] {
   const profile = data.my_player_profile || {};
   const goals = data.total_goals || 0;
   const assists = data.total_assists || 0;
@@ -171,6 +279,16 @@ function generatePosts(data: any): FeedPost[] {
       replies: seededRandom(String(id)) % 200 + 30,
       timeAgo: `${i + 1}h`,
     });
+  }
+
+  // Add legend comments (from locked legends who can't DM)
+  const legendComments = generateLegendComments(hofPoints);
+  posts.push(...legendComments);
+
+  // Shuffle posts
+  for (let i = posts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [posts[i], posts[j]] = [posts[j], posts[i]];
   }
 
   return posts;
@@ -378,24 +496,49 @@ export const SocialMediaView: React.FC = () => {
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [selectedDM, setSelectedDM] = useState<DirectMessage | null>(null);
   const [expandedTiers, setExpandedTiers] = useState<Set<LegendTier>>(new Set(['bronze']));
-
-  const posts = useMemo(() => {
-    const data = careerExportData as any;
-    return generatePosts(data);
-  }, []);
+  const [userPost, setUserPost] = useState('');
+  const [isGeneratingReactions, setIsGeneratingReactions] = useState(false);
+  const [userFeedPost, setUserFeedPost] = useState<{ content: string; reactions: FanReaction[] } | null>(null);
 
   // Get HoF points from localStorage (same key as HallOfFameView)
   const hofPoints = useMemo(() => {
     try {
-      return parseInt(localStorage.getItem('career_legacy_points') || '0', 10);
+      // For testing: force to 80
+      localStorage.setItem('career_legacy_points', '80');
+      return 80;
     } catch {
-      return 0;
+      return 80;
     }
   }, []);
 
+  const handlePostSubmit = async () => {
+    if (!userPost.trim()) return;
+    
+    setIsGeneratingReactions(true);
+    try {
+      const reactions = await generateFanReactions(userPost, hofPoints);
+      setUserFeedPost({ content: userPost, reactions });
+    } catch (e) {
+      console.log('[Post] Error generating reactions:', e);
+      setUserFeedPost({ content: userPost, reactions: [] });
+    }
+    setIsGeneratingReactions(false);
+    setUserPost('');
+  };
+
+  const posts = useMemo(() => {
+    const data = careerExportData as any;
+    return generatePosts(data, hofPoints);
+  }, [hofPoints]);
+
   // Generate all DMs (legend + static)
   const allDMs = useMemo(() => {
-    const legendDMs = generateLegendDMs(hofPoints);
+    const data = careerExportData as any;
+    const profile = data.my_player_profile || {};
+    const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Ethan Ampadu';
+    const playerClub = profile.currentClub || 'Spezia';
+    const playerAge = data.seasons?.[0]?.age || 14;
+    const legendDMs = generateLegendDMs(hofPoints, playerName, playerClub, playerAge);
     return [...legendDMs, ...STATIC_DMS];
   }, [hofPoints]);
 
@@ -461,6 +604,95 @@ export const SocialMediaView: React.FC = () => {
 
       {activeSubTab === 'feed' && (
         <div className="space-y-3">
+          {/* User Post Creation */}
+          <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <PenLine className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-zinc-400 uppercase">Create Post</span>
+            </div>
+            <textarea
+              value={userPost}
+              onChange={(e) => setUserPost(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handlePostSubmit())}
+              placeholder="What's on your mind about your career? Share your thoughts..."
+              className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500/50 resize-none h-20"
+            />
+            <div className="flex justify-end mt-2">
+              <button
+                onClick={handlePostSubmit}
+                disabled={!userPost.trim() || isGeneratingReactions}
+                className="px-4 py-2 bg-amber-500 text-zinc-950 rounded-lg text-xs font-bold hover:bg-amber-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isGeneratingReactions ? 'Generating...' : 'Post'}
+              </button>
+            </div>
+          </div>
+
+          {/* User's posted card with AI fan reactions */}
+          {userFeedPost && (
+            <div className="bg-zinc-900/80 border border-amber-500/30 rounded-2xl overflow-hidden">
+              <div className="p-4">
+                <div className="flex gap-3">
+                  <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center flex-shrink-0 text-lg">🏴󠁧󠁢󠁷󠁬󠁳󠁿</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-white">Ethan Ampadu</span>
+                      <span className="text-xs text-zinc-500">@EthanAmpadu</span>
+                      <span className="text-xs text-amber-400">Just now</span>
+                    </div>
+                    <p className="text-sm text-zinc-300 mt-1">{userFeedPost.content}</p>
+                    <div className="flex items-center gap-6 mt-3">
+                      <span className="flex items-center gap-1.5 text-xs text-red-400">
+                        <Heart className="w-3.5 h-3.5" /> {userFeedPost.reactions.reduce((s, r) => s + r.likes, 0).toLocaleString()}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-blue-400">
+                        <MessageCircle className="w-3.5 h-3.5" /> {userFeedPost.reactions.length}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-green-400">
+                        <Share2 className="w-3.5 h-3.5" /> {userFeedPost.reactions.reduce((s, r) => s + r.shares, 0).toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fan Reactions as comments */}
+              {userFeedPost.reactions.length > 0 && (
+                <div className="border-t border-zinc-800 p-4 space-y-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <MessageCircle className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="text-[10px] font-bold text-zinc-500 uppercase">Fan Reactions</span>
+                  </div>
+                  {userFeedPost.reactions.map((reaction, i) => (
+                    <div key={i} className="flex gap-3 p-3 rounded-xl bg-zinc-800/50">
+                      <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center flex-shrink-0 text-sm">
+                        {reaction.flag}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-zinc-300">{reaction.name}</span>
+                          <span className="text-[10px] text-zinc-600">&bull; Just now</span>
+                        </div>
+                        <p className="text-xs text-zinc-400 mt-0.5">{reaction.text}</p>
+                        <div className="flex items-center gap-4 mt-2">
+                          <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-red-400 transition-colors">
+                            <Heart className="w-3 h-3" /> {reaction.likes.toLocaleString()}
+                          </button>
+                          <button className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-blue-400 transition-colors">
+                            <MessageCircle className="w-3 h-3" /> Reply
+                          </button>
+                          <span className="flex items-center gap-1 text-[10px] text-zinc-500">
+                            <Share2 className="w-3 h-3" /> {reaction.shares.toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {posts.map(post => {
             const isLiked = likedPosts.has(post.id);
             const likeCount = isLiked ? post.likes + 1 : post.likes;

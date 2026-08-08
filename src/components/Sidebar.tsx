@@ -21,13 +21,12 @@ export interface TabItem {
   id: string;
   label: string;
   icon: React.ElementType;
-  badge?: string;
-  badgeColor?: string;
+  hasNotification?: boolean;
 }
 
 export const TABS: TabItem[] = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-  { id: 'news', label: 'Career News', icon: Newspaper, badge: 'LIVE', badgeColor: 'bg-red-500 text-white font-bold animate-pulse' },
+  { id: 'news', label: 'Career News', icon: Newspaper },
   { id: 'profile', label: 'Player Profile', icon: User },
   { id: 'growth', label: 'Growth Curve', icon: TrendingUp },
   { id: 'seasons', label: 'Season History', icon: Calendar },
@@ -35,20 +34,21 @@ export const TABS: TabItem[] = [
   { id: 'tactical', label: 'Tactical Team Sheet', icon: Layout },
   { id: 'league', label: 'League Universe', icon: Globe },
   { id: 'compare', label: 'Compare Legends', icon: GitCompare },
-  { id: 'h2h', label: 'Head-to-Head', icon: Shield, badge: 'NEW', badgeColor: 'bg-emerald-500 text-zinc-950 font-bold' },
-  { id: 'halloffame', label: 'Hall of Fame', icon: Award, badge: 'HOT', badgeColor: 'bg-amber-500 text-zinc-950 font-bold' },
-  { id: 'trophyroom', label: 'Trophy Room', icon: Trophy, badge: 'MUSEUM', badgeColor: 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40' },
-  { id: 'seasonawards', label: 'Season Awards', icon: Medal, badge: 'NEW', badgeColor: 'bg-purple-500 text-white font-bold' },
+  { id: 'h2h', label: 'Head-to-Head', icon: Shield },
+  { id: 'halloffame', label: 'Hall of Fame', icon: Award },
+  { id: 'trophyroom', label: 'Trophy Room', icon: Trophy },
+  { id: 'seasonawards', label: 'Season Awards', icon: Medal },
   { id: 'projections', label: 'Records & Projections', icon: LineChart },
-  { id: 'social', label: 'Social Hub', icon: MessageSquare, badge: 'NEW', badgeColor: 'bg-blue-500 text-white font-bold' },
+  { id: 'social', label: 'Social Hub', icon: MessageSquare },
 ];
 
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tabId: string) => void;
+  notifications?: Record<string, boolean>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, notifications = {} }) => {
   const handleTabClick = (id: string) => {
     audioEngine.playClick();
     setActiveTab(id);
@@ -83,10 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
               <span>{tab.label}</span>
             </div>
 
-            {tab.badge && (
-              <span className={`ml-2 px-1.5 py-0.5 text-[9px] uppercase tracking-wider rounded ${tab.badgeColor || 'bg-zinc-800 text-zinc-300'}`}>
-                {tab.badge}
-              </span>
+            {notifications[tab.id] && (
+              <span className="ml-2 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
             )}
           </button>
         );

@@ -28,7 +28,12 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     try { return JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || '{}'); } catch { return {}; }
   });
   const [totalLegacyPoints, setTotalLegacyPoints] = useState<number>(() => {
-    try { return parseInt(localStorage.getItem(LEGACY_POINTS_KEY) || '0', 10); } catch { return 0; }
+    try {
+      const stored = parseInt(localStorage.getItem(LEGACY_POINTS_KEY) || '0', 10);
+      // For testing: force to 80
+      localStorage.setItem(LEGACY_POINTS_KEY, '80');
+      return 80;
+    } catch { return 80; }
   });
   // Track which broken records have had their points/news already claimed
   const [claimedRecords, setClaimedRecords] = useState<Record<string, boolean>>(() => {
