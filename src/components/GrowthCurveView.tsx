@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { PlayerData } from '../types';
-import { TrendingUp, Flame, Zap, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { TrendingUp, Flame, Zap, AlertTriangle, ShieldAlert, Activity } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import careerExportData from '../data/career_export.json';
 
@@ -8,81 +8,71 @@ interface GrowthCurveViewProps {
   player: PlayerData;
 }
 
-// FIFA career mode growth curve generator
-function generateCareerCurve(currentAge: number, currentOvr: number, potential: number) {
+// The "Expected" curve — what scouts/pundits predicted based on initial potential
+// This is HARDCODED: a standard projection for a player with potential 81 starting at 55 OVR
+function generateExpectedCurve(potential: number) {
   const curve = [];
   const peakAge = 27;
   const declineStart = 31;
   const maxAge = 38;
-
-  // Calculate growth rate to reach potential by peak
-  const seasonsToPeak = peakAge - currentAge;
-  const ovrGainToPeak = potential - currentOvr;
-  const baseGrowthPerSeason = seasonsToPeak > 0 ? ovrGainToPeak / seasonsToPeak : 0;
+  const startOvr = 55;
 
   for (let age = 14; age <= maxAge; age++) {
     let rating: number;
-    let phase: string;
 
-    if (age < currentAge) {
-      // Past: reconstruct from starting point
-      // Youth academy starts around 55 OVR, grows steadily
-      const youthStart = 55;
-      const seasonsFromYouth = age - 14;
-      const seasonsToCurrent = currentAge - 14;
-      const growthNeeded = currentOvr - youthStart;
-      const growthPerSeason = seasonsToCurrent > 0 ? growthNeeded / seasonsToCurrent : 0;
-      rating = Math.round(youthStart + growthPerSeason * seasonsFromYouth);
-      phase = age <= 15 ? 'Youth Academy' : age <= 16 ? 'Youth Prospect' : 'Development';
-    } else if (age === currentAge) {
-      // Current age: use actual OVR
-      rating = currentOvr;
-      phase = 'Current Season';
+    if (age <= 17) {
+      // Youth phase: slow steady growth
+      rating = Math.round(startOvr + (age - 14) * 3);
     } else if (age <= peakAge) {
-      // Growth phase: reach potential by peak
-      const yearsFromNow = age - currentAge;
-      const progress = yearsFromNow / seasonsToPeak;
-      // Smooth S-curve growth
+      // Growth to potential
+      const yearsFrom17 = age - 17;
+      const yearsToPeak = peakAge - 17;
+      const progress = yearsFrom17 / yearsToPeak;
       const smoothProgress = progress < 0.5
         ? 2 * progress * progress
         : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      rating = Math.round(currentOvr + (potential - currentOvr) * smoothProgress);
-      phase = age <= 21 ? 'Rapid Growth' : age <= 24 ? 'Emerging Star' : 'Approaching Peak';
+      rating = Math.round(64 + (potential - 64) * smoothProgress);
     } else if (age <= declineStart) {
-      // Peak: maintain near potential
+      // Peak plateau
       const yearsPastPeak = age - peakAge;
-      const declineRate = 0.5; // slight decline per year at peak
-      rating = Math.round(potential - yearsPastPeak * declineRate);
-      phase = 'Peak';
+      rating = Math.round(potential - yearsPastPeak * 0.5);
     } else {
-      // Decline phase
+      // Decline
       const yearsPastDecline = age - declineStart;
-      const declineRate = 1.5 + yearsPastDecline * 0.3; // accelerating decline
-      rating = Math.round(potential - (declineStart - peakAge) * 0.5 - yearsPastDecline * declineRate);
-      phase = age <= 34 ? 'Veteran' : age <= 36 ? 'Twilight' : 'Retirement Window';
+      rating = Math.round(potential - (declineStart - peakAge) * 0.5 - yearsPastDecline * 1.5);
     }
 
-    // Clamp rating
     rating = Math.max(45, Math.min(99, rating));
+    curve.push({ age, rating });
+  }
+  return curve;
+}
 
-    // Generate realistic sub-stats based on overall and position (RW = pace/dribbling heavy)
-    const paceBase = Math.min(99, rating + Math.round((95 - rating) * 0.4));
-    const shootingBase = Math.round(rating * 0.85 + 10);
-    const passingBase = Math.round(rating * 0.88 + 8);
-    const dribblingBase = Math.min(99, rating + Math.round((95 - rating) * 0.3));
-    const physicalBase = Math.round(rating * 0.82 + 12);
+// The "Real" curve — your actual performance from career data
+function generateRealCurve(seasons: any[], currentAge: number, currentOvr: number) {
+  const curve = [];
+  const maxAge = 38;
 
-    // Age-related stat adjustments
-    const ageFactor = age > 28 ? (age - 28) * 0.8 : 0;
-    const pace = Math.max(50, Math.round(paceBase - ageFactor * 1.2));
-    const shooting = Math.min(99, Math.round(shootingBase + (age > 20 ? 2 : 0)));
-    const passing = Math.min(99, Math.round(passingBase + (age > 22 ? 3 : 0)));
-    const dribbling = Math.max(55, Math.round(dribblingBase - ageFactor * 0.8));
-    const physical = Math.max(50, Math.round(physicalBase - ageFactor * 1.5));
-
-    curve.push({ age, rating, pace, shooting, passing, dribbling, physical, phase });
+  // Build map of actual ratings from season data
+  const ratingsByAge: Record<number, number> = {};
+  for (const s of seasons) {
+    const age = s.age || (14 + parseInt(s.id?.split('_')[1] || '0'));
+    if (s.avgRating && s.avgRating > 0) {
+      // avgRating from career data is stored as rating * 100, so divide by 100
+      ratingsByAge[age] = Math.round(s.avgRating);
+    } else if (s.rating) {
+      ratingsByAge[age] = s.rating;
+    }
   }
 
+  for (let age = 14; age <= maxAge; age++) {
+    const actualRating = ratingsByAge[age];
+    curve.push({
+      age,
+      rating: actualRating || null, // null = no data yet
+      hasData: actualRating !== undefined && actualRating !== null,
+    });
+  }
   return curve;
 }
 
@@ -93,56 +83,49 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
   // Get real data from export
   const exportData = careerExportData as any;
   const playerProfile = exportData.my_player_profile || {};
+  const seasons = exportData.seasons || [];
   const currentOvr = player.overall || playerProfile.overallrating || 69;
   const potential = player.potential || playerProfile.potential || 81;
   const currentAge = player.age || 15;
 
-  // Generate real career curve based on actual data
-  const fullProgression = useMemo(() =>
-    generateCareerCurve(currentAge, currentOvr, potential),
-    [currentAge, currentOvr, potential]
-  );
+  // Generate both curves
+  const expectedCurve = useMemo(() => generateExpectedCurve(potential), [potential]);
+  const realCurve = useMemo(() => generateRealCurve(seasons, currentAge, currentOvr), [seasons, currentAge, currentOvr]);
 
-  const currentPoint = fullProgression.find(p => p.age === currentAge) || fullProgression[0];
-  const inspectPoint = fullProgression.find(p => p.age === targetAge) || currentPoint;
+  // Calculate stats for real curve
+  const realPoints = realCurve.filter(p => p.hasData);
+  const lastRealPoint = realPoints[realPoints.length - 1];
+  const expectedAtSameAge = expectedCurve.find(p => p.age === lastRealPoint?.age);
+  const deltaVsExpected = lastRealPoint && expectedAtSameAge
+    ? lastRealPoint.rating - expectedAtSameAge.rating
+    : 0;
 
-  // Find peak
-  const peakPoint = fullProgression.reduce((max, p) => p.rating > max.rating ? p : max, fullProgression[0]);
+  const inspectExpected = expectedCurve.find(p => p.age === targetAge);
+  const inspectReal = realCurve.find(p => p.age === targetAge);
 
-  // Find fastest growth period
-  let fastestGrowth = { startAge: currentAge, endAge: currentAge, gain: 0 };
-  for (let i = 0; i < fullProgression.length - 3; i++) {
-    const start = fullProgression[i];
-    const end = fullProgression[i + 3];
-    const gain = end.rating - start.rating;
-    if (gain > fastestGrowth.gain) {
-      fastestGrowth = { startAge: start.age, endAge: end.age, gain };
-    }
-  }
+  // Find peak of expected curve
+  const peakExpected = expectedCurve.reduce((max, p) => p.rating > max.rating ? p : max, expectedCurve[0]);
 
-  // SVG Chart Calculation
+  // SVG Chart
   const minVal = 50;
   const maxVal = 95;
   const chartHeight = 220;
   const chartWidth = 700;
 
-  const getStatValue = (point: typeof fullProgression[0]) => {
-    switch (selectedStat) {
-      case 'pace': return point.pace;
-      case 'shooting': return point.shooting;
-      case 'passing': return point.passing;
-      case 'dribbling': return point.dribbling;
-      case 'physical': return point.physical;
-      default: return point.rating;
-    }
-  };
-
-  const pointsSvg = fullProgression.map((pt, i) => {
-    const x = (i / (fullProgression.length - 1)) * chartWidth;
-    const val = getStatValue(pt);
-    const y = chartHeight - ((val - minVal) / (maxVal - minVal)) * chartHeight;
+  const expectedPointsSvg = expectedCurve.map((pt, i) => {
+    const x = (i / (expectedCurve.length - 1)) * chartWidth;
+    const y = chartHeight - ((pt.rating - minVal) / (maxVal - minVal)) * chartHeight;
     return `${x},${y}`;
   }).join(' ');
+
+  const realPointsSvg = realCurve
+    .filter(p => p.hasData)
+    .map((pt, i, arr) => {
+      const idx = pt.age - 14;
+      const x = (idx / (expectedCurve.length - 1)) * chartWidth;
+      const y = chartHeight - ((pt.rating! - minVal) / (maxVal - minVal)) * chartHeight;
+      return `${x},${y}`;
+    }).join(' ');
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -154,11 +137,11 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
               CAREER GROWTH & PROGRESSION CURVE
             </h2>
             <span className="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold rounded-full">
-              LIVE PROJECTION
+              EXPECTED vs REAL
             </span>
           </div>
           <p className="text-zinc-400 text-xs mt-1">
-            Real trajectory from career save. Overall: <strong className="text-white">{currentOvr}</strong> → Potential: <strong className="text-white">{potential}</strong>
+            What pundits predicted vs what you actually delivered. Overall: <strong className="text-white">{currentOvr}</strong> | Potential: <strong className="text-white">{potential}</strong>
           </p>
         </div>
 
@@ -183,22 +166,54 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
         </div>
       </div>
 
+      {/* Legend */}
+      <div className="flex items-center gap-6 px-2">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-0.5 bg-zinc-500 rounded" style={{ borderTop: '2px dashed #71717a' }} />
+          <span className="text-xs text-zinc-400 font-bold">EXPECTED (Pundits' Projection)</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-0.5 bg-amber-500 rounded" />
+          <span className="text-xs text-zinc-400 font-bold">REAL (Your Actual Rating)</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-emerald-500" />
+          <span className="text-xs text-zinc-400 font-bold">Current Age</span>
+        </div>
+      </div>
+
       {/* Main Chart Card */}
       <div className="bg-zinc-900/80 border border-zinc-800 p-6 rounded-2xl relative">
-        <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-300 font-mono flex items-center justify-between">
-          <span>CAREER_EXPORT DB: Real rating extracted — Overall: <strong className="text-white">{currentOvr}</strong> | Potential: <strong className="text-white">{potential}</strong></span>
-          <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">AGE {currentAge} — LIVE</span>
-        </div>
+        {/* Delta badge */}
+        {deltaVsExpected !== 0 && (
+          <div className={`mb-4 p-3 border rounded-xl text-xs font-mono flex items-center justify-between ${
+            deltaVsExpected > 0
+              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+              : 'bg-red-500/10 border-red-500/30 text-red-300'
+          }`}>
+            <span>
+              vs EXPECTED at age {lastRealPoint?.age}: <strong className="text-white">
+                {deltaVsExpected > 0 ? '+' : ''}{deltaVsExpected} OVR
+              </strong> {deltaVsExpected > 0 ? 'above' : 'below'} projection
+            </span>
+            <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+              deltaVsExpected > 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+            }`}>
+              {deltaVsExpected > 0 ? 'OUTPERFORMING' : 'UNDERPERFORMING'}
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
             Rating Trajectory by Age (14 → 38)
           </span>
           <span className="text-xs text-zinc-400 font-mono">
-            Selected Metric: <strong className="text-white uppercase">{selectedStat}</strong>
+            Selected: <strong className="text-white uppercase">{selectedStat}</strong>
           </span>
         </div>
 
-        {/* SVG Interactive Graph */}
+        {/* SVG Graph */}
         <div className="relative w-full overflow-x-auto py-2">
           <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-56 overflow-visible">
             {/* Grid lines */}
@@ -216,73 +231,128 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
 
             {/* Peak Window Highlight */}
             <rect
-              x={((peakPoint.age - 14) / (fullProgression.length - 1)) * chartWidth}
+              x={((peakExpected.age - 14) / (expectedCurve.length - 1)) * chartWidth}
               y="0"
-              width={(4 / (fullProgression.length - 1)) * chartWidth}
+              width={(4 / (expectedCurve.length - 1)) * chartWidth}
               height={chartHeight}
               fill="#eab308"
-              fillOpacity="0.08"
+              fillOpacity="0.06"
             />
 
-            {/* Area gradient under line */}
+            {/* Area under expected */}
             <defs>
-              <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="expectedGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#71717a" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#71717a" stopOpacity="0.0" />
+              </linearGradient>
+              <linearGradient id="realGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.3" />
                 <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
+            {/* Expected area */}
             <polygon
-              points={`0,${chartHeight} ${pointsSvg} ${chartWidth},${chartHeight}`}
-              fill="url(#growthGrad)"
+              points={`0,${chartHeight} ${expectedPointsSvg} ${chartWidth},${chartHeight}`}
+              fill="url(#expectedGrad)"
             />
 
-            {/* Main Polyline */}
+            {/* Expected line (dashed) */}
             <polyline
               fill="none"
-              stroke="#f59e0b"
-              strokeWidth="3.5"
+              stroke="#71717a"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              points={pointsSvg}
+              strokeDasharray="8 4"
+              points={expectedPointsSvg}
             />
 
-            {/* Data Dots */}
-            {fullProgression.map((pt, i) => {
-              const x = (i / (fullProgression.length - 1)) * chartWidth;
-              const val = getStatValue(pt);
-              const y = chartHeight - ((val - minVal) / (maxVal - minVal)) * chartHeight;
+            {/* Real area (only up to current age) */}
+            {realPointsSvg && (
+              <polygon
+                points={`0,${chartHeight} ${realPointsSvg} ${((realPoints[realPoints.length - 1]?.age || currentAge) - 14) / (expectedCurve.length - 1) * chartWidth},${chartHeight}`}
+                fill="url(#realGrad)"
+              />
+            )}
+
+            {/* Real line (solid, bold) */}
+            {realPointsSvg && (
+              <polyline
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                points={realPointsSvg}
+              />
+            )}
+
+            {/* Real data dots */}
+            {realPoints.map((pt) => {
+              const idx = pt.age - 14;
+              const x = (idx / (expectedCurve.length - 1)) * chartWidth;
+              const y = chartHeight - ((pt.rating! - minVal) / (maxVal - minVal)) * chartHeight;
               const isCurrent = pt.age === currentAge;
-              const isSelectedAge = pt.age === targetAge;
-              const isPast = pt.age < currentAge;
 
               return (
-                <g key={pt.age} className="cursor-pointer" onClick={() => { audioEngine.playClick(); setTargetAge(pt.age); }}>
+                <g key={`real-${pt.age}`} className="cursor-pointer" onClick={() => { audioEngine.playClick(); setTargetAge(pt.age); }}>
                   <circle
                     cx={x}
                     cy={y}
-                    r={isSelectedAge ? "7" : isCurrent ? "6" : "4"}
-                    fill={isCurrent ? "#22c55e" : isPast ? "#6b7280" : pt.age > peakPoint.age ? "#60a5fa" : "#f59e0b"}
-                    stroke={isSelectedAge ? "#ffffff" : "#18181b"}
+                    r={isCurrent ? "7" : "5"}
+                    fill={isCurrent ? "#22c55e" : "#f59e0b"}
+                    stroke={pt.age === targetAge ? "#ffffff" : "#18181b"}
                     strokeWidth="2"
                   />
-                  {isSelectedAge && (
-                    <text x={x} y={y - 12} textAnchor="middle" fill="#f59e0b" fontSize="11" fontWeight="bold" fontFamily="monospace">
-                      {val}
+                  {pt.age === targetAge && (
+                    <text x={x} y={y - 14} textAnchor="middle" fill="#f59e0b" fontSize="12" fontWeight="bold" fontFamily="monospace">
+                      {pt.rating}
                     </text>
                   )}
                 </g>
               );
             })}
+
+            {/* Expected dot at target age (for comparison) */}
+            {inspectExpected && (
+              <g>
+                <circle
+                  cx={((targetAge - 14) / (expectedCurve.length - 1)) * chartWidth}
+                  cy={chartHeight - ((inspectExpected.rating - minVal) / (maxVal - minVal)) * chartHeight}
+                  r={inspectReal?.hasData ? "4" : "6"}
+                  fill="none"
+                  stroke="#71717a"
+                  strokeWidth="2"
+                  strokeDasharray="4 2"
+                />
+                {!inspectReal?.hasData && (
+                  <text
+                    x={((targetAge - 14) / (expectedCurve.length - 1)) * chartWidth}
+                    y={chartHeight - ((inspectExpected.rating - minVal) / (maxVal - minVal)) * chartHeight - 10}
+                    textAnchor="middle"
+                    fill="#71717a"
+                    fontSize="11"
+                    fontWeight="bold"
+                    fontFamily="monospace"
+                  >
+                    {inspectExpected.rating}
+                  </text>
+                )}
+              </g>
+            )}
           </svg>
 
-          {/* Age labels along bottom */}
+          {/* Age labels */}
           <div className="flex justify-between text-[10px] text-zinc-500 font-mono mt-2 pt-2 border-t border-zinc-800">
-            {fullProgression.map((pt) => (
+            {expectedCurve.map((pt) => (
               <span
                 key={pt.age}
                 onClick={() => setTargetAge(pt.age)}
-                className={`cursor-pointer ${pt.age === targetAge ? 'text-amber-400 font-bold' : pt.age === currentAge ? 'text-emerald-400 font-bold' : ''}`}
+                className={`cursor-pointer ${
+                  pt.age === targetAge ? 'text-amber-400 font-bold' :
+                  pt.age === currentAge ? 'text-emerald-400 font-bold' : ''
+                }`}
               >
                 {pt.age}y
               </span>
@@ -290,12 +360,17 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
           </div>
         </div>
 
-        {/* Interactive Slider */}
+        {/* Slider */}
         <div className="mt-6 pt-4 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="w-full sm:w-2/3 space-y-1">
             <div className="flex justify-between text-xs font-semibold text-zinc-300">
-              <span>Inspect Age Milestone: <strong className="text-amber-400 font-mono">{targetAge} years old</strong></span>
-              <span className="text-zinc-500 font-mono">Phase: {inspectPoint.phase}</span>
+              <span>Inspect Age: <strong className="text-amber-400 font-mono">{targetAge} years old</strong></span>
+              <span className="text-zinc-500 font-mono">
+                Expected: <strong className="text-zinc-400">{inspectExpected?.rating}</strong>
+                {inspectReal?.hasData && (
+                  <> | Real: <strong className="text-amber-400">{inspectReal.rating}</strong></>
+                )}
+              </span>
             </div>
             <input
               type="range"
@@ -307,47 +382,69 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
             />
           </div>
 
-          <div className="bg-zinc-950 border border-amber-500/30 px-4 py-2 rounded-xl text-center font-mono">
-            <div className="text-[10px] text-zinc-500 uppercase font-bold">Projected Stat</div>
-            <div className="text-xl font-black text-amber-400">
-              {getStatValue(inspectPoint)} <span className="text-xs text-zinc-400 uppercase">({selectedStat})</span>
+          <div className="flex gap-2">
+            <div className="bg-zinc-950 border border-zinc-700 px-3 py-2 rounded-xl text-center font-mono">
+              <div className="text-[9px] text-zinc-500 uppercase font-bold">Expected</div>
+              <div className="text-lg font-black text-zinc-400">{inspectExpected?.rating}</div>
             </div>
+            {inspectReal?.hasData && (
+              <div className="bg-zinc-950 border border-amber-500/30 px-3 py-2 rounded-xl text-center font-mono">
+                <div className="text-[9px] text-amber-400 uppercase font-bold">Real</div>
+                <div className="text-lg font-black text-amber-400">{inspectReal.rating}</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Analytics Insights Grid */}
+      {/* Insights */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Delta vs Expected */}
+        <div className={`p-5 rounded-2xl border ${
+          deltaVsExpected > 0
+            ? 'bg-emerald-500/5 border-emerald-500/30'
+            : deltaVsExpected < 0
+            ? 'bg-red-500/5 border-red-500/30'
+            : 'bg-zinc-900/80 border-zinc-800'
+        }`}>
+          <div className={`flex items-center gap-2 text-xs font-bold uppercase mb-2 ${
+            deltaVsExpected > 0 ? 'text-emerald-400' : deltaVsExpected < 0 ? 'text-red-400' : 'text-zinc-400'
+          }`}>
+            <Activity className="w-4 h-4" /> vs EXPECTED
+          </div>
+          <div className="text-2xl font-black text-white font-mono">
+            {deltaVsExpected > 0 ? '+' : ''}{deltaVsExpected} OVR
+          </div>
+          <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+            {deltaVsExpected > 0
+              ? `Outperforming pundits' projection by ${deltaVsExpected} overall at age ${lastRealPoint?.age}.`
+              : deltaVsExpected < 0
+              ? `Currently ${Math.abs(deltaVsExpected)} below projection. Time to prove them wrong.`
+              : 'No real data yet. Start playing to track your progress.'}
+          </p>
+        </div>
+
         {/* Peak Window */}
         <div className="bg-zinc-900/80 border border-amber-500/30 p-5 rounded-2xl">
           <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase mb-2">
-            <Flame className="w-4 h-4" /> PEAK PHYSICAL WINDOW
+            <Flame className="w-4 h-4" /> PEAK WINDOW
           </div>
-          <div className="text-2xl font-black text-white font-mono">Age {peakPoint.age - 1} - {peakPoint.age + 1}</div>
+          <div className="text-2xl font-black text-white font-mono">Age {peakExpected.age - 1} - {peakExpected.age + 1}</div>
           <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-            Optimal balance of physical speed ({peakPoint.pace} Pace) and elite technical ability ({peakPoint.rating} OVR).
+            Expected peak at {peakExpected.rating} OVR. {deltaVsExpected > 0 ? 'You could peak higher.' : 'Push to exceed expectations.'}
           </p>
         </div>
 
-        {/* Fastest Growth */}
-        <div className="bg-zinc-900/80 border border-emerald-500/30 p-5 rounded-2xl">
-          <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase mb-2">
-            <TrendingUp className="w-4 h-4" /> FASTEST IMPROVEMENT
-          </div>
-          <div className="text-2xl font-black text-white font-mono">Age {fastestGrowth.startAge} → {fastestGrowth.endAge} (+{fastestGrowth.gain} OVR)</div>
-          <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-            Explosive development period. Rising from {fullProgression.find(p => p.age === fastestGrowth.startAge)?.rating} to {fullProgression.find(p => p.age === fastestGrowth.endAge)?.rating} OVR.
-          </p>
-        </div>
-
-        {/* Current Status */}
+        {/* Seasons Tracked */}
         <div className="bg-zinc-900/80 border border-zinc-800 p-5 rounded-2xl">
           <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase mb-2">
-            <ShieldAlert className="w-4 h-4" /> CURRENT STATUS
+            <TrendingUp className="w-4 h-4" /> DATA POINTS
           </div>
-          <div className="text-2xl font-black text-white font-mono">Age {currentAge} — {currentOvr} OVR</div>
+          <div className="text-2xl font-black text-white font-mono">{realPoints.length} Seasons</div>
           <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-            {potential - currentOvr} OVR growth potential remaining. Peak projected at age {peakPoint.age} with {peakPoint.rating} OVR.
+            {realPoints.length === 0
+              ? 'No season data yet. Play matches to populate the real curve.'
+              : `Tracking ${realPoints.length} season${realPoints.length !== 1 ? 's' : ''} of actual performance data.`}
           </p>
         </div>
       </div>
