@@ -360,3 +360,145 @@ function getHaterComment(
   ];
   return genericHater[Math.floor(Math.random() * genericHater.length)];
 }
+
+// ============================================
+// Legend Comments (triggered on 9.0+ match ratings)
+// ============================================
+export interface LegendComment {
+  name: string;
+  handle: string;
+  flag: string;
+  text: string;
+  isLegend: boolean;
+}
+
+const LEGEND_COMMENTERS = [
+  { name: 'Rio Ferdinand', handle: '@RioFerdy5', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', personality: 'Respectful but direct. Mentions his own career. Short sentences.' },
+  { name: 'Thierry Henry', handle: '@ThierryHenry', flag: '🇫🇷', personality: 'Elegant, analytical. References Arsenal/Barcelona. Visionary.' },
+  { name: 'Gary Neville', handle: '@GNev2', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', personality: 'Tactical, honest. References Man United. Sky Sports pundit style.' },
+  { name: 'Paolo Maldini', handle: '@PaoloMaldini', flag: '🇮🇹', personality: 'Calm, legendary. References AC Milan. Italian elegance.' },
+  { name: 'Xavi Hernandez', handle: '@XaviHernandez', flag: '🇪🇸', personality: 'Tactical genius. References Barcelona tiki-taka. Philosophy.' },
+  { name: 'Ronaldinho', handle: '@Ronaldinho', flag: '🇧🇷', personality: 'Joyful, playful. References Barcelona/PSG. Smile and football.' },
+  { name: 'Zinedine Zidane', handle: '@Zidane', flag: '🇫🇷', personality: 'Mysterious, class. References Real Madrid/Juventus. Minimal words.' },
+  { name: 'Andrea Pirlo', handle: '@AndreaPirlo', flag: '🇮🇹', personality: 'Calm, elegant. References AC Milan/Juventus. Wine and football.' },
+];
+
+export function generateMatchRatingLegendComments(
+  matchRating: number,
+  playerName: string,
+  playerStats: { goals: number; assists: number; age: number; team: string },
+  hofPoints: number
+): LegendComment[] {
+  if (matchRating < 9) return [];
+
+  // Select legends based on HoF points (more points = more legends)
+  const maxLegends = hofPoints >= 200 ? 4 : hofPoints >= 100 ? 3 : hofPoints >= 50 ? 2 : 1;
+  const shuffled = [...LEGEND_COMMENTERS].sort(() => Math.random() - 0.5);
+  const selected = shuffled.slice(0, maxLegends);
+
+  return selected.map(legend => {
+    let text = '';
+
+    if (matchRating >= 10) {
+      // Perfect 10 - legendary reactions
+      const perfectReactions: Record<string, string[]> = {
+        'Rio Ferdinand': [
+          `A 10.0 at ${playerStats.age}? I was still in the reserves at that age. This kid is DIFFERENT.`,
+          `Absolute perfection. I have seen a lot of young players. This one is special.`,
+          `10.0. Remember this name. ${playerName} is going to be the best in the world.`,
+        ],
+        'Thierry Henry': [
+          `A 10.0 performance at ${playerStats.age} years old. This is not normal. This is a generational talent.`,
+          `I scored my first senior goal at 19. ${playerName} is getting 10.0 ratings at ${playerStats.age}. Different level.`,
+          `Perfect. Simply perfect. ${playerName} at ${playerStats.team} is appointment viewing.`,
+        ],
+        'Gary Neville': [
+          `10.0. I have given maybe 3 of those in my entire career analysis. ${playerName} is world class.`,
+          `That was the best individual performance I have seen from a youngster in years. Outstanding.`,
+          `I do not give 10.0 lightly. ${playerName} earned every bit of that. Phenomenal.`,
+        ],
+        'Paolo Maldini': [
+          `Perfetto. ${playerName} at ${playerStats.age}. This is what football is about.`,
+          `A 10.0 at ${playerStats.age}. I retired at 41 and never got a 10.0. This kid is special.`,
+          `Class. Pure class. ${playerName} reminds me of myself at that age. Maybe better.`,
+        ],
+        'Xavi Hernandez': [
+          `A 10.0 at ${playerStats.age}. This is tiki-taka meets raw talent. Beautiful.`,
+          `${playerName} at ${playerStats.team} is playing football from another dimension. 10.0 deserved.`,
+          `I have never seen a youngster with this game intelligence. 10.0 is an understatement.`,
+        ],
+        'Ronaldinho': [
+          `10.0! Haha! ${playerName} is having FUN out there. That is what matters! 😄`,
+          `A 10.0 at ${playerStats.age}? This kid smiles like me and plays like me. SPECIAL!`,
+          `Football is joy. ${playerName} at ${playerStats.team} is pure joy. 10.0! 🎉`,
+        ],
+        'Zinedine Zidane': [
+          `10.0. Class. ${playerName} has something you cannot teach.`,
+          `Perfection. At ${playerStats.age}. Remember this night.`,
+          `${playerName}. Remember the name. 10.0. That is all.`,
+        ],
+        'Andrea Pirlo': [
+          `A 10.0. Like a fine wine, ${playerName} gets better with every match. Beautiful.`,
+          `Perfetto. ${playerName} at ${playerStats.age} is playing with the elegance of a veteran. 10.0.`,
+          `I have seen many great players. ${playerName} at ${playerStats.team} is one of them. 10.0.`,
+        ],
+      };
+      const reactions = perfectReactions[legend.name] || [`10.0 at ${playerStats.age}. Special.`];
+      text = reactions[Math.floor(Math.random() * reactions.length)];
+    } else {
+      // 9.0 - great performance
+      const greatReactions: Record<string, string[]> = {
+        'Rio Ferdinand': [
+          `9.0 at ${playerStats.age}. I was marking strikers at that age. ${playerName} is running the game.`,
+          `Outstanding. ${playerName} at ${playerStats.team} is developing into something special.`,
+          `That was a captain's performance from a ${playerStats.age}-year-old. Remarkable.`,
+        ],
+        'Thierry Henry': [
+          `9.0. At ${playerStats.age}. Remember when people doubted him? Not anymore.`,
+          `${playerName} at ${playerStats.team} with 9.0. The Premier League will come calling soon.`,
+          `A 9.0 performance at ${playerStats.age}. I had hair when I was this good. Impressive.`,
+        ],
+        'Gary Neville': [
+          `9.0 at ${playerStats.age}. That is an elite performance. Not good. ELITE.`,
+          `I have been watching football for 30 years. ${playerName} at ${playerStats.age} is the real deal.`,
+          `9.0. At ${playerStats.age}. At ${playerStats.team}. Remember this night.`,
+        ],
+        'Paolo Maldini': [
+          `9.0. ${playerName} at ${playerStats.age} is playing with the composure of a veteran.`,
+          `Bene. ${playerName} at ${playerStats.team}. The Italian leagues will fight for him.`,
+          `A 9.0 at ${playerStats.age}. This is what AC Milan dreams of signing.`,
+        ],
+        'Xavi Hernandez': [
+          `9.0 at ${playerStats.age}. This is football intelligence. You cannot teach this.`,
+          `${playerName} at ${playerStats.team} is playing the beautiful game. 9.0 deserved.`,
+          `I love watching ${playerName}. 9.0 at ${playerStats.age}. The future is bright.`,
+        ],
+        'Ronaldinho': [
+          `9.0! ${playerName} is playing with JOY! That is what football is about! 😄`,
+          `A 9.0 at ${playerStats.age}? This kid has the smile and the skill! LOVE IT!`,
+          `${playerName} at ${playerStats.team} with 9.0! Football needs more players like this!`,
+        ],
+        'Zinedine Zidane': [
+          `9.0. ${playerName}. Class. Remember this name.`,
+          `At ${playerStats.age}. 9.0. ${playerName} has the touch.`,
+          `Beautiful performance. ${playerName} at ${playerStats.team}. 9.0.`,
+        ],
+        'Andrea Pirlo': [
+          `9.0. Like a fine wine. ${playerName} at ${playerStats.age} is pure elegance.`,
+          `Bene. ${playerName} at ${playerStats.team}. 9.0. The midfield maestro.`,
+          `I see myself in ${playerName}. 9.0 at ${playerStats.age}. Beautiful.`,
+        ],
+      };
+      const reactions = greatReactions[legend.name] || [`9.0 at ${playerStats.age}. Impressive.`];
+      text = reactions[Math.floor(Math.random() * reactions.length)];
+    }
+
+    return {
+      name: legend.name,
+      handle: legend.handle,
+      flag: legend.flag,
+      text,
+      isLegend: true,
+    };
+  });
+}

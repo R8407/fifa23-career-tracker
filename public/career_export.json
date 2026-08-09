@@ -6,7 +6,7 @@
     "firstname": "Ethan",
     "lastname": "Ampadu",
     "commonname": "",
-    "overallrating": "67",
+    "overallrating": "69",
     "potential": "81",
     "height": "173",
     "weight": "78",
@@ -14,21 +14,21 @@
     "birthdate": "155198",
     "preferredposition1": "23",
     "nationality": "45",
-    "finishing": "62",
-    "shotpower": "59",
-    "longshots": "61",
+    "finishing": "66",
+    "shotpower": "62",
+    "longshots": "65",
     "volleys": "36",
     "penalties": "22",
     "vision": "48",
     "crossing": "46",
-    "shortpassing": "74",
+    "shortpassing": "77",
     "longpassing": "69",
-    "curve": "56",
-    "agility": "73",
+    "curve": "60",
+    "agility": "75",
     "balance": "68",
     "reactions": "72",
-    "ballcontrol": "78",
-    "dribbling": "74",
+    "ballcontrol": "80",
+    "dribbling": "76",
     "composure": "52",
     "interceptions": "52",
     "headingaccuracy": "67",
@@ -40,12 +40,12 @@
     "jumping": "86",
     "aggression": "60",
     "acceleration": "68",
-    "sprintspeed": "62",
+    "sprintspeed": "64",
     "currentClub": "Spezia"
   },
   "my_squad": [
     {
-      "squad_position": "ST",
+      "squad_position": "LW",
       "jerseynumber": "13",
       "form": "3",
       "leaguegoals": "1",
@@ -83,7 +83,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CM",
+      "squad_position": "CAM",
       "jerseynumber": "77",
       "form": "3",
       "leaguegoals": "0",
@@ -102,7 +102,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "10",
       "form": "3",
       "leaguegoals": "0",
@@ -122,6 +122,25 @@
     },
     {
       "squad_position": "CF",
+      "jerseynumber": "27",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "231235",
+      "firstname": "Kelvin",
+      "lastname": "Amian",
+      "commonname": null,
+      "overallrating": "75",
+      "potential": "77",
+      "height": "180",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "151693",
+      "preferredposition1": "2",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "ST",
       "jerseynumber": "14",
       "form": "3",
       "leaguegoals": "0",
@@ -140,7 +159,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "LW",
+      "squad_position": "CF",
       "jerseynumber": "9",
       "form": "3",
       "leaguegoals": "5",
@@ -178,25 +197,6 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
-      "jerseynumber": "27",
-      "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "231235",
-      "firstname": "Kelvin",
-      "lastname": "Amian",
-      "commonname": null,
-      "overallrating": "74",
-      "potential": "77",
-      "height": "180",
-      "weight": "78",
-      "preferredfoot": "1",
-      "birthdate": "151693",
-      "preferredposition1": "2",
-      "isUserPlayer": false
-    },
-    {
       "squad_position": "CB",
       "jerseynumber": "29",
       "form": "3",
@@ -216,7 +216,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
+      "squad_position": "CM",
       "jerseynumber": "20",
       "form": "3",
       "leaguegoals": "2",
@@ -254,7 +254,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
+      "squad_position": "CDM",
       "jerseynumber": "8",
       "form": "3",
       "leaguegoals": "0",
@@ -273,7 +273,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
+      "squad_position": "CB",
       "jerseynumber": "43",
       "form": "3",
       "leaguegoals": "0",
@@ -292,7 +292,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CAM",
+      "squad_position": "RW",
       "jerseynumber": "15",
       "form": "3",
       "leaguegoals": "0",
@@ -311,7 +311,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "24",
       "form": "3",
       "leaguegoals": "0",
@@ -387,7 +387,64 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CDM",
+      "squad_position": "CM",
+      "jerseynumber": "46",
+      "form": "3",
+      "leaguegoals": "8",
+      "leagueappearances": "32",
+      "playerid": "235735",
+      "firstname": "Ethan",
+      "lastname": "Ampadu",
+      "commonname": null,
+      "overallrating": "69",
+      "potential": "81",
+      "height": "173",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "155198",
+      "preferredposition1": "23",
+      "isUserPlayer": true
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "2",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "246656",
+      "firstname": "Emil",
+      "lastname": "Holm",
+      "commonname": null,
+      "overallrating": "69",
+      "potential": "76",
+      "height": "191",
+      "weight": "83",
+      "preferredfoot": "1",
+      "birthdate": "152518",
+      "preferredposition1": "12",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "55",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "243185",
+      "firstname": "Przemysław",
+      "lastname": "Wiśniewski",
+      "commonname": null,
+      "overallrating": "69",
+      "potential": "73",
+      "height": "195",
+      "weight": "91",
+      "preferredfoot": "1",
+      "birthdate": "151862",
+      "preferredposition1": "5",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
       "jerseynumber": "7",
       "form": "3",
       "leaguegoals": "0",
@@ -406,45 +463,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
-      "jerseynumber": "2",
-      "form": "3",
-      "leaguegoals": "1",
-      "leagueappearances": "0",
-      "playerid": "246656",
-      "firstname": "Emil",
-      "lastname": "Holm",
-      "commonname": null,
-      "overallrating": "68",
-      "potential": "76",
-      "height": "191",
-      "weight": "83",
-      "preferredfoot": "1",
-      "birthdate": "152518",
-      "preferredposition1": "12",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "CB",
-      "jerseynumber": "55",
-      "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "243185",
-      "firstname": "Przemysław",
-      "lastname": "Wiśniewski",
-      "commonname": null,
-      "overallrating": "68",
-      "potential": "73",
-      "height": "195",
-      "weight": "91",
-      "preferredfoot": "1",
-      "birthdate": "151862",
-      "preferredposition1": "5",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "21",
       "form": "3",
       "leaguegoals": "0",
@@ -461,25 +480,6 @@
       "birthdate": "151675",
       "preferredposition1": "2",
       "isUserPlayer": false
-    },
-    {
-      "squad_position": "CM",
-      "jerseynumber": "46",
-      "form": "3",
-      "leaguegoals": "4",
-      "leagueappearances": "22",
-      "playerid": "235735",
-      "firstname": "Ethan",
-      "lastname": "Ampadu",
-      "commonname": null,
-      "overallrating": "67",
-      "potential": "81",
-      "height": "173",
-      "weight": "78",
-      "preferredfoot": "1",
-      "birthdate": "155198",
-      "preferredposition1": "23",
-      "isUserPlayer": true
     },
     {
       "squad_position": "RW",
@@ -593,18 +593,18 @@
       "teamname": "Paris SG"
     },
     {
-      "playerid": "158023",
-      "firstname": "Lionel",
-      "lastname": "Messi",
+      "playerid": "192119",
+      "firstname": "Thibaut",
+      "lastname": "Courtois",
       "commonname": null,
       "overallrating": "91",
       "potential": "91",
-      "height": "169",
-      "weight": "67",
+      "height": "199",
+      "weight": "96",
       "preferredfoot": "2",
-      "birthdate": "147811",
-      "preferredposition1": "23",
-      "teamname": "Paris SG"
+      "birthdate": "149594",
+      "preferredposition1": "0",
+      "teamname": "Real Madrid"
     },
     {
       "playerid": "192985",
@@ -621,32 +621,18 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "188545",
-      "firstname": "Robert",
-      "lastname": "Lewandowski",
+      "playerid": "158023",
+      "firstname": "Lionel",
+      "lastname": "Messi",
       "commonname": null,
       "overallrating": "90",
       "potential": "91",
-      "height": "185",
-      "weight": "81",
-      "preferredfoot": "1",
-      "birthdate": "148235",
-      "preferredposition1": "25",
-      "teamname": "FC Barcelona"
-    },
-    {
-      "playerid": "192119",
-      "firstname": "Thibaut",
-      "lastname": "Courtois",
-      "commonname": null,
-      "overallrating": "90",
-      "potential": "91",
-      "height": "199",
-      "weight": "96",
+      "height": "169",
+      "weight": "67",
       "preferredfoot": "2",
-      "birthdate": "149594",
-      "preferredposition1": "0",
-      "teamname": "Real Madrid"
+      "birthdate": "147811",
+      "preferredposition1": "23",
+      "teamname": "Paris SG"
     },
     {
       "playerid": "200389",
@@ -663,6 +649,20 @@
       "teamname": "Atlético de Madrid"
     },
     {
+      "playerid": "212622",
+      "firstname": "Joshua",
+      "lastname": "Kimmich",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "90",
+      "height": "177",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150597",
+      "preferredposition1": "10",
+      "teamname": "FC Bayern München"
+    },
+    {
       "playerid": "212831",
       "firstname": "Alisson",
       "lastname": "Ramses Becker",
@@ -675,6 +675,20 @@
       "birthdate": "149738",
       "preferredposition1": "0",
       "teamname": "Liverpool"
+    },
+    {
+      "playerid": "230621",
+      "firstname": "Gianluigi",
+      "lastname": "Donnarumma",
+      "commonname": null,
+      "overallrating": "90",
+      "potential": "92",
+      "height": "196",
+      "weight": "90",
+      "preferredfoot": "1",
+      "birthdate": "152075",
+      "preferredposition1": "0",
+      "teamname": "Paris SG"
     },
     {
       "playerid": "239085",
@@ -691,20 +705,6 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "165153",
-      "firstname": "Karim",
-      "lastname": "Benzema",
-      "commonname": null,
-      "overallrating": "89",
-      "potential": "91",
-      "height": "185",
-      "weight": "81",
-      "preferredfoot": "1",
-      "birthdate": "147989",
-      "preferredposition1": "21",
-      "teamname": "Real Madrid"
-    },
-    {
       "playerid": "167495",
       "firstname": "Manuel",
       "lastname": "Neuer",
@@ -717,6 +717,20 @@
       "birthdate": "147357",
       "preferredposition1": "0",
       "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "188545",
+      "firstname": "Robert",
+      "lastname": "Lewandowski",
+      "commonname": null,
+      "overallrating": "89",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "148235",
+      "preferredposition1": "25",
+      "teamname": "FC Barcelona"
     },
     {
       "playerid": "190871",
@@ -789,6 +803,20 @@
       "teamname": "Liverpool"
     },
     {
+      "playerid": "207865",
+      "firstname": "Marcos",
+      "lastname": "Aoás Corrêa",
+      "commonname": "Marquinhos",
+      "overallrating": "89",
+      "potential": "90",
+      "height": "183",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150327",
+      "preferredposition1": "5",
+      "teamname": "Paris SG"
+    },
+    {
       "playerid": "208722",
       "firstname": "Sadio",
       "lastname": "Mané",
@@ -831,46 +859,32 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "212622",
-      "firstname": "Joshua",
-      "lastname": "Kimmich",
-      "commonname": null,
+      "playerid": "239818",
+      "firstname": "Rúben Santos",
+      "lastname": "Gato Alves Dias",
+      "commonname": "Rúben Dias",
       "overallrating": "89",
-      "potential": "90",
-      "height": "177",
-      "weight": "75",
-      "preferredfoot": "1",
-      "birthdate": "150597",
-      "preferredposition1": "10",
-      "teamname": "FC Bayern München"
-    },
-    {
-      "playerid": "230621",
-      "firstname": "Gianluigi",
-      "lastname": "Donnarumma",
-      "commonname": null,
-      "overallrating": "89",
-      "potential": "92",
-      "height": "196",
-      "weight": "90",
-      "preferredfoot": "1",
-      "birthdate": "152075",
-      "preferredposition1": "0",
-      "teamname": "Paris SG"
-    },
-    {
-      "playerid": "20801",
-      "firstname": "C. Ronaldo",
-      "lastname": "dos Santos Aveiro",
-      "commonname": "Cristiano Ronaldo",
-      "overallrating": "88",
-      "potential": "88",
+      "potential": "91",
       "height": "187",
-      "weight": "83",
+      "weight": "82",
       "preferredfoot": "1",
-      "birthdate": "146942",
-      "preferredposition1": "25",
-      "teamname": "Al Nassr"
+      "birthdate": "151423",
+      "preferredposition1": "5",
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "165153",
+      "firstname": "Karim",
+      "lastname": "Benzema",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "147989",
+      "preferredposition1": "21",
+      "teamname": "Real Madrid"
     },
     {
       "playerid": "182521",
@@ -901,18 +915,18 @@
       "teamname": "Spurs"
     },
     {
-      "playerid": "207865",
-      "firstname": "Marcos",
-      "lastname": "Aoás Corrêa",
-      "commonname": "Marquinhos",
+      "playerid": "205452",
+      "firstname": "Antonio",
+      "lastname": "Rüdiger",
+      "commonname": null,
       "overallrating": "88",
-      "potential": "90",
-      "height": "183",
-      "weight": "75",
+      "potential": "88",
+      "height": "190",
+      "weight": "85",
       "preferredfoot": "1",
-      "birthdate": "150327",
+      "birthdate": "149890",
       "preferredposition1": "5",
-      "teamname": "Paris SG"
+      "teamname": "Real Madrid"
     },
     {
       "playerid": "209658",
@@ -985,6 +999,20 @@
       "teamname": "FC Barcelona"
     },
     {
+      "playerid": "231281",
+      "firstname": "Trent",
+      "lastname": "Alexander-Arnold",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "89",
+      "height": "180",
+      "weight": "69",
+      "preferredfoot": "1",
+      "birthdate": "151934",
+      "preferredposition1": "3",
+      "teamname": "Liverpool"
+    },
+    {
       "playerid": "231866",
       "firstname": "Rodrigo",
       "lastname": "Hernández Cascante",
@@ -999,18 +1027,32 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "239818",
-      "firstname": "Rúben Santos",
-      "lastname": "Gato Alves Dias",
-      "commonname": "Rúben Dias",
+      "playerid": "232411",
+      "firstname": "Christopher",
+      "lastname": "Nkunku",
+      "commonname": null,
       "overallrating": "88",
-      "potential": "91",
-      "height": "187",
-      "weight": "82",
+      "potential": "89",
+      "height": "175",
+      "weight": "73",
       "preferredfoot": "1",
-      "birthdate": "151423",
-      "preferredposition1": "5",
-      "teamname": "Manchester City"
+      "birthdate": "151607",
+      "preferredposition1": "21",
+      "teamname": "RB Leipzig"
+    },
+    {
+      "playerid": "20801",
+      "firstname": "C. Ronaldo",
+      "lastname": "dos Santos Aveiro",
+      "commonname": "Cristiano Ronaldo",
+      "overallrating": "87",
+      "potential": "88",
+      "height": "187",
+      "weight": "83",
+      "preferredfoot": "1",
+      "birthdate": "146942",
+      "preferredposition1": "25",
+      "teamname": "Al Nassr"
     },
     {
       "playerid": "193041",
@@ -1055,20 +1097,6 @@
       "teamname": "Paris SG"
     },
     {
-      "playerid": "205452",
-      "firstname": "Antonio",
-      "lastname": "Rüdiger",
-      "commonname": null,
-      "overallrating": "87",
-      "potential": "88",
-      "height": "190",
-      "weight": "85",
-      "preferredfoot": "1",
-      "birthdate": "149890",
-      "preferredposition1": "5",
-      "teamname": "Real Madrid"
-    },
-    {
       "playerid": "210514",
       "firstname": "João Pedro",
       "lastname": "Cavaco Cancelo",
@@ -1081,6 +1109,20 @@
       "birthdate": "150340",
       "preferredposition1": "7",
       "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "212218",
+      "firstname": "Aymeric",
+      "lastname": "Laporte",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "191",
+      "weight": "85",
+      "preferredfoot": "2",
+      "birthdate": "150340",
+      "preferredposition1": "5",
+      "teamname": "Spurs"
     },
     {
       "playerid": "216267",
@@ -1097,6 +1139,20 @@
       "teamname": "Liverpool"
     },
     {
+      "playerid": "222665",
+      "firstname": "Martin",
+      "lastname": "Ødegaard",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "89",
+      "height": "178",
+      "weight": "68",
+      "preferredfoot": "2",
+      "birthdate": "152005",
+      "preferredposition1": "18",
+      "teamname": "Arsenal"
+    },
+    {
       "playerid": "224232",
       "firstname": "Nicolò",
       "lastname": "Barella",
@@ -1109,20 +1165,6 @@
       "birthdate": "151327",
       "preferredposition1": "14",
       "teamname": "Inter"
-    },
-    {
-      "playerid": "231281",
-      "firstname": "Trent",
-      "lastname": "Alexander-Arnold",
-      "commonname": null,
-      "overallrating": "87",
-      "potential": "89",
-      "height": "180",
-      "weight": "69",
-      "preferredfoot": "1",
-      "birthdate": "151934",
-      "preferredposition1": "3",
-      "teamname": "Liverpool"
     },
     {
       "playerid": "231478",
@@ -1153,18 +1195,18 @@
       "teamname": "Liverpool"
     },
     {
-      "playerid": "232411",
-      "firstname": "Christopher",
-      "lastname": "Nkunku",
+      "playerid": "232656",
+      "firstname": "Theo",
+      "lastname": "Hernández",
       "commonname": null,
       "overallrating": "87",
-      "potential": "89",
-      "height": "175",
-      "weight": "73",
-      "preferredfoot": "1",
-      "birthdate": "151607",
-      "preferredposition1": "21",
-      "teamname": "RB Leipzig"
+      "potential": "90",
+      "height": "184",
+      "weight": "81",
+      "preferredfoot": "2",
+      "birthdate": "151568",
+      "preferredposition1": "7",
+      "teamname": "Milan"
     },
     {
       "playerid": "238794",
@@ -1191,20 +1233,6 @@
       "weight": "78",
       "preferredfoot": "1",
       "birthdate": "151857",
-      "preferredposition1": "14",
-      "teamname": "Real Madrid"
-    },
-    {
-      "playerid": "177003",
-      "firstname": "Luka",
-      "lastname": "Modrić",
-      "commonname": null,
-      "overallrating": "86",
-      "potential": "88",
-      "height": "172",
-      "weight": "66",
-      "preferredfoot": "1",
-      "birthdate": "147158",
       "preferredposition1": "14",
       "teamname": "Real Madrid"
     },
@@ -1349,20 +1377,6 @@
       "teamname": "Manchester Utd"
     },
     {
-      "playerid": "212218",
-      "firstname": "Aymeric",
-      "lastname": "Laporte",
-      "commonname": null,
-      "overallrating": "86",
-      "potential": "87",
-      "height": "191",
-      "weight": "85",
-      "preferredfoot": "2",
-      "birthdate": "150340",
-      "preferredposition1": "5",
-      "teamname": "Spurs"
-    },
-    {
       "playerid": "213345",
       "firstname": "Kingsley",
       "lastname": "Coman",
@@ -1388,21 +1402,7 @@
       "preferredfoot": "1",
       "birthdate": "149783",
       "preferredposition1": "10",
-      "teamname": "Inter"
-    },
-    {
-      "playerid": "222665",
-      "firstname": "Martin",
-      "lastname": "Ødegaard",
-      "commonname": null,
-      "overallrating": "86",
-      "potential": "89",
-      "height": "178",
-      "weight": "68",
-      "preferredfoot": "2",
-      "birthdate": "152005",
-      "preferredposition1": "18",
-      "teamname": "Arsenal"
+      "teamname": "FC Barcelona"
     },
     {
       "playerid": "223848",
@@ -1433,18 +1433,18 @@
       "teamname": "Liverpool"
     },
     {
-      "playerid": "232656",
-      "firstname": "Theo",
-      "lastname": "Hernández",
+      "playerid": "232293",
+      "firstname": "Victor",
+      "lastname": "Osimhen",
       "commonname": null,
       "overallrating": "86",
       "potential": "90",
-      "height": "184",
-      "weight": "81",
-      "preferredfoot": "2",
-      "birthdate": "151568",
-      "preferredposition1": "7",
-      "teamname": "Milan"
+      "height": "185",
+      "weight": "78",
+      "preferredfoot": "1",
+      "birthdate": "152017",
+      "preferredposition1": "25",
+      "teamname": "Manchester Utd"
     },
     {
       "playerid": "234642",
@@ -1475,6 +1475,20 @@
       "teamname": "Borussia Dortmund"
     },
     {
+      "playerid": "235212",
+      "firstname": "Achraf",
+      "lastname": "Hakimi",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "87",
+      "height": "181",
+      "weight": "73",
+      "preferredfoot": "1",
+      "birthdate": "151962",
+      "preferredposition1": "3",
+      "teamname": "Paris SG"
+    },
+    {
       "playerid": "235243",
       "firstname": "Matthijs",
       "lastname": "de Ligt",
@@ -1487,6 +1501,20 @@
       "birthdate": "152243",
       "preferredposition1": "5",
       "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "235790",
+      "firstname": "Kai",
+      "lastname": "Havertz",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "91",
+      "height": "190",
+      "weight": "82",
+      "preferredfoot": "2",
+      "birthdate": "152181",
+      "preferredposition1": "18",
+      "teamname": "Chelsea"
     },
     {
       "playerid": "237692",
@@ -1515,6 +1543,34 @@
       "birthdate": "152361",
       "preferredposition1": "2",
       "teamname": "Chelsea"
+    },
+    {
+      "playerid": "241852",
+      "firstname": "Moussa",
+      "lastname": "Diaby",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "88",
+      "height": "171",
+      "weight": "67",
+      "preferredfoot": "2",
+      "birthdate": "152207",
+      "preferredposition1": "12",
+      "teamname": "Leverkusen"
+    },
+    {
+      "playerid": "246430",
+      "firstname": "Dušan",
+      "lastname": "Vlahović",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "91",
+      "height": "190",
+      "weight": "75",
+      "preferredfoot": "2",
+      "birthdate": "152412",
+      "preferredposition1": "25",
+      "teamname": "Juventus"
     },
     {
       "playerid": "251854",
@@ -1552,7 +1608,7 @@
         "firstname": "Robert",
         "lastname": "Lewandowski",
         "commonname": null,
-        "overallrating": "90",
+        "overallrating": "89",
         "potential": "91",
         "height": "185",
         "weight": "81",
@@ -1590,7 +1646,7 @@
         "weight": "83",
         "preferredfoot": "1",
         "birthdate": "149662",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "Villarreal CF",
         "leaguegoals": "10",
         "leagueappearances": "0"
@@ -1600,7 +1656,7 @@
         "firstname": "Jay",
         "lastname": "Rodriguez",
         "commonname": null,
-        "overallrating": "74",
+        "overallrating": "73",
         "potential": "74",
         "height": "185",
         "weight": "84",
@@ -1618,13 +1674,13 @@
         "firstname": "Ademola",
         "lastname": "Lookman",
         "commonname": null,
-        "overallrating": "78",
+        "overallrating": "79",
         "potential": "81",
         "height": "174",
         "weight": "71",
         "preferredfoot": "1",
         "birthdate": "151582",
-        "preferredposition1": "16",
+        "preferredposition1": "29",
         "teamname": "Bergamo Calcio",
         "leaguegoals": "12",
         "leagueappearances": "0"
@@ -1640,7 +1696,7 @@
         "weight": "68",
         "preferredfoot": "1",
         "birthdate": "148956",
-        "preferredposition1": "25",
+        "preferredposition1": "29",
         "teamname": "Milan",
         "leaguegoals": "11",
         "leagueappearances": "0"
@@ -1650,7 +1706,7 @@
         "firstname": "Marcus",
         "lastname": "Thuram",
         "commonname": null,
-        "overallrating": "81",
+        "overallrating": "82",
         "potential": "84",
         "height": "192",
         "weight": "88",
@@ -1716,7 +1772,7 @@
         "firstname": "Victor",
         "lastname": "Osimhen",
         "commonname": null,
-        "overallrating": "85",
+        "overallrating": "86",
         "potential": "90",
         "height": "185",
         "weight": "78",
@@ -1741,72 +1797,6 @@
         "preferredposition1": "24",
         "teamname": "Brentford",
         "leaguegoals": "13",
-        "leagueappearances": "0"
-      }
-    ],
-    "Bundesliga": [
-      {
-        "playerid": "205431",
-        "firstname": "Niclas",
-        "lastname": "Füllkrug",
-        "commonname": null,
-        "overallrating": "78",
-        "potential": "78",
-        "height": "188",
-        "weight": "83",
-        "preferredfoot": "1",
-        "birthdate": "149868",
-        "preferredposition1": "29",
-        "teamname": "TSG Hoffenheim",
-        "leaguegoals": "13",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "232411",
-        "firstname": "Christopher",
-        "lastname": "Nkunku",
-        "commonname": null,
-        "overallrating": "87",
-        "potential": "89",
-        "height": "175",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "151607",
-        "preferredposition1": "26",
-        "teamname": "RB Leipzig",
-        "leaguegoals": "12",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "231478",
-        "firstname": "Lautaro",
-        "lastname": "Martínez",
-        "commonname": null,
-        "overallrating": "87",
-        "potential": "89",
-        "height": "174",
-        "weight": "72",
-        "preferredfoot": "1",
-        "birthdate": "151523",
-        "preferredposition1": "29",
-        "teamname": "FC Bayern München",
-        "leaguegoals": "11",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "256790",
-        "firstname": "Jamal",
-        "lastname": "Musiala",
-        "commonname": null,
-        "overallrating": "84",
-        "potential": "92",
-        "height": "184",
-        "weight": "72",
-        "preferredfoot": "1",
-        "birthdate": "153537",
-        "preferredposition1": "18",
-        "teamname": "FC Bayern München",
-        "leaguegoals": "9",
         "leagueappearances": "0"
       }
     ],
@@ -1864,7 +1854,7 @@
         "firstname": "Terem",
         "lastname": "Moffi",
         "commonname": null,
-        "overallrating": "76",
+        "overallrating": "77",
         "potential": "80",
         "height": "188",
         "weight": "89",
@@ -1873,6 +1863,72 @@
         "preferredposition1": "28",
         "teamname": "OGC Nice",
         "leaguegoals": "12",
+        "leagueappearances": "0"
+      }
+    ],
+    "Bundesliga": [
+      {
+        "playerid": "205431",
+        "firstname": "Niclas",
+        "lastname": "Füllkrug",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "78",
+        "height": "188",
+        "weight": "83",
+        "preferredfoot": "1",
+        "birthdate": "149868",
+        "preferredposition1": "29",
+        "teamname": "TSG Hoffenheim",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "232411",
+        "firstname": "Christopher",
+        "lastname": "Nkunku",
+        "commonname": null,
+        "overallrating": "88",
+        "potential": "89",
+        "height": "175",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "151607",
+        "preferredposition1": "26",
+        "teamname": "RB Leipzig",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "231478",
+        "firstname": "Lautaro",
+        "lastname": "Martínez",
+        "commonname": null,
+        "overallrating": "87",
+        "potential": "89",
+        "height": "174",
+        "weight": "72",
+        "preferredfoot": "1",
+        "birthdate": "151523",
+        "preferredposition1": "29",
+        "teamname": "FC Bayern München",
+        "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "198329",
+        "firstname": "Rodrigo",
+        "lastname": "Moreno Machado",
+        "commonname": "Rodrigo",
+        "overallrating": "78",
+        "potential": "78",
+        "height": "182",
+        "weight": "77",
+        "preferredfoot": "2",
+        "birthdate": "149162",
+        "preferredposition1": "29",
+        "teamname": "TSG Hoffenheim",
+        "leaguegoals": "10",
         "leagueappearances": "0"
       }
     ]
@@ -4819,39 +4875,94 @@
       "season": "2023/2024",
       "age": 15,
       "club": "Spezia",
-      "league": "Serie A",
+      "clubId": "113974",
+      "league": "Serie A TIM",
+      "leagueId": "31",
       "clubBadgeColor": "bg-zinc-800",
-      "apps": 22,
-      "goals": 4,
-      "assists": 16,
-      "avgRating": 7.67,
+      "apps": 32,
+      "goals": 8,
+      "assists": 21,
+      "avgRating": 4.14,
+      "overall": 73,
       "yellowCards": 0,
       "redCards": 0,
       "trophies": [],
       "individualAwards": [],
-      "highlights": "4 goals, 16 assists in 22 appearances",
+      "highlights": "8 goals, 21 assists in 32 appearances",
       "xG": 0,
       "xA": 0,
       "keyPassesPerGame": 0,
-      "dribblesPerGame": 0,
-      "motm": 7
+      "dribblesPerGame": 0
     }
   ],
-  "total_goals": 4,
-  "total_assists": 16,
-  "total_appearances": 22,
+  "club_history": [
+    {
+      "teamid": "113974",
+      "teamname": "Spezia",
+      "league": "Serie A TIM",
+      "leagueId": "31",
+      "seasons": [
+        {
+          "id": "season_1",
+          "season": "2023/2024",
+          "age": 15,
+          "club": "Spezia",
+          "clubId": "113974",
+          "league": "Serie A TIM",
+          "leagueId": "31",
+          "clubBadgeColor": "bg-zinc-800",
+          "apps": 32,
+          "goals": 8,
+          "assists": 21,
+          "avgRating": 4.14,
+          "overall": 73,
+          "yellowCards": 0,
+          "redCards": 0,
+          "trophies": [],
+          "individualAwards": [],
+          "highlights": "8 goals, 21 assists in 32 appearances",
+          "xG": 0,
+          "xA": 0,
+          "keyPassesPerGame": 0,
+          "dribblesPerGame": 0
+        }
+      ],
+      "totalGoals": 8,
+      "totalAssists": 21,
+      "totalApps": 32,
+      "historicalTrophies": {
+        "leagueTitles": 0,
+        "domesticCups": 0,
+        "uclWins": 0,
+        "uelWins": 0,
+        "ueclWins": 0
+      },
+      "trophiesWithPlayer": {
+        "league": 0,
+        "domesticCup": 0,
+        "ucl": 0,
+        "uel": 0
+      },
+      "isCurrentClub": true
+    }
+  ],
+  "post_departure": {},
+  "total_goals": 8,
+  "total_assists": 21,
+  "total_appearances": 32,
   "wage": 9800,
   "market_value": 6000000,
+  "latest_match_rating": 7,
   "trophies": [
     {
       "id": "t_motm",
       "title": "Man of the Match Awards",
       "category": "Individual",
-      "quantity": 10,
+      "quantity": 11,
       "yearsWon": [
         "2023/2024"
       ],
-      "description": "Awarded 10 times for outstanding match performances.",
+      "description": "Awarded 11 times for outstanding match performances.",
       "tier": "Platinum",
       "iconType": "manofmatch"
     },
@@ -4888,8 +4999,8 @@
   ],
   "news": [
     {
-      "id": "news_b1c234fc_2026-08-08 02:29",
-      "timestamp": "2026-08-08 02:29",
+      "id": "news_b1c234fc_2026-08-08 02:13",
+      "timestamp": "2026-08-08 02:13",
       "category": "performance",
       "icon": "🎨",
       "headline": "Ethan Ampadu's creativity rivals Dennis Bergkamp!",

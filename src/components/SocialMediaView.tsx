@@ -11,7 +11,7 @@ import {
   getClosestLockedLegends,
   LegendConversation,
 } from '../utils/legendUnlock';
-import { generateFanReactions, FanReaction } from '../utils/fanReactions';
+import { generateFanReactions, FanReaction, generateMatchRatingLegendComments, LegendComment } from '../utils/fanReactions';
 
 interface FeedPost {
   id: string;
@@ -23,6 +23,7 @@ interface FeedPost {
   likes: number;
   replies: number;
   timeAgo: string;
+  legendComments?: LegendComment[];
 }
 
 interface DirectMessage {
@@ -285,6 +286,24 @@ function generatePosts(data: any, hofPoints: number = 0): FeedPost[] {
   const legendComments = generateLegendComments(hofPoints);
   posts.push(...legendComments);
 
+  // Add match rating legend comments for 9.0+ performances
+  const matchRating = data.latest_match_rating || 0;
+  if (matchRating >= 9) {
+    const profile = data.my_player_profile || {};
+    const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Your Player';
+    const matchLegendComments = generateMatchRatingLegendComments(
+      matchRating,
+      playerName,
+      { goals: data.total_goals || 0, assists: data.total_assists || 0, age: seasons[0]?.age || 14, team: profile.currentClub || 'Spezia' },
+      hofPoints
+    );
+    
+    // Add legend comments to the most recent post
+    if (posts.length > 0 && matchLegendComments.length > 0) {
+      posts[0].legendComments = matchLegendComments;
+    }
+  }
+
   // Shuffle posts
   for (let i = posts.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -525,6 +544,7 @@ export const SocialMediaView: React.FC = () => {
   const [userPost, setUserPost] = useState('');
   const [isGeneratingReactions, setIsGeneratingReactions] = useState(false);
   const [userFeedPost, setUserFeedPost] = useState<{ content: string; reactions: FanReaction[] } | null>(null);
+  const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set());
 
   // Get HoF points from localStorage (same key as HallOfFameView)
   const hofPoints = useMemo(() => {
@@ -722,6 +742,9 @@ export const SocialMediaView: React.FC = () => {
           {posts.map(post => {
             const isLiked = likedPosts.has(post.id);
             const likeCount = isLiked ? post.likes + 1 : post.likes;
+            const hasLegendComments = post.legendComments && post.legendComments.length > 0;
+            const isCommentsExpanded = expandedComments.has(post.id);
+            
             return (
               <div key={post.id} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 hover:border-zinc-700 transition-all">
                 <div className="flex gap-3">
@@ -741,8 +764,28 @@ export const SocialMediaView: React.FC = () => {
                       >
                         <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-red-400' : ''}`} /> {formatNumber(likeCount)}
                       </button>
-                      <button className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-blue-400 transition-colors">
+                      <button 
+                        onClick={() => {
+                          if (hasLegendComments) {
+                            setExpandedComments(prev => {
+                              const next = new Set(prev);
+                              if (next.has(post.id)) {
+                                next.delete(post.id);
+                              } else {
+                                next.add(post.id);
+                              }
+                              return next;
+                            });
+                          }
+                        }}
+                        className={`flex items-center gap-1.5 text-xs transition-colors ${hasLegendComments ? 'text-amber-400 hover:text-amber-300 cursor-pointer' : 'text-zinc-500 hover:text-blue-400'}`}
+                      >
                         <MessageCircle className="w-3.5 h-3.5" /> {formatNumber(post.replies)}
+                        {hasLegendComments && (
+                          <span className="ml-1 px-1.5 py-0.5 bg-amber-500/20 text-amber-400 text-[9px] font-bold rounded-full">
+                            {post.legendComments!.length} LEGEND{post.legendComments!.length > 1 ? 'S' : ''}
+                          </span>
+                        )}
                       </button>
                       <button className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-green-400 transition-colors">
                         <Share2 className="w-3.5 h-3.5" /> Share
@@ -750,6 +793,27 @@ export const SocialMediaView: React.FC = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* Expandable Legend Comments */}
+                {hasLegendComments && isCommentsExpanded && (
+                  <div className="mt-4 pt-4 border-t border-zinc-800 space-y-3">
+                    <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Legend Comments</div>
+                    {post.legendComments!.map((comment, idx) => (
+                      <div key={idx} className="flex gap-2 pl-2">
+                        <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 text-sm">
+                          {comment.flag}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-white">{comment.name}</span>
+                            <span className="text-[10px] text-zinc-500">{comment.handle}</span>
+                          </div>
+                          <p className="text-xs text-zinc-400 mt-0.5">{comment.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}
