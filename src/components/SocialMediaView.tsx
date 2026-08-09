@@ -80,6 +80,67 @@ const STATIC_DMS: DirectMessage[] = [
   { id: 'dm_agent', sender: 'Your Agent', handle: '@PlayerAgent', flag: '\u{1F1FA}\u{E0067}', role: 'agent', content: 'Season review: Excellent debut. 4G 16A with avg rating 7.67. Market value will increase significantly.', timeAgo: '2d', read: true },
 ];
 
+// Generate performance-triggered DMs from unlocked legends
+function generatePerformanceDMs(
+  matchRating: number,
+  hofPoints: number,
+  playerName: string,
+  playerClub: string,
+  playerAge: number
+): DirectMessage[] {
+  if (matchRating === 0) return [];
+  
+  const dms: DirectMessage[] = [];
+  const unlockedLegends = getUnlockedLegends(hofPoints);
+  
+  // Pick legends that would react to this performance
+  const reactingLegends = unlockedLegends.filter(legend => {
+    // Coach always reacts
+    if (legend.id === 'your_coach') return true;
+    // Agent reacts to very high or very low
+    if (legend.id === 'jorge_mendes') return matchRating >= 9 || matchRating <= 5;
+    // Other legends react to extreme performances
+    return matchRating >= 9 || matchRating <= 5;
+  });
+  
+  for (const legend of reactingLegends) {
+    const reaction = legend.matchPerformanceReaction(playerName, matchRating, legend.name);
+    
+    // Check if we already sent a DM about this rating
+    const existing = getLegendConversation(legend.id);
+    if (existing && existing.messages.some(m => m.content === reaction)) continue;
+    
+    // Save to conversation
+    const conversation = existing || {
+      legendId: legend.id,
+      messages: [],
+      lastActivity: Date.now(),
+      unlockedAt: Date.now(),
+    };
+    conversation.messages.push({
+      role: 'assistant',
+      content: reaction,
+      timeAgo: 'Just now',
+    });
+    conversation.lastActivity = Date.now();
+    saveLegendConversation(legend.id, conversation);
+    
+    dms.push({
+      id: `perf_${legend.id}_${matchRating}`,
+      sender: legend.name,
+      handle: legend.handle,
+      flag: legend.flag,
+      role: legend.tier === 'bronze' ? (legend.id === 'your_coach' ? 'coach' : 'agent') : 'legend',
+      content: reaction,
+      timeAgo: 'Just now',
+      read: false,
+      legendId: legend.id,
+    });
+  }
+  
+  return dms;
+}
+
 // Generate locked legend comments for the feed
 function generateLegendComments(hofPoints: number): FeedPost[] {
   const comments: FeedPost[] = [];
@@ -577,15 +638,17 @@ export const SocialMediaView: React.FC = () => {
     return generatePosts(data, hofPoints);
   }, [hofPoints]);
 
-  // Generate all DMs (legend + static)
+  // Generate all DMs (legend + static + performance-triggered)
   const allDMs = useMemo(() => {
     const data = careerExportData as any;
     const profile = data.my_player_profile || {};
     const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Ethan Ampadu';
     const playerClub = profile.currentClub || 'Spezia';
     const playerAge = data.seasons?.[0]?.age || 14;
+    const matchRating = data.latest_match_rating || 0;
     const legendDMs = generateLegendDMs(hofPoints, playerName, playerClub, playerAge);
-    return [...legendDMs, ...STATIC_DMS];
+    const perfDMs = generatePerformanceDMs(matchRating, hofPoints, playerName, playerClub, playerAge);
+    return [...perfDMs, ...legendDMs, ...STATIC_DMS];
   }, [hofPoints]);
 
   const unreadCount = allDMs.filter(d => !d.read).length;
