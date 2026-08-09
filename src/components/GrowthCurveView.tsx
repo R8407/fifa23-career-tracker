@@ -53,23 +53,26 @@ function generateRealCurve(seasons: any[], currentAge: number, currentOvr: numbe
   const curve = [];
   const maxAge = 38;
 
-  // Build map of actual ratings from season data
+  // Build map of actual OVR ratings from season data
   const ratingsByAge: Record<number, number> = {};
   for (const s of seasons) {
     const age = s.age || (14 + parseInt(s.id?.split('_')[1] || '0'));
-    if (s.avgRating && s.avgRating > 0) {
-      // avgRating from career data is stored as rating * 100, so divide by 100
-      ratingsByAge[age] = Math.round(s.avgRating);
-    } else if (s.rating) {
-      ratingsByAge[age] = s.rating;
+    const ovr = s.overall || (s.avgRating > 10 ? Math.round(s.avgRating) : null);
+    if (ovr && ovr > 40) {
+      ratingsByAge[age] = ovr;
     }
+  }
+
+  // Also add current OVR for current age if not in seasons
+  if (!ratingsByAge[currentAge] && currentOvr > 40) {
+    ratingsByAge[currentAge] = currentOvr;
   }
 
   for (let age = 14; age <= maxAge; age++) {
     const actualRating = ratingsByAge[age];
     curve.push({
       age,
-      rating: actualRating || null, // null = no data yet
+      rating: actualRating || null,
       hasData: actualRating !== undefined && actualRating !== null,
     });
   }
