@@ -98,9 +98,9 @@ function generatePerformanceDMs(
     // Coach always reacts
     if (legend.id === 'your_coach') return true;
     // Agent reacts to very high or very low
-    if (legend.id === 'jorge_mendes') return matchRating >= 9 || matchRating <= 5;
+    if (legend.id === 'jorge_mendes') return matchRating >= 9 || matchRating <= 6;
     // Other legends react to extreme performances
-    return matchRating >= 9 || matchRating <= 5;
+    return matchRating >= 9 || matchRating <= 6;
   });
   
   for (const legend of reactingLegends) {
@@ -607,6 +607,10 @@ export const SocialMediaView: React.FC = () => {
   const [userFeedPost, setUserFeedPost] = useState<{ content: string; reactions: FanReaction[] } | null>(null);
   const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set());
 
+  // Notification tracking
+  const [newFeedCount, setNewFeedCount] = useState(0);
+  const [newDMCount, setNewDMCount] = useState(0);
+
   // Get HoF points from localStorage (same key as HallOfFameView)
   const hofPoints = useMemo(() => {
     try {
@@ -652,6 +656,33 @@ export const SocialMediaView: React.FC = () => {
   }, [hofPoints]);
 
   const unreadCount = allDMs.filter(d => !d.read).length;
+
+  // Track new notifications
+  useEffect(() => {
+    const lastVisit = parseInt(localStorage.getItem('social_last_visit') || '0');
+    const now = Date.now();
+    
+    // Count new unread DMs
+    const newDMs = allDMs.filter(d => !d.read).length;
+    setNewDMCount(newDMs);
+    
+    // Count new feed posts (posts with recent timestamps)
+    const recentPosts = posts.filter(p => {
+      const timeStr = p.timeAgo;
+      // Consider "Just now", "Xm", "Xh" as new
+      return timeStr.includes('Just now') || timeStr.includes('m') || timeStr.includes('h');
+    }).length;
+    setNewFeedCount(recentPosts > 0 ? recentPosts : 0);
+    
+    // Update last visit
+    localStorage.setItem('social_last_visit', now.toString());
+  }, [allDMs, posts]);
+
+  // Clear notifications when tab is viewed
+  const clearNotifications = (tab: 'feed' | 'dms') => {
+    if (tab === 'feed') setNewFeedCount(0);
+    if (tab === 'dms') setNewDMCount(0);
+  };
 
   // Get legend unlock statuses by tier
   const legendStatusesByTier = useMemo(() => {
@@ -704,8 +735,13 @@ export const SocialMediaView: React.FC = () => {
       </div>
 
       <div className="flex gap-2">
-        <button onClick={() => setActiveSubTab('feed')} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer ${activeSubTab === 'feed' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white'}`}>Feed</button>
-        <button onClick={() => setActiveSubTab('dms')} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${activeSubTab === 'dms' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white'}`}>
+        <button onClick={() => { setActiveSubTab('feed'); clearNotifications('feed'); }} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${activeSubTab === 'feed' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white'}`}>
+          Feed
+          {newFeedCount > 0 && activeSubTab !== 'feed' && (
+            <span className="px-1.5 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded-full">{newFeedCount}</span>
+          )}
+        </button>
+        <button onClick={() => { setActiveSubTab('dms'); clearNotifications('dms'); }} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${activeSubTab === 'dms' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white'}`}>
           DMs
           {unreadCount > 0 && <span className="px-1.5 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded-full">{unreadCount}</span>}
         </button>

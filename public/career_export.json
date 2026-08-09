@@ -4967,6 +4967,13 @@
   "wage": 9800,
   "market_value": 6000000,
   "latest_match_rating": 10,
+  "matches_played": 15,
+  "latest_match_date": "20230409",
+  "season_start_date": "20220820",
+  "season_end_date": "20230630",
+  "current_game_date": "20230410",
+  "season_is_active": true,
+  "days_until_season_end": 81,
   "trophies": [
     {
       "id": "t_motm",
@@ -5013,8 +5020,18 @@
   ],
   "news": [
     {
-      "id": "news_d1df3a8f_2026-08-09 19:40",
-      "timestamp": "2026-08-09 19:40",
+      "id": "news_077ba556_2026-08-09 19:56",
+      "timestamp": "2026-08-09 19:56",
+      "category": "form",
+      "icon": "📈",
+      "headline": "Ethan Ampadu finding his feet — form improving!",
+      "details": "Average rating climbing: 4.1 → 4.5. Quietly building momentum. 11G / 24A in 35 apps. The consistency is there.",
+      "priority": "medium",
+      "image": "form"
+    },
+    {
+      "id": "news_d1df3a8f_2026-08-09 19:56",
+      "timestamp": "2026-08-09 19:56",
       "category": "performance",
       "icon": "⭐",
       "headline": "Ethan Ampadu delivers MASTERCLASS performance! Rating: 10.0!",
@@ -5023,22 +5040,32 @@
       "image": "match_rating"
     },
     {
-      "id": "news_b1c234fc_2026-08-09 19:40",
-      "timestamp": "2026-08-09 19:40",
-      "category": "performance",
-      "icon": "🎨",
-      "headline": "Ethan Ampadu's creativity rivals Dennis Bergkamp!",
-      "details": "With 24 career assists, Ethan Ampadu is showing the vision and passing ability that made Dennis Bergkamp a legend. The Dutch maestro had 120 goals and countless assists in his Arsenal career. Ethan Ampadu is building a similar legacy of beautiful football!",
-      "priority": "medium",
-      "image": "legend_comparison"
-    },
-    {
-      "id": "news_6ba7a037_2026-08-09 19:40",
-      "timestamp": "2026-08-09 19:40",
+      "id": "news_6ba7a037_2026-08-09 19:56",
+      "timestamp": "2026-08-09 19:56",
       "category": "performance",
       "icon": "⚡",
       "headline": "Ethan Ampadu matching Thierry Henry's early trajectory!",
       "details": "With 11 career goals at age 18, Ethan Ampadu is on a similar path to Thierry Henry, who had 15 goals in his first full season at Monaco. The French legend went on to score 411 career goals. Keep this up and Ethan Ampadu could reach similar heights!",
+      "priority": "medium",
+      "image": "legend_comparison"
+    },
+    {
+      "id": "news_b1a1d031_2026-08-09 19:56",
+      "timestamp": "2026-08-09 19:56",
+      "category": "growth",
+      "icon": "📈",
+      "headline": "Ethan Ampadu improves to 70 OVR!",
+      "details": "Hard work paying off. Ethan Ampadu continues to develop as a player.",
+      "priority": "medium",
+      "image": "rating"
+    },
+    {
+      "id": "news_b1c234fc_2026-08-08 02:13",
+      "timestamp": "2026-08-08 02:13",
+      "category": "performance",
+      "icon": "🎨",
+      "headline": "Ethan Ampadu's creativity rivals Dennis Bergkamp!",
+      "details": "With 12 career assists, Ethan Ampadu is showing the vision and passing ability that made Dennis Bergkamp a legend. The Dutch maestro had 120 goals and countless assists in his Arsenal career. Ethan Ampadu is building a similar legacy of beautiful football!",
       "priority": "medium",
       "image": "legend_comparison"
     }
