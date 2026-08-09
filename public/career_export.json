@@ -4896,7 +4896,7 @@
       "apps": 35,
       "goals": 11,
       "assists": 24,
-      "avgRating": 4.48,
+      "avgRating": 8.0,
       "overall": 73,
       "yellowCards": 1,
       "redCards": 0,
@@ -4928,7 +4928,7 @@
           "apps": 35,
           "goals": 11,
           "assists": 24,
-          "avgRating": 4.48,
+          "avgRating": 8.0,
           "overall": 73,
           "yellowCards": 1,
           "redCards": 0,
@@ -5019,6 +5019,16 @@
     }
   ],
   "news": [
+    {
+      "id": "news_f1233be7_2026-08-09 20:02",
+      "timestamp": "2026-08-09 20:02",
+      "category": "form",
+      "icon": "🔥",
+      "headline": "Ethan Ampadu is on FIRE! Average rating surging!",
+      "details": "Average rating jumped from 4.5 to 8.0! Ethan Ampadu is hitting top form at the right time. With 11G / 24A, the numbers back it up. Is this the start of something special?",
+      "priority": "high",
+      "image": "form"
+    },
     {
       "id": "news_077ba556_2026-08-09 19:56",
       "timestamp": "2026-08-09 19:56",
