@@ -92,6 +92,10 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
   const [selectedSeasonIdx, setSelectedSeasonIdx] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const seasonIsActive = player.season_is_active ?? true;
+  const daysRemaining = player.days_until_season_end ?? 0;
+  const matchesPlayed = player.matches_played ?? 0;
+
   // Sort seasons newest first
   const seasons = useMemo(() => {
     return [...player.seasons].sort((a, b) => {
@@ -178,17 +182,33 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
-      <div className="bg-gradient-to-r from-zinc-900 via-amber-950/30 to-zinc-900 border border-amber-500/40 p-6 rounded-2xl">
+      <div className={`bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 border p-6 rounded-2xl ${seasonIsActive ? 'border-zinc-700' : 'border-amber-500/40'}`}>
         <div className="flex items-center gap-2">
-          <h2 className="text-2xl font-black text-white uppercase tracking-wider">
-            END OF SEASON AWARDS
-          </h2>
-          <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold rounded-full flex items-center gap-1">
-            <Award className="w-3.5 h-3.5" /> {seasons.length} SEASONS
-          </span>
+          {seasonIsActive ? (
+            <>
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider">
+                SEASON IN PROGRESS
+              </h2>
+              <span className="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold rounded-full flex items-center gap-1">
+                <Flame className="w-3.5 h-3.5" /> {daysRemaining} DAYS LEFT
+              </span>
+            </>
+          ) : (
+            <>
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider">
+                END OF SEASON AWARDS
+              </h2>
+              <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold rounded-full flex items-center gap-1">
+                <Award className="w-3.5 h-3.5" /> {seasons.length} SEASONS
+              </span>
+            </>
+          )}
         </div>
         <p className="text-zinc-400 text-xs mt-1">
-          Golden Boot • Player of the Season • Best XI • Young Player • Assist King
+          {seasonIsActive 
+            ? `${matchesPlayed} matches played • ${daysRemaining} days until season ends`
+            : 'Golden Boot • Player of the Season • Best XI • Young Player • Assist King'
+          }
         </p>
       </div>
 
@@ -272,15 +292,15 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
       {currentSeason && awards && (
         <div className="space-y-4">
           {/* In Progress Banner */}
-          {!awards.isCompleted && (
-            <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-2xl p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-cyan-400" />
+          {seasonIsActive && (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                <Flame className="w-5 h-5 text-emerald-400" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-cyan-400">SEASON IN PROGRESS</h4>
+                <h4 className="text-sm font-bold text-emerald-400">SEASON IN PROGRESS</h4>
                 <p className="text-xs text-zinc-400">
-                  {currentSeason.apps} of {FULL_SEASON_MATCHES} matches played ({Math.round((currentSeason.apps / FULL_SEASON_MATCHES) * 100)}% complete)
+                  {matchesPlayed} matches played • {daysRemaining} days remaining
                   • Awards are projected based on current form
                 </p>
               </div>
@@ -416,8 +436,8 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             </div>
           </div>
 
-          {/* Press Conference Section */}
-          {awards.isCompleted && wonAnyAward && (
+          {/* Press Conference Section - only show when season has ended */}
+          {!seasonIsActive && awards.isCompleted && wonAnyAward && (
             <div className="bg-gradient-to-r from-zinc-900 via-amber-950/20 to-zinc-900 border border-amber-500/30 rounded-2xl p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

@@ -245,4 +245,10 @@ export interface PlayerData {
   trophies: TrophyItem[];
   iconicMoments: IconicMoment[];
   isLoadedFromExportDB?: boolean;
+  // Season tracking
+  season_is_active?: boolean;
+  days_until_season_end?: number;
+  matches_played?: number;
+  latest_match_date?: string;
+  current_game_date?: string;
 }
