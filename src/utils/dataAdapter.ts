@@ -657,6 +657,11 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
     },
     evolutionHistory: [],
     seasons: (exportDataFinal as any).seasons || [],
+    season_is_active: (exportDataFinal as any).season_is_active ?? true,
+    days_until_season_end: (exportDataFinal as any).days_until_season_end ?? 0,
+    matches_played: (exportDataFinal as any).matches_played ?? 0,
+    latest_match_date: (exportDataFinal as any).latest_match_date ?? '',
+    current_game_date: (exportDataFinal as any).current_game_date ?? '',
     clubs: [
       {
         id: 'spezia',
