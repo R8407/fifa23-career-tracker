@@ -14,7 +14,7 @@ import { PlayerProfileView } from './components/PlayerProfileView';
 import { GrowthCurveView } from './components/GrowthCurveView';
 import { SeasonHistoryView } from './components/SeasonHistoryView';
 import { TeamsView } from './components/TeamsView';
-import { TacticalSheetView } from './components/TacticalSheetView';
+import { ClubView } from './components/ClubView';
 import { LeagueUniverseView } from './components/LeagueUniverseView';
 import { CompareView } from './components/CompareView';
 import { HeadToHeadView } from './components/HeadToHeadView';
@@ -372,7 +372,7 @@ export default function App() {
           )}
 
           {activeTab === 'tactical' && (
-            <TacticalSheetView player={player} />
+            <ClubView player={player} />
           )}
 
           {activeTab === 'league' && (
