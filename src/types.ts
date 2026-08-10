@@ -50,6 +50,25 @@ export interface AttributeHistoryPoint {
   physical: number;
 }
 
+export type CompetitionType = 'League' | 'DomesticCup' | 'ContinentalCup' | 'International' | 'Friendly';
+
+export interface CompetitionStat {
+  compobjid: number;
+  competition: string;
+  teamid: number;
+  apps: number;
+  goals: number;
+  assists: number;
+  avgRating: number;
+  yellow: number;
+  red: number;
+  motm: number;
+  clean_sheets: number;
+  goals_conceded: number;
+  saves: number;
+  type?: CompetitionType;
+}
+
 export interface SeasonData {
   id: string;
   season: string; // e.g., "2028/29"
@@ -70,6 +89,8 @@ export interface SeasonData {
   xA: number;
   keyPassesPerGame: number;
   dribblesPerGame: number;
+  competitionStats?: CompetitionStat[];
+  motm?: number;
 }
 
 export interface ClubHistory {
@@ -210,7 +231,7 @@ export interface TrophyItem {
   yearsWon: string[];
   description: string;
   tier: 'Gold' | 'Platinum' | 'Diamond';
-  iconType: 'champions' | 'ballondor' | 'league' | 'cup' | 'goldenboot' | 'national' | 'worldcup' | 'manofmatch';
+  iconType: 'champions' | 'ballondor' | 'league' | 'cup' | 'goldenboot' | 'national' | 'worldcup' | 'manofmatch' | 'assistking';
   imagePath?: string;
 }
 

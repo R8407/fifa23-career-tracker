@@ -14,7 +14,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
   const totalGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
   const totalApps = player.seasons.reduce((acc, s) => acc + s.apps, 0);
-  const totalTrophies = player.trophies.filter(t => t.iconType !== 'manofmatch').reduce((acc, t) => acc + t.quantity, 0);
+  const totalTrophies = player.trophies.filter(t => t.iconType !== 'manofmatch' && t.iconType !== 'assistking').reduce((acc, t) => acc + t.quantity, 0);
 
   // Iconic Moments Carousel state
   const moments = player.iconicMoments && player.iconicMoments.length > 0
@@ -59,79 +59,75 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Hero Player Card Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-900 to-black border border-amber-500/30 rounded-3xl p-6 shadow-2xl">
-        {/* Glow backdrop decorative elements */}
-        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-1/3 -mb-16 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+      <div className="relative overflow-hidden bg-[#1e293b] border border-slate-700 rounded-xl p-6">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Left: FIFA Style Player Card Badge */}
           <div className="lg:col-span-4 flex justify-center">
-            <div className="relative w-64 sm:w-72 bg-gradient-to-b from-amber-400 via-yellow-500 to-amber-700 p-1 rounded-3xl shadow-2xl shadow-amber-500/10 transform hover:scale-105 transition-transform duration-300">
-              <div className="bg-zinc-950 rounded-[22px] p-5 text-center relative overflow-hidden border border-amber-400/30">
+            <div className="relative w-64 sm:w-72 bg-gradient-to-b from-emerald-500 via-emerald-600 to-emerald-700 p-1 rounded-xl">
+              <div className="bg-[#0f172a] rounded-[10px] p-5 text-center relative overflow-hidden">
                 {/* FIFA Card Header */}
                 <div className="flex items-start justify-between">
                   <div className="text-left">
-                    <div className="text-4xl font-black text-amber-400 tracking-tight leading-none font-mono">
+                    <div className="text-4xl font-black text-white tracking-tight leading-none font-mono">
                       {player.overall}
                     </div>
-                    <div className="text-sm font-extrabold text-zinc-300 tracking-wider uppercase mt-0.5">
+                    <div className="text-sm font-bold text-slate-300 uppercase mt-0.5">
                       {player.position}
                     </div>
-                    <div className="mt-2 text-[10px] font-bold text-amber-300/80 uppercase bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-                      POTENTIAL: {player.potential}
+                    <div className="mt-2 text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                      POT: {player.potential}
                     </div>
                   </div>
 
                   <div className="flex flex-col items-end gap-1.5">
                     <span className="text-2xl">{player.nationalityFlag}</span>
-                    <span className="text-xs font-bold text-zinc-400 bg-zinc-800 px-2 py-1 rounded">{player.currentClub}</span>
+                    <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-1 rounded">{player.currentClub}</span>
                   </div>
                 </div>
 
                 {/* Player Avatar */}
                 <div className="my-4 relative h-36 flex items-center justify-center">
-                  <div className="w-28 h-28 rounded-full bg-gradient-to-br from-amber-500/20 via-zinc-800 to-amber-900/40 border-2 border-amber-400/60 flex items-center justify-center shadow-inner relative">
+                  <div className="w-28 h-28 rounded-full bg-slate-800 border-2 border-slate-600 flex items-center justify-center relative">
                     <span className="text-5xl select-none">👑</span>
-                    <div className="absolute -bottom-2 bg-amber-500 text-zinc-950 font-black text-xs px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    <div className="absolute -bottom-2 bg-emerald-500 text-white font-bold text-xs px-2.5 py-0.5 rounded-full">
                       #{player.jerseyNumber}
                     </div>
                   </div>
                 </div>
 
                 {/* Player Name */}
-                <h2 className="text-2xl font-black text-zinc-100 uppercase tracking-wide font-sans">
+                <h2 className="text-2xl font-bold text-white">
                   {player.name}
                 </h2>
-                <p className="text-xs text-amber-400 font-semibold tracking-wider uppercase mb-3">
+                <p className="text-xs text-emerald-400 font-medium mb-3">
                   "{player.nickname}"
                 </p>
 
                 {/* Core Attributes Line */}
-                <div className="grid grid-cols-6 gap-1 pt-3 border-t border-zinc-800 text-[11px] font-mono">
+                <div className="grid grid-cols-6 gap-1 pt-3 border-t border-slate-700 text-xs font-mono">
                   <div>
-                    <div className="text-zinc-500 text-[9px]">PAC</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.pace}</div>
+                    <div className="text-slate-500 text-xs">PAC</div>
+                    <div className="font-medium text-white">{player.attributes.pace}</div>
                   </div>
                   <div>
-                    <div className="text-zinc-500 text-[9px]">SHO</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.shooting}</div>
+                    <div className="text-slate-500 text-xs">SHO</div>
+                    <div className="font-medium text-white">{player.attributes.shooting}</div>
                   </div>
                   <div>
-                    <div className="text-zinc-500 text-[9px]">PAS</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.passing}</div>
+                    <div className="text-slate-500 text-xs">PAS</div>
+                    <div className="font-medium text-white">{player.attributes.passing}</div>
                   </div>
                   <div>
-                    <div className="text-zinc-500 text-[9px]">DRI</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.dribbling}</div>
+                    <div className="text-slate-500 text-xs">DRI</div>
+                    <div className="font-medium text-white">{player.attributes.dribbling}</div>
                   </div>
                   <div>
-                    <div className="text-zinc-500 text-[9px]">DEF</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.defending}</div>
+                    <div className="text-slate-500 text-xs">DEF</div>
+                    <div className="font-medium text-white">{player.attributes.defending}</div>
                   </div>
                   <div>
-                    <div className="text-zinc-500 text-[9px]">PHY</div>
-                    <div className="font-bold text-zinc-100">{player.attributes.physical}</div>
+                    <div className="text-slate-500 text-xs">PHY</div>
+                    <div className="font-medium text-white">{player.attributes.physical}</div>
                   </div>
                 </div>
               </div>
@@ -141,55 +137,57 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
           {/* Right: Detailed Career Metadata & Contract */}
           <div className="lg:col-span-8 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold rounded-full uppercase tracking-wider flex items-center gap-1.5">
-                <Crown className="w-3.5 h-3.5" /> WORLD CLASS STAR
+              {parseInt(player.overall) >= 80 && (
+                <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-medium rounded flex items-center gap-1.5">
+                  <Crown className="w-3.5 h-3.5" /> WORLD CLASS
+                </span>
+              )}
+              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
+                Age: <strong className="text-white">{player.age}</strong>
               </span>
-              <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-semibold rounded-full flex items-center gap-1">
-                Age: <strong className="text-zinc-100">{player.age} yrs</strong>
+              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
+                Foot: <strong className="text-white">{player.preferredFoot}</strong>
               </span>
-              <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-semibold rounded-full flex items-center gap-1">
-                Foot: <strong className="text-zinc-100">{player.preferredFoot}</strong>
-              </span>
-              <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs font-semibold rounded-full flex items-center gap-1">
-                Debut: <strong className="text-zinc-100">{player.debutYear}</strong>
+              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
+                Debut: <strong className="text-white">{player.debutYear}</strong>
               </span>
             </div>
 
             <div>
-              <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 {player.name}
               </h1>
-              <p className="text-zinc-400 text-sm mt-1 max-w-xl">
-                Managing an elite, record-shattering career archive. From initial professional debut to world champion and Ballon d'Or glory with {player.currentClub}.
+              <p className="text-slate-400 text-sm mt-1 max-w-xl">
+                Managing an elite career archive. From initial professional debut to world champion and Ballon d'Or glory with {player.currentClub}.
               </p>
             </div>
 
             {/* Financial & Club Info */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              <div className="bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl">
-                <div className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Current Club</div>
-                <div className="text-sm font-bold text-zinc-100 mt-1">
+              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
+                <div className="text-slate-500 text-xs font-medium">Current Club</div>
+                <div className="text-sm font-medium text-white mt-1">
                   {player.currentClub}
                 </div>
               </div>
 
-              <div className="bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl">
-                <div className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Market Value</div>
-                <div className="text-sm font-bold text-emerald-400 mt-1">
+              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
+                <div className="text-slate-500 text-xs font-medium">Market Value</div>
+                <div className="text-sm font-medium text-emerald-400 mt-1">
                   {player.marketValue}
                 </div>
               </div>
 
-              <div className="bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl">
-                <div className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Contract Wage</div>
-                <div className="text-sm font-bold text-zinc-200 mt-1">
+              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
+                <div className="text-slate-500 text-xs font-medium">Contract Wage</div>
+                <div className="text-sm font-medium text-white mt-1">
                   {player.weeklySalary}
                 </div>
               </div>
 
-              <div className="bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl">
-                <div className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Height / Weight</div>
-                <div className="text-sm font-bold text-zinc-200 mt-1">
+              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
+                <div className="text-slate-500 text-xs font-medium">Height / Weight</div>
+                <div className="text-sm font-medium text-white mt-1">
                   {player.height} • {player.weight}
                 </div>
               </div>

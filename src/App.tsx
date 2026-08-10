@@ -15,9 +15,8 @@ import { GrowthCurveView } from './components/GrowthCurveView';
 import { SeasonHistoryView } from './components/SeasonHistoryView';
 import { TeamsView } from './components/TeamsView';
 import { ClubView } from './components/ClubView';
-import { LeagueUniverseView } from './components/LeagueUniverseView';
 import { CompareView } from './components/CompareView';
-import { HeadToHeadView } from './components/HeadToHeadView';
+import { TopPlayersView } from './components/TopPlayersView';
 import { NewsFeed } from './components/NewsFeed';
 import { SocialMediaView } from './components/SocialMediaView';
 import { HallOfFameView } from './components/HallOfFameView';
@@ -323,7 +322,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f17] text-zinc-100 flex flex-col font-sans selection:bg-amber-500 selection:text-zinc-950">
+    <div className="min-h-screen bg-[#111827] text-zinc-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white">
       {/* Header */}
       <Header
         player={player}
@@ -375,16 +374,12 @@ export default function App() {
             <ClubView player={player} />
           )}
 
-          {activeTab === 'league' && (
-            <LeagueUniverseView player={player} />
-          )}
-
           {activeTab === 'compare' && (
             <CompareView player={player} />
           )}
 
-          {activeTab === 'h2h' && (
-            <HeadToHeadView />
+          {activeTab === 'topplayers' && (
+            <TopPlayersView />
           )}
 
           {activeTab === 'halloffame' && (
@@ -423,22 +418,24 @@ export default function App() {
 
       {/* Milestone Notification Toast */}
       {notification && (
-        <div className="fixed bottom-6 right-6 z-50 bg-zinc-950 border-2 border-amber-400 rounded-2xl p-4 shadow-2xl max-w-sm animate-bounce">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#1e293b] border border-slate-700 rounded-lg p-4 shadow-xl max-w-sm animate-fadeIn">
           <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-amber-500/20 text-amber-400 rounded-xl">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
                 <Trophy className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs font-black text-amber-400 uppercase tracking-wider">
+                <h4 className="text-sm font-bold text-white">
                   {notification.title}
                 </h4>
-                <p className="text-xs text-zinc-200 mt-0.5 leading-tight">
+                <p className="text-xs text-zinc-400 mt-0.5 leading-tight">
                   {notification.subtitle}
                 </p>
-                <span className="text-[10px] text-emerald-400 font-mono font-bold mt-1 block">
-                  Legacy Score +{notification.bonusPoints}
-                </span>
+                {notification.bonusPoints > 0 && (
+                  <span className="text-xs text-emerald-400 font-medium mt-1 block">
+                    +{notification.bonusPoints} Legacy Points
+                  </span>
+                )}
               </div>
             </div>
 

@@ -29,11 +29,8 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
   });
   const [totalLegacyPoints, setTotalLegacyPoints] = useState<number>(() => {
     try {
-      const stored = parseInt(localStorage.getItem(LEGACY_POINTS_KEY) || '0', 10);
-      // For testing: force to 80
-      localStorage.setItem(LEGACY_POINTS_KEY, '80');
-      return 80;
-    } catch { return 80; }
+      return parseInt(localStorage.getItem(LEGACY_POINTS_KEY) || '0', 10);
+    } catch { return 0; }
   });
   // Track which broken records have had their points/news already claimed
   const [claimedRecords, setClaimedRecords] = useState<Record<string, boolean>>(() => {

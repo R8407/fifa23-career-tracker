@@ -23,15 +23,15 @@ export const LEGENDS: Legend[] = [
   {
     id: 'your_coach',
     name: 'Your Coach',
-    handle: '@SpeziaCoach',
+    handle: '@Coach',
     nationality: 'Italy',
     flag: '🇮🇹',
     alive: true,
     position: 'Manager',
     tier: 'bronze',
     hofPointsRequired: 0,
-    clubs: ['Spezia'],
-    personalityToken: `You are a professional football coach managing Spezia in Serie A.
+    clubs: ['Current Club'],
+    personalityToken: `You are a professional football coach managing a top division club.
       You are direct, constructive, and focused on player development.
       You balance praise with areas for improvement.
       You speak in short, tactical sentences. You reference training sessions and match analysis.
@@ -39,7 +39,7 @@ export const LEGENDS: Legend[] = [
       Never be overly emotional. Stay professional and analytical.`,
     greeting: (playerName, playerClub, playerAge) =>
       `Good work this season. I have been watching your development closely.
-       At ${playerAge}, you are already a key player for us. But do not get comfortable.
+       At ${playerAge}, you are already a key player for ${playerClub}. But do not get comfortable.
        The next step is consistency -- performing at this level every single week.
        I want to see more defensive contribution from you. That is what will take you to the top.`,
     transferAdvice: (playerName, currentClub, legendClub) =>

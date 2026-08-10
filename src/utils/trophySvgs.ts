@@ -325,6 +325,60 @@ export const TROPHY_SVGS: Record<string, string> = {
     </svg>
   `,
   
+  assistking: `
+    <svg viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="assistGold" x1="10" y1="15" x2="130" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFFACD"/>
+          <stop offset="20%" stop-color="#FFD700"/>
+          <stop offset="40%" stop-color="#FFC125"/>
+          <stop offset="60%" stop-color="#FFD700"/>
+          <stop offset="80%" stop-color="#DAA520"/>
+          <stop offset="100%" stop-color="#8B6914"/>
+        </linearGradient>
+        <filter id="assist3d" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+          <feOffset dx="3" dy="6" result="offsetBlur"/>
+          <feFlood flood-color="#000000" flood-opacity="0.35" result="color"/>
+          <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+          <feMerge>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      <!-- Ground shadow -->
+      <ellipse cx="70" cy="112" rx="45" ry="6" fill="#000" opacity="0.25"/>
+      
+      <!-- Boot body -->
+      <path d="M30 18 L65 18 L70 60 L125 68 L128 78 L128 88 L70 82 L65 100 L30 100 Z" 
+            fill="url(#assistGold)" stroke="#8B6914" stroke-width="2" filter="url(#assist3d)"/>
+      
+      <!-- Boot details - stitches -->
+      <path d="M38 30 L58 30" stroke="#FFFACD" stroke-width="2" opacity="0.5"/>
+      <path d="M38 42 L58 42" stroke="#FFFACD" stroke-width="2" opacity="0.5"/>
+      <path d="M38 54 L58 54" stroke="#FFFACD" stroke-width="2" opacity="0.5"/>
+      
+      <!-- Laces -->
+      <circle cx="48" cy="24" r="3" fill="#FFFACD" stroke="#DAA520" stroke-width="1"/>
+      <circle cx="48" cy="34" r="3" fill="#FFFACD" stroke="#DAA520" stroke-width="1"/>
+      
+      <!-- Sole -->
+      <path d="M30 100 L65 100 L68 108 L28 108 Z" fill="#8B6914" stroke="#6B4F12" stroke-width="1"/>
+      
+      <!-- Studs -->
+      <rect x="35" y="108" width="6" height="6" rx="1" fill="#6B4F12"/>
+      <rect x="50" y="108" width="6" height="6" rx="1" fill="#6B4F12"/>
+      
+      <!-- Shine -->
+      <path d="M42 25 L62 25 L67 58 L120 65 L120 72 L67 65 L62 80 L42 80 Z" fill="#FFFFFF" opacity="0.15"/>
+      
+      <!-- Edge highlight -->
+      <path d="M35 25 Q32 50 35 85" stroke="#FFFACD" stroke-width="1.5" fill="none" opacity="0.5"/>
+    </svg>
+  `,
+  
   worldcup: `
     <svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>

@@ -15,11 +15,39 @@ export const LeagueUniverseView: React.FC<LeagueUniverseViewProps> = ({ player }
   const { leagueScorers, leagueKeys } = useMemo(() => {
     const exportData = careerExportData as any;
     const topScorers = exportData.top_scorers_by_league || {};
+    const leagueStats = exportData.league_stats || {};
     
     const scorersByLeague: Record<string, any[]> = {};
     
+    // First, use live API data from league_stats (user's league only)
+    if (leagueStats.topScorers && leagueStats.topScorers.length > 0) {
+      // Determine which league this is from the competition name
+      const userLeague = leagueStats.competitions?.[0]?.name || '';
+      const mappedScorers = leagueStats.topScorers.map((s: any, idx: number) => ({
+        rank: idx + 1,
+        player: s.playerName || `Player ${s.playerid}`,
+        team: s.teamname || 'Unknown',
+        nationality: '',
+        flag: '⚽',
+        position: '',
+        value: s.goals || 0,
+        displayValue: `${s.goals} goals`,
+        isUserPlayer: s.playerid === parseInt(exportData.my_player_id),
+        isLiveData: true,
+      }));
+      
+      // Map to the correct league name
+      if (userLeague.includes('Serie A')) scorersByLeague['Serie A'] = mappedScorers;
+      else if (userLeague.includes('Premier')) scorersByLeague['Premier League'] = mappedScorers;
+      else if (userLeague.includes('La Liga')) scorersByLeague['La Liga'] = mappedScorers;
+      else if (userLeague.includes('Bundesliga')) scorersByLeague['Bundesliga'] = mappedScorers;
+      else if (userLeague.includes('Ligue')) scorersByLeague['Ligue 1'] = mappedScorers;
+    }
+    
+    // Then fill in other leagues from CSV data (stale but only option)
     for (const [leagueName, scorers] of Object.entries(topScorers)) {
       if (!TOP_5_LEAGUES.includes(leagueName)) continue;
+      if (scorersByLeague[leagueName]) continue; // Skip if we already have live data
       
       const mappedScorers = (scorers as any[]).map((s: any, idx: number) => ({
         rank: idx + 1,
@@ -31,6 +59,7 @@ export const LeagueUniverseView: React.FC<LeagueUniverseViewProps> = ({ player }
         value: parseInt(s.leaguegoals) || 0,
         displayValue: `${s.leaguegoals} goals`,
         isUserPlayer: s.playerid === exportData.my_player_id,
+        isLiveData: false,
       }));
       
       scorersByLeague[leagueName] = mappedScorers;
@@ -86,7 +115,12 @@ export const LeagueUniverseView: React.FC<LeagueUniverseViewProps> = ({ player }
           <h3 className="text-sm font-extrabold text-amber-400 uppercase tracking-wider flex items-center gap-2">
             <Flame className="w-4 h-4" /> TOP GOALSCORERS ({selectedLeague.toUpperCase()})
           </h3>
-          <span className="text-[10px] text-zinc-500 font-mono">GOLDEN BOOT RACE</span>
+          <div className="flex items-center gap-2">
+            {currentScorers.some((s: any) => s.isLiveData) && (
+              <span className="px-1.5 py-0.5 bg-green-500/20 text-green-400 text-[8px] font-bold rounded uppercase">Live</span>
+            )}
+            <span className="text-[10px] text-zinc-500 font-mono">GOLDEN BOOT RACE</span>
+          </div>
         </div>
 
         <div className="space-y-2">

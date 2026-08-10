@@ -7,6 +7,7 @@ import motmImg from '../../models/MOTM.webp';
 import ballondorSvg from '../../models/ballon-dor.svg';
 import eplImg from '../../models/EPL.webp';
 import uclImg from '../../models/UCL.webp';
+import goldenbootImg from '../assets/images/golden_boot_trophy_1786062523925.jpg';
 
 interface TrophyRoomViewProps {
   player: PlayerData;
@@ -21,7 +22,8 @@ const TROPHY_ASSETS: Record<string, TrophyAsset> = {
   ballondor: { kind: 'svg', src: ballondorSvg },
   league: { kind: 'img', src: eplImg, blend: 'multiply' },
   champions: { kind: 'img', src: uclImg, blend: 'screen' },
-  goldenboot: { kind: 'svg', src: ballondorSvg },
+  goldenboot: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
+  assistking: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
   worldcup: { kind: 'img', src: eplImg, blend: 'multiply' },
   national: { kind: 'img', src: eplImg, blend: 'multiply' },
   cup: { kind: 'img', src: eplImg, blend: 'multiply' },
@@ -180,14 +182,12 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
   const wonTrophies = player.trophies.filter(t => t.quantity > 0);
 
   const teamTrophies = wonTrophies.filter(t => t.category === 'Club' || t.category === 'International');
-  const individualTrophies = wonTrophies.filter(t => t.category === 'Individual' && t.iconType !== 'manofmatch');
-  const matchAwards = wonTrophies.filter(t => t.iconType === 'manofmatch');
-  const hasAny = teamTrophies.length > 0 || individualTrophies.length > 0 || matchAwards.length > 0;
+  const individualTrophies = wonTrophies.filter(t => t.category === 'Individual');
+  const hasAny = teamTrophies.length > 0 || individualTrophies.length > 0;
 
   const teamCount = teamTrophies.reduce((a, t) => a + t.quantity, 0);
   const individualCount = individualTrophies.reduce((a, t) => a + t.quantity, 0);
-  const matchCount = matchAwards.reduce((a, t) => a + t.quantity, 0);
-  const totalTrophyCount = teamCount + individualCount + matchCount;
+  const totalTrophyCount = teamCount + individualCount;
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -224,13 +224,6 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
               <div>
                 <div className="text-[9px] text-zinc-500 font-bold uppercase">Individual</div>
                 <div className="text-lg font-black text-purple-300">{individualCount}</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 bg-zinc-950 border border-blue-500/40 px-4 py-2 rounded-xl">
-              <Star className="w-4 h-4 text-blue-400" />
-              <div>
-                <div className="text-[9px] text-zinc-500 font-bold uppercase">MOTM</div>
-                <div className="text-lg font-black text-blue-300">{matchCount}</div>
               </div>
             </div>
           </div>
@@ -270,16 +263,6 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
           title="Individual Awards"
           icon={<Award className="w-4 h-4 text-purple-400" />}
           trophies={individualTrophies}
-          onSelect={handleSelectTrophy}
-        />
-      )}
-
-      {/* Match Awards Shelf */}
-      {matchAwards.length > 0 && (
-        <TrophyShelf
-          title="Man of the Match Awards"
-          icon={<Star className="w-4 h-4 text-blue-400" />}
-          trophies={matchAwards}
           onSelect={handleSelectTrophy}
         />
       )}

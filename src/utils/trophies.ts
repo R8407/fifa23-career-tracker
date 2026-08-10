@@ -10,6 +10,7 @@ export const TROPHY_IMAGES: Record<string, string> = {
   ballondor: ballonDorImg,
   champions: uclImg,
   goldenboot: goldenBootImg,
+  assistking: goldenBootImg,
   worldcup: worldCupImg,
   manofmatch: motmImg,
   league: leagueImg,

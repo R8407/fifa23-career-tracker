@@ -396,9 +396,9 @@ export const CompareView: React.FC<CompareViewProps> = ({ player }) => {
 
           {/* Ballon d'Or */}
           <div className="bg-zinc-900/80 p-3.5 rounded-xl border border-zinc-800 flex items-center justify-between">
-            <span className="font-extrabold text-amber-400 text-sm w-28">{userBallonDor} Winner</span>
+            <span className="font-extrabold text-amber-400 text-sm w-28">{userBallonDor} {userBallonDor === 1 ? 'Winner' : 'Winners'}</span>
             <span className="text-zinc-300 uppercase font-sans font-bold text-xs text-center">Ballon d'Or Titles</span>
-            <span className="font-extrabold text-blue-400 text-sm w-28 text-right">{selectedLegend.ballondOr} Winner</span>
+            <span className="font-extrabold text-blue-400 text-sm w-28 text-right">{selectedLegend.ballondOr} {selectedLegend.ballondOr === 1 ? 'Winner' : 'Winners'}</span>
           </div>
 
           {/* World Cup */}

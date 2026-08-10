@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlayerData, SeasonData } from '../types';
+import { PlayerData, SeasonData, CompetitionStat } from '../types';
 import { Trophy, Award, Flame, Zap, Activity, Calendar, ChevronRight, X, Star } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import { getLeagueLogo } from '../utils/logos';
@@ -198,6 +198,46 @@ export const SeasonHistoryView: React.FC<SeasonHistoryViewProps> = ({ player }) 
                 </div>
               </div>
             </div>
+
+            {/* Competition Breakdown */}
+            {selectedSeason.competitionStats && selectedSeason.competitionStats.length > 0 && (
+              <div className="bg-zinc-900/60 p-4 rounded-xl border border-zinc-800 space-y-3">
+                <div className="text-xs font-bold text-zinc-300 uppercase tracking-wider">Competition Breakdown</div>
+                <div className="space-y-2">
+                  {selectedSeason.competitionStats.map((comp, idx) => (
+                    <div key={idx} className="flex items-center justify-between bg-zinc-950/50 p-3 rounded-lg border border-zinc-800/50">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center text-[10px] font-bold text-zinc-400">
+                          {comp.competition.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-white">{comp.competition}</div>
+                          <div className="text-[10px] text-zinc-500">{comp.apps} apps • {comp.motm || 0} MOTM</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 font-mono text-xs">
+                        <div className="text-center">
+                          <div className="text-[9px] text-zinc-500 uppercase">Goals</div>
+                          <div className="font-bold text-amber-400">{comp.goals}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-[9px] text-zinc-500 uppercase">Assists</div>
+                          <div className="font-bold text-blue-400">{comp.assists}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-[9px] text-zinc-500 uppercase">Rating</div>
+                          <div className="font-bold text-emerald-400">{comp.avgRating?.toFixed(1) || '-'}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-[9px] text-zinc-500 uppercase">Cards</div>
+                          <div className="font-bold text-zinc-300">{comp.yellow}🟡 {comp.red}🔴</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Highlights */}
             <div className="bg-zinc-900/60 p-4 rounded-xl border border-zinc-800">

@@ -1,4 +1,5 @@
 import llmContextData from '../data/llm_context.json';
+import careerExportData from '../data/career_export.json';
 
 export interface PlayerContextEntry {
   name: string;
@@ -8,6 +9,28 @@ export interface PlayerContextEntry {
   goals: number;
   assists: number;
   appearances: number;
+}
+
+export interface LeaguePlayerStat {
+  rank: number;
+  playerid: number;
+  teamid: number;
+  teamname: string;
+  playerName: string;
+  apps: number;
+  goals: number;
+  assists: number;
+  motm: number;
+}
+
+export interface LeagueStanding {
+  position: number;
+  teamid: number;
+  teamname: string;
+  apps: number;
+  goals: number;
+  goalDifference: number;
+  points: number;
 }
 
 export interface PlayerContext {
@@ -25,10 +48,17 @@ export interface PlayerContext {
   };
   elitePlayers: PlayerContextEntry[];
   topScorers: Record<string, PlayerContextEntry[]>;
+  leagueStats: {
+    topScorers: LeaguePlayerStat[];
+    topAssists: LeaguePlayerStat[];
+    standings: LeagueStanding[];
+  };
 }
 
 export function buildPlayerContext(): PlayerContext {
   const data = llmContextData as any;
+  const careerData = careerExportData as any;
+  const leagueStats = careerData?.league_stats || {};
 
   return {
     userPlayer: data.user_player || {
@@ -53,6 +83,11 @@ export function buildPlayerContext(): PlayerContext {
       appearances: p.appearances || 0,
     })),
     topScorers: data.top_scorers || {},
+    leagueStats: {
+      topScorers: leagueStats.topScorers || [],
+      topAssists: leagueStats.topAssists || [],
+      standings: leagueStats.competitions?.[0]?.teams || [],
+    },
   };
 }
 
@@ -65,18 +100,40 @@ export function formatPlayerContextForLLM(context: PlayerContext): string {
   lines.push(`Season: ${context.userPlayer.goals} goals, ${context.userPlayer.assists} assists in ${context.userPlayer.appearances} apps`);
   lines.push('');
 
-  lines.push('## TOP PLAYERS (86+ rated)');
-  context.elitePlayers.slice(0, 15).forEach(p => {
-    lines.push(`- ${p.name} (${p.position}, ${p.overall} OVR, ${p.team}) - ${p.goals}G ${p.assists}A`);
-  });
-  lines.push('');
-
-  lines.push('## TOP SCORERS BY LEAGUE');
-  Object.entries(context.topScorers).forEach(([league, players]) => {
-    lines.push(`### ${league}`);
-    players.slice(0, 3).forEach(p => {
-      lines.push(`- ${p.name} (${p.overall} OVR, ${p.team}) - ${p.goals} goals`);
+  // Real league standings
+  if (context.leagueStats.standings.length > 0) {
+    lines.push('## CURRENT LEAGUE STANDINGS (Top 10)');
+    context.leagueStats.standings.slice(0, 10).forEach(t => {
+      const userMarker = t.teamname === context.userPlayer.team ? ' (YOUR TEAM)' : '';
+      lines.push(`${t.position}. ${t.teamname}${userMarker} - ${t.points}pts, GD:${t.goalDifference > 0 ? '+' : ''}${t.goalDifference}`);
     });
+    lines.push('');
+  }
+
+  // Real top scorers
+  if (context.leagueStats.topScorers.length > 0) {
+    lines.push('## GOLDEN BOOT RACE (Top 5)');
+    context.leagueStats.topScorers.slice(0, 5).forEach(p => {
+      const userMarker = p.playerName === context.userPlayer.name ? ' (YOU)' : '';
+      lines.push(`${p.rank}. ${p.playerName}${userMarker} (${p.teamname}) - ${p.goals} goals in ${p.apps} apps`);
+    });
+    lines.push('');
+  }
+
+  // Real top assists
+  if (context.leagueStats.topAssists.length > 0) {
+    lines.push('## ASSIST LEADERS (Top 5)');
+    context.leagueStats.topAssists.slice(0, 5).forEach(p => {
+      const userMarker = p.playerName === context.userPlayer.name ? ' (YOU)' : '';
+      lines.push(`${p.rank}. ${p.playerName}${userMarker} (${p.teamname}) - ${p.assists} assists`);
+    });
+    lines.push('');
+  }
+
+  // Fallback: static elite players
+  lines.push('## OTHER TOP PLAYERS');
+  context.elitePlayers.slice(0, 5).forEach(p => {
+    lines.push(`- ${p.name} (${p.position}, ${p.overall} OVR, ${p.team}) - ${p.goals}G ${p.assists}A`);
   });
 
   return lines.join('\n');

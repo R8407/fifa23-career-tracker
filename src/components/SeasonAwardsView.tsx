@@ -399,7 +399,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
               rank={awards.assistKing.rank}
               total={seasons.length}
               detail={`${awards.assistKing.assists} assists`}
-              subtext={awards.assistKing.won ? 'Assist King!' : '10+ assists to compete'}
+              subtext={awards.assistKing.won ? 'Assist King!' : '10+ assists & top 3 to win'}
               color="blue"
               isCompleted={awards.isCompleted}
             />
@@ -611,7 +611,7 @@ const AwardCard: React.FC<{
 
       {won ? (
         <div>
-          <div className={`text-2xl font-black ${c.text} mb-1`}>{isCompleted ? 'WINNER' : 'ON TRACK'}</div>
+          <div className={`text-2xl font-black ${c.text} mb-1`}>WINNER</div>
           <div className="text-[10px] text-zinc-300 font-mono">{detail}</div>
           <div className={`text-[10px] ${c.text} font-bold mt-1`}>{subtext}</div>
         </div>

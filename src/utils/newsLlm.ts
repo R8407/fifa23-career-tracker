@@ -41,9 +41,6 @@ const PUNDITS = [
 const FAN_PERSONAS = [
   { name: 'Marco T.', handle: '@MarcoT_Football', flag: '\u{1F1EE}\u{E0067}' },
   { name: 'Liam O\'Brien', handle: '@LiamOB_analyst', flag: '\u{1F1EE}\u{E0067}' },
-  { name: 'Carlos Mendoza', handle: '@CarlosM_Tactics', flag: '\u{1F1EA}\u{E0067}' },
-  { name: 'Jean-Pierre D.', handle: '@JPD_Football', flag: '\u{1F1EB}\u{E0067}' },
-  { name: 'Tommy Wright', handle: '@TommyW_Underdogs', flag: '\u{1F3F4}\u{E0067}\u{E0073}\u{E0063}\u{E007F}' },
 ];
 
 const GRADIENTS: Record<string, string> = {
@@ -179,7 +176,11 @@ export async function generateLLMFanComments(headline: string, details: string):
   const context = llmContextData as any;
   const user = context.user_player || {};
 
-  const prompt = `You are generating 5 fan comments reacting to a football news headline. Be authentic, varied, and reference real stats.
+  // Detect if news is negative or positive
+  const negativeKeywords = ['drop', 'concern', 'fail', 'loss', 'injury', 'crisis', 'worst', 'decline', 'struggle', 'poor', 'bad'];
+  const isNegative = negativeKeywords.some(kw => headline.toLowerCase().includes(kw) || details.toLowerCase().includes(kw));
+
+  const prompt = `You are generating 2 fan comments reacting to a football news headline. Be authentic, varied, and reference real stats.
 
 PLAYER: ${user.name || 'Unknown'} | ${user.team || 'Unknown'} | ${user.position || 'Unknown'} | ${user.overall || 65} OVR
 STATS: ${user.goals ?? 0} goals, ${user.assists ?? 0} assists in ${user.appearances ?? 0} apps
@@ -187,13 +188,14 @@ STATS: ${user.goals ?? 0} goals, ${user.assists ?? 0} assists in ${user.appearan
 NEWS: "${headline}"
 DETAILS: "${details}"
 
-Generate 5 fan comments. Mix hype, analysis, humor, and emotion. Under 20 words each. Reference real stats when possible.
+${isNegative 
+  ? 'This is NEGATIVE news. Generate 2 comments: 1 negative/critical fan and 1 encouraging/defensive fan defending the player. Mix criticism with support.'
+  : 'This is POSITIVE news. Generate 2 comments: 1 hyped/excited fan and 1 analytical fan providing context. Be celebratory.'}
+
+Under 20 words each. Reference real stats when possible.
 
 Return ONLY a JSON array:
 [
-  { "text": "comment under 20 words" },
-  { "text": "comment under 20 words" },
-  { "text": "comment under 20 words" },
   { "text": "comment under 20 words" },
   { "text": "comment under 20 words" }
 ]
@@ -253,8 +255,5 @@ export function getStaticFanComments(): FanComment[] {
   return [
     { name: 'Marco T.', handle: '@MarcoT_Football', flag: '\u{1F1EE}\u{E0067}', text: 'This guy is the REAL DEAL!' },
     { name: 'Liam O\'Brien', handle: '@LiamOB_analyst', flag: '\u{1F1EE}\u{E0067}', text: 'Best young player in the world right now!' },
-    { name: 'Carlos Mendoza', handle: '@CarlosM_Tactics', flag: '\u{1F1EA}\u{E0067}', text: 'POV: You chose the right career mode save' },
-    { name: 'Jean-Pierre D.', handle: '@JPD_Football', flag: '\u{1F1EB}\u{E0067}', text: 'Future Ballon d\'Or winner right here' },
-    { name: 'Tommy Wright', handle: '@TommyW_Underdogs', flag: '\u{1F3F4}\u{E0067}\u{E0073}\u{E0063}\u{E007F}', text: 'This career mode save is a movie' },
   ];
 }
