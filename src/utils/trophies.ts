@@ -15,7 +15,8 @@ export const TROPHY_IMAGES: Record<string, string> = {
   manofmatch: motmImg,
   league: leagueImg,
   cup: cupImg,
-  national: worldCupImg
+  national: worldCupImg,
+  europaleague: uclImg
 };
 
 /**
@@ -25,7 +26,13 @@ export const TROPHY_IMAGES: Record<string, string> = {
  * - Assists: 0.75 pt each
  * - Ballon d'Ors: 120 pts each
  * - World Cups: 150 pts each
- * - Club Team Trophies: 30 pts each
+ * - Champions League: 80 pts each
+ * - Europa League: 40 pts each
+ * - League Titles: 50 pts each
+ * - Cup Trophies: 30 pts each
+ * - Golden Boot: 60 pts each
+ * - Assist King: 40 pts each
+ * - Man of the Match: 5 pts each
  * - Popular Opinion / Legacy Prestige Bonus
  */
 export function calculateLegendPoints(stats: {
@@ -33,14 +40,26 @@ export function calculateLegendPoints(stats: {
   assists: number;
   ballondOr: number;
   worldCup: number;
-  clubTrophies: number;
+  championsLeague: number;
+  europaLeague: number;
+  leagueTitles: number;
+  cupTrophies: number;
+  goldenBoot: number;
+  assistKing: number;
+  manOfTheMatch: number;
   popularOpinionBonus?: number;
 }): number {
   const g_a = stats.goals * 1.0 + stats.assists * 0.75;
   const bOr = stats.ballondOr * 120;
   const wc = stats.worldCup * 150;
-  const trophies = stats.clubTrophies * 30;
+  const ucl = stats.championsLeague * 80;
+  const uel = stats.europaLeague * 40;
+  const leagues = stats.leagueTitles * 50;
+  const cups = stats.cupTrophies * 30;
+  const boot = stats.goldenBoot * 60;
+  const assist = stats.assistKing * 40;
+  const motm = stats.manOfTheMatch * 5;
   const opinion = stats.popularOpinionBonus || 0;
 
-  return Math.round(g_a + bOr + wc + trophies + opinion);
+  return Math.round(g_a + bOr + wc + ucl + uel + leagues + cups + boot + assist + motm + opinion);
 }

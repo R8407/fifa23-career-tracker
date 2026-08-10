@@ -231,7 +231,13 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     assists: totalUserAssists,
     ballondOr: userBallonDor,
     worldCup: userWorldCup,
-    clubTrophies: userClubTrophies,
+    championsLeague: player.trophies.find(t => t.iconType === 'champions')?.quantity || 0,
+    europaLeague: player.trophies.find(t => t.iconType === 'europaleague')?.quantity || 0,
+    leagueTitles: player.trophies.filter(t => t.iconType === 'league').reduce((acc, t) => acc + t.quantity, 0),
+    cupTrophies: player.trophies.filter(t => t.iconType === 'cup').reduce((acc, t) => acc + t.quantity, 0),
+    goldenBoot: player.trophies.find(t => t.iconType === 'goldenboot')?.quantity || 0,
+    assistKing: player.trophies.find(t => t.iconType === 'assistking')?.quantity || 0,
+    manOfTheMatch: player.trophies.find(t => t.iconType === 'manofmatch')?.quantity || 0,
     popularOpinionBonus: 20
   });
 
@@ -258,7 +264,9 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     isUser: false,
     points: calculateLegendPoints({
       goals: leg.goals, assists: leg.assists, ballondOr: leg.ballondOr,
-      worldCup: leg.worldCup, clubTrophies: leg.clubTrophies, popularOpinionBonus: leg.popularOpinionBonus
+      worldCup: leg.worldCup, championsLeague: 0, europaLeague: 0,
+      leagueTitles: 0, cupTrophies: leg.clubTrophies, goldenBoot: 0,
+      assistKing: 0, manOfTheMatch: 0, popularOpinionBonus: leg.popularOpinionBonus
     })
   }));
 

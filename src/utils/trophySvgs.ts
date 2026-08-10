@@ -544,6 +544,76 @@ export const TROPHY_SVGS: Record<string, string> = {
       <ellipse cx="60" cy="112" rx="18" ry="4.5" fill="#C0C0C0"/>
     </svg>
   `,
+  
+  europaleague: `
+    <svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="uelSilver" x1="20" y1="0" x2="100" y2="160" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#F8F8F8"/>
+          <stop offset="15%" stop-color="#E0E0E0"/>
+          <stop offset="30%" stop-color="#C8C8C8"/>
+          <stop offset="50%" stop-color="#D8D8D8"/>
+          <stop offset="70%" stop-color="#B0B0B0"/>
+          <stop offset="85%" stop-color="#909090"/>
+          <stop offset="100%" stop-color="#707070"/>
+        </linearGradient>
+        <linearGradient id="uelShine" x1="35" y1="10" x2="55" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+          <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="uel3d" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+          <feOffset dx="4" dy="8" result="offsetBlur"/>
+          <feFlood flood-color="#000000" flood-opacity="0.4" result="color"/>
+          <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+          <feMerge>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      <!-- Ground shadow -->
+      <ellipse cx="60" cy="152" rx="32" ry="8" fill="#000" opacity="0.3"/>
+      
+      <!-- Left handle -->
+      <path d="M20 25 Q0 25 0 50 Q0 75 20 75 L26 75 L26 30 Q26 25 20 25" 
+            fill="url(#uelSilver)" stroke="#707070" stroke-width="1.5" filter="url(#uel3d)"/>
+      
+      <!-- Right handle -->
+      <path d="M100 25 Q120 25 120 50 Q120 75 100 75 L94 75 L94 30 Q94 25 100 25" 
+            fill="url(#uelSilver)" stroke="#707070" stroke-width="1.5" filter="url(#uel3d)"/>
+      
+      <!-- Main body - UEFA Cup distinctive shape -->
+      <path d="M26 22 L94 22 L88 100 Q60 115 32 100 Z" 
+            fill="url(#uelSilver)" stroke="#707070" stroke-width="2" filter="url(#uel3d)"/>
+      
+      <!-- Top rim -->
+      <ellipse cx="60" cy="22" rx="34" ry="6" fill="#E8E8E8" stroke="#B0B0B0" stroke-width="1"/>
+      <ellipse cx="60" cy="21" rx="30" ry="4" fill="#F0F0F0" opacity="0.5"/>
+      
+      <!-- Body detail lines - UEFA Cup pattern -->
+      <path d="M32 40 Q60 35 88 40" stroke="#B0B0B0" stroke-width="1" fill="none" opacity="0.4"/>
+      <path d="M34 55 Q60 50 86 55" stroke="#B0B0B0" stroke-width="1" fill="none" opacity="0.4"/>
+      <path d="M36 70 Q60 65 84 70" stroke="#B0B0B0" stroke-width="1" fill="none" opacity="0.4"/>
+      
+      <!-- Shine -->
+      <path d="M34 30 L86 30 L82 95 Q60 108 38 95 Z" fill="url(#uelShine)" opacity="0.3"/>
+      
+      <!-- Edge highlight -->
+      <path d="M30 30 Q26 60 34 90" stroke="#F0F0F0" stroke-width="2" fill="none" opacity="0.5"/>
+      
+      <!-- Base stem -->
+      <rect x="50" y="110" width="20" height="18" fill="#A0A0A0" stroke="#808080" stroke-width="1"/>
+      <rect x="52" y="112" width="16" height="14" fill="#C0C0C0"/>
+      
+      <!-- Base -->
+      <ellipse cx="60" cy="138" rx="28" ry="9" fill="#808080" stroke="#606060" stroke-width="1.5"/>
+      <ellipse cx="60" cy="135" rx="24" ry="7" fill="#A0A0A0"/>
+      <ellipse cx="60" cy="132" rx="20" ry="5" fill="#C0C0C0"/>
+    </svg>
+  `,
 };
 
 // Helper to get SVG as data URI
