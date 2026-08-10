@@ -138,8 +138,21 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
 
     // International/UCL records: not applicable yet
     if (rec.id.includes('ghana') || rec.id.includes('worldcup') || rec.id.includes('world_cup')) return { value: 0, isApplicable: false };
-    if (rec.id.includes('ucl') || rec.id.includes('champions_league')) return { value: 0, isApplicable: false };
     if (rec.id.includes('intl_') || rec.id.includes('international')) return { value: 0, isApplicable: false };
+    // UCL records: applicable if player has played in any European competition
+    if (rec.id.includes('ucl') || rec.id.includes('champions_league')) {
+      // Check if player has European competition stats
+      const hasEuropeanStats = Object.keys(leagueStats).some(league => 
+        league.includes('Champions League') || league.includes('Europa League') || league.includes('Conference League')
+      );
+      if (hasEuropeanStats) {
+        // Use career-wide stats for UCL records
+        if (rec.id.includes('alltime_goals')) return { value: totalUserGoals, isApplicable: true };
+        if (rec.id.includes('alltime_assists')) return { value: totalUserAssists, isApplicable: true };
+        return { value: 0, isApplicable: true };
+      }
+      return { value: 0, isApplicable: false };
+    }
 
     return { value: 0, isApplicable: false };
   };
