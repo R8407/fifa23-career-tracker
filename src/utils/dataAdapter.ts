@@ -1,6 +1,6 @@
 import careerExportData from '../data/career_export.json';
 import playerNamesData from '../data/player_names.json';
-import { PlayerData, Teammate, LeaguePlayerStat } from '../types';
+import { PlayerData, Teammate, LeaguePlayerStat, TrophyItem, SeasonData } from '../types';
 import { INITIAL_PLAYER, SQUAD_TEAMMATES, LEAGUE_UNIVERSE_DATA } from '../data/mockData';
 
 // Player name lookup from FIFA database
@@ -679,8 +679,12 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
         notableMoment: 'First professional season'
       }
     ],
-    // Use trophies from career export if available, otherwise empty
-    trophies: (exportDataFinal as any).trophies || [],
+    // Merge career export trophies with computed award trophies from seasons
+    trophies: mergeTrophiesWithAwards(
+      (exportDataFinal as any).trophies || [],
+      (exportDataFinal as any).seasons || [],
+      (exportDataFinal as any).days_until_season_end ?? 0
+    ),
     iconicMoments: [],
     isLoadedFromExportDB: true,
     isOnLoan: (exportDataFinal as any).isOnLoan || false,
@@ -688,6 +692,93 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
     isLoanToBuy: (exportDataFinal as any).isLoanToBuy || false,
     headassetid: (exportDataFinal as any).headassetid || (profile as any).headassetid || '',
   };
+}
+
+/**
+ * Merge career export trophies with computed awards from completed seasons.
+ * Awards: Golden Boot (20+ goals), Player of Season (8.0+ rating),
+ * Best XI (7.2+ rating), Young Player (age<=23 & 7.5+ rating), Assist King (10+ assists, top 3).
+ */
+function mergeTrophiesWithAwards(
+  baseTrophies: TrophyItem[],
+  seasons: SeasonData[],
+  currentDaysRemaining: number
+): TrophyItem[] {
+  const GOLDEN_BOOT_THRESHOLD = 20;
+  const POTY_RATING = 8.0;
+  const BEST_XI_RATING = 7.2;
+  const YOUNG_PLAYER_RATING = 7.5;
+  const ASSIST_KING_MIN = 10;
+  const ASSIST_KING_TOP = 3;
+
+  // Build mutable trophy map
+  const trophyMap = new Map<string, TrophyItem>();
+  for (const t of baseTrophies) {
+    trophyMap.set(t.iconType, { ...t });
+  }
+
+  // Helper to get or create trophy
+  function ensureTrophy(iconType: TrophyItem['iconType'], id: string, title: string, category: 'Club' | 'Individual' | 'International', description: string, tier: 'Gold' | 'Platinum' | 'Diamond' = 'Gold'): TrophyItem {
+    if (trophyMap.has(iconType)) return trophyMap.get(iconType)!;
+    const t: TrophyItem = { id, title, category, quantity: 0, yearsWon: [], description, tier, iconType };
+    trophyMap.set(iconType, t);
+    return t;
+  }
+
+  if (!seasons || seasons.length === 0) {
+    return Array.from(trophyMap.values());
+  }
+
+  // Sort seasons for ranking
+  const allSeasons = [...seasons].sort((a, b) => a.id.localeCompare(b.id));
+  const goalRanks = [...allSeasons].sort((a, b) => b.goals - a.goals);
+  const ratingRanks = [...allSeasons].sort((a, b) => b.avgRating - a.avgRating);
+  const assistRanks = [...allSeasons].sort((a, b) => b.assists - a.assists);
+
+  for (const season of allSeasons) {
+    // Past seasons are always complete; current season uses daysRemaining
+    const isLastSeason = season === allSeasons[allSeasons.length - 1];
+    const isCompleted = isLastSeason ? currentDaysRemaining <= 25 : true;
+    if (!isCompleted) continue;
+
+    // Golden Boot
+    if (season.goals >= GOLDEN_BOOT_THRESHOLD) {
+      const t = ensureTrophy('goldenboot', 't_goldenboot', 'Golden Boot', 'Individual', 'Scored 20+ league goals in a single season', 'Platinum');
+      t.quantity += 1;
+      t.yearsWon.push(season.season);
+    }
+
+    // Player of the Season
+    if (season.avgRating >= POTY_RATING) {
+      const t = ensureTrophy('playerofseason', 't_playerofseason', 'Player of the Season', 'Individual', 'Highest average rating in the squad', 'Diamond');
+      t.quantity += 1;
+      t.yearsWon.push(season.season);
+    }
+
+    // Best XI
+    if (season.avgRating >= BEST_XI_RATING) {
+      const t = ensureTrophy('bestxi', 't_bestxi', 'League Best XI', 'Individual', 'Inducted into the League Best XI', 'Gold');
+      t.quantity += 1;
+      t.yearsWon.push(season.season);
+    }
+
+    // Young Player
+    if (season.age <= 23 && season.avgRating >= YOUNG_PLAYER_RATING) {
+      const t = ensureTrophy('youngplayer', 't_youngplayer', 'Young Player of the Season', 'Individual', 'Best young player award (under 23)', 'Gold');
+      t.quantity += 1;
+      t.yearsWon.push(season.season);
+    }
+
+    // Assist King (top 3 assists, minimum 10)
+    const assistRank = assistRanks.findIndex(s => s.id === season.id) + 1;
+    if (season.assists >= ASSIST_KING_MIN && assistRank <= ASSIST_KING_TOP) {
+      const t = ensureTrophy('assistking', 't_assistking', 'Assist King', 'Individual', `Led the league with ${season.assists} assists`, 'Gold');
+      t.quantity += 1;
+      t.yearsWon.push(season.season);
+    }
+  }
+
+  return Array.from(trophyMap.values());
 }
 
 /**

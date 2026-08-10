@@ -664,6 +664,24 @@ export const TROPHY_SVGS: Record<string, string> = {
       <text x="60" y="80" text-anchor="middle" font-size="7" fill="#8B6914" font-family="sans-serif" font-weight="bold">TEAM OF THE SEASON</text>
     </svg>
   `,
+  playerofseason: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160">
+      <defs>
+        <linearGradient id="posGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="50%" stop-color="#DAA520"/>
+          <stop offset="100%" stop-color="#B8860B"/>
+        </linearGradient>
+        <filter id="pos3d"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.4"/></filter>
+      </defs>
+      <rect x="48" y="115" width="24" height="25" fill="url(#posGold)" stroke="#8B6914" stroke-width="1.5"/>
+      <circle cx="60" cy="65" r="40" fill="url(#posGold)" stroke="#8B6914" stroke-width="2" filter="url(#pos3d)"/>
+      <circle cx="60" cy="65" r="32" fill="none" stroke="#FFF8DC" stroke-width="1" opacity="0.5"/>
+      <text x="60" y="60" text-anchor="middle" font-size="8" font-weight="bold" fill="#8B6914" font-family="sans-serif">PLAYER OF</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" font-weight="bold" fill="#8B6914" font-family="sans-serif">THE SEASON</text>
+      <polygon points="60,28 63,37 72,37 65,43 67,52 60,47 53,52 55,43 48,37 57,37" fill="#FFF8DC" opacity="0.9"/>
+    </svg>
+  `,
 };
 
 // Helper to get SVG as data URI
