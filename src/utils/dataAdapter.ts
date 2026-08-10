@@ -669,20 +669,24 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
         league: 'Serie A TIM',
         logoBg: 'bg-zinc-800',
         logoText: 'S',
-        years: 'Current',
+        years: (exportDataFinal as any).isOnLoan ? `On Loan from ${(exportDataFinal as any).parentClub || 'Parent Club'}` : 'Current',
         apps: (exportDataFinal as any).total_appearances || parseInt(userSquadEntry?.leagueappearances || '0', 10),
         goals: (exportDataFinal as any).total_goals || parseInt(userSquadEntry?.leaguegoals || '0', 10),
         assists: (exportDataFinal as any).total_assists || parseInt((userSquadEntry as any)?.assists || '0', 10) || 0,
         avgRating: 0,
         trophiesWon: 0,
-        transferFee: 'Academy',
+        transferFee: (exportDataFinal as any).isOnLoan ? `Loan from ${(exportDataFinal as any).parentClub || 'Parent Club'}` : 'Permanent',
         notableMoment: 'First professional season'
       }
     ],
     // Use trophies from career export if available, otherwise empty
     trophies: (exportDataFinal as any).trophies || [],
     iconicMoments: [],
-    isLoadedFromExportDB: true
+    isLoadedFromExportDB: true,
+    isOnLoan: (exportDataFinal as any).isOnLoan || false,
+    parentClub: (exportDataFinal as any).parentClub || '',
+    isLoanToBuy: (exportDataFinal as any).isLoanToBuy || false,
+    headassetid: (exportDataFinal as any).headassetid || (profile as any).headassetid || '',
   };
 }
 

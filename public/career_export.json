@@ -6,7 +6,7 @@
     "firstname": "Ethan",
     "lastname": "Ampadu",
     "commonname": "",
-    "overallrating": "71",
+    "overallrating": "73",
     "potential": "81",
     "height": "173",
     "weight": "78",
@@ -14,21 +14,21 @@
     "birthdate": "155198",
     "preferredposition1": "23",
     "nationality": "45",
-    "finishing": "68",
-    "shotpower": "64",
-    "longshots": "67",
+    "finishing": "72",
+    "shotpower": "67",
+    "longshots": "71",
     "volleys": "36",
     "penalties": "22",
     "vision": "48",
     "crossing": "46",
-    "shortpassing": "79",
+    "shortpassing": "81",
     "longpassing": "69",
-    "curve": "68",
-    "agility": "76",
+    "curve": "70",
+    "agility": "78",
     "balance": "68",
     "reactions": "72",
-    "ballcontrol": "81",
-    "dribbling": "77",
+    "ballcontrol": "82",
+    "dribbling": "79",
     "composure": "52",
     "interceptions": "52",
     "headingaccuracy": "67",
@@ -40,7 +40,7 @@
     "jumping": "66",
     "aggression": "60",
     "acceleration": "77",
-    "sprintspeed": "66",
+    "sprintspeed": "68",
     "currentClub": "Spezia"
   },
   "my_squad": [
@@ -61,25 +61,6 @@
       "preferredfoot": "1",
       "birthdate": "151520",
       "preferredposition1": "0",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "CAM",
-      "jerseynumber": "77",
-      "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "239732",
-      "firstname": "Szymon",
-      "lastname": "Żurkowski",
-      "commonname": null,
-      "overallrating": "78",
-      "potential": "81",
-      "height": "185",
-      "weight": "77",
-      "preferredfoot": "1",
-      "birthdate": "151557",
-      "preferredposition1": "14",
       "isUserPlayer": false
     },
     {
@@ -141,25 +122,6 @@
     },
     {
       "squad_position": "ST",
-      "jerseynumber": "14",
-      "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "239964",
-      "firstname": "Eldor",
-      "lastname": "Shomurodov",
-      "commonname": null,
-      "overallrating": "75",
-      "potential": "75",
-      "height": "190",
-      "weight": "76",
-      "preferredfoot": "1",
-      "birthdate": "150738",
-      "preferredposition1": "25",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "CF",
       "jerseynumber": "9",
       "form": "3",
       "leaguegoals": "5",
@@ -197,23 +159,23 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CB",
-      "jerseynumber": "29",
+      "squad_position": "CM",
+      "jerseynumber": "46",
       "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "220477",
-      "firstname": "Mattia",
-      "lastname": "Caldara",
+      "leaguegoals": "15",
+      "leagueappearances": "41",
+      "playerid": "235735",
+      "firstname": "Ethan",
+      "lastname": "Ampadu",
       "commonname": null,
-      "overallrating": "74",
-      "potential": "74",
-      "height": "187",
-      "weight": "80",
+      "overallrating": "73",
+      "potential": "81",
+      "height": "173",
+      "weight": "78",
       "preferredfoot": "1",
-      "birthdate": "150318",
-      "preferredposition1": "5",
-      "isUserPlayer": false
+      "birthdate": "155198",
+      "preferredposition1": "23",
+      "isUserPlayer": true
     },
     {
       "squad_position": "RW",
@@ -273,7 +235,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CB",
+      "squad_position": "RW",
       "jerseynumber": "43",
       "form": "3",
       "leaguegoals": "0",
@@ -292,7 +254,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
+      "squad_position": "CAM",
       "jerseynumber": "15",
       "form": "3",
       "leaguegoals": "0",
@@ -311,60 +273,22 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CM",
-      "jerseynumber": "46",
-      "form": "3",
-      "leaguegoals": "13",
-      "leagueappearances": "37",
-      "playerid": "235735",
-      "firstname": "Ethan",
-      "lastname": "Ampadu",
-      "commonname": null,
-      "overallrating": "71",
-      "potential": "81",
-      "height": "173",
-      "weight": "78",
-      "preferredfoot": "1",
-      "birthdate": "155198",
-      "preferredposition1": "23",
-      "isUserPlayer": true
-    },
-    {
-      "squad_position": "CM",
-      "jerseynumber": "24",
+      "squad_position": "RW",
+      "jerseynumber": "4",
       "form": "3",
       "leaguegoals": "0",
       "leagueappearances": "0",
-      "playerid": "228698",
-      "firstname": "Viktor",
-      "lastname": "Kovalenko",
-      "commonname": null,
+      "playerid": "242629",
+      "firstname": "João Gervásio",
+      "lastname": "Bragança Moutinho",
+      "commonname": "João Moutinho",
       "overallrating": "71",
       "potential": "73",
       "height": "182",
-      "weight": "75",
-      "preferredfoot": "1",
-      "birthdate": "150968",
-      "preferredposition1": "14",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "CF",
-      "jerseynumber": "25",
-      "form": "3",
-      "leaguegoals": "0",
-      "leagueappearances": "0",
-      "playerid": "252290",
-      "firstname": "Salvatore",
-      "lastname": "Esposito",
-      "commonname": null,
-      "overallrating": "71",
-      "potential": "79",
-      "height": "178",
-      "weight": "70",
-      "preferredfoot": "1",
-      "birthdate": "152665",
-      "preferredposition1": "14",
+      "weight": "71",
+      "preferredfoot": "2",
+      "birthdate": "151666",
+      "preferredposition1": "7",
       "isUserPlayer": false
     },
     {
@@ -387,7 +311,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
+      "squad_position": "CM",
       "jerseynumber": "6",
       "form": "3",
       "leaguegoals": "0",
@@ -406,7 +330,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "2",
       "form": "3",
       "leaguegoals": "1",
@@ -425,7 +349,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "CF",
+      "squad_position": "CB",
       "jerseynumber": "55",
       "form": "3",
       "leaguegoals": "0",
@@ -444,7 +368,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "7",
       "form": "3",
       "leaguegoals": "0",
@@ -463,26 +387,7 @@
       "isUserPlayer": false
     },
     {
-      "squad_position": "RW",
-      "jerseynumber": "30",
-      "form": "3",
-      "leaguegoals": "1",
-      "leagueappearances": "0",
-      "playerid": "255611",
-      "firstname": "Daniel",
-      "lastname": "Maldini",
-      "commonname": null,
-      "overallrating": "68",
-      "potential": "78",
-      "height": "185",
-      "weight": "66",
-      "preferredfoot": "1",
-      "birthdate": "153034",
-      "preferredposition1": "18",
-      "isUserPlayer": false
-    },
-    {
-      "squad_position": "RW",
+      "squad_position": "CF",
       "jerseynumber": "21",
       "form": "3",
       "leaguegoals": "0",
@@ -491,13 +396,32 @@
       "firstname": "Salvador",
       "lastname": "Ferrer Canals",
       "commonname": "Salva Ferrer",
-      "overallrating": "68",
+      "overallrating": "69",
       "potential": "71",
       "height": "184",
       "weight": "73",
       "preferredfoot": "1",
       "birthdate": "151675",
       "preferredposition1": "2",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CB",
+      "jerseynumber": "5",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "239998",
+      "firstname": "Petko",
+      "lastname": "Hristov",
+      "commonname": null,
+      "overallrating": "69",
+      "potential": "75",
+      "height": "191",
+      "weight": "85",
+      "preferredfoot": "1",
+      "birthdate": "152079",
+      "preferredposition1": "5",
       "isUserPlayer": false
     },
     {
@@ -510,13 +434,51 @@
       "firstname": null,
       "lastname": null,
       "commonname": null,
-      "overallrating": "67",
+      "overallrating": "68",
       "potential": "74",
       "height": "186",
       "weight": "80",
       "preferredfoot": "2",
       "birthdate": "153051",
       "preferredposition1": "25",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "CF",
+      "jerseynumber": "18",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "264692",
+      "firstname": "David",
+      "lastname": "Strelec",
+      "commonname": null,
+      "overallrating": "67",
+      "potential": "70",
+      "height": "185",
+      "weight": "75",
+      "preferredfoot": "2",
+      "birthdate": "152844",
+      "preferredposition1": "25",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "17",
+      "form": "3",
+      "leaguegoals": "0",
+      "leagueappearances": "0",
+      "playerid": "257161",
+      "firstname": "Leandro",
+      "lastname": "Sanca",
+      "commonname": "Leandro Sanca",
+      "overallrating": "67",
+      "potential": "71",
+      "height": "184",
+      "weight": "76",
+      "preferredfoot": "1",
+      "birthdate": "152388",
+      "preferredposition1": "23",
       "isUserPlayer": false
     },
     {
@@ -535,6 +497,25 @@
       "weight": "74",
       "preferredfoot": "1",
       "birthdate": "153590",
+      "preferredposition1": "14",
+      "isUserPlayer": false
+    },
+    {
+      "squad_position": "RW",
+      "jerseynumber": "16",
+      "form": "3",
+      "leaguegoals": "1",
+      "leagueappearances": "0",
+      "playerid": "254084",
+      "firstname": "Emil",
+      "lastname": "Kornvig",
+      "commonname": null,
+      "overallrating": "65",
+      "potential": "72",
+      "height": "187",
+      "weight": "70",
+      "preferredfoot": "1",
+      "birthdate": "152503",
       "preferredposition1": "14",
       "isUserPlayer": false
     },
@@ -567,7 +548,7 @@
       "firstname": "Petar",
       "lastname": "Zovko",
       "commonname": null,
-      "overallrating": "60",
+      "overallrating": "61",
       "potential": "73",
       "height": "192",
       "weight": "80",
@@ -663,6 +644,34 @@
       "teamname": "Atlético de Madrid"
     },
     {
+      "playerid": "207865",
+      "firstname": "Marcos",
+      "lastname": "Aoás Corrêa",
+      "commonname": "Marquinhos",
+      "overallrating": "90",
+      "potential": "90",
+      "height": "183",
+      "weight": "75",
+      "preferredfoot": "1",
+      "birthdate": "150327",
+      "preferredposition1": "5",
+      "teamname": "Paris SG"
+    },
+    {
+      "playerid": "210257",
+      "firstname": "Ederson",
+      "lastname": "Santana de Moraes",
+      "commonname": "Ederson",
+      "overallrating": "90",
+      "potential": "91",
+      "height": "188",
+      "weight": "86",
+      "preferredfoot": "2",
+      "birthdate": "150057",
+      "preferredposition1": "0",
+      "teamname": "Manchester City"
+    },
+    {
       "playerid": "212622",
       "firstname": "Joshua",
       "lastname": "Kimmich",
@@ -717,20 +726,6 @@
       "birthdate": "147357",
       "preferredposition1": "0",
       "teamname": "FC Bayern München"
-    },
-    {
-      "playerid": "188545",
-      "firstname": "Robert",
-      "lastname": "Lewandowski",
-      "commonname": null,
-      "overallrating": "89",
-      "potential": "91",
-      "height": "185",
-      "weight": "81",
-      "preferredfoot": "1",
-      "birthdate": "148235",
-      "preferredposition1": "25",
-      "teamname": "FC Barcelona"
     },
     {
       "playerid": "190871",
@@ -803,20 +798,6 @@
       "teamname": "Liverpool"
     },
     {
-      "playerid": "207865",
-      "firstname": "Marcos",
-      "lastname": "Aoás Corrêa",
-      "commonname": "Marquinhos",
-      "overallrating": "89",
-      "potential": "90",
-      "height": "183",
-      "weight": "75",
-      "preferredfoot": "1",
-      "birthdate": "150327",
-      "preferredposition1": "5",
-      "teamname": "Paris SG"
-    },
-    {
       "playerid": "208722",
       "firstname": "Sadio",
       "lastname": "Mané",
@@ -845,20 +826,6 @@
       "teamname": "Liverpool"
     },
     {
-      "playerid": "210257",
-      "firstname": "Ederson",
-      "lastname": "Santana de Moraes",
-      "commonname": "Ederson",
-      "overallrating": "89",
-      "potential": "91",
-      "height": "188",
-      "weight": "86",
-      "preferredfoot": "2",
-      "birthdate": "150057",
-      "preferredposition1": "0",
-      "teamname": "Manchester City"
-    },
-    {
       "playerid": "228702",
       "firstname": "Frenkie",
       "lastname": "de Jong",
@@ -871,6 +838,20 @@
       "birthdate": "151421",
       "preferredposition1": "14",
       "teamname": "FC Barcelona"
+    },
+    {
+      "playerid": "231866",
+      "firstname": "Rodrigo",
+      "lastname": "Hernández Cascante",
+      "commonname": "Rodri",
+      "overallrating": "89",
+      "potential": "89",
+      "height": "191",
+      "weight": "82",
+      "preferredfoot": "1",
+      "birthdate": "151097",
+      "preferredposition1": "10",
+      "teamname": "Manchester City"
     },
     {
       "playerid": "239818",
@@ -887,20 +868,6 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "165153",
-      "firstname": "Karim",
-      "lastname": "Benzema",
-      "commonname": null,
-      "overallrating": "88",
-      "potential": "91",
-      "height": "185",
-      "weight": "81",
-      "preferredfoot": "1",
-      "birthdate": "147989",
-      "preferredposition1": "21",
-      "teamname": "Real Madrid"
-    },
-    {
       "playerid": "182521",
       "firstname": "Toni",
       "lastname": "Kroos",
@@ -913,6 +880,20 @@
       "birthdate": "148736",
       "preferredposition1": "14",
       "teamname": "Real Madrid"
+    },
+    {
+      "playerid": "188545",
+      "firstname": "Robert",
+      "lastname": "Lewandowski",
+      "commonname": null,
+      "overallrating": "88",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "148235",
+      "preferredposition1": "25",
+      "teamname": "FC Barcelona"
     },
     {
       "playerid": "200104",
@@ -1013,18 +994,18 @@
       "teamname": "Liverpool"
     },
     {
-      "playerid": "231866",
-      "firstname": "Rodrigo",
-      "lastname": "Hernández Cascante",
-      "commonname": "Rodri",
+      "playerid": "231478",
+      "firstname": "Lautaro",
+      "lastname": "Martínez",
+      "commonname": null,
       "overallrating": "88",
       "potential": "89",
-      "height": "191",
-      "weight": "82",
+      "height": "174",
+      "weight": "72",
       "preferredfoot": "1",
-      "birthdate": "151097",
-      "preferredposition1": "10",
-      "teamname": "Manchester City"
+      "birthdate": "151523",
+      "preferredposition1": "25",
+      "teamname": "FC Bayern München"
     },
     {
       "playerid": "232411",
@@ -1069,6 +1050,20 @@
       "teamname": "Al Nassr"
     },
     {
+      "playerid": "165153",
+      "firstname": "Karim",
+      "lastname": "Benzema",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "91",
+      "height": "185",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "147989",
+      "preferredposition1": "21",
+      "teamname": "Real Madrid"
+    },
+    {
       "playerid": "193041",
       "firstname": "Keylor",
       "lastname": "Navas",
@@ -1080,7 +1075,7 @@
       "preferredfoot": "1",
       "birthdate": "147620",
       "preferredposition1": "0",
-      "teamname": "Nott'm Forest"
+      "teamname": "Paris SG"
     },
     {
       "playerid": "193080",
@@ -1122,7 +1117,21 @@
       "preferredfoot": "1",
       "birthdate": "150340",
       "preferredposition1": "7",
-      "teamname": "FC Bayern München"
+      "teamname": "Manchester City"
+    },
+    {
+      "playerid": "212190",
+      "firstname": "Niklas",
+      "lastname": "Süle",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "87",
+      "height": "195",
+      "weight": "99",
+      "preferredfoot": "1",
+      "birthdate": "150804",
+      "preferredposition1": "5",
+      "teamname": "Borussia Dortmund"
     },
     {
       "playerid": "212218",
@@ -1181,20 +1190,6 @@
       "teamname": "Inter"
     },
     {
-      "playerid": "231478",
-      "firstname": "Lautaro",
-      "lastname": "Martínez",
-      "commonname": null,
-      "overallrating": "87",
-      "potential": "89",
-      "height": "174",
-      "weight": "72",
-      "preferredfoot": "1",
-      "birthdate": "151523",
-      "preferredposition1": "25",
-      "teamname": "FC Bayern München"
-    },
-    {
       "playerid": "232363",
       "firstname": "Milan",
       "lastname": "Škriniar",
@@ -1235,6 +1230,20 @@
       "birthdate": "151629",
       "preferredposition1": "0",
       "teamname": "Borussia Dortmund"
+    },
+    {
+      "playerid": "238074",
+      "firstname": "Reece",
+      "lastname": "James",
+      "commonname": null,
+      "overallrating": "87",
+      "potential": "88",
+      "height": "178",
+      "weight": "87",
+      "preferredfoot": "1",
+      "birthdate": "152361",
+      "preferredposition1": "2",
+      "teamname": "Chelsea"
     },
     {
       "playerid": "238794",
@@ -1363,20 +1372,6 @@
       "teamname": "Roma FC"
     },
     {
-      "playerid": "212190",
-      "firstname": "Niklas",
-      "lastname": "Süle",
-      "commonname": null,
-      "overallrating": "86",
-      "potential": "87",
-      "height": "195",
-      "weight": "99",
-      "preferredfoot": "1",
-      "birthdate": "150804",
-      "preferredposition1": "5",
-      "teamname": "Borussia Dortmund"
-    },
-    {
       "playerid": "212198",
       "firstname": "Bruno Miguel",
       "lastname": "Borges Fernandes",
@@ -1403,6 +1398,20 @@
       "birthdate": "151088",
       "preferredposition1": "12",
       "teamname": "FC Bayern München"
+    },
+    {
+      "playerid": "213648",
+      "firstname": "Pierre-Emile",
+      "lastname": "Højbjerg",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "86",
+      "height": "187",
+      "weight": "84",
+      "preferredfoot": "1",
+      "birthdate": "150775",
+      "preferredposition1": "10",
+      "teamname": "Spurs"
     },
     {
       "playerid": "216352",
@@ -1475,6 +1484,34 @@
       "teamname": "Manchester Utd"
     },
     {
+      "playerid": "232756",
+      "firstname": "Fikayo",
+      "lastname": "Tomori",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "90",
+      "height": "185",
+      "weight": "79",
+      "preferredfoot": "1",
+      "birthdate": "151642",
+      "preferredposition1": "5",
+      "teamname": "Milan"
+    },
+    {
+      "playerid": "234396",
+      "firstname": "Alphonso",
+      "lastname": "Davies",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "89",
+      "height": "185",
+      "weight": "77",
+      "preferredfoot": "2",
+      "birthdate": "152691",
+      "preferredposition1": "7",
+      "teamname": "FC Bayern München"
+    },
+    {
       "playerid": "234642",
       "firstname": "Édouard",
       "lastname": "Mendy",
@@ -1545,18 +1582,32 @@
       "teamname": "Manchester City"
     },
     {
-      "playerid": "238074",
-      "firstname": "Reece",
-      "lastname": "James",
+      "playerid": "241096",
+      "firstname": "Sandro",
+      "lastname": "Tonali",
       "commonname": null,
       "overallrating": "86",
-      "potential": "88",
-      "height": "178",
-      "weight": "87",
+      "potential": "90",
+      "height": "181",
+      "weight": "79",
       "preferredfoot": "1",
-      "birthdate": "152361",
-      "preferredposition1": "2",
-      "teamname": "Chelsea"
+      "birthdate": "152513",
+      "preferredposition1": "10",
+      "teamname": "Milan"
+    },
+    {
+      "playerid": "241721",
+      "firstname": "Rafael",
+      "lastname": "da Conceição Leão",
+      "commonname": "Rafael Leão",
+      "overallrating": "86",
+      "potential": "90",
+      "height": "188",
+      "weight": "81",
+      "preferredfoot": "1",
+      "birthdate": "152180",
+      "preferredposition1": "27",
+      "teamname": "Milan"
     },
     {
       "playerid": "241852",
@@ -1573,6 +1624,20 @@
       "teamname": "Leverkusen"
     },
     {
+      "playerid": "242444",
+      "firstname": "João",
+      "lastname": "Félix Sequeira",
+      "commonname": "João Félix",
+      "overallrating": "86",
+      "potential": "89",
+      "height": "181",
+      "weight": "72",
+      "preferredfoot": "1",
+      "birthdate": "152333",
+      "preferredposition1": "21",
+      "teamname": "Atlético de Madrid"
+    },
+    {
       "playerid": "246430",
       "firstname": "Dušan",
       "lastname": "Vlahović",
@@ -1585,6 +1650,20 @@
       "birthdate": "152412",
       "preferredposition1": "25",
       "teamname": "Juventus"
+    },
+    {
+      "playerid": "246669",
+      "firstname": "Bukayo",
+      "lastname": "Saka",
+      "commonname": null,
+      "overallrating": "86",
+      "potential": "90",
+      "height": "178",
+      "weight": "65",
+      "preferredfoot": "2",
+      "birthdate": "152998",
+      "preferredposition1": "12",
+      "teamname": "Arsenal"
     },
     {
       "playerid": "251854",
@@ -1616,13 +1695,351 @@
     }
   ],
   "top_scorers_by_league": {
+    "Ligue 1": [
+      {
+        "playerid": "231747",
+        "firstname": "Kylian",
+        "lastname": "Mbappé",
+        "commonname": null,
+        "overallrating": "93",
+        "potential": "95",
+        "height": "182",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "152008",
+        "preferredposition1": "26",
+        "teamname": "Paris SG",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "243630",
+        "firstname": "Jonathan",
+        "lastname": "David",
+        "commonname": null,
+        "overallrating": "81",
+        "potential": "85",
+        "height": "177",
+        "weight": "77",
+        "preferredfoot": "1",
+        "birthdate": "152398",
+        "preferredposition1": "24",
+        "teamname": "LOSC Lille",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "193301",
+        "firstname": "Alexandre",
+        "lastname": "Lacazette",
+        "commonname": null,
+        "overallrating": "82",
+        "potential": "82",
+        "height": "175",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "149245",
+        "preferredposition1": "25",
+        "teamname": "OL",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "190871",
+        "firstname": "Neymar",
+        "lastname": "da Silva Santos Jr.",
+        "commonname": "Neymar Jr",
+        "overallrating": "89",
+        "potential": "89",
+        "height": "175",
+        "weight": "68",
+        "preferredfoot": "1",
+        "birthdate": "149498",
+        "preferredposition1": "18",
+        "teamname": "Paris SG",
+        "leaguegoals": "12",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "222357",
+        "firstname": "Breel",
+        "lastname": "Embolo",
+        "commonname": null,
+        "overallrating": "79",
+        "potential": "81",
+        "height": "187",
+        "weight": "88",
+        "preferredfoot": "1",
+        "birthdate": "151334",
+        "preferredposition1": "24",
+        "teamname": "AS Monaco",
+        "leaguegoals": "10",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "254551",
+        "firstname": "Georges",
+        "lastname": "Mikautadze",
+        "commonname": null,
+        "overallrating": "73",
+        "potential": "81",
+        "height": "178",
+        "weight": "72",
+        "preferredfoot": "1",
+        "birthdate": "152689",
+        "preferredposition1": "25",
+        "teamname": "FC Metz",
+        "leaguegoals": "10",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "243580",
+        "firstname": "Loïs",
+        "lastname": "Openda",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "84",
+        "height": "175",
+        "weight": "78",
+        "preferredfoot": "1",
+        "birthdate": "152431",
+        "preferredposition1": "25",
+        "teamname": "RC Lens",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "236786",
+        "firstname": "Martin",
+        "lastname": "Terrier",
+        "commonname": null,
+        "overallrating": "83",
+        "potential": "84",
+        "height": "184",
+        "weight": "78",
+        "preferredfoot": "1",
+        "birthdate": "151352",
+        "preferredposition1": "28",
+        "teamname": "Stade Rennais FC",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "256731",
+        "firstname": "Jean-Philippe",
+        "lastname": "Krasso",
+        "commonname": null,
+        "overallrating": "69",
+        "potential": "73",
+        "height": "187",
+        "weight": "90",
+        "preferredfoot": "2",
+        "birthdate": "151487",
+        "preferredposition1": "28",
+        "teamname": "AS Saint-Étienne",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "261771",
+        "firstname": "Moïse",
+        "lastname": "Sahi",
+        "commonname": null,
+        "overallrating": "72",
+        "potential": "79",
+        "height": "175",
+        "weight": "68",
+        "preferredfoot": "2",
+        "birthdate": "153104",
+        "preferredposition1": "29",
+        "teamname": "Strasbourg",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "158023",
+        "firstname": "Lionel",
+        "lastname": "Messi",
+        "commonname": null,
+        "overallrating": "90",
+        "potential": "91",
+        "height": "169",
+        "weight": "67",
+        "preferredfoot": "2",
+        "birthdate": "147811",
+        "preferredposition1": "24",
+        "teamname": "Paris SG",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "205686",
+        "firstname": "Téji",
+        "lastname": "Savanier",
+        "commonname": null,
+        "overallrating": "81",
+        "potential": "81",
+        "height": "172",
+        "weight": "69",
+        "preferredfoot": "1",
+        "birthdate": "149453",
+        "preferredposition1": "18",
+        "teamname": "Montpellier",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "260407",
+        "firstname": "Elye",
+        "lastname": "Wahi",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "85",
+        "height": "184",
+        "weight": "74",
+        "preferredfoot": "1",
+        "birthdate": "153482",
+        "preferredposition1": "29",
+        "teamname": "RC Lens",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "176600",
+        "firstname": "Kévin",
+        "lastname": "Gameiro",
+        "commonname": null,
+        "overallrating": "74",
+        "potential": "77",
+        "height": "172",
+        "weight": "69",
+        "preferredfoot": "1",
+        "birthdate": "147765",
+        "preferredposition1": "24",
+        "teamname": "Strasbourg",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "184941",
+        "firstname": "Alexis",
+        "lastname": "Sánchez",
+        "commonname": null,
+        "overallrating": "78",
+        "potential": "80",
+        "height": "169",
+        "weight": "62",
+        "preferredfoot": "1",
+        "birthdate": "148355",
+        "preferredposition1": "25",
+        "teamname": "OM",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "231753",
+        "firstname": "Jérémy",
+        "lastname": "Livolant",
+        "commonname": null,
+        "overallrating": "70",
+        "potential": "72",
+        "height": "175",
+        "weight": "70",
+        "preferredfoot": "1",
+        "birthdate": "151663",
+        "preferredposition1": "16",
+        "teamname": "En Avant Guingamp",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "221714",
+        "firstname": "Alfredo",
+        "lastname": "Morelos",
+        "commonname": null,
+        "overallrating": "76",
+        "potential": "76",
+        "height": "177",
+        "weight": "79",
+        "preferredfoot": "1",
+        "birthdate": "151096",
+        "preferredposition1": "26",
+        "teamname": "Strasbourg",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "193983",
+        "firstname": "Andy",
+        "lastname": "Delort",
+        "commonname": null,
+        "overallrating": "80",
+        "potential": "80",
+        "height": "181",
+        "weight": "83",
+        "preferredfoot": "1",
+        "birthdate": "149379",
+        "preferredposition1": "28",
+        "teamname": "OGC Nice",
+        "leaguegoals": "6",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "209519",
+        "firstname": "Gaëtan",
+        "lastname": "Laborde",
+        "commonname": null,
+        "overallrating": "81",
+        "potential": "81",
+        "height": "181",
+        "weight": "78",
+        "preferredfoot": "2",
+        "birthdate": "150316",
+        "preferredposition1": "25",
+        "teamname": "OGC Nice",
+        "leaguegoals": "6",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "240753",
+        "firstname": "Amine",
+        "lastname": "Gouiri",
+        "commonname": null,
+        "overallrating": "81",
+        "potential": "86",
+        "height": "181",
+        "weight": "83",
+        "preferredfoot": "1",
+        "birthdate": "152431",
+        "preferredposition1": "26",
+        "teamname": "Stade Rennais FC",
+        "leaguegoals": "6",
+        "leagueappearances": "0"
+      }
+    ],
     "La Liga": [
+      {
+        "playerid": "261204",
+        "firstname": "Myrto",
+        "lastname": "Uzuni",
+        "commonname": null,
+        "overallrating": "75",
+        "potential": "75",
+        "height": "178",
+        "weight": "64",
+        "preferredfoot": "1",
+        "birthdate": "150709",
+        "preferredposition1": "16",
+        "teamname": "Granada CF",
+        "leaguegoals": "14",
+        "leagueappearances": "0"
+      },
       {
         "playerid": "188545",
         "firstname": "Robert",
         "lastname": "Lewandowski",
         "commonname": null,
-        "overallrating": "89",
+        "overallrating": "88",
         "potential": "91",
         "height": "185",
         "weight": "81",
@@ -1647,6 +2064,22 @@
         "preferredposition1": "25",
         "teamname": "RCD Espanyol",
         "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "253416",
+        "firstname": "Raúl",
+        "lastname": "García de Haro",
+        "commonname": "Raúl García",
+        "overallrating": "71",
+        "potential": "79",
+        "height": "192",
+        "weight": "70",
+        "preferredfoot": "1",
+        "birthdate": "152692",
+        "preferredposition1": "29",
+        "teamname": "Real Betis",
+        "leaguegoals": "10",
         "leagueappearances": "0"
       },
       {
@@ -1686,7 +2119,7 @@
         "firstname": "M'Bala",
         "lastname": "Nzola",
         "commonname": null,
-        "overallrating": "75",
+        "overallrating": "76",
         "potential": "77",
         "height": "185",
         "weight": "82",
@@ -1702,7 +2135,7 @@
         "firstname": "Karim",
         "lastname": "Benzema",
         "commonname": null,
-        "overallrating": "88",
+        "overallrating": "87",
         "potential": "91",
         "height": "185",
         "weight": "81",
@@ -1746,6 +2179,22 @@
         "leagueappearances": "0"
       },
       {
+        "playerid": "246242",
+        "firstname": "Boulaye",
+        "lastname": "Dia",
+        "commonname": null,
+        "overallrating": "80",
+        "potential": "82",
+        "height": "180",
+        "weight": "75",
+        "preferredfoot": "1",
+        "birthdate": "151244",
+        "preferredposition1": "29",
+        "teamname": "Villarreal CF",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
         "playerid": "195479",
         "firstname": "James",
         "lastname": "Tavernier",
@@ -1778,22 +2227,6 @@
         "leagueappearances": "0"
       },
       {
-        "playerid": "216549",
-        "firstname": "Alexander",
-        "lastname": "Sørloth",
-        "commonname": null,
-        "overallrating": "79",
-        "potential": "79",
-        "height": "194",
-        "weight": "90",
-        "preferredfoot": "2",
-        "birthdate": "150897",
-        "preferredposition1": "26",
-        "teamname": "Real Sociedad",
-        "leaguegoals": "8",
-        "leagueappearances": "0"
-      },
-      {
         "playerid": "213516",
         "firstname": "Ricardo Jorge",
         "lastname": "da Luz Horta",
@@ -1820,7 +2253,7 @@
         "weight": "77",
         "preferredfoot": "1",
         "birthdate": "150598",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "Real Betis",
         "leaguegoals": "7",
         "leagueappearances": "0"
@@ -1858,11 +2291,27 @@
         "leagueappearances": "0"
       },
       {
+        "playerid": "236393",
+        "firstname": "Marc",
+        "lastname": "Cardona Rovira",
+        "commonname": "Marc Cardona",
+        "overallrating": "72",
+        "potential": "72",
+        "height": "183",
+        "weight": "70",
+        "preferredfoot": "1",
+        "birthdate": "150747",
+        "preferredposition1": "25",
+        "teamname": "UD Las Palmas",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
         "playerid": "235973",
         "firstname": "Sebastian",
         "lastname": "Szymański",
         "commonname": null,
-        "overallrating": "79",
+        "overallrating": "80",
         "potential": "83",
         "height": "174",
         "weight": "60",
@@ -1878,7 +2327,7 @@
         "firstname": "Antoine",
         "lastname": "Griezmann",
         "commonname": null,
-        "overallrating": "85",
+        "overallrating": "84",
         "potential": "85",
         "height": "176",
         "weight": "73",
@@ -1887,54 +2336,6 @@
         "preferredposition1": "24",
         "teamname": "Atlético de Madrid",
         "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "239053",
-        "firstname": "Federico",
-        "lastname": "Valverde",
-        "commonname": null,
-        "overallrating": "88",
-        "potential": "91",
-        "height": "182",
-        "weight": "78",
-        "preferredfoot": "1",
-        "birthdate": "151857",
-        "preferredposition1": "23",
-        "teamname": "Real Madrid",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "238794",
-        "firstname": "Vinícius José",
-        "lastname": "de Oliveira Júnior",
-        "commonname": "Vinícius Jr.",
-        "overallrating": "87",
-        "potential": "92",
-        "height": "176",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "152578",
-        "preferredposition1": "27",
-        "teamname": "Real Madrid",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "239837",
-        "firstname": "Alexis",
-        "lastname": "Mac Allister",
-        "commonname": null,
-        "overallrating": "80",
-        "potential": "83",
-        "height": "176",
-        "weight": "72",
-        "preferredfoot": "1",
-        "birthdate": "152012",
-        "preferredposition1": "9",
-        "teamname": "Real Betis",
-        "leaguegoals": "5",
         "leagueappearances": "0"
       }
     ],
@@ -1992,7 +2393,7 @@
         "firstname": "Rafael",
         "lastname": "da Conceição Leão",
         "commonname": "Rafael Leão",
-        "overallrating": "85",
+        "overallrating": "86",
         "potential": "90",
         "height": "188",
         "weight": "81",
@@ -2008,7 +2409,7 @@
         "firstname": "Marko",
         "lastname": "Arnautović",
         "commonname": null,
-        "overallrating": "81",
+        "overallrating": "80",
         "potential": "82",
         "height": "192",
         "weight": "83",
@@ -2016,22 +2417,6 @@
         "birthdate": "148476",
         "preferredposition1": "25",
         "teamname": "Bologna",
-        "leaguegoals": "8",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "246242",
-        "firstname": "Boulaye",
-        "lastname": "Dia",
-        "commonname": null,
-        "overallrating": "80",
-        "potential": "82",
-        "height": "180",
-        "weight": "75",
-        "preferredfoot": "1",
-        "birthdate": "151244",
-        "preferredposition1": "28",
-        "teamname": "Salernitana",
         "leaguegoals": "8",
         "leagueappearances": "0"
       },
@@ -2046,8 +2431,40 @@
         "weight": "63",
         "preferredfoot": "1",
         "birthdate": "150725",
-        "preferredposition1": "28",
+        "preferredposition1": "27",
         "teamname": "Latium",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "211302",
+        "firstname": "Gianluca",
+        "lastname": "Lapadula",
+        "commonname": null,
+        "overallrating": "73",
+        "potential": "73",
+        "height": "178",
+        "weight": "69",
+        "preferredfoot": "2",
+        "birthdate": "148770",
+        "preferredposition1": "24",
+        "teamname": "Cagliari",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "185144",
+        "firstname": "Massimo",
+        "lastname": "Coda",
+        "commonname": null,
+        "overallrating": "72",
+        "potential": "74",
+        "height": "184",
+        "weight": "73",
+        "preferredfoot": "1",
+        "birthdate": "148316",
+        "preferredposition1": "28",
+        "teamname": "Genoa",
         "leaguegoals": "8",
         "leagueappearances": "0"
       },
@@ -2120,7 +2537,7 @@
         "firstname": "Khvicha",
         "lastname": "Kvaratskhelia",
         "commonname": null,
-        "overallrating": "80",
+        "overallrating": "81",
         "potential": "88",
         "height": "183",
         "weight": "70",
@@ -2128,6 +2545,22 @@
         "birthdate": "152793",
         "preferredposition1": "28",
         "teamname": "Napoli FC",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "271019",
+        "firstname": "Giovanni",
+        "lastname": "Fabbian",
+        "commonname": null,
+        "overallrating": "65",
+        "potential": "74",
+        "height": "186",
+        "weight": "75",
+        "preferredfoot": "1",
+        "birthdate": "153494",
+        "preferredposition1": "29",
+        "teamname": "Inter",
         "leaguegoals": "7",
         "leagueappearances": "0"
       },
@@ -2145,6 +2578,22 @@
         "preferredposition1": "26",
         "teamname": "Inter",
         "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "244601",
+        "firstname": "Sydney",
+        "lastname": "van Hooijdonk",
+        "commonname": null,
+        "overallrating": "70",
+        "potential": "77",
+        "height": "188",
+        "weight": "81",
+        "preferredfoot": "1",
+        "birthdate": "152421",
+        "preferredposition1": "29",
+        "teamname": "Bologna",
+        "leaguegoals": "6",
         "leagueappearances": "0"
       },
       {
@@ -2180,27 +2629,11 @@
         "leagueappearances": "0"
       },
       {
-        "playerid": "205175",
-        "firstname": "Arkadiusz",
-        "lastname": "Milik",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "81",
-        "height": "186",
-        "weight": "80",
-        "preferredfoot": "2",
-        "birthdate": "150252",
-        "preferredposition1": "28",
-        "teamname": "Juventus",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
         "playerid": "178509",
         "firstname": "Olivier",
         "lastname": "Giroud",
         "commonname": null,
-        "overallrating": "80",
+        "overallrating": "79",
         "potential": "82",
         "height": "193",
         "weight": "93",
@@ -2208,22 +2641,6 @@
         "birthdate": "147544",
         "preferredposition1": "28",
         "teamname": "Milan",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "235949",
-        "firstname": "Gabriel Tadeu",
-        "lastname": "Strefezza Rebelato",
-        "commonname": "Gabriel Strefezza",
-        "overallrating": "77",
-        "potential": "78",
-        "height": "168",
-        "weight": "65",
-        "preferredfoot": "1",
-        "birthdate": "151397",
-        "preferredposition1": "23",
-        "teamname": "Lecce",
         "leaguegoals": "6",
         "leagueappearances": "0"
       },
@@ -2240,22 +2657,6 @@
         "birthdate": "149933",
         "preferredposition1": "23",
         "teamname": "Latium",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "240679",
-        "firstname": "Teun",
-        "lastname": "Koopmeiners",
-        "commonname": null,
-        "overallrating": "82",
-        "potential": "84",
-        "height": "183",
-        "weight": "77",
-        "preferredfoot": "2",
-        "birthdate": "151713",
-        "preferredposition1": "28",
-        "teamname": "Bergamo Calcio",
         "leaguegoals": "6",
         "leagueappearances": "0"
       }
@@ -2304,25 +2705,9 @@
         "weight": "78",
         "preferredfoot": "1",
         "birthdate": "152017",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "Manchester Utd",
         "leaguegoals": "14",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "212228",
-        "firstname": "Ivan",
-        "lastname": "Toney",
-        "commonname": null,
-        "overallrating": "80",
-        "potential": "81",
-        "height": "187",
-        "weight": "76",
-        "preferredfoot": "1",
-        "birthdate": "150999",
-        "preferredposition1": "24",
-        "teamname": "Brentford",
-        "leaguegoals": "13",
         "leagueappearances": "0"
       },
       {
@@ -2336,9 +2721,57 @@
         "weight": "90",
         "preferredfoot": "1",
         "birthdate": "150452",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "Nott'm Forest",
         "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "247463",
+        "firstname": "Folarin",
+        "lastname": "Balogun",
+        "commonname": null,
+        "overallrating": "74",
+        "potential": "79",
+        "height": "178",
+        "weight": "70",
+        "preferredfoot": "1",
+        "birthdate": "152934",
+        "preferredposition1": "29",
+        "teamname": "Arsenal",
+        "leaguegoals": "11",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "242075",
+        "firstname": "Josh",
+        "lastname": "Sargent",
+        "commonname": null,
+        "overallrating": "71",
+        "potential": "75",
+        "height": "185",
+        "weight": "79",
+        "preferredfoot": "1",
+        "birthdate": "152435",
+        "preferredposition1": "21",
+        "teamname": "Norwich",
+        "leaguegoals": "10",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "190362",
+        "firstname": "Teemu",
+        "lastname": "Pukki",
+        "commonname": null,
+        "overallrating": "74",
+        "potential": "75",
+        "height": "180",
+        "weight": "78",
+        "preferredfoot": "1",
+        "birthdate": "148820",
+        "preferredposition1": "25",
+        "teamname": "Norwich",
+        "leaguegoals": "10",
         "leagueappearances": "0"
       },
       {
@@ -2362,7 +2795,7 @@
         "firstname": "Marcus",
         "lastname": "Rashford",
         "commonname": null,
-        "overallrating": "84",
+        "overallrating": "85",
         "potential": "86",
         "height": "186",
         "weight": "70",
@@ -2386,6 +2819,38 @@
         "birthdate": "150234",
         "preferredposition1": "29",
         "teamname": "Arsenal",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "220031",
+        "firstname": "Oli",
+        "lastname": "McBurnie",
+        "commonname": null,
+        "overallrating": "72",
+        "potential": "73",
+        "height": "191",
+        "weight": "77",
+        "preferredfoot": "1",
+        "birthdate": "151079",
+        "preferredposition1": "24",
+        "teamname": "Sheffield Utd",
+        "leaguegoals": "9",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "237328",
+        "firstname": "Nathan",
+        "lastname": "Tella",
+        "commonname": null,
+        "overallrating": "73",
+        "potential": "79",
+        "height": "173",
+        "weight": "70",
+        "preferredfoot": "1",
+        "birthdate": "152205",
+        "preferredposition1": "29",
+        "teamname": "Southampton",
         "leaguegoals": "9",
         "leagueappearances": "0"
       },
@@ -2426,7 +2891,7 @@
         "firstname": "Bukayo",
         "lastname": "Saka",
         "commonname": null,
-        "overallrating": "85",
+        "overallrating": "86",
         "potential": "90",
         "height": "178",
         "weight": "65",
@@ -2516,392 +2981,6 @@
         "teamname": "Leicester City",
         "leaguegoals": "7",
         "leagueappearances": "0"
-      },
-      {
-        "playerid": "234742",
-        "firstname": "Harvey",
-        "lastname": "Barnes",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "83",
-        "height": "180",
-        "weight": "66",
-        "preferredfoot": "1",
-        "birthdate": "151632",
-        "preferredposition1": "16",
-        "teamname": "Leicester City",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "235353",
-        "firstname": "Ismaïla",
-        "lastname": "Sarr",
-        "commonname": null,
-        "overallrating": "79",
-        "potential": "83",
-        "height": "185",
-        "weight": "76",
-        "preferredfoot": "1",
-        "birthdate": "151710",
-        "preferredposition1": "28",
-        "teamname": "Aston Villa",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "242530",
-        "firstname": "Noah",
-        "lastname": "Okafor",
-        "commonname": null,
-        "overallrating": "77",
-        "potential": "83",
-        "height": "185",
-        "weight": "85",
-        "preferredfoot": "1",
-        "birthdate": "152529",
-        "preferredposition1": "29",
-        "teamname": "AFC Bournemouth",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "195859",
-        "firstname": "Danny",
-        "lastname": "Ings",
-        "commonname": null,
-        "overallrating": "79",
-        "potential": "79",
-        "height": "178",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "149667",
-        "preferredposition1": "28",
-        "teamname": "West Ham",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      }
-    ],
-    "Ligue 1": [
-      {
-        "playerid": "231747",
-        "firstname": "Kylian",
-        "lastname": "Mbappé",
-        "commonname": null,
-        "overallrating": "93",
-        "potential": "95",
-        "height": "182",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "152008",
-        "preferredposition1": "26",
-        "teamname": "Paris SG",
-        "leaguegoals": "13",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "243630",
-        "firstname": "Jonathan",
-        "lastname": "David",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "85",
-        "height": "177",
-        "weight": "77",
-        "preferredfoot": "1",
-        "birthdate": "152398",
-        "preferredposition1": "24",
-        "teamname": "LOSC Lille",
-        "leaguegoals": "12",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "193301",
-        "firstname": "Alexandre",
-        "lastname": "Lacazette",
-        "commonname": null,
-        "overallrating": "82",
-        "potential": "82",
-        "height": "175",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "149245",
-        "preferredposition1": "25",
-        "teamname": "OL",
-        "leaguegoals": "12",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "255000",
-        "firstname": "Terem",
-        "lastname": "Moffi",
-        "commonname": null,
-        "overallrating": "77",
-        "potential": "80",
-        "height": "188",
-        "weight": "89",
-        "preferredfoot": "2",
-        "birthdate": "152164",
-        "preferredposition1": "28",
-        "teamname": "OGC Nice",
-        "leaguegoals": "12",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "190871",
-        "firstname": "Neymar",
-        "lastname": "da Silva Santos Jr.",
-        "commonname": "Neymar Jr",
-        "overallrating": "89",
-        "potential": "89",
-        "height": "175",
-        "weight": "68",
-        "preferredfoot": "1",
-        "birthdate": "149498",
-        "preferredposition1": "18",
-        "teamname": "Paris SG",
-        "leaguegoals": "12",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "247463",
-        "firstname": "Folarin",
-        "lastname": "Balogun",
-        "commonname": null,
-        "overallrating": "74",
-        "potential": "79",
-        "height": "178",
-        "weight": "70",
-        "preferredfoot": "1",
-        "birthdate": "152934",
-        "preferredposition1": "25",
-        "teamname": "Stade de Reims",
-        "leaguegoals": "11",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "222357",
-        "firstname": "Breel",
-        "lastname": "Embolo",
-        "commonname": null,
-        "overallrating": "79",
-        "potential": "81",
-        "height": "187",
-        "weight": "88",
-        "preferredfoot": "1",
-        "birthdate": "151334",
-        "preferredposition1": "24",
-        "teamname": "AS Monaco",
-        "leaguegoals": "10",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "243580",
-        "firstname": "Loïs",
-        "lastname": "Openda",
-        "commonname": null,
-        "overallrating": "78",
-        "potential": "84",
-        "height": "175",
-        "weight": "78",
-        "preferredfoot": "1",
-        "birthdate": "152431",
-        "preferredposition1": "25",
-        "teamname": "RC Lens",
-        "leaguegoals": "9",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "236786",
-        "firstname": "Martin",
-        "lastname": "Terrier",
-        "commonname": null,
-        "overallrating": "83",
-        "potential": "84",
-        "height": "184",
-        "weight": "78",
-        "preferredfoot": "1",
-        "birthdate": "151352",
-        "preferredposition1": "28",
-        "teamname": "Stade Rennais FC",
-        "leaguegoals": "9",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "158023",
-        "firstname": "Lionel",
-        "lastname": "Messi",
-        "commonname": null,
-        "overallrating": "90",
-        "potential": "91",
-        "height": "169",
-        "weight": "67",
-        "preferredfoot": "2",
-        "birthdate": "147811",
-        "preferredposition1": "24",
-        "teamname": "Paris SG",
-        "leaguegoals": "8",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "237960",
-        "firstname": "Mama Samba",
-        "lastname": "Baldé",
-        "commonname": "Mama Baldé",
-        "overallrating": "76",
-        "potential": "76",
-        "height": "176",
-        "weight": "69",
-        "preferredfoot": "1",
-        "birthdate": "150868",
-        "preferredposition1": "25",
-        "teamname": "ESTAC Troyes",
-        "leaguegoals": "8",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "205686",
-        "firstname": "Téji",
-        "lastname": "Savanier",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "81",
-        "height": "172",
-        "weight": "69",
-        "preferredfoot": "1",
-        "birthdate": "149453",
-        "preferredposition1": "18",
-        "teamname": "Montpellier",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "260407",
-        "firstname": "Elye",
-        "lastname": "Wahi",
-        "commonname": null,
-        "overallrating": "77",
-        "potential": "85",
-        "height": "184",
-        "weight": "74",
-        "preferredfoot": "1",
-        "birthdate": "153482",
-        "preferredposition1": "29",
-        "teamname": "RC Lens",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "176600",
-        "firstname": "Kévin",
-        "lastname": "Gameiro",
-        "commonname": null,
-        "overallrating": "74",
-        "potential": "77",
-        "height": "172",
-        "weight": "69",
-        "preferredfoot": "1",
-        "birthdate": "147765",
-        "preferredposition1": "24",
-        "teamname": "Strasbourg",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "184941",
-        "firstname": "Alexis",
-        "lastname": "Sánchez",
-        "commonname": null,
-        "overallrating": "78",
-        "potential": "80",
-        "height": "169",
-        "weight": "62",
-        "preferredfoot": "1",
-        "birthdate": "148355",
-        "preferredposition1": "25",
-        "teamname": "OM",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "221714",
-        "firstname": "Alfredo",
-        "lastname": "Morelos",
-        "commonname": null,
-        "overallrating": "76",
-        "potential": "76",
-        "height": "177",
-        "weight": "79",
-        "preferredfoot": "1",
-        "birthdate": "151096",
-        "preferredposition1": "26",
-        "teamname": "Strasbourg",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "193983",
-        "firstname": "Andy",
-        "lastname": "Delort",
-        "commonname": null,
-        "overallrating": "80",
-        "potential": "80",
-        "height": "181",
-        "weight": "83",
-        "preferredfoot": "1",
-        "birthdate": "149379",
-        "preferredposition1": "28",
-        "teamname": "FC Nantes",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "226110",
-        "firstname": "Nicolas",
-        "lastname": "Pépé",
-        "commonname": null,
-        "overallrating": "79",
-        "potential": "79",
-        "height": "183",
-        "weight": "73",
-        "preferredfoot": "2",
-        "birthdate": "150707",
-        "preferredposition1": "23",
-        "teamname": "OGC Nice",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "209519",
-        "firstname": "Gaëtan",
-        "lastname": "Laborde",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "81",
-        "height": "181",
-        "weight": "78",
-        "preferredfoot": "2",
-        "birthdate": "150316",
-        "preferredposition1": "25",
-        "teamname": "OGC Nice",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "240753",
-        "firstname": "Amine",
-        "lastname": "Gouiri",
-        "commonname": null,
-        "overallrating": "81",
-        "potential": "86",
-        "height": "181",
-        "weight": "83",
-        "preferredfoot": "1",
-        "birthdate": "152431",
-        "preferredposition1": "26",
-        "teamname": "Stade Rennais FC",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
       }
     ],
     "Bundesliga": [
@@ -2918,6 +2997,22 @@
         "birthdate": "149868",
         "preferredposition1": "29",
         "teamname": "TSG Hoffenheim",
+        "leaguegoals": "13",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "236533",
+        "firstname": "Robert",
+        "lastname": "Glatzel",
+        "commonname": null,
+        "overallrating": "73",
+        "potential": "73",
+        "height": "193",
+        "weight": "85",
+        "preferredfoot": "1",
+        "birthdate": "150201",
+        "preferredposition1": "25",
+        "teamname": "Hamburger SV",
         "leaguegoals": "13",
         "leagueappearances": "0"
       },
@@ -2942,7 +3037,7 @@
         "firstname": "Lautaro",
         "lastname": "Martínez",
         "commonname": null,
-        "overallrating": "87",
+        "overallrating": "88",
         "potential": "89",
         "height": "174",
         "weight": "72",
@@ -2964,7 +3059,7 @@
         "weight": "77",
         "preferredfoot": "2",
         "birthdate": "149162",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "TSG Hoffenheim",
         "leaguegoals": "10",
         "leagueappearances": "0"
@@ -2980,7 +3075,7 @@
         "weight": "75",
         "preferredfoot": "1",
         "birthdate": "152127",
-        "preferredposition1": "29",
+        "preferredposition1": "28",
         "teamname": "Union Berlin",
         "leaguegoals": "9",
         "leagueappearances": "0"
@@ -2990,7 +3085,7 @@
         "firstname": "Jamal",
         "lastname": "Musiala",
         "commonname": null,
-        "overallrating": "84",
+        "overallrating": "85",
         "potential": "92",
         "height": "184",
         "weight": "72",
@@ -3034,17 +3129,65 @@
         "leagueappearances": "0"
       },
       {
+        "playerid": "211736",
+        "firstname": "Robert",
+        "lastname": "Leipertz",
+        "commonname": null,
+        "overallrating": "69",
+        "potential": "69",
+        "height": "183",
+        "weight": "82",
+        "preferredfoot": "2",
+        "birthdate": "149860",
+        "preferredposition1": "12",
+        "teamname": "SC Paderborn 07",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "216549",
+        "firstname": "Alexander",
+        "lastname": "Sørloth",
+        "commonname": null,
+        "overallrating": "79",
+        "potential": "79",
+        "height": "194",
+        "weight": "90",
+        "preferredfoot": "2",
+        "birthdate": "150897",
+        "preferredposition1": "29",
+        "teamname": "RB Leipzig",
+        "leaguegoals": "8",
+        "leagueappearances": "0"
+      },
+      {
+        "playerid": "251223",
+        "firstname": "Ricardo",
+        "lastname": "Pepi",
+        "commonname": null,
+        "overallrating": "73",
+        "potential": "83",
+        "height": "185",
+        "weight": "74",
+        "preferredfoot": "1",
+        "birthdate": "153489",
+        "preferredposition1": "28",
+        "teamname": "FC Augsburg",
+        "leaguegoals": "7",
+        "leagueappearances": "0"
+      },
+      {
         "playerid": "251566",
         "firstname": "Gabriel Teodoro",
         "lastname": "Martinelli Silva",
         "commonname": "Gabriel Martinelli",
-        "overallrating": "81",
+        "overallrating": "82",
         "potential": "88",
         "height": "178",
         "weight": "75",
         "preferredfoot": "1",
         "birthdate": "152919",
-        "preferredposition1": "29",
+        "preferredposition1": "16",
         "teamname": "Leverkusen",
         "leaguegoals": "7",
         "leagueappearances": "0"
@@ -3054,7 +3197,7 @@
         "firstname": "Eric Maxim",
         "lastname": "Choupo-Moting",
         "commonname": null,
-        "overallrating": "77",
+        "overallrating": "76",
         "potential": "78",
         "height": "191",
         "weight": "90",
@@ -3108,7 +3251,7 @@
         "weight": "77",
         "preferredfoot": "2",
         "birthdate": "151556",
-        "preferredposition1": "28",
+        "preferredposition1": "12",
         "teamname": "Frankfurt",
         "leaguegoals": "7",
         "leagueappearances": "0"
@@ -3150,7 +3293,7 @@
         "firstname": "Jesper",
         "lastname": "Lindstrøm",
         "commonname": null,
-        "overallrating": "79",
+        "overallrating": "80",
         "potential": "84",
         "height": "182",
         "weight": "66",
@@ -3159,70 +3302,6 @@
         "preferredposition1": "20",
         "teamname": "Frankfurt",
         "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "237679",
-        "firstname": "Randal",
-        "lastname": "Kolo Muani",
-        "commonname": null,
-        "overallrating": "82",
-        "potential": "86",
-        "height": "187",
-        "weight": "73",
-        "preferredfoot": "1",
-        "birthdate": "151993",
-        "preferredposition1": "25",
-        "teamname": "Frankfurt",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "258580",
-        "firstname": "Kerem",
-        "lastname": "Aktürkoğlu",
-        "commonname": null,
-        "overallrating": "75",
-        "potential": "79",
-        "height": "173",
-        "weight": "71",
-        "preferredfoot": "1",
-        "birthdate": "151948",
-        "preferredposition1": "29",
-        "teamname": "1. FC Köln",
-        "leaguegoals": "7",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "222492",
-        "firstname": "Leroy",
-        "lastname": "Sané",
-        "commonname": null,
-        "overallrating": "84",
-        "potential": "84",
-        "height": "183",
-        "weight": "80",
-        "preferredfoot": "2",
-        "birthdate": "150934",
-        "preferredposition1": "16",
-        "teamname": "FC Bayern München",
-        "leaguegoals": "6",
-        "leagueappearances": "0"
-      },
-      {
-        "playerid": "208722",
-        "firstname": "Sadio",
-        "lastname": "Mané",
-        "commonname": null,
-        "overallrating": "89",
-        "potential": "89",
-        "height": "174",
-        "weight": "69",
-        "preferredfoot": "1",
-        "birthdate": "149563",
-        "preferredposition1": "28",
-        "teamname": "FC Bayern München",
-        "leaguegoals": "6",
         "leagueappearances": "0"
       }
     ]
@@ -3488,12 +3567,30 @@
         "teamname": "Wolves"
       },
       {
-        "teamid": "144",
-        "teamname": "Fulham"
-      },
-      {
         "teamid": "1799",
         "teamname": "Crystal Palace"
+      },
+      {
+        "teamid": "1943",
+        "teamname": "AFC Bournemouth"
+      },
+      {
+        "teamid": "109",
+        "teamname": "West Brom"
+      },
+      {
+        "teamid": "1792",
+        "teamname": "Norwich"
+      },
+      {
+        "teamid": "1794",
+        "teamname": "Sheffield Utd"
+      }
+    ],
+    "14": [
+      {
+        "teamid": "144",
+        "teamname": "Fulham"
       },
       {
         "teamid": "1808",
@@ -3503,12 +3600,6 @@
         "teamid": "1925",
         "teamname": "Brentford"
       },
-      {
-        "teamid": "1943",
-        "teamname": "AFC Bournemouth"
-      }
-    ],
-    "14": [
       {
         "teamid": "3",
         "teamname": "Blackburn Rovers"
@@ -3534,20 +3625,8 @@
         "teamname": "Sunderland"
       },
       {
-        "teamid": "109",
-        "teamname": "West Brom"
-      },
-      {
-        "teamid": "1792",
-        "teamname": "Norwich"
-      },
-      {
         "teamid": "1793",
         "teamname": "Reading"
-      },
-      {
-        "teamid": "1794",
-        "teamname": "Sheffield Utd"
       },
       {
         "teamid": "1795",
@@ -3556,10 +3635,6 @@
       {
         "teamid": "1796",
         "teamname": "Burnley"
-      },
-      {
-        "teamid": "1797",
-        "teamname": "Rotherham Utd"
       },
       {
         "teamid": "1800",
@@ -3586,10 +3661,6 @@
         "teamname": "Luton Town"
       },
       {
-        "teamid": "1926",
-        "teamname": "Blackpool"
-      },
-      {
         "teamid": "1939",
         "teamname": "Huddersfield"
       },
@@ -3602,8 +3673,114 @@
         "teamname": "Swansea City"
       },
       {
+        "teamid": "94",
+        "teamname": "Ipswich"
+      },
+      {
+        "teamid": "1807",
+        "teamname": "Sheffield Wed"
+      },
+      {
+        "teamid": "1929",
+        "teamname": "Plymouth Argyle"
+      }
+    ],
+    "60": [
+      {
+        "teamid": "1797",
+        "teamname": "Rotherham Utd"
+      },
+      {
+        "teamid": "1926",
+        "teamname": "Blackpool"
+      },
+      {
         "teamid": "1961",
         "teamname": "Cardiff City"
+      },
+      {
+        "teamid": "4",
+        "teamname": "Bolton"
+      },
+      {
+        "teamid": "89",
+        "teamname": "Charlton Ath"
+      },
+      {
+        "teamid": "91",
+        "teamname": "Derby County"
+      },
+      {
+        "teamid": "127",
+        "teamname": "Shrewsbury"
+      },
+      {
+        "teamid": "143",
+        "teamname": "Exeter City"
+      },
+      {
+        "teamid": "149",
+        "teamname": "Lincoln City"
+      },
+      {
+        "teamid": "1790",
+        "teamname": "Portsmouth"
+      },
+      {
+        "teamid": "1798",
+        "teamname": "MK Dons"
+      },
+      {
+        "teamid": "1932",
+        "teamname": "Barnsley"
+      },
+      {
+        "teamid": "1933",
+        "teamname": "Wycombe"
+      },
+      {
+        "teamid": "1936",
+        "teamname": "Cheltenham Town"
+      },
+      {
+        "teamid": "1938",
+        "teamname": "Peterborough"
+      },
+      {
+        "teamid": "1944",
+        "teamname": "Cambridge Utd"
+      },
+      {
+        "teamid": "1951",
+        "teamname": "Oxford United"
+      },
+      {
+        "teamid": "1962",
+        "teamname": "Bristol Rovers"
+      },
+      {
+        "teamid": "110313",
+        "teamname": "Accrington"
+      },
+      {
+        "teamid": "112260",
+        "teamname": "Fleetwood Town"
+      },
+      {
+        "teamid": "1804",
+        "teamname": "Bradford City"
+      },
+      {
+        "teamid": "1930",
+        "teamname": "Northampton"
+      },
+      {
+        "teamid": "15048",
+        "teamname": "Tranmere Rovers"
+      },
+      {
+        "teamid": "113926",
+        "teamname": "Salford City"
       }
     ],
     "16": [
@@ -3652,16 +3829,8 @@
         "teamname": "Strasbourg"
       },
       {
-        "teamid": "217",
-        "teamname": "FC Lorient"
-      },
-      {
         "teamid": "219",
         "teamname": "OM"
-      },
-      {
-        "teamid": "294",
-        "teamname": "ESTAC Troyes"
       },
       {
         "teamid": "378",
@@ -3672,30 +3841,12 @@
         "teamname": "Stade de Reims"
       },
       {
-        "teamid": "614",
-        "teamname": "AC Ajaccio"
-      },
-      {
         "teamid": "1530",
         "teamname": "Angers SCO"
       },
       {
-        "teamid": "1809",
-        "teamname": "Toulouse FC"
-      },
-      {
         "teamid": "1815",
         "teamname": "Clermont Foot 63"
-      }
-    ],
-    "17": [
-      {
-        "teamid": "58",
-        "teamname": "SC Bastia"
-      },
-      {
-        "teamid": "59",
-        "teamname": "Bordeaux"
       },
       {
         "teamid": "62",
@@ -3704,6 +3855,40 @@
       {
         "teamid": "68",
         "teamname": "FC Metz"
+      },
+      {
+        "teamid": "1738",
+        "teamname": "Havre AC"
+      },
+      {
+        "teamid": "1819",
+        "teamname": "AS Saint-Étienne"
+      }
+    ],
+    "17": [
+      {
+        "teamid": "217",
+        "teamname": "FC Lorient"
+      },
+      {
+        "teamid": "294",
+        "teamname": "ESTAC Troyes"
+      },
+      {
+        "teamid": "614",
+        "teamname": "AC Ajaccio"
+      },
+      {
+        "teamid": "1809",
+        "teamname": "Toulouse FC"
+      },
+      {
+        "teamid": "58",
+        "teamname": "SC Bastia"
+      },
+      {
+        "teamid": "59",
+        "teamname": "Bordeaux"
       },
       {
         "teamid": "210",
@@ -3716,10 +3901,6 @@
       {
         "teamid": "226",
         "teamname": "FCSM"
-      },
-      {
-        "teamid": "1738",
-        "teamname": "Havre AC"
       },
       {
         "teamid": "1805",
@@ -3736,10 +3917,6 @@
       {
         "teamid": "1816",
         "teamname": "Amiens SC"
-      },
-      {
-        "teamid": "1819",
-        "teamname": "AS Saint-Étienne"
       },
       {
         "teamid": "110321",
@@ -3788,10 +3965,6 @@
         "teamname": "SC Freiburg"
       },
       {
-        "teamid": "31",
-        "teamname": "1. FC Köln"
-      },
-      {
         "teamid": "32",
         "teamname": "Leverkusen"
       },
@@ -3800,16 +3973,8 @@
         "teamname": "FC Schalke 04"
       },
       {
-        "teamid": "36",
-        "teamname": "VfB Stuttgart"
-      },
-      {
         "teamid": "38",
         "teamname": "SV Werder Bremen"
-      },
-      {
-        "teamid": "160",
-        "teamname": "VfL Bochum"
       },
       {
         "teamid": "166",
@@ -3842,16 +4007,36 @@
       {
         "teamid": "112172",
         "teamname": "RB Leipzig"
-      }
-    ],
-    "20": [
-      {
-        "teamid": "27",
-        "teamname": "Hansa Rostock"
       },
       {
         "teamid": "28",
         "teamname": "Hamburger SV"
+      },
+      {
+        "teamid": "485",
+        "teamname": "Hannover 96"
+      },
+      {
+        "teamid": "10030",
+        "teamname": "SC Paderborn 07"
+      }
+    ],
+    "20": [
+      {
+        "teamid": "31",
+        "teamname": "1. FC Köln"
+      },
+      {
+        "teamid": "36",
+        "teamname": "VfB Stuttgart"
+      },
+      {
+        "teamid": "160",
+        "teamname": "VfL Bochum"
+      },
+      {
+        "teamid": "27",
+        "teamname": "Hansa Rostock"
       },
       {
         "teamid": "29",
@@ -3870,14 +4055,6 @@
         "teamname": "1. FC Nürnberg"
       },
       {
-        "teamid": "485",
-        "teamname": "Hannover 96"
-      },
-      {
-        "teamid": "543",
-        "teamname": "Jahn Regensburg"
-      },
-      {
         "teamid": "576",
         "teamname": "Holstein Kiel"
       },
@@ -3886,20 +4063,12 @@
         "teamname": "Karlsruher SC"
       },
       {
-        "teamid": "10030",
-        "teamname": "SC Paderborn 07"
-      },
-      {
         "teamid": "110178",
         "teamname": "SV Sandhausen"
       },
       {
         "teamid": "110329",
         "teamname": "FC St. Pauli"
-      },
-      {
-        "teamid": "110500",
-        "teamname": "Braunschweig"
       },
       {
         "teamid": "110502",
@@ -3916,6 +4085,96 @@
       {
         "teamid": "111235",
         "teamname": "Heidenheim"
+      },
+      {
+        "teamid": "503",
+        "teamname": "Dynamo Dresden"
+      },
+      {
+        "teamid": "110645",
+        "teamname": "Viktoria Köln"
+      }
+    ],
+    "2076": [
+      {
+        "teamid": "543",
+        "teamname": "Jahn Regensburg"
+      },
+      {
+        "teamid": "110500",
+        "teamname": "Braunschweig"
+      },
+      {
+        "teamid": "33",
+        "teamname": "1860 München"
+      },
+      {
+        "teamid": "487",
+        "teamname": "VfL Osnabrück"
+      },
+      {
+        "teamid": "492",
+        "teamname": "Wehen Wiesbaden"
+      },
+      {
+        "teamid": "506",
+        "teamname": "FC Erzgebirge Aue"
+      },
+      {
+        "teamid": "523",
+        "teamname": "Saarbrücken"
+      },
+      {
+        "teamid": "526",
+        "teamname": "Rot-Weiss Essen"
+      },
+      {
+        "teamid": "580",
+        "teamname": "SV Elversberg"
+      },
+      {
+        "teamid": "1825",
+        "teamname": "MSV Duisburg"
+      },
+      {
+        "teamid": "110194",
+        "teamname": "SpVgg Bayreuth"
+      },
+      {
+        "teamid": "110482",
+        "teamname": "Hallescher FC"
+      },
+      {
+        "teamid": "110501",
+        "teamname": "SC Verl"
+      },
+      {
+        "teamid": "110532",
+        "teamname": "SV Waldhof"
+      },
+      {
+        "teamid": "110587",
+        "teamname": "VfB Oldenburg"
+      },
+      {
+        "teamid": "110592",
+        "teamname": "FSV Zwickau"
+      },
+      {
+        "teamid": "110597",
+        "teamname": "SV Meppen"
+      },
+      {
+        "teamid": "110676",
+        "teamname": "B. Dortmund II"
+      },
+      {
+        "teamid": "110691",
+        "teamname": "SC Freiburg II"
+      },
+      {
+        "teamid": "111239",
+        "teamname": "FC Ingolstadt 04"
       }
     ],
     "31": [
@@ -3948,16 +4207,8 @@
         "teamname": "Hellas Verona"
       },
       {
-        "teamid": "347",
-        "teamname": "Lecce"
-      },
-      {
         "teamid": "1746",
         "teamname": "Empoli"
-      },
-      {
-        "teamid": "1837",
-        "teamname": "Sampdoria"
       },
       {
         "teamid": "110373",
@@ -3966,10 +4217,6 @@
       {
         "teamid": "110374",
         "teamname": "Fiorentina"
-      },
-      {
-        "teamid": "111434",
-        "teamname": "Cremonese"
       },
       {
         "teamid": "111811",
@@ -3998,9 +4245,33 @@
       {
         "teamid": "116365",
         "teamname": "Napoli FC"
+      },
+      {
+        "teamid": "1842",
+        "teamname": "Cagliari"
+      },
+      {
+        "teamid": "110556",
+        "teamname": "Genoa"
+      },
+      {
+        "teamid": "112026",
+        "teamname": "Benevento"
       }
     ],
     "32": [
+      {
+        "teamid": "347",
+        "teamname": "Lecce"
+      },
+      {
+        "teamid": "1837",
+        "teamname": "Sampdoria"
+      },
+      {
+        "teamid": "111434",
+        "teamname": "Cremonese"
+      },
       {
         "teamid": "50",
         "teamname": "Parma"
@@ -4034,10 +4305,6 @@
         "teamname": "Como"
       },
       {
-        "teamid": "1842",
-        "teamname": "Cagliari"
-      },
-      {
         "teamid": "1843",
         "teamname": "Palermo"
       },
@@ -4050,10 +4317,6 @@
         "teamname": "Bari"
       },
       {
-        "teamid": "110556",
-        "teamname": "Genoa"
-      },
-      {
         "teamid": "110738",
         "teamname": "Pisa"
       },
@@ -4064,10 +4327,6 @@
       {
         "teamid": "111993",
         "teamname": "Cittadella"
-      },
-      {
-        "teamid": "112026",
-        "teamname": "Benevento"
       },
       {
         "teamid": "112168",
@@ -4366,10 +4625,6 @@
         "teamname": "CA Osasuna"
       },
       {
-        "teamid": "480",
-        "teamname": "Rayo Vallecano"
-      },
-      {
         "teamid": "481",
         "teamname": "Sevilla FC"
       },
@@ -4382,19 +4637,35 @@
         "teamname": "Getafe CF"
       },
       {
-        "teamid": "1861",
-        "teamname": "UD Almería"
-      },
-      {
         "teamid": "1968",
         "teamname": "Cádiz CF"
       },
       {
-        "teamid": "110062",
-        "teamname": "Girona FC"
+        "teamid": "463",
+        "teamname": "D. Alavés"
+      },
+      {
+        "teamid": "472",
+        "teamname": "UD Las Palmas"
+      },
+      {
+        "teamid": "110832",
+        "teamname": "Granada CF"
       }
     ],
     "54": [
+      {
+        "teamid": "480",
+        "teamname": "Rayo Vallecano"
+      },
+      {
+        "teamid": "1861",
+        "teamname": "UD Almería"
+      },
+      {
+        "teamid": "110062",
+        "teamname": "Girona FC"
+      },
       {
         "teamid": "244",
         "teamname": "Real Zaragoza"
@@ -4412,16 +4683,8 @@
         "teamname": "R. Sporting"
       },
       {
-        "teamid": "463",
-        "teamname": "D. Alavés"
-      },
-      {
         "teamid": "467",
         "teamname": "SD Eibar"
-      },
-      {
-        "teamid": "472",
-        "teamname": "UD Las Palmas"
       },
       {
         "teamid": "573",
@@ -4462,10 +4725,6 @@
       {
         "teamid": "110831",
         "teamname": "CD Lugo"
-      },
-      {
-        "teamid": "110832",
-        "teamname": "Granada CF"
       },
       {
         "teamid": "110839",
@@ -4550,35 +4809,7 @@
         "teamname": "Degerfors IF"
       }
     ],
-    "60": [
-      {
-        "teamid": "4",
-        "teamname": "Bolton"
-      },
-      {
-        "teamid": "89",
-        "teamname": "Charlton Ath"
-      },
-      {
-        "teamid": "91",
-        "teamname": "Derby County"
-      },
-      {
-        "teamid": "94",
-        "teamname": "Ipswich"
-      },
-      {
-        "teamid": "127",
-        "teamname": "Shrewsbury"
-      },
-      {
-        "teamid": "143",
-        "teamname": "Exeter City"
-      },
-      {
-        "teamid": "149",
-        "teamname": "Lincoln City"
-      },
+    "61": [
       {
         "teamid": "357",
         "teamname": "Morecambe"
@@ -4588,67 +4819,13 @@
         "teamname": "Forest Green"
       },
       {
-        "teamid": "1790",
-        "teamname": "Portsmouth"
-      },
-      {
-        "teamid": "1798",
-        "teamname": "MK Dons"
-      },
-      {
-        "teamid": "1807",
-        "teamname": "Sheffield Wed"
-      },
-      {
         "teamid": "1928",
         "teamname": "Port Vale"
-      },
-      {
-        "teamid": "1929",
-        "teamname": "Plymouth Argyle"
-      },
-      {
-        "teamid": "1932",
-        "teamname": "Barnsley"
-      },
-      {
-        "teamid": "1933",
-        "teamname": "Wycombe"
-      },
-      {
-        "teamid": "1936",
-        "teamname": "Cheltenham Town"
-      },
-      {
-        "teamid": "1938",
-        "teamname": "Peterborough"
-      },
-      {
-        "teamid": "1944",
-        "teamname": "Cambridge Utd"
-      },
-      {
-        "teamid": "1951",
-        "teamname": "Oxford United"
-      },
-      {
-        "teamid": "1962",
-        "teamname": "Bristol Rovers"
       },
       {
         "teamid": "15015",
         "teamname": "Burton Albion"
       },
-      {
-        "teamid": "110313",
-        "teamname": "Accrington"
-      },
-      {
-        "teamid": "112260",
-        "teamname": "Fleetwood Town"
-      }
-    ],
-    "61": [
       {
         "teamid": "92",
         "teamname": "Grimsby Town"
@@ -4682,14 +4859,6 @@
         "teamname": "Walsall"
       },
       {
-        "teamid": "1804",
-        "teamname": "Bradford City"
-      },
-      {
-        "teamid": "1930",
-        "teamname": "Northampton"
-      },
-      {
         "teamid": "1931",
         "teamname": "Stockport"
       },
@@ -4718,10 +4887,6 @@
         "teamname": "Leyton Orient"
       },
       {
-        "teamid": "15048",
-        "teamname": "Tranmere Rovers"
-      },
-      {
         "teamid": "110799",
         "teamname": "Sutton United"
       },
@@ -4740,10 +4905,6 @@
       {
         "teamid": "112259",
         "teamname": "AFC Wimbledon"
-      },
-      {
-        "teamid": "113926",
-        "teamname": "Salford City"
       }
     ],
     "65": [
@@ -6034,88 +6195,6 @@
         "teamname": "*TeamName_Abbr15_112264"
       }
     ],
-    "2076": [
-      {
-        "teamid": "33",
-        "teamname": "1860 München"
-      },
-      {
-        "teamid": "487",
-        "teamname": "VfL Osnabrück"
-      },
-      {
-        "teamid": "492",
-        "teamname": "Wehen Wiesbaden"
-      },
-      {
-        "teamid": "503",
-        "teamname": "Dynamo Dresden"
-      },
-      {
-        "teamid": "506",
-        "teamname": "FC Erzgebirge Aue"
-      },
-      {
-        "teamid": "523",
-        "teamname": "Saarbrücken"
-      },
-      {
-        "teamid": "526",
-        "teamname": "Rot-Weiss Essen"
-      },
-      {
-        "teamid": "580",
-        "teamname": "SV Elversberg"
-      },
-      {
-        "teamid": "1825",
-        "teamname": "MSV Duisburg"
-      },
-      {
-        "teamid": "110194",
-        "teamname": "SpVgg Bayreuth"
-      },
-      {
-        "teamid": "110482",
-        "teamname": "Hallescher FC"
-      },
-      {
-        "teamid": "110501",
-        "teamname": "SC Verl"
-      },
-      {
-        "teamid": "110532",
-        "teamname": "SV Waldhof"
-      },
-      {
-        "teamid": "110587",
-        "teamname": "VfB Oldenburg"
-      },
-      {
-        "teamid": "110592",
-        "teamname": "FSV Zwickau"
-      },
-      {
-        "teamid": "110597",
-        "teamname": "SV Meppen"
-      },
-      {
-        "teamid": "110645",
-        "teamname": "Viktoria Köln"
-      },
-      {
-        "teamid": "110676",
-        "teamname": "B. Dortmund II"
-      },
-      {
-        "teamid": "110691",
-        "teamname": "SC Freiburg II"
-      },
-      {
-        "teamid": "111239",
-        "teamname": "FC Ingolstadt 04"
-      }
-    ],
     "2149": [
       {
         "teamid": "111629",
@@ -6173,16 +6252,16 @@
       "league": "Serie A TIM",
       "leagueId": "31",
       "clubBadgeColor": "bg-zinc-800",
-      "apps": 40,
-      "goals": 13,
-      "assists": 29,
+      "apps": 44,
+      "goals": 15,
+      "assists": 31,
       "avgRating": 7.51,
       "overall": 73,
       "yellowCards": 1,
       "redCards": 0,
       "trophies": [],
       "individualAwards": [],
-      "highlights": "13 goals, 26 assists in 37 appearances",
+      "highlights": "15 goals, 28 assists in 41 appearances",
       "xG": 0,
       "xA": 0,
       "keyPassesPerGame": 0,
@@ -6207,15 +6286,15 @@
           "compobjid": 1097,
           "competition": "Serie A TIM",
           "teamid": 113974,
-          "apps": 34,
-          "goals": 13,
-          "assists": 22,
+          "apps": 38,
+          "goals": 15,
+          "assists": 24,
           "avgRating": 7.57,
           "yellow": 1,
           "red": 0,
-          "motm": 12,
+          "motm": 13,
           "clean_sheets": 4,
-          "goals_conceded": 66,
+          "goals_conceded": 75,
           "saves": 0
         },
         {
@@ -6234,7 +6313,7 @@
           "saves": 0
         }
       ],
-      "motm": 14
+      "motm": 15
     }
   ],
   "club_history": [
@@ -6253,16 +6332,16 @@
           "league": "Serie A TIM",
           "leagueId": "31",
           "clubBadgeColor": "bg-zinc-800",
-          "apps": 40,
-          "goals": 13,
-          "assists": 29,
+          "apps": 44,
+          "goals": 15,
+          "assists": 31,
           "avgRating": 7.51,
           "overall": 73,
           "yellowCards": 1,
           "redCards": 0,
           "trophies": [],
           "individualAwards": [],
-          "highlights": "13 goals, 26 assists in 37 appearances",
+          "highlights": "15 goals, 28 assists in 41 appearances",
           "xG": 0,
           "xA": 0,
           "keyPassesPerGame": 0,
@@ -6287,15 +6366,15 @@
               "compobjid": 1097,
               "competition": "Serie A TIM",
               "teamid": 113974,
-              "apps": 34,
-              "goals": 13,
-              "assists": 22,
+              "apps": 38,
+              "goals": 15,
+              "assists": 24,
               "avgRating": 7.57,
               "yellow": 1,
               "red": 0,
-              "motm": 12,
+              "motm": 13,
               "clean_sheets": 4,
-              "goals_conceded": 66,
+              "goals_conceded": 75,
               "saves": 0
             },
             {
@@ -6314,12 +6393,12 @@
               "saves": 0
             }
           ],
-          "motm": 14
+          "motm": 15
         }
       ],
-      "totalGoals": 13,
-      "totalAssists": 29,
-      "totalApps": 40,
+      "totalGoals": 15,
+      "totalAssists": 31,
+      "totalApps": 44,
       "historicalTrophies": {
         "leagueTitles": 0,
         "domesticCups": 0,
@@ -6337,29 +6416,29 @@
     }
   ],
   "post_departure": {},
-  "total_goals": 13,
-  "total_assists": 26,
-  "total_appearances": 40,
+  "total_goals": 15,
+  "total_assists": 28,
+  "total_appearances": 44,
   "wage": 9800,
   "market_value": 6000000,
-  "latest_match_rating": 9,
+  "latest_match_rating": 8,
   "matches_played": 15,
-  "latest_match_date": "20230422",
+  "latest_match_date": "20230521",
   "season_start_date": "20220820",
   "season_end_date": "20230630",
-  "current_game_date": "20230423",
+  "current_game_date": "20230611",
   "season_is_active": true,
-  "days_until_season_end": 68,
+  "days_until_season_end": 19,
   "trophies": [
     {
       "id": "t_motm",
       "title": "Man of the Match Awards",
       "category": "Individual",
-      "quantity": 14,
+      "quantity": 15,
       "yearsWon": [
         "2023/2024"
       ],
-      "description": "Awarded 14 times for outstanding match performances.",
+      "description": "Awarded 15 times for outstanding match performances.",
       "tier": "Platinum",
       "iconType": "manofmatch"
     },
@@ -6395,7 +6474,7 @@
     }
   ],
   "league_stats": {
-    "exportDate": "23/04/2023",
+    "exportDate": "30/06/2023",
     "userTeamId": 113974,
     "myPlayerId": 235735,
     "competitions": [
@@ -6405,17 +6484,6 @@
         "teams": [
           {
             "position": 1,
-            "teamid": 110556,
-            "teamname": "Genoa",
-            "matchesPlayed": 3,
-            "goals": 7,
-            "assists": 3,
-            "yellow": 3,
-            "red": 0,
-            "goalDifference": 7
-          },
-          {
-            "position": 2,
             "teamid": 160,
             "teamname": "VfL Bochum",
             "matchesPlayed": 3,
@@ -6426,10 +6494,21 @@
             "goalDifference": 6
           },
           {
+            "position": 2,
+            "teamid": 110556,
+            "teamname": "Genoa",
+            "matchesPlayed": 2,
+            "goals": 6,
+            "assists": 2,
+            "yellow": 3,
+            "red": 0,
+            "goalDifference": 6
+          },
+          {
             "position": 3,
             "teamid": 166,
             "teamname": "Hertha Berlin",
-            "matchesPlayed": 4,
+            "matchesPlayed": 3,
             "goals": 5,
             "assists": 2,
             "yellow": 3,
@@ -6460,17 +6539,6 @@
           },
           {
             "position": 6,
-            "teamid": 36,
-            "teamname": "VfB Stuttgart",
-            "matchesPlayed": 3,
-            "goals": 3,
-            "assists": 2,
-            "yellow": 2,
-            "red": 0,
-            "goalDifference": 3
-          },
-          {
-            "position": 7,
             "teamid": 468,
             "teamname": "Elche CF",
             "matchesPlayed": 3,
@@ -6481,15 +6549,26 @@
             "goalDifference": 3
           },
           {
+            "position": 7,
+            "teamid": 36,
+            "teamname": "VfB Stuttgart",
+            "matchesPlayed": 3,
+            "goals": 2,
+            "assists": 2,
+            "yellow": 1,
+            "red": 0,
+            "goalDifference": 2
+          },
+          {
             "position": 8,
             "teamid": 113974,
             "teamname": "Spezia",
-            "matchesPlayed": 3,
-            "goals": 3,
-            "assists": 4,
+            "matchesPlayed": 2,
+            "goals": 1,
+            "assists": 3,
             "yellow": 0,
             "red": 0,
-            "goalDifference": 3
+            "goalDifference": 1
           }
         ]
       },
@@ -6501,221 +6580,221 @@
             "position": 1,
             "teamid": 114912,
             "teamname": "Roma FC",
-            "matchesPlayed": 41,
-            "goals": 75,
-            "assists": 42,
+            "matchesPlayed": 45,
+            "goals": 88,
+            "assists": 41,
             "yellow": 20,
             "red": 4,
-            "goalDifference": 75
+            "goalDifference": 88
           },
           {
             "position": 2,
-            "teamid": 44,
-            "teamname": "Inter",
-            "matchesPlayed": 38,
-            "goals": 72,
-            "assists": 37,
-            "yellow": 13,
-            "red": 1,
-            "goalDifference": 72
+            "teamid": 115845,
+            "teamname": "Bergamo Calcio",
+            "matchesPlayed": 62,
+            "goals": 78,
+            "assists": 43,
+            "yellow": 37,
+            "red": 3,
+            "goalDifference": 78
           },
           {
             "position": 3,
-            "teamid": 45,
-            "teamname": "Juventus",
-            "matchesPlayed": 38,
-            "goals": 62,
-            "assists": 43,
-            "yellow": 12,
-            "red": 2,
-            "goalDifference": 62
+            "teamid": 44,
+            "teamname": "Inter",
+            "matchesPlayed": 43,
+            "goals": 70,
+            "assists": 38,
+            "yellow": 16,
+            "red": 0,
+            "goalDifference": 70
           },
           {
             "position": 4,
-            "teamid": 47,
-            "teamname": "Milan",
-            "matchesPlayed": 41,
-            "goals": 60,
-            "assists": 40,
-            "yellow": 20,
-            "red": 1,
-            "goalDifference": 60
+            "teamid": 116365,
+            "teamname": "Napoli FC",
+            "matchesPlayed": 45,
+            "goals": 69,
+            "assists": 33,
+            "yellow": 33,
+            "red": 4,
+            "goalDifference": 69
           },
           {
             "position": 5,
-            "teamid": 115841,
-            "teamname": "Latium",
-            "matchesPlayed": 39,
-            "goals": 58,
-            "assists": 31,
-            "yellow": 24,
+            "teamid": 110374,
+            "teamname": "Fiorentina",
+            "matchesPlayed": 54,
+            "goals": 68,
+            "assists": 32,
+            "yellow": 33,
             "red": 2,
-            "goalDifference": 58
+            "goalDifference": 68
           },
           {
             "position": 6,
-            "teamid": 115845,
-            "teamname": "Bergamo Calcio",
-            "matchesPlayed": 41,
-            "goals": 57,
-            "assists": 28,
-            "yellow": 26,
-            "red": 0,
-            "goalDifference": 57
+            "teamid": 115841,
+            "teamname": "Latium",
+            "matchesPlayed": 48,
+            "goals": 68,
+            "assists": 42,
+            "yellow": 35,
+            "red": 2,
+            "goalDifference": 68
           },
           {
             "position": 7,
-            "teamid": 116365,
-            "teamname": "Napoli FC",
-            "matchesPlayed": 40,
-            "goals": 56,
+            "teamid": 47,
+            "teamname": "Milan",
+            "matchesPlayed": 44,
+            "goals": 65,
             "assists": 36,
-            "yellow": 28,
-            "red": 3,
-            "goalDifference": 56
+            "yellow": 20,
+            "red": 2,
+            "goalDifference": 65
           },
           {
             "position": 8,
-            "teamid": 113974,
-            "teamname": "Spezia",
-            "matchesPlayed": 41,
-            "goals": 52,
-            "assists": 48,
-            "yellow": 1,
-            "red": 0,
-            "goalDifference": 52
+            "teamid": 45,
+            "teamname": "Juventus",
+            "matchesPlayed": 44,
+            "goals": 60,
+            "assists": 47,
+            "yellow": 18,
+            "red": 2,
+            "goalDifference": 60
           },
           {
             "position": 9,
-            "teamid": 110374,
-            "teamname": "Fiorentina",
-            "matchesPlayed": 39,
-            "goals": 44,
-            "assists": 22,
-            "yellow": 24,
-            "red": 2,
-            "goalDifference": 44
+            "teamid": 111974,
+            "teamname": "Sassuolo",
+            "matchesPlayed": 47,
+            "goals": 51,
+            "assists": 27,
+            "yellow": 26,
+            "red": 1,
+            "goalDifference": 51
           },
           {
             "position": 10,
             "teamid": 55,
             "teamname": "Udinese",
-            "matchesPlayed": 39,
-            "goals": 42,
+            "matchesPlayed": 42,
+            "goals": 46,
             "assists": 24,
-            "yellow": 24,
+            "yellow": 21,
             "red": 1,
-            "goalDifference": 42
+            "goalDifference": 46
           },
           {
             "position": 11,
-            "teamid": 111974,
-            "teamname": "Sassuolo",
-            "matchesPlayed": 37,
-            "goals": 41,
-            "assists": 23,
-            "yellow": 21,
-            "red": 1,
-            "goalDifference": 41
+            "teamid": 206,
+            "teamname": "Hellas Verona",
+            "matchesPlayed": 48,
+            "goals": 43,
+            "assists": 27,
+            "yellow": 26,
+            "red": 2,
+            "goalDifference": 43
           },
           {
             "position": 12,
-            "teamid": 347,
-            "teamname": "Lecce",
-            "matchesPlayed": 40,
-            "goals": 39,
-            "assists": 26,
-            "yellow": 22,
-            "red": 1,
-            "goalDifference": 39
+            "teamid": 113974,
+            "teamname": "Spezia",
+            "matchesPlayed": 33,
+            "goals": 40,
+            "assists": 45,
+            "yellow": 1,
+            "red": 0,
+            "goalDifference": 40
           },
           {
             "position": 13,
-            "teamid": 1746,
-            "teamname": "Empoli",
-            "matchesPlayed": 37,
-            "goals": 37,
-            "assists": 21,
-            "yellow": 28,
-            "red": 1,
-            "goalDifference": 37
+            "teamid": 1837,
+            "teamname": "Sampdoria",
+            "matchesPlayed": 43,
+            "goals": 38,
+            "assists": 16,
+            "yellow": 22,
+            "red": 2,
+            "goalDifference": 38
           },
           {
             "position": 14,
-            "teamid": 111811,
-            "teamname": "Monza",
-            "matchesPlayed": 38,
-            "goals": 37,
-            "assists": 15,
-            "yellow": 24,
-            "red": 0,
-            "goalDifference": 37
+            "teamid": 189,
+            "teamname": "Bologna",
+            "matchesPlayed": 39,
+            "goals": 36,
+            "assists": 18,
+            "yellow": 19,
+            "red": 4,
+            "goalDifference": 36
           },
           {
             "position": 15,
-            "teamid": 1837,
-            "teamname": "Sampdoria",
-            "matchesPlayed": 38,
+            "teamid": 54,
+            "teamname": "Torino",
+            "matchesPlayed": 36,
             "goals": 36,
-            "assists": 26,
-            "yellow": 18,
-            "red": 1,
+            "assists": 14,
+            "yellow": 23,
+            "red": 0,
             "goalDifference": 36
           },
           {
             "position": 16,
-            "teamid": 54,
-            "teamname": "Torino",
-            "matchesPlayed": 38,
-            "goals": 36,
-            "assists": 13,
-            "yellow": 22,
+            "teamid": 347,
+            "teamname": "Lecce",
+            "matchesPlayed": 27,
+            "goals": 32,
+            "assists": 25,
+            "yellow": 15,
             "red": 1,
-            "goalDifference": 36
+            "goalDifference": 32
           },
           {
             "position": 17,
-            "teamid": 206,
-            "teamname": "Hellas Verona",
-            "matchesPlayed": 40,
-            "goals": 34,
-            "assists": 19,
-            "yellow": 23,
-            "red": 1,
-            "goalDifference": 34
+            "teamid": 111434,
+            "teamname": "Cremonese",
+            "matchesPlayed": 31,
+            "goals": 30,
+            "assists": 20,
+            "yellow": 28,
+            "red": 0,
+            "goalDifference": 30
           },
           {
             "position": 18,
             "teamid": 110373,
             "teamname": "Salernitana",
-            "matchesPlayed": 40,
-            "goals": 34,
-            "assists": 15,
-            "yellow": 28,
+            "matchesPlayed": 32,
+            "goals": 25,
+            "assists": 9,
+            "yellow": 24,
             "red": 0,
-            "goalDifference": 34
+            "goalDifference": 25
           },
           {
             "position": 19,
-            "teamid": 189,
-            "teamname": "Bologna",
-            "matchesPlayed": 39,
-            "goals": 33,
-            "assists": 18,
-            "yellow": 19,
-            "red": 3,
-            "goalDifference": 33
+            "teamid": 1746,
+            "teamname": "Empoli",
+            "matchesPlayed": 30,
+            "goals": 22,
+            "assists": 13,
+            "yellow": 22,
+            "red": 1,
+            "goalDifference": 22
           },
           {
             "position": 20,
-            "teamid": 111434,
-            "teamname": "Cremonese",
-            "matchesPlayed": 39,
-            "goals": 29,
-            "assists": 20,
-            "yellow": 26,
-            "red": 2,
-            "goalDifference": 29
+            "teamid": 111811,
+            "teamname": "Monza",
+            "matchesPlayed": 19,
+            "goals": 10,
+            "assists": 10,
+            "yellow": 15,
+            "red": 0,
+            "goalDifference": 10
           }
         ]
       },
@@ -6727,51 +6806,62 @@
             "position": 1,
             "teamid": 114912,
             "teamname": "Roma FC",
-            "matchesPlayed": 5,
-            "goals": 11,
-            "assists": 6,
-            "yellow": 4,
-            "red": 0,
-            "goalDifference": 11
+            "matchesPlayed": 6,
+            "goals": 13,
+            "assists": 7,
+            "yellow": 3,
+            "red": 1,
+            "goalDifference": 13
           },
           {
             "position": 2,
             "teamid": 47,
             "teamname": "Milan",
-            "matchesPlayed": 5,
+            "matchesPlayed": 4,
             "goals": 10,
             "assists": 6,
-            "yellow": 3,
+            "yellow": 4,
             "red": 0,
             "goalDifference": 10
           },
           {
             "position": 3,
-            "teamid": 45,
-            "teamname": "Juventus",
+            "teamid": 110374,
+            "teamname": "Fiorentina",
             "matchesPlayed": 5,
             "goals": 9,
-            "assists": 6,
-            "yellow": 4,
+            "assists": 3,
+            "yellow": 1,
             "red": 0,
             "goalDifference": 9
           },
           {
             "position": 4,
-            "teamid": 110374,
-            "teamname": "Fiorentina",
-            "matchesPlayed": 5,
+            "teamid": 45,
+            "teamname": "Juventus",
+            "matchesPlayed": 6,
+            "goals": 9,
+            "assists": 6,
+            "yellow": 5,
+            "red": 0,
+            "goalDifference": 9
+          },
+          {
+            "position": 5,
+            "teamid": 111434,
+            "teamname": "Cremonese",
+            "matchesPlayed": 3,
             "goals": 8,
-            "assists": 3,
-            "yellow": 1,
+            "assists": 1,
+            "yellow": 2,
             "red": 0,
             "goalDifference": 8
           },
           {
-            "position": 5,
-            "teamid": 113974,
-            "teamname": "Spezia",
-            "matchesPlayed": 4,
+            "position": 6,
+            "teamid": 110738,
+            "teamname": "Pisa",
+            "matchesPlayed": 5,
             "goals": 7,
             "assists": 4,
             "yellow": 1,
@@ -6779,7 +6869,7 @@
             "goalDifference": 7
           },
           {
-            "position": 6,
+            "position": 7,
             "teamid": 111974,
             "teamname": "Sassuolo",
             "matchesPlayed": 4,
@@ -6790,32 +6880,10 @@
             "goalDifference": 7
           },
           {
-            "position": 7,
-            "teamid": 110738,
-            "teamname": "Pisa",
-            "matchesPlayed": 5,
-            "goals": 7,
-            "assists": 3,
-            "yellow": 1,
-            "red": 0,
-            "goalDifference": 7
-          },
-          {
             "position": 8,
-            "teamid": 55,
-            "teamname": "Udinese",
-            "matchesPlayed": 4,
-            "goals": 6,
-            "assists": 3,
-            "yellow": 1,
-            "red": 0,
-            "goalDifference": 6
-          },
-          {
-            "position": 9,
             "teamid": 1847,
             "teamname": "Ascoli",
-            "matchesPlayed": 4,
+            "matchesPlayed": 3,
             "goals": 6,
             "assists": 3,
             "yellow": 1,
@@ -6823,62 +6891,40 @@
             "goalDifference": 6
           },
           {
-            "position": 10,
-            "teamid": 206,
-            "teamname": "Hellas Verona",
-            "matchesPlayed": 2,
-            "goals": 5,
-            "assists": 0,
-            "yellow": 0,
+            "position": 9,
+            "teamid": 55,
+            "teamname": "Udinese",
+            "matchesPlayed": 3,
+            "goals": 6,
+            "assists": 3,
+            "yellow": 1,
             "red": 0,
-            "goalDifference": 5
+            "goalDifference": 6
+          },
+          {
+            "position": 10,
+            "teamid": 112026,
+            "teamname": "Benevento",
+            "matchesPlayed": 2,
+            "goals": 4,
+            "assists": 0,
+            "yellow": 1,
+            "red": 0,
+            "goalDifference": 4
           },
           {
             "position": 11,
-            "teamid": 50,
-            "teamname": "Parma",
-            "matchesPlayed": 2,
-            "goals": 5,
-            "assists": 2,
+            "teamid": 113974,
+            "teamname": "Spezia",
+            "matchesPlayed": 3,
+            "goals": 4,
+            "assists": 4,
             "yellow": 0,
             "red": 0,
-            "goalDifference": 5
+            "goalDifference": 4
           },
           {
             "position": 12,
-            "teamid": 111434,
-            "teamname": "Cremonese",
-            "matchesPlayed": 3,
-            "goals": 4,
-            "assists": 1,
-            "yellow": 2,
-            "red": 0,
-            "goalDifference": 4
-          },
-          {
-            "position": 13,
-            "teamid": 1746,
-            "teamname": "Empoli",
-            "matchesPlayed": 3,
-            "goals": 4,
-            "assists": 2,
-            "yellow": 3,
-            "red": 0,
-            "goalDifference": 4
-          },
-          {
-            "position": 14,
-            "teamid": 110373,
-            "teamname": "Salernitana",
-            "matchesPlayed": 4,
-            "goals": 4,
-            "assists": 3,
-            "yellow": 3,
-            "red": 0,
-            "goalDifference": 4
-          },
-          {
-            "position": 15,
             "teamid": 1848,
             "teamname": "Bari",
             "matchesPlayed": 1,
@@ -6889,10 +6935,10 @@
             "goalDifference": 3
           },
           {
-            "position": 16,
+            "position": 13,
             "teamid": 115845,
             "teamname": "Bergamo Calcio",
-            "matchesPlayed": 2,
+            "matchesPlayed": 3,
             "goals": 3,
             "assists": 2,
             "yellow": 0,
@@ -6900,18 +6946,40 @@
             "goalDifference": 3
           },
           {
-            "position": 17,
-            "teamid": 54,
-            "teamname": "Torino",
+            "position": 14,
+            "teamid": 1837,
+            "teamname": "Sampdoria",
             "matchesPlayed": 2,
             "goals": 3,
-            "assists": 1,
-            "yellow": 1,
-            "red": 1,
+            "assists": 2,
+            "yellow": 2,
+            "red": 0,
             "goalDifference": 3
           },
           {
-            "position": 18,
+            "position": 15,
+            "teamid": 206,
+            "teamname": "Hellas Verona",
+            "matchesPlayed": 3,
+            "goals": 3,
+            "assists": 0,
+            "yellow": 0,
+            "red": 0,
+            "goalDifference": 3
+          },
+          {
+            "position": 16,
+            "teamid": 110373,
+            "teamname": "Salernitana",
+            "matchesPlayed": 3,
+            "goals": 3,
+            "assists": 3,
+            "yellow": 2,
+            "red": 0,
+            "goalDifference": 3
+          },
+          {
+            "position": 17,
             "teamid": 116365,
             "teamname": "Napoli FC",
             "matchesPlayed": 2,
@@ -6922,43 +6990,21 @@
             "goalDifference": 3
           },
           {
-            "position": 19,
-            "teamid": 112026,
-            "teamname": "Benevento",
-            "matchesPlayed": 2,
-            "goals": 3,
+            "position": 18,
+            "teamid": 110556,
+            "teamname": "Genoa",
+            "matchesPlayed": 1,
+            "goals": 2,
             "assists": 0,
             "yellow": 1,
             "red": 0,
-            "goalDifference": 3
-          },
-          {
-            "position": 20,
-            "teamid": 1842,
-            "teamname": "Cagliari",
-            "matchesPlayed": 1,
-            "goals": 2,
-            "assists": 1,
-            "yellow": 0,
-            "red": 0,
             "goalDifference": 2
           },
           {
-            "position": 21,
-            "teamid": 1745,
-            "teamname": "Como",
-            "matchesPlayed": 3,
-            "goals": 2,
-            "assists": 2,
-            "yellow": 1,
-            "red": 1,
-            "goalDifference": 2
-          },
-          {
-            "position": 22,
+            "position": 19,
             "teamid": 115841,
             "teamname": "Latium",
-            "matchesPlayed": 2,
+            "matchesPlayed": 3,
             "goals": 2,
             "assists": 1,
             "yellow": 2,
@@ -6966,10 +7012,43 @@
             "goalDifference": 2
           },
           {
+            "position": 20,
+            "teamid": 1746,
+            "teamname": "Empoli",
+            "matchesPlayed": 2,
+            "goals": 2,
+            "assists": 1,
+            "yellow": 3,
+            "red": 0,
+            "goalDifference": 2
+          },
+          {
+            "position": 21,
+            "teamid": 1842,
+            "teamname": "Cagliari",
+            "matchesPlayed": 2,
+            "goals": 2,
+            "assists": 1,
+            "yellow": 1,
+            "red": 0,
+            "goalDifference": 2
+          },
+          {
+            "position": 22,
+            "teamid": 54,
+            "teamname": "Torino",
+            "matchesPlayed": 2,
+            "goals": 2,
+            "assists": 0,
+            "yellow": 0,
+            "red": 1,
+            "goalDifference": 2
+          },
+          {
             "position": 23,
-            "teamid": 1837,
-            "teamname": "Sampdoria",
-            "matchesPlayed": 3,
+            "teamid": 205,
+            "teamname": "Venezia",
+            "matchesPlayed": 2,
             "goals": 2,
             "assists": 1,
             "yellow": 0,
@@ -6978,45 +7057,45 @@
           },
           {
             "position": 24,
-            "teamid": 205,
-            "teamname": "Venezia",
-            "matchesPlayed": 2,
-            "goals": 2,
+            "teamid": 50,
+            "teamname": "Parma",
+            "matchesPlayed": 3,
+            "goals": 1,
             "assists": 2,
-            "yellow": 2,
+            "yellow": 0,
             "red": 0,
-            "goalDifference": 2
+            "goalDifference": 1
           },
           {
             "position": 25,
-            "teamid": 112791,
-            "teamname": "SPAL",
+            "teamid": 111811,
+            "teamname": "Monza",
             "matchesPlayed": 1,
             "goals": 1,
-            "assists": 1,
-            "yellow": 1,
+            "assists": 0,
+            "yellow": 2,
             "red": 0,
             "goalDifference": 1
           },
           {
             "position": 26,
+            "teamid": 189,
+            "teamname": "Bologna",
+            "matchesPlayed": 1,
+            "goals": 1,
+            "assists": 1,
+            "yellow": 1,
+            "red": 1,
+            "goalDifference": 1
+          },
+          {
+            "position": 27,
             "teamid": 347,
             "teamname": "Lecce",
             "matchesPlayed": 2,
             "goals": 1,
             "assists": 0,
             "yellow": 2,
-            "red": 0,
-            "goalDifference": 1
-          },
-          {
-            "position": 27,
-            "teamid": 111993,
-            "teamname": "Cittadella",
-            "matchesPlayed": 1,
-            "goals": 1,
-            "assists": 0,
-            "yellow": 0,
             "red": 0,
             "goalDifference": 1
           },
@@ -7044,39 +7123,17 @@
           },
           {
             "position": 30,
-            "teamid": 189,
-            "teamname": "Bologna",
+            "teamid": 111993,
+            "teamname": "Cittadella",
             "matchesPlayed": 1,
             "goals": 1,
-            "assists": 1,
-            "yellow": 2,
+            "assists": 0,
+            "yellow": 0,
             "red": 0,
             "goalDifference": 1
           },
           {
             "position": 31,
-            "teamid": 1744,
-            "teamname": "Modena",
-            "matchesPlayed": 1,
-            "goals": 0,
-            "assists": 0,
-            "yellow": 1,
-            "red": 0,
-            "goalDifference": 0
-          },
-          {
-            "position": 32,
-            "teamid": 1843,
-            "teamname": "Palermo",
-            "matchesPlayed": 1,
-            "goals": 0,
-            "assists": 0,
-            "yellow": 0,
-            "red": 0,
-            "goalDifference": 0
-          },
-          {
-            "position": 33,
             "teamid": 111657,
             "teamname": "Frosinone",
             "matchesPlayed": 1,
@@ -7087,7 +7144,7 @@
             "goalDifference": 0
           },
           {
-            "position": 34,
+            "position": 32,
             "teamid": 203,
             "teamname": "Reggina",
             "matchesPlayed": 1,
@@ -7098,18 +7155,7 @@
             "goalDifference": 0
           },
           {
-            "position": 35,
-            "teamid": 110556,
-            "teamname": "Genoa",
-            "matchesPlayed": 1,
-            "goals": 0,
-            "assists": 0,
-            "yellow": 1,
-            "red": 0,
-            "goalDifference": 0
-          },
-          {
-            "position": 36,
+            "position": 33,
             "teamid": 112168,
             "teamname": "Cosenza",
             "matchesPlayed": 1,
@@ -7120,18 +7166,18 @@
             "goalDifference": 0
           },
           {
-            "position": 37,
-            "teamid": 44,
-            "teamname": "Inter",
-            "matchesPlayed": 1,
+            "position": 34,
+            "teamid": 1745,
+            "teamname": "Como",
+            "matchesPlayed": 2,
             "goals": 0,
-            "assists": 0,
-            "yellow": 2,
+            "assists": 2,
+            "yellow": 0,
             "red": 0,
             "goalDifference": 0
           },
           {
-            "position": 38,
+            "position": 35,
             "teamid": 112494,
             "teamname": "Südtirol",
             "matchesPlayed": 1,
@@ -7142,9 +7188,31 @@
             "goalDifference": 0
           },
           {
-            "position": 39,
-            "teamid": 111811,
-            "teamname": "Monza",
+            "position": 36,
+            "teamid": 199,
+            "teamname": "Perugia",
+            "matchesPlayed": 1,
+            "goals": 0,
+            "assists": 0,
+            "yellow": 0,
+            "red": 0,
+            "goalDifference": 0
+          },
+          {
+            "position": 37,
+            "teamid": 112791,
+            "teamname": "SPAL",
+            "matchesPlayed": 1,
+            "goals": 0,
+            "assists": 1,
+            "yellow": 1,
+            "red": 0,
+            "goalDifference": 0
+          },
+          {
+            "position": 38,
+            "teamid": 44,
+            "teamname": "Inter",
             "matchesPlayed": 1,
             "goals": 0,
             "assists": 0,
@@ -7153,13 +7221,24 @@
             "goalDifference": 0
           },
           {
-            "position": 40,
-            "teamid": 199,
-            "teamname": "Perugia",
+            "position": 39,
+            "teamid": 1843,
+            "teamname": "Palermo",
             "matchesPlayed": 1,
             "goals": 0,
             "assists": 0,
             "yellow": 0,
+            "red": 0,
+            "goalDifference": 0
+          },
+          {
+            "position": 40,
+            "teamid": 1744,
+            "teamname": "Modena",
+            "matchesPlayed": 1,
+            "goals": 0,
+            "assists": 0,
+            "yellow": 1,
             "red": 0,
             "goalDifference": 0
           }
@@ -7174,9 +7253,9 @@
         "teamname": "Juventus",
         "playerName": "Dušan Vlahović",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 23,
-        "assists": 3,
+        "apps": 37,
+        "goals": 24,
+        "assists": 4,
         "motm": 9
       },
       {
@@ -7186,8 +7265,8 @@
         "teamname": "Bergamo Calcio",
         "playerName": "Duván Zapata",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 19,
+        "apps": 38,
+        "goals": 21,
         "assists": 5,
         "motm": 8
       },
@@ -7198,202 +7277,202 @@
         "teamname": "Roma FC",
         "playerName": "Tammy Abraham",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 17,
+        "apps": 38,
+        "goals": 20,
         "assists": 13,
-        "motm": 11
+        "motm": 13
       },
       {
         "rank": 4,
-        "playerid": 192505,
-        "teamid": 44,
-        "teamname": "Inter",
-        "playerName": "Romelu Lukaku",
-        "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 16,
-        "assists": 4,
-        "motm": 5
-      },
-      {
-        "rank": 5,
-        "playerid": 189505,
-        "teamid": 115841,
-        "teamname": "Latium",
-        "playerName": "Pedro",
-        "compname": "Serie A TIM",
-        "apps": 18,
-        "goals": 16,
-        "assists": 3,
-        "motm": 4
-      },
-      {
-        "rank": 6,
-        "playerid": 211110,
-        "teamid": 114912,
-        "teamname": "Roma FC",
-        "playerName": "Paulo Dybala",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 15,
-        "assists": 8,
-        "motm": 4
-      },
-      {
-        "rank": 7,
-        "playerid": 253004,
-        "teamid": 116365,
-        "teamname": "Napoli FC",
-        "playerName": "Ansu Fati",
-        "compname": "Serie A TIM",
-        "apps": 27,
-        "goals": 15,
-        "assists": 3,
-        "motm": 4
-      },
-      {
-        "rank": 8,
         "playerid": 241721,
         "teamid": 47,
         "teamname": "Milan",
         "playerName": "Rafael Leão",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 15,
+        "apps": 37,
+        "goals": 18,
         "assists": 6,
+        "motm": 5
+      },
+      {
+        "rank": 5,
+        "playerid": 211110,
+        "teamid": 114912,
+        "teamname": "Roma FC",
+        "playerName": "Paulo Dybala",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 17,
+        "assists": 8,
         "motm": 4
       },
       {
-        "rank": 9,
-        "playerid": 201153,
-        "teamid": 44,
-        "teamname": "Inter",
-        "playerName": "Morata",
-        "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 15,
-        "assists": 3,
-        "motm": 6
-      },
-      {
-        "rank": 10,
-        "playerid": 199110,
-        "teamid": 115845,
-        "teamname": "Bergamo Calcio",
-        "playerName": "Luis Muriel",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 14,
-        "assists": 2,
-        "motm": 4
-      },
-      {
-        "rank": 11,
-        "playerid": 193881,
-        "teamid": 1837,
-        "teamname": "Sampdoria",
-        "playerName": "Filip Đuričić",
-        "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 13,
-        "assists": 2,
-        "motm": 4
-      },
-      {
-        "rank": 12,
+        "rank": 6,
         "playerid": 192387,
         "teamid": 115841,
         "teamname": "Latium",
         "playerName": "Ciro Immobile",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 13,
+        "apps": 37,
+        "goals": 17,
         "assists": 4,
-        "motm": 3
+        "motm": 5
       },
       {
-        "rank": 13,
+        "rank": 7,
+        "playerid": 193881,
+        "teamid": 1837,
+        "teamname": "Sampdoria",
+        "playerName": "Filip Đuričić",
+        "compname": "Serie A TIM",
+        "apps": 34,
+        "goals": 17,
+        "assists": 2,
+        "motm": 6
+      },
+      {
+        "rank": 8,
+        "playerid": 189505,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Pedro",
+        "compname": "Serie A TIM",
+        "apps": 19,
+        "goals": 16,
+        "assists": 3,
+        "motm": 4
+      },
+      {
+        "rank": 9,
+        "playerid": 215689,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Andrea Petagna",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 16,
+        "assists": 1,
+        "motm": 6
+      },
+      {
+        "rank": 10,
+        "playerid": 201153,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Morata",
+        "compname": "Serie A TIM",
+        "apps": 35,
+        "goals": 16,
+        "assists": 4,
+        "motm": 7
+      },
+      {
+        "rank": 11,
+        "playerid": 199110,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Luis Muriel",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 15,
+        "assists": 2,
+        "motm": 4
+      },
+      {
+        "rank": 12,
         "playerid": 235735,
         "teamid": 113974,
         "teamname": "Spezia",
         "playerName": "Ethan Ampadu",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 13,
-        "assists": 22,
-        "motm": 12
+        "apps": 38,
+        "goals": 15,
+        "assists": 24,
+        "motm": 13
       },
       {
-        "rank": 14,
-        "playerid": 223273,
-        "teamid": 115845,
-        "teamname": "Bergamo Calcio",
-        "playerName": "Mario Pašalić",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 13,
-        "assists": 4,
-        "motm": 5
-      },
-      {
-        "rank": 15,
+        "rank": 13,
         "playerid": 251892,
         "teamid": 55,
         "teamname": "Udinese",
         "playerName": "Beto",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 13,
+        "apps": 38,
+        "goals": 15,
         "assists": 5,
-        "motm": 5
-      },
-      {
-        "rank": 16,
-        "playerid": 215689,
-        "teamid": 111811,
-        "teamname": "Monza",
-        "playerName": "Andrea Petagna",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 13,
-        "assists": 1,
         "motm": 6
       },
       {
-        "rank": 17,
-        "playerid": 216409,
+        "rank": 14,
+        "playerid": 253004,
         "teamid": 116365,
         "teamname": "Napoli FC",
-        "playerName": "Matteo Politano",
+        "playerName": "Ansu Fati",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 12,
-        "assists": 9,
-        "motm": 7
+        "apps": 31,
+        "goals": 15,
+        "assists": 3,
+        "motm": 4
       },
       {
-        "rank": 18,
+        "rank": 15,
         "playerid": 196889,
-        "teamid": 206,
-        "teamname": "Hellas Verona",
+        "teamid": 54,
+        "teamname": "Torino",
         "playerName": "Simone Verdi",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 12,
+        "apps": 38,
+        "goals": 14,
         "assists": 4,
         "motm": 4
       },
       {
-        "rank": 19,
+        "rank": 16,
+        "playerid": 223273,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Mario Pašalić",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 14,
+        "assists": 4,
+        "motm": 6
+      },
+      {
+        "rank": 17,
+        "playerid": 242664,
+        "teamid": 47,
+        "teamname": "Milan",
+        "playerName": "Alexis Saelemaekers",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 12,
+        "assists": 9,
+        "motm": 5
+      },
+      {
+        "rank": 18,
         "playerid": 238067,
         "teamid": 114912,
         "teamname": "Roma FC",
         "playerName": "Nicolò Zaniolo",
         "compname": "Serie A TIM",
-        "apps": 30,
+        "apps": 34,
         "goals": 12,
         "assists": 3,
         "motm": 7
+      },
+      {
+        "rank": 19,
+        "playerid": 246186,
+        "teamid": 110374,
+        "teamname": "Fiorentina",
+        "playerName": "Arthur Cabral",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 12,
+        "assists": 1,
+        "motm": 4
       },
       {
         "rank": 20,
@@ -7402,34 +7481,34 @@
         "teamname": "Milan",
         "playerName": "Wissam Ben Yedder",
         "compname": "Serie A TIM",
-        "apps": 20,
+        "apps": 22,
         "goals": 12,
         "assists": 1,
         "motm": 3
       },
       {
         "rank": 21,
-        "playerid": 246186,
-        "teamid": 110374,
-        "teamname": "Fiorentina",
-        "playerName": "Arthur Cabral",
+        "playerid": 216409,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Matteo Politano",
         "compname": "Serie A TIM",
-        "apps": 33,
+        "apps": 37,
         "goals": 12,
-        "assists": 0,
-        "motm": 4
+        "assists": 9,
+        "motm": 7
       },
       {
         "rank": 22,
-        "playerid": 239964,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Eldor Shomurodov",
+        "playerid": 202848,
+        "teamid": 206,
+        "teamname": "Hellas Verona",
+        "playerName": "Gianluca Caprari",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 11,
-        "assists": 3,
-        "motm": 1
+        "apps": 35,
+        "goals": 12,
+        "assists": 2,
+        "motm": 3
       },
       {
         "rank": 23,
@@ -7438,70 +7517,70 @@
         "teamname": "Inter",
         "playerName": "Federico Dimarco",
         "compname": "Serie A TIM",
-        "apps": 26,
+        "apps": 29,
         "goals": 11,
         "assists": 5,
         "motm": 5
       },
       {
         "rank": 24,
-        "playerid": 242664,
-        "teamid": 47,
-        "teamname": "Milan",
-        "playerName": "Alexis Saelemaekers",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 11,
-        "assists": 9,
-        "motm": 5
-      },
-      {
-        "rank": 25,
         "playerid": 210935,
         "teamid": 111974,
         "teamname": "Sassuolo",
         "playerName": "Domenico Berardi",
         "compname": "Serie A TIM",
-        "apps": 31,
+        "apps": 36,
         "goals": 11,
-        "assists": 5,
+        "assists": 6,
         "motm": 5
       },
       {
-        "rank": 26,
-        "playerid": 202848,
-        "teamid": 111811,
-        "teamname": "Monza",
-        "playerName": "Gianluca Caprari",
+        "rank": 25,
+        "playerid": 239964,
+        "teamid": 114912,
+        "teamname": "Roma FC",
+        "playerName": "Eldor Shomurodov",
         "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 10,
-        "assists": 2,
-        "motm": 2
+        "apps": 38,
+        "goals": 11,
+        "assists": 3,
+        "motm": 1
       },
       {
-        "rank": 27,
+        "rank": 26,
         "playerid": 235842,
         "teamid": 111974,
         "teamname": "Sassuolo",
         "playerName": "Andrea Pinamonti",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 9,
+        "apps": 37,
+        "goals": 10,
         "assists": 2,
         "motm": 4
       },
       {
-        "rank": 28,
-        "playerid": 228093,
-        "teamid": 116365,
-        "teamname": "Napoli FC",
-        "playerName": "Marcus Thuram",
+        "rank": 27,
+        "playerid": 240690,
+        "teamid": 110374,
+        "teamname": "Fiorentina",
+        "playerName": "Nicolás González",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 9,
-        "assists": 2,
-        "motm": 3
+        "apps": 37,
+        "goals": 10,
+        "assists": 6,
+        "motm": 2
+      },
+      {
+        "rank": 28,
+        "playerid": 211784,
+        "teamid": 113974,
+        "teamname": "Spezia",
+        "playerName": "Neal Maupay",
+        "compname": "Serie A TIM",
+        "apps": 18,
+        "goals": 10,
+        "assists": 5,
+        "motm": 1
       },
       {
         "rank": 29,
@@ -7510,8 +7589,8 @@
         "teamname": "Torino",
         "playerName": "Ché Adams",
         "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 9,
+        "apps": 34,
+        "goals": 10,
         "assists": 3,
         "motm": 4
       },
@@ -7522,136 +7601,136 @@
         "teamname": "Lecce",
         "playerName": "Omar Marmoush",
         "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 9,
+        "apps": 32,
+        "goals": 10,
         "assists": 4,
         "motm": 3
       },
       {
         "rank": 31,
-        "playerid": 211784,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Neal Maupay",
-        "compname": "Serie A TIM",
-        "apps": 14,
-        "goals": 8,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 32,
         "playerid": 222467,
         "teamid": 113974,
         "teamname": "Spezia",
         "playerName": "Ivi López",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 8,
+        "apps": 35,
+        "goals": 9,
         "assists": 5,
         "motm": 2
       },
       {
-        "rank": 33,
+        "rank": 32,
         "playerid": 186942,
         "teamid": 45,
         "teamname": "Juventus",
         "playerName": "İlkay Gündoğan",
         "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 8,
+        "apps": 36,
+        "goals": 9,
         "assists": 7,
         "motm": 3
       },
       {
-        "rank": 34,
-        "playerid": 223113,
-        "teamid": 110373,
-        "teamname": "Salernitana",
-        "playerName": "Krzysztof Piątek",
-        "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 8,
-        "assists": 3,
-        "motm": 3
-      },
-      {
-        "rank": 35,
-        "playerid": 246242,
-        "teamid": 110373,
-        "teamname": "Salernitana",
-        "playerName": "Boulaye Dia",
-        "compname": "Serie A TIM",
-        "apps": 26,
-        "goals": 8,
-        "assists": 1,
-        "motm": 4
-      },
-      {
-        "rank": 36,
+        "rank": 33,
         "playerid": 210321,
         "teamid": 1746,
         "teamname": "Empoli",
         "playerName": "Romell Quioto",
         "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 8,
+        "apps": 34,
+        "goals": 9,
         "assists": 3,
         "motm": 3
       },
       {
-        "rank": 37,
+        "rank": 34,
         "playerid": 222634,
         "teamid": 55,
         "teamname": "Udinese",
         "playerName": "Isaac Success",
         "compname": "Serie A TIM",
-        "apps": 14,
-        "goals": 8,
+        "apps": 18,
+        "goals": 9,
         "assists": 4,
+        "motm": 3
+      },
+      {
+        "rank": 35,
+        "playerid": 228093,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Marcus Thuram",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 9,
+        "assists": 2,
+        "motm": 3
+      },
+      {
+        "rank": 36,
+        "playerid": 201995,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Felipe Anderson",
+        "compname": "Serie A TIM",
+        "apps": 35,
+        "goals": 8,
+        "assists": 5,
+        "motm": 4
+      },
+      {
+        "rank": 37,
+        "playerid": 203502,
+        "teamid": 189,
+        "teamname": "Bologna",
+        "playerName": "Bobby Decordova-Reid",
+        "compname": "Serie A TIM",
+        "apps": 32,
+        "goals": 8,
+        "assists": 2,
         "motm": 3
       },
       {
         "rank": 38,
-        "playerid": 236610,
-        "teamid": 45,
-        "teamname": "Juventus",
-        "playerName": "Moise Kean",
+        "playerid": 201046,
+        "teamid": 110374,
+        "teamname": "Fiorentina",
+        "playerName": "Riccardo Saponara",
         "compname": "Serie A TIM",
-        "apps": 22,
+        "apps": 11,
         "goals": 7,
-        "assists": 0,
-        "motm": 0
+        "assists": 2,
+        "motm": 3
       },
       {
         "rank": 39,
-        "playerid": 231835,
-        "teamid": 206,
-        "teamname": "Hellas Verona",
-        "playerName": "Thomas Henry",
+        "playerid": 195038,
+        "teamid": 189,
+        "teamname": "Bologna",
+        "playerName": "Florian Kainz",
         "compname": "Serie A TIM",
-        "apps": 27,
+        "apps": 31,
         "goals": 7,
-        "assists": 3,
-        "motm": 1
+        "assists": 5,
+        "motm": 3
       },
       {
         "rank": 40,
-        "playerid": 213814,
-        "teamid": 347,
-        "teamname": "Lecce",
-        "playerName": "Federico Di Francesco",
+        "playerid": 245537,
+        "teamid": 111974,
+        "teamname": "Sassuolo",
+        "playerName": "Emil Ceïde",
         "compname": "Serie A TIM",
-        "apps": 24,
+        "apps": 38,
         "goals": 7,
-        "assists": 4,
-        "motm": 3
+        "assists": 5,
+        "motm": 5
       },
       {
         "rank": 41,
         "playerid": 189053,
-        "teamid": 1746,
-        "teamname": "Empoli",
+        "teamid": 1837,
+        "teamname": "Sampdoria",
         "playerName": "Francesco Caputo",
         "compname": "Serie A TIM",
         "apps": 21,
@@ -7666,22 +7745,22 @@
         "teamname": "Inter",
         "playerName": "Hakan Çalhanoğlu",
         "compname": "Serie A TIM",
-        "apps": 29,
+        "apps": 34,
         "goals": 7,
-        "assists": 6,
+        "assists": 7,
         "motm": 3
       },
       {
         "rank": 43,
-        "playerid": 201995,
-        "teamid": 115841,
-        "teamname": "Latium",
-        "playerName": "Felipe Anderson",
+        "playerid": 231835,
+        "teamid": 206,
+        "teamname": "Hellas Verona",
+        "playerName": "Thomas Henry",
         "compname": "Serie A TIM",
-        "apps": 30,
+        "apps": 27,
         "goals": 7,
         "assists": 3,
-        "motm": 3
+        "motm": 1
       },
       {
         "rank": 44,
@@ -7690,82 +7769,82 @@
         "teamname": "Cremonese",
         "playerName": "David Okereke",
         "compname": "Serie A TIM",
-        "apps": 27,
+        "apps": 30,
         "goals": 7,
         "assists": 3,
         "motm": 0
       },
       {
         "rank": 45,
-        "playerid": 240690,
-        "teamid": 110374,
-        "teamname": "Fiorentina",
-        "playerName": "Nicolás González",
+        "playerid": 235949,
+        "teamid": 347,
+        "teamname": "Lecce",
+        "playerName": "Gabriel Strefezza",
         "compname": "Serie A TIM",
-        "apps": 32,
+        "apps": 38,
         "goals": 7,
         "assists": 6,
         "motm": 1
       },
       {
         "rank": 46,
+        "playerid": 213814,
+        "teamid": 347,
+        "teamname": "Lecce",
+        "playerName": "Federico Di Francesco",
+        "compname": "Serie A TIM",
+        "apps": 27,
+        "goals": 7,
+        "assists": 4,
+        "motm": 3
+      },
+      {
+        "rank": 47,
+        "playerid": 224232,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Nicolò Barella",
+        "compname": "Serie A TIM",
+        "apps": 36,
+        "goals": 7,
+        "assists": 5,
+        "motm": 2
+      },
+      {
+        "rank": 48,
+        "playerid": 222262,
+        "teamid": 111434,
+        "teamname": "Cremonese",
+        "playerName": "Cyriel Dessers",
+        "compname": "Serie A TIM",
+        "apps": 33,
+        "goals": 6,
+        "assists": 3,
+        "motm": 2
+      },
+      {
+        "rank": 49,
         "playerid": 184200,
         "teamid": 189,
         "teamname": "Bologna",
         "playerName": "Marko Arnautović",
         "compname": "Serie A TIM",
-        "apps": 32,
+        "apps": 37,
         "goals": 6,
-        "assists": 4,
+        "assists": 6,
         "motm": 4
-      },
-      {
-        "rank": 47,
-        "playerid": 245537,
-        "teamid": 111974,
-        "teamname": "Sassuolo",
-        "playerName": "Emil Ceïde",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 6,
-        "assists": 4,
-        "motm": 4
-      },
-      {
-        "rank": 48,
-        "playerid": 235949,
-        "teamid": 347,
-        "teamname": "Lecce",
-        "playerName": "Gabriel Strefezza",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 6,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 49,
-        "playerid": 239732,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Szymon Żurkowski",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 6,
-        "assists": 2,
-        "motm": 0
       },
       {
         "rank": 50,
-        "playerid": 219536,
-        "teamid": 1837,
-        "teamname": "Sampdoria",
-        "playerName": "Ignacio Pussetto",
+        "playerid": 247635,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Khvicha Kvaratskhelia",
         "compname": "Serie A TIM",
-        "apps": 25,
+        "apps": 11,
         "goals": 6,
-        "assists": 5,
-        "motm": 0
+        "assists": 0,
+        "motm": 2
       }
     ],
     "topAssists": [
@@ -7776,10 +7855,10 @@
         "teamname": "Spezia",
         "playerName": "Ethan Ampadu",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 13,
-        "assists": 22,
-        "motm": 12
+        "apps": 38,
+        "goals": 15,
+        "assists": 24,
+        "motm": 13
       },
       {
         "rank": 2,
@@ -7788,118 +7867,118 @@
         "teamname": "Roma FC",
         "playerName": "Tammy Abraham",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 17,
+        "apps": 38,
+        "goals": 20,
         "assists": 13,
-        "motm": 11
+        "motm": 13
       },
       {
         "rank": 3,
-        "playerid": 208574,
-        "teamid": 45,
-        "teamname": "Juventus",
-        "playerName": "Filip Kostić",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 5,
-        "assists": 12,
-        "motm": 2
-      },
-      {
-        "rank": 4,
-        "playerid": 216409,
-        "teamid": 116365,
-        "teamname": "Napoli FC",
-        "playerName": "Matteo Politano",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 12,
-        "assists": 9,
-        "motm": 7
-      },
-      {
-        "rank": 5,
         "playerid": 193082,
         "teamid": 45,
         "teamname": "Juventus",
         "playerName": "Juan Cuadrado",
         "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 4,
-        "assists": 9,
-        "motm": 4
+        "apps": 35,
+        "goals": 5,
+        "assists": 12,
+        "motm": 5
       },
       {
-        "rank": 6,
+        "rank": 4,
+        "playerid": 208574,
+        "teamid": 45,
+        "teamname": "Juventus",
+        "playerName": "Filip Kostić",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 5,
+        "assists": 12,
+        "motm": 2
+      },
+      {
+        "rank": 5,
         "playerid": 242664,
         "teamid": 47,
         "teamname": "Milan",
         "playerName": "Alexis Saelemaekers",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 11,
+        "apps": 37,
+        "goals": 12,
         "assists": 9,
         "motm": 5
       },
       {
-        "rank": 7,
-        "playerid": 224031,
-        "teamid": 115841,
-        "teamname": "Latium",
-        "playerName": "Adam Marušić",
+        "rank": 6,
+        "playerid": 216409,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Matteo Politano",
         "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 1,
-        "assists": 8,
-        "motm": 2
+        "apps": 37,
+        "goals": 12,
+        "assists": 9,
+        "motm": 7
       },
       {
-        "rank": 8,
+        "rank": 7,
         "playerid": 211110,
         "teamid": 114912,
         "teamname": "Roma FC",
         "playerName": "Paulo Dybala",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 15,
+        "apps": 37,
+        "goals": 17,
         "assists": 8,
         "motm": 4
       },
       {
-        "rank": 9,
-        "playerid": 186942,
-        "teamid": 45,
-        "teamname": "Juventus",
-        "playerName": "İlkay Gündoğan",
+        "rank": 8,
+        "playerid": 224031,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Adam Marušić",
         "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 8,
+        "apps": 36,
+        "goals": 1,
+        "assists": 8,
+        "motm": 2
+      },
+      {
+        "rank": 9,
+        "playerid": 208128,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Hakan Çalhanoğlu",
+        "compname": "Serie A TIM",
+        "apps": 34,
+        "goals": 7,
         "assists": 7,
         "motm": 3
       },
       {
         "rank": 10,
-        "playerid": 240690,
-        "teamid": 110374,
-        "teamname": "Fiorentina",
-        "playerName": "Nicolás González",
+        "playerid": 186942,
+        "teamid": 45,
+        "teamname": "Juventus",
+        "playerName": "İlkay Gündoğan",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 7,
-        "assists": 6,
-        "motm": 1
+        "apps": 36,
+        "goals": 9,
+        "assists": 7,
+        "motm": 3
       },
       {
         "rank": 11,
-        "playerid": 231410,
-        "teamid": 47,
-        "teamname": "Milan",
-        "playerName": "Brahim",
+        "playerid": 210935,
+        "teamid": 111974,
+        "teamname": "Sassuolo",
+        "playerName": "Domenico Berardi",
         "compname": "Serie A TIM",
-        "apps": 28,
-        "goals": 5,
+        "apps": 36,
+        "goals": 11,
         "assists": 6,
-        "motm": 2
+        "motm": 5
       },
       {
         "rank": 12,
@@ -7908,25 +7987,61 @@
         "teamname": "Milan",
         "playerName": "Rafael Leão",
         "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 15,
+        "apps": 37,
+        "goals": 18,
         "assists": 6,
-        "motm": 4
+        "motm": 5
       },
       {
         "rank": 13,
-        "playerid": 239807,
-        "teamid": 111974,
-        "teamname": "Sassuolo",
-        "playerName": "Davide Frattesi",
+        "playerid": 235949,
+        "teamid": 347,
+        "teamname": "Lecce",
+        "playerName": "Gabriel Strefezza",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 4,
+        "apps": 38,
+        "goals": 7,
         "assists": 6,
         "motm": 1
       },
       {
         "rank": 14,
+        "playerid": 240690,
+        "teamid": 110374,
+        "teamname": "Fiorentina",
+        "playerName": "Nicolás González",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 10,
+        "assists": 6,
+        "motm": 2
+      },
+      {
+        "rank": 15,
+        "playerid": 184200,
+        "teamid": 189,
+        "teamname": "Bologna",
+        "playerName": "Marko Arnautović",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 6,
+        "assists": 6,
+        "motm": 4
+      },
+      {
+        "rank": 16,
+        "playerid": 239807,
+        "teamid": 111974,
+        "teamname": "Sassuolo",
+        "playerName": "Davide Frattesi",
+        "compname": "Serie A TIM",
+        "apps": 35,
+        "goals": 4,
+        "assists": 6,
+        "motm": 1
+      },
+      {
+        "rank": 17,
         "playerid": 246431,
         "teamid": 110374,
         "teamname": "Fiorentina",
@@ -7938,355 +8053,175 @@
         "motm": 3
       },
       {
-        "rank": 15,
-        "playerid": 208128,
-        "teamid": 44,
-        "teamname": "Inter",
-        "playerName": "Hakan Çalhanoğlu",
-        "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 7,
-        "assists": 6,
-        "motm": 3
-      },
-      {
-        "rank": 16,
-        "playerid": 215333,
-        "teamid": 115845,
-        "teamname": "Bergamo Calcio",
-        "playerName": "Duván Zapata",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 19,
-        "assists": 5,
-        "motm": 8
-      },
-      {
-        "rank": 17,
-        "playerid": 222467,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Ivi López",
-        "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 8,
-        "assists": 5,
-        "motm": 2
-      },
-      {
         "rank": 18,
-        "playerid": 219536,
-        "teamid": 1837,
-        "teamname": "Sampdoria",
-        "playerName": "Ignacio Pussetto",
-        "compname": "Serie A TIM",
-        "apps": 25,
-        "goals": 6,
-        "assists": 5,
-        "motm": 0
-      },
-      {
-        "rank": 19,
-        "playerid": 195038,
-        "teamid": 189,
-        "teamname": "Bologna",
-        "playerName": "Florian Kainz",
-        "compname": "Serie A TIM",
-        "apps": 26,
-        "goals": 4,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 20,
-        "playerid": 211784,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Neal Maupay",
-        "compname": "Serie A TIM",
-        "apps": 14,
-        "goals": 8,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 21,
-        "playerid": 216435,
-        "teamid": 116365,
-        "teamname": "Napoli FC",
-        "playerName": "Stanislav Lobotka",
-        "compname": "Serie A TIM",
-        "apps": 26,
-        "goals": 5,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 22,
-        "playerid": 205343,
-        "teamid": 1746,
-        "teamname": "Empoli",
-        "playerName": "Jean-Daniel Akpa Akpro",
-        "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 2,
-        "assists": 5,
-        "motm": 0
-      },
-      {
-        "rank": 23,
         "playerid": 224232,
         "teamid": 44,
         "teamname": "Inter",
         "playerName": "Nicolò Barella",
         "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 5,
+        "apps": 36,
+        "goals": 7,
         "assists": 5,
         "motm": 2
       },
       {
-        "rank": 24,
-        "playerid": 222558,
-        "teamid": 114912,
-        "teamname": "Roma FC",
-        "playerName": "Rick Karsdorp",
-        "compname": "Serie A TIM",
-        "apps": 28,
-        "goals": 3,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 25,
-        "playerid": 251892,
-        "teamid": 55,
-        "teamname": "Udinese",
-        "playerName": "Beto",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 13,
-        "assists": 5,
-        "motm": 5
-      },
-      {
-        "rank": 26,
-        "playerid": 235949,
-        "teamid": 347,
-        "teamname": "Lecce",
-        "playerName": "Gabriel Strefezza",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 6,
-        "assists": 5,
-        "motm": 1
-      },
-      {
-        "rank": 27,
-        "playerid": 210935,
-        "teamid": 111974,
-        "teamname": "Sassuolo",
-        "playerName": "Domenico Berardi",
-        "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 11,
-        "assists": 5,
-        "motm": 5
-      },
-      {
-        "rank": 28,
+        "rank": 19,
         "playerid": 226268,
         "teamid": 44,
         "teamname": "Inter",
         "playerName": "Federico Dimarco",
         "compname": "Serie A TIM",
-        "apps": 26,
+        "apps": 29,
         "goals": 11,
         "assists": 5,
         "motm": 5
       },
       {
-        "rank": 29,
-        "playerid": 264325,
-        "teamid": 1746,
-        "teamname": "Empoli",
-        "playerName": "Martín Satriano",
-        "compname": "Serie A TIM",
-        "apps": 12,
-        "goals": 3,
-        "assists": 4,
-        "motm": 1
-      },
-      {
-        "rank": 30,
-        "playerid": 223273,
-        "teamid": 115845,
-        "teamname": "Bergamo Calcio",
-        "playerName": "Mario Pašalić",
-        "compname": "Serie A TIM",
-        "apps": 34,
-        "goals": 13,
-        "assists": 4,
-        "motm": 5
-      },
-      {
-        "rank": 31,
-        "playerid": 184200,
-        "teamid": 189,
-        "teamname": "Bologna",
-        "playerName": "Marko Arnautović",
-        "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 6,
-        "assists": 4,
-        "motm": 4
-      },
-      {
-        "rank": 32,
-        "playerid": 193747,
-        "teamid": 47,
-        "teamname": "Milan",
-        "playerName": "Koke",
-        "compname": "Serie A TIM",
-        "apps": 25,
-        "goals": 1,
-        "assists": 4,
-        "motm": 1
-      },
-      {
-        "rank": 33,
-        "playerid": 196889,
-        "teamid": 206,
-        "teamname": "Hellas Verona",
-        "playerName": "Simone Verdi",
-        "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 12,
-        "assists": 4,
-        "motm": 4
-      },
-      {
-        "rank": 34,
-        "playerid": 222634,
-        "teamid": 55,
-        "teamname": "Udinese",
-        "playerName": "Isaac Success",
-        "compname": "Serie A TIM",
-        "apps": 14,
-        "goals": 8,
-        "assists": 4,
-        "motm": 3
-      },
-      {
-        "rank": 35,
-        "playerid": 213814,
-        "teamid": 347,
-        "teamname": "Lecce",
-        "playerName": "Federico Di Francesco",
-        "compname": "Serie A TIM",
-        "apps": 24,
-        "goals": 7,
-        "assists": 4,
-        "motm": 3
-      },
-      {
-        "rank": 36,
-        "playerid": 207439,
-        "teamid": 45,
-        "teamname": "Juventus",
-        "playerName": "Leandro Paredes",
-        "compname": "Serie A TIM",
-        "apps": 18,
-        "goals": 1,
-        "assists": 4,
-        "motm": 0
-      },
-      {
-        "rank": 37,
-        "playerid": 256675,
-        "teamid": 347,
-        "teamname": "Lecce",
-        "playerName": "Omar Marmoush",
-        "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 9,
-        "assists": 4,
-        "motm": 3
-      },
-      {
-        "rank": 38,
-        "playerid": 192387,
+        "rank": 20,
+        "playerid": 201995,
         "teamid": 115841,
         "teamname": "Latium",
-        "playerName": "Ciro Immobile",
+        "playerName": "Felipe Anderson",
         "compname": "Serie A TIM",
-        "apps": 32,
-        "goals": 13,
-        "assists": 4,
+        "apps": 35,
+        "goals": 8,
+        "assists": 5,
+        "motm": 4
+      },
+      {
+        "rank": 21,
+        "playerid": 251892,
+        "teamid": 55,
+        "teamname": "Udinese",
+        "playerName": "Beto",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 15,
+        "assists": 5,
+        "motm": 6
+      },
+      {
+        "rank": 22,
+        "playerid": 195038,
+        "teamid": 189,
+        "teamname": "Bologna",
+        "playerName": "Florian Kainz",
+        "compname": "Serie A TIM",
+        "apps": 31,
+        "goals": 7,
+        "assists": 5,
         "motm": 3
       },
       {
-        "rank": 39,
-        "playerid": 241390,
-        "teamid": 116365,
-        "teamname": "Napoli FC",
-        "playerName": "Eljif Elmas",
+        "rank": 23,
+        "playerid": 222467,
+        "teamid": 113974,
+        "teamname": "Spezia",
+        "playerName": "Ivi López",
         "compname": "Serie A TIM",
-        "apps": 31,
-        "goals": 4,
-        "assists": 4,
+        "apps": 35,
+        "goals": 9,
+        "assists": 5,
+        "motm": 2
+      },
+      {
+        "rank": 24,
+        "playerid": 211784,
+        "teamid": 113974,
+        "teamname": "Spezia",
+        "playerName": "Neal Maupay",
+        "compname": "Serie A TIM",
+        "apps": 18,
+        "goals": 10,
+        "assists": 5,
         "motm": 1
       },
       {
-        "rank": 40,
-        "playerid": 192505,
-        "teamid": 44,
-        "teamname": "Inter",
-        "playerName": "Romelu Lukaku",
-        "compname": "Serie A TIM",
-        "apps": 30,
-        "goals": 16,
-        "assists": 4,
-        "motm": 5
-      },
-      {
-        "rank": 41,
-        "playerid": 225189,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Simone Bastoni",
-        "compname": "Serie A TIM",
-        "apps": 29,
-        "goals": 1,
-        "assists": 4,
-        "motm": 0
-      },
-      {
-        "rank": 42,
+        "rank": 25,
         "playerid": 245537,
         "teamid": 111974,
         "teamname": "Sassuolo",
         "playerName": "Emil Ceïde",
         "compname": "Serie A TIM",
-        "apps": 33,
-        "goals": 6,
-        "assists": 4,
-        "motm": 4
+        "apps": 38,
+        "goals": 7,
+        "assists": 5,
+        "motm": 5
       },
       {
-        "rank": 43,
-        "playerid": 236498,
-        "teamid": 1837,
-        "teamname": "Sampdoria",
-        "playerName": "Sam Lammers",
+        "rank": 26,
+        "playerid": 215333,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Duván Zapata",
         "compname": "Serie A TIM",
-        "apps": 18,
-        "goals": 5,
-        "assists": 4,
-        "motm": 4
+        "apps": 38,
+        "goals": 21,
+        "assists": 5,
+        "motm": 8
       },
       {
-        "rank": 44,
+        "rank": 27,
+        "playerid": 216435,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Stanislav Lobotka",
+        "compname": "Serie A TIM",
+        "apps": 29,
+        "goals": 5,
+        "assists": 5,
+        "motm": 1
+      },
+      {
+        "rank": 28,
+        "playerid": 205343,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Jean-Daniel Akpa Akpro",
+        "compname": "Serie A TIM",
+        "apps": 35,
+        "goals": 2,
+        "assists": 5,
+        "motm": 0
+      },
+      {
+        "rank": 29,
+        "playerid": 253071,
+        "teamid": 111434,
+        "teamname": "Cremonese",
+        "playerName": "Frank Tsadjout",
+        "compname": "Serie A TIM",
+        "apps": 10,
+        "goals": 3,
+        "assists": 5,
+        "motm": 1
+      },
+      {
+        "rank": 30,
+        "playerid": 222558,
+        "teamid": 114912,
+        "teamname": "Roma FC",
+        "playerName": "Rick Karsdorp",
+        "compname": "Serie A TIM",
+        "apps": 32,
+        "goals": 3,
+        "assists": 5,
+        "motm": 1
+      },
+      {
+        "rank": 31,
+        "playerid": 240679,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Teun Koopmeiners",
+        "compname": "Serie A TIM",
+        "apps": 34,
+        "goals": 1,
+        "assists": 5,
+        "motm": 0
+      },
+      {
+        "rank": 32,
         "playerid": 235735,
         "teamid": 113974,
         "teamname": "Spezia",
@@ -8298,80 +8233,254 @@
         "motm": 2
       },
       {
-        "rank": 45,
-        "playerid": 181291,
-        "teamid": 114912,
-        "teamname": "Roma FC",
-        "playerName": "Georginio Wijnaldum",
+        "rank": 33,
+        "playerid": 201153,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Morata",
         "compname": "Serie A TIM",
-        "apps": 28,
-        "goals": 2,
+        "apps": 35,
+        "goals": 16,
         "assists": 4,
-        "motm": 0
+        "motm": 7
       },
       {
-        "rank": 46,
-        "playerid": 240679,
-        "teamid": 115845,
-        "teamname": "Bergamo Calcio",
-        "playerName": "Teun Koopmeiners",
+        "rank": 34,
+        "playerid": 213814,
+        "teamid": 347,
+        "teamname": "Lecce",
+        "playerName": "Federico Di Francesco",
         "compname": "Serie A TIM",
-        "apps": 31,
+        "apps": 27,
+        "goals": 7,
+        "assists": 4,
+        "motm": 3
+      },
+      {
+        "rank": 35,
+        "playerid": 241390,
+        "teamid": 116365,
+        "teamname": "Napoli FC",
+        "playerName": "Eljif Elmas",
+        "compname": "Serie A TIM",
+        "apps": 33,
+        "goals": 4,
+        "assists": 4,
+        "motm": 1
+      },
+      {
+        "rank": 36,
+        "playerid": 246430,
+        "teamid": 45,
+        "teamname": "Juventus",
+        "playerName": "Dušan Vlahović",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 24,
+        "assists": 4,
+        "motm": 9
+      },
+      {
+        "rank": 37,
+        "playerid": 192387,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Ciro Immobile",
+        "compname": "Serie A TIM",
+        "apps": 37,
+        "goals": 17,
+        "assists": 4,
+        "motm": 5
+      },
+      {
+        "rank": 38,
+        "playerid": 193747,
+        "teamid": 47,
+        "teamname": "Milan",
+        "playerName": "Koke",
+        "compname": "Serie A TIM",
+        "apps": 26,
         "goals": 1,
         "assists": 4,
-        "motm": 0
+        "motm": 1
       },
       {
-        "rank": 47,
+        "rank": 39,
+        "playerid": 256675,
+        "teamid": 347,
+        "teamname": "Lecce",
+        "playerName": "Omar Marmoush",
+        "compname": "Serie A TIM",
+        "apps": 32,
+        "goals": 10,
+        "assists": 4,
+        "motm": 3
+      },
+      {
+        "rank": 40,
+        "playerid": 196889,
+        "teamid": 54,
+        "teamname": "Torino",
+        "playerName": "Simone Verdi",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 14,
+        "assists": 4,
+        "motm": 4
+      },
+      {
+        "rank": 41,
+        "playerid": 264325,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Martín Satriano",
+        "compname": "Serie A TIM",
+        "apps": 17,
+        "goals": 6,
+        "assists": 4,
+        "motm": 1
+      },
+      {
+        "rank": 42,
         "playerid": 226753,
         "teamid": 44,
         "teamname": "Inter",
         "playerName": "André Onana",
         "compname": "Serie A TIM",
-        "apps": 33,
+        "apps": 38,
         "goals": 0,
         "assists": 4,
         "motm": 0
       },
       {
-        "rank": 48,
-        "playerid": 239613,
-        "teamid": 111811,
-        "teamname": "Monza",
-        "playerName": "Matteo Pessina",
+        "rank": 43,
+        "playerid": 222634,
+        "teamid": 55,
+        "teamname": "Udinese",
+        "playerName": "Isaac Success",
         "compname": "Serie A TIM",
-        "apps": 26,
+        "apps": 18,
+        "goals": 9,
+        "assists": 4,
+        "motm": 3
+      },
+      {
+        "rank": 44,
+        "playerid": 225189,
+        "teamid": 113974,
+        "teamname": "Spezia",
+        "playerName": "Simone Bastoni",
+        "compname": "Serie A TIM",
+        "apps": 29,
         "goals": 1,
+        "assists": 4,
+        "motm": 0
+      },
+      {
+        "rank": 45,
+        "playerid": 223273,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Mario Pašalić",
+        "compname": "Serie A TIM",
+        "apps": 38,
+        "goals": 14,
+        "assists": 4,
+        "motm": 6
+      },
+      {
+        "rank": 46,
+        "playerid": 236498,
+        "teamid": 115845,
+        "teamname": "Bergamo Calcio",
+        "playerName": "Sam Lammers",
+        "compname": "Serie A TIM",
+        "apps": 22,
+        "goals": 5,
+        "assists": 4,
+        "motm": 4
+      },
+      {
+        "rank": 47,
+        "playerid": 180930,
+        "teamid": 44,
+        "teamname": "Inter",
+        "playerName": "Edin Džeko",
+        "compname": "Serie A TIM",
+        "apps": 22,
+        "goals": 5,
+        "assists": 3,
+        "motm": 3
+      },
+      {
+        "rank": 48,
+        "playerid": 212127,
+        "teamid": 206,
+        "teamname": "Hellas Verona",
+        "playerName": "Darko Lazović",
+        "compname": "Serie A TIM",
+        "apps": 34,
+        "goals": 4,
         "assists": 3,
         "motm": 0
       },
       {
         "rank": 49,
-        "playerid": 241095,
-        "teamid": 54,
-        "teamname": "Torino",
-        "playerName": "Nikola Vlašić",
+        "playerid": 223848,
+        "teamid": 115841,
+        "teamname": "Latium",
+        "playerName": "Sergej Milinković-Savić",
         "compname": "Serie A TIM",
-        "apps": 30,
+        "apps": 36,
         "goals": 4,
         "assists": 3,
-        "motm": 1
+        "motm": 2
       },
       {
         "rank": 50,
-        "playerid": 239964,
-        "teamid": 113974,
-        "teamname": "Spezia",
-        "playerName": "Eldor Shomurodov",
+        "playerid": 238067,
+        "teamid": 114912,
+        "teamname": "Roma FC",
+        "playerName": "Nicolò Zaniolo",
         "compname": "Serie A TIM",
         "apps": 34,
-        "goals": 11,
+        "goals": 12,
         "assists": 3,
-        "motm": 1
+        "motm": 7
       }
     ]
   },
   "news": [
+    {
+      "id": "news_65dbda30_2026-08-10 19:15",
+      "timestamp": "2026-08-10 19:15",
+      "category": "growth",
+      "icon": "📈",
+      "headline": "Ethan Ampadu improves to 73 OVR!",
+      "details": "Hard work paying off. Ethan Ampadu continues to develop as a player.",
+      "priority": "medium",
+      "image": "rating"
+    },
+    {
+      "id": "news_69283088_2026-08-10 18:53",
+      "timestamp": "2026-08-10 18:53",
+      "category": "performance",
+      "icon": "👍",
+      "headline": "Ethan Ampadu puts in solid shift — Rating: 8.0",
+      "details": "Consistent from Ethan Ampadu! A 8.0 rating shows the quality is there. Season stats: 15G / 28A in 44 apps. The foundation is being built game by game.",
+      "priority": "medium",
+      "image": "match_rating"
+    },
+    {
+      "id": "news_5cdfa884_2026-08-10 18:53",
+      "timestamp": "2026-08-10 18:53",
+      "category": "growth",
+      "icon": "📈",
+      "headline": "Ethan Ampadu improves to 72 OVR!",
+      "details": "Hard work paying off. Ethan Ampadu continues to develop as a player.",
+      "priority": "medium",
+      "image": "rating"
+    },
     {
       "id": "news_d9d8a390_2026-08-10 15:28",
       "timestamp": "2026-08-10 15:28",

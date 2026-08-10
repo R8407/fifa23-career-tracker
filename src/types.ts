@@ -266,6 +266,11 @@ export interface PlayerData {
   trophies: TrophyItem[];
   iconicMoments: IconicMoment[];
   isLoadedFromExportDB?: boolean;
+  // Loan status
+  isOnLoan?: boolean;
+  parentClub?: string;
+  isLoanToBuy?: boolean;
+  headassetid?: string;
   // Season tracking
   season_is_active?: boolean;
   days_until_season_end?: number;

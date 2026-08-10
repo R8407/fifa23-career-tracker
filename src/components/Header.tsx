@@ -74,6 +74,12 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-emerald-400 font-medium">{player.position}</span>
               <span className="text-slate-600">·</span>
               <span className="text-slate-300">{player.currentClub}</span>
+              {player.isOnLoan && (
+                <>
+                  <span className="text-slate-600">·</span>
+                  <span className="text-amber-400 text-[10px] font-medium bg-amber-500/10 px-1.5 py-0.5 rounded">ON LOAN</span>
+                </>
+              )}
             </p>
           </div>
         </div>

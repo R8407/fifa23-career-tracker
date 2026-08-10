@@ -82,13 +82,33 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
                   <div className="flex flex-col items-end gap-1.5">
                     <span className="text-2xl">{player.nationalityFlag}</span>
                     <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-1 rounded">{player.currentClub}</span>
+                    {player.isOnLoan && (
+                      <span className="text-[10px] font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                        ON LOAN from {player.parentClub}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 {/* Player Avatar */}
                 <div className="my-4 relative h-36 flex items-center justify-center">
-                  <div className="w-28 h-28 rounded-full bg-slate-800 border-2 border-slate-600 flex items-center justify-center relative">
-                    <span className="text-5xl select-none">👑</span>
+                  <div className="w-28 h-28 rounded-full bg-slate-800 border-2 border-slate-600 flex items-center justify-center relative overflow-hidden">
+                    {player.headassetid ? (
+                      <img
+                        src={`/miniface/${player.headassetid}.png`}
+                        alt={player.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.style.display = 'flex';
+                        }}
+                      />
+                    ) : null}
+                    <div className={`w-full h-full items-center justify-center text-3xl font-bold text-emerald-400 ${player.headassetid ? 'hidden' : 'flex'}`}>
+                      {player.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
                     <div className="absolute -bottom-2 bg-emerald-500 text-white font-bold text-xs px-2.5 py-0.5 rounded-full">
                       #{player.jerseyNumber}
                     </div>
