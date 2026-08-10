@@ -4,8 +4,8 @@ import { Trophy, Award, X, Sparkles, Info, Users, User, Star } from 'lucide-reac
 import { audioEngine } from '../utils/audio';
 
 import motmImg from '../../models/MOTM.webp';
-import ballondorSvg from '../../models/ballon-dor.svg';
-import eplImg from '../../models/EPL.webp';
+import ballondorImg from '../../models/ballon-dor..jpg';
+import eplImg from '../../models/Premier_league_trophy.jpg';
 import uclImg from '../../models/UCL.webp';
 import goldenbootImg from '../assets/images/golden_boot_trophy_1786062523925.jpg';
 
@@ -19,7 +19,7 @@ type TrophyAsset =
 
 const TROPHY_ASSETS: Record<string, TrophyAsset> = {
   manofmatch: { kind: 'img', src: motmImg, blend: 'multiply' },
-  ballondor: { kind: 'svg', src: ballondorSvg },
+  ballondor: { kind: 'img', src: ballondorImg, blend: 'multiply' },
   league: { kind: 'img', src: eplImg, blend: 'multiply' },
   champions: { kind: 'img', src: uclImg, blend: 'screen' },
   goldenboot: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
@@ -30,7 +30,7 @@ const TROPHY_ASSETS: Record<string, TrophyAsset> = {
   national: { kind: 'img', src: eplImg, blend: 'multiply' },
   cup: { kind: 'img', src: eplImg, blend: 'multiply' },
   europaleague: { kind: 'img', src: uclImg, blend: 'screen' },
-  playerofseason: { kind: 'img', src: ballondorSvg, blend: 'multiply' },
+  playerofseason: { kind: 'img', src: ballondorImg, blend: 'multiply' },
 };
 
 const TrophyVisual: React.FC<{

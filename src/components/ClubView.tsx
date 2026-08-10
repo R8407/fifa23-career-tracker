@@ -8,8 +8,8 @@ import careerExportData from '../data/career_export.json';
 import { TacticalSheetView } from './TacticalSheetView';
 
 import uclImg from '../../models/UCL.webp';
-import uelImg from '../../models/UEL.png';
-import leagueImg from '../../models/PremierLeague.webp';
+import uelImg from '../../models/EUROPA-LEAGUE.jpg';
+import leagueImg from '../../models/Premier_league_trophy.jpg';
 import cupImg from '../../models/DomesticCup.png';
 
 interface ClubViewProps {
