@@ -24,6 +24,8 @@ const TROPHY_ASSETS: Record<string, TrophyAsset> = {
   champions: { kind: 'img', src: uclImg, blend: 'screen' },
   goldenboot: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
   assistking: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
+  youngplayer: { kind: 'img', src: motmImg, blend: 'multiply' },
+  bestxi: { kind: 'img', src: eplImg, blend: 'multiply' },
   worldcup: { kind: 'img', src: eplImg, blend: 'multiply' },
   national: { kind: 'img', src: eplImg, blend: 'multiply' },
   cup: { kind: 'img', src: eplImg, blend: 'multiply' },

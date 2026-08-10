@@ -614,6 +614,56 @@ export const TROPHY_SVGS: Record<string, string> = {
       <ellipse cx="60" cy="132" rx="20" ry="5" fill="#C0C0C0"/>
     </svg>
   `,
+
+  youngplayer: `
+    <svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ypGold" x1="30" y1="0" x2="90" y2="150" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFF8DC"/>
+          <stop offset="30%" stop-color="#FFD700"/>
+          <stop offset="60%" stop-color="#DAA520"/>
+          <stop offset="100%" stop-color="#8B6914"/>
+        </linearGradient>
+        <filter id="yp3d" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+          <feOffset dx="3" dy="6"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="140" rx="30" ry="8" fill="#8B6914"/>
+      <ellipse cx="60" cy="137" rx="26" ry="6" fill="#DAA520"/>
+      <rect x="48" y="115" width="24" height="25" fill="url(#ypGold)" stroke="#8B6914" stroke-width="1.5" filter="url(#yp3d)"/>
+      <circle cx="60" cy="70" r="40" fill="url(#ypGold)" stroke="#8B6914" stroke-width="2" filter="url(#yp3d)"/>
+      <text x="60" y="68" text-anchor="middle" font-size="14" font-weight="bold" fill="#8B6914" font-family="serif">★</text>
+      <text x="60" y="82" text-anchor="middle" font-size="8" fill="#8B6914" font-family="sans-serif" font-weight="bold">YOUNG</text>
+    </svg>
+  `,
+
+  bestxi: `
+    <svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bxGold" x1="30" y1="0" x2="90" y2="150" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFF8DC"/>
+          <stop offset="25%" stop-color="#FFD700"/>
+          <stop offset="50%" stop-color="#FFC125"/>
+          <stop offset="75%" stop-color="#DAA520"/>
+          <stop offset="100%" stop-color="#8B6914"/>
+        </linearGradient>
+        <filter id="bx3d" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+          <feOffset dx="3" dy="6"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="140" rx="30" ry="8" fill="#8B6914"/>
+      <ellipse cx="60" cy="137" rx="26" ry="6" fill="#DAA520"/>
+      <rect x="48" y="115" width="24" height="25" fill="url(#bxGold)" stroke="#8B6914" stroke-width="1.5"/>
+      <path d="M60 15 L90 35 L90 80 Q90 110 60 125 Q30 110 30 80 L30 35 Z" fill="url(#bxGold)" stroke="#8B6914" stroke-width="2" filter="url(#bx3d)"/>
+      <path d="M60 25 L82 40 L82 75 Q82 100 60 112 Q38 100 38 75 L38 40 Z" fill="none" stroke="#FFF8DC" stroke-width="1" opacity="0.5"/>
+      <text x="60" y="65" text-anchor="middle" font-size="16" font-weight="bold" fill="#8B6914" font-family="serif">XI</text>
+      <text x="60" y="80" text-anchor="middle" font-size="7" fill="#8B6914" font-family="sans-serif" font-weight="bold">TEAM OF THE SEASON</text>
+    </svg>
+  `,
 };
 
 // Helper to get SVG as data URI

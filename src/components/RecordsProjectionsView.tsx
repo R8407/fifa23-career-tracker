@@ -29,7 +29,7 @@ export const RecordsProjectionsView: React.FC<RecordsProjectionsViewProps> = ({ 
 
   const currentGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const currentAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
-  const currentTrophies = player.trophies.filter(t => t.iconType !== 'manofmatch').reduce((acc, t) => acc + t.quantity, 0);
+  const currentTrophies = player.trophies.filter(t => !['manofmatch', 'assistking', 'youngplayer', 'bestxi'].includes(t.iconType)).reduce((acc, t) => acc + t.quantity, 0);
 
   const projectedGoals = currentGoals + Math.round(goalsPerYear * remainingYears * 0.9); // slight decline factor
   const projectedAssists = currentAssists + Math.round(assistsPerYear * remainingYears * 0.95);

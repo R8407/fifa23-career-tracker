@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
   const totalGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
   const totalApps = player.seasons.reduce((acc, s) => acc + s.apps, 0);
-  const totalTrophies = player.trophies.filter(t => t.iconType !== 'manofmatch' && t.iconType !== 'assistking').reduce((acc, t) => acc + t.quantity, 0);
+  const totalTrophies = player.trophies.filter(t => !['manofmatch', 'assistking', 'youngplayer', 'bestxi'].includes(t.iconType)).reduce((acc, t) => acc + t.quantity, 0);
 
   return (
     <header className="sticky top-0 z-40 bg-[#0f172a] border-b border-slate-800 px-4 lg:px-6 py-3">

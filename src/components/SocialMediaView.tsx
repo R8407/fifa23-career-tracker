@@ -146,6 +146,80 @@ const STATIC_DMS: DirectMessage[] = [
   { id: 'dm_agent', sender: 'Your Agent', handle: '@PlayerAgent', flag: '\u{1F1FA}\u{E0067}', role: 'agent', content: 'Season review: Excellent debut. 4G 16A with avg rating 7.67. Market value will increase significantly.', timeAgo: '2d', read: true },
 ];
 
+// Generate end-of-season DMs from coach, agent, and teammates
+function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: string): DirectMessage[] {
+  const seasons = data.seasons || [];
+  if (seasons.length === 0) return [];
+
+  const latestSeason = seasons[seasons.length - 1];
+  const goals = latestSeason.goals || 0;
+  const assists = latestSeason.assists || 0;
+  const apps = latestSeason.apps || 0;
+  const rating = parseFloat(latestSeason.avgRating) || 7.0;
+  const motm = latestSeason.motm || 0;
+  const yellowCards = latestSeason.yellowCards || 0;
+  const redCards = latestSeason.redCards || 0;
+
+  // Check if we already sent end-of-season DMs for this season
+  const seasonKey = `eos_dm_${latestSeason.season || 'current'}`;
+  const alreadySent = localStorage.getItem(seasonKey);
+  if (alreadySent) return [];
+
+  const dms: DirectMessage[] = [];
+
+  // Coach DM
+  const coachMessages = [
+    `Season review: ${apps} appearances, ${goals} goals, ${assists} assists. ${rating >= 8.0 ? 'Outstanding season. You are becoming the player I knew you could be.' : rating >= 7.5 ? 'Very good season. Consistent performances. Keep pushing for more.' : 'Solid season. You showed moments of quality. Next season I expect more.'}${motm > 0 ? ` ${motm}x MOTM shows you can be the difference.` : ''}`,
+  ];
+  dms.push({
+    id: `eos_coach_${latestSeason.season}`,
+    sender: 'Your Coach',
+    handle: '@Coach',
+    flag: '\u{1F1EE}\u{E0067}',
+    role: 'coach',
+    content: coachMessages[0],
+    timeAgo: 'End of season',
+    read: false,
+  });
+
+  // Agent DM
+  const valueChange = rating >= 8.0 ? 'significantly' : rating >= 7.5 ? 'noticeably' : 'moderately';
+  dms.push({
+    id: `eos_agent_${latestSeason.season}`,
+    sender: 'Your Agent',
+    handle: '@PlayerAgent',
+    flag: '\u{1F1FA}\u{E0067}',
+    role: 'agent',
+    content: `Season complete. ${goals}G ${assists}A in ${apps} apps. Market value will increase ${valueChange}. ${rating >= 8.0 ? 'Big clubs will be watching. Let me know if you want to explore options.' : 'Keep performing and the opportunities will come.'}`,
+    timeAgo: 'End of season',
+    read: false,
+  });
+
+  // Teammate DM (if high OVR teammate exists)
+  const userOVR = parseInt(data.my_player_profile?.overallrating || '65');
+  const squad = data.my_squad || [];
+  const betterTeammates = squad.filter((p: any) => !p.isUserPlayer && parseInt(p.overallrating || '0') > userOVR);
+  if (betterTeammates.length > 0) {
+    const tm = betterTeammates[0];
+    const tmName = tm.commonname || `${tm.firstname || ''} ${tm.lastname || ''}`.trim() || 'Teammate';
+    dms.push({
+      id: `eos_tm_${latestSeason.season}_${tm.playerid}`,
+      sender: tmName,
+      handle: `@${tmName.replace(/\s/g, '')}`,
+      flag: '\u{1F30D}',
+      role: 'teammate',
+      content: `${playerName}, great season. ${goals > 10 ? 'Your goals were crucial for us.' : assists > 8 ? 'Those assists changed games for us.' : 'You really contributed to the team.'} Hope we play together next season too.${redCards > 0 ? ' Maybe watch the tackles though lol.' : ''}`,
+      timeAgo: 'End of season',
+      read: false,
+    });
+  }
+
+  // Mark as sent
+  localStorage.setItem(seasonKey, 'true');
+
+  return dms;
+}
+
 // Generate performance-triggered DMs from unlocked legends
 function generatePerformanceDMs(
   matchRating: number,
@@ -246,20 +320,37 @@ interface MilestonePost {
   };
 }
 
-// Find the best legend to compare against
+// Position groups for legend matching
+const ATTACKER_POSITIONS = ['ST', 'CF', 'RW', 'LW', 'RF', 'LF'];
+const MIDFIELDER_POSITIONS = ['CAM', 'CM', 'CDM', 'RM', 'LM'];
+
+// Find the best legend to compare against (same position only)
 function findBestLegendComparison(
   playerGoals: number,
   playerAssists: number,
   playerApps: number,
   playerClub: string,
+  playerPosition: string,
   legends: any[]
 ): { legend: any; type: 'goals' | 'assists' | 'apps' | 'club_legend'; value: number } | null {
+  const isAttacker = ATTACKER_POSITIONS.includes(playerPosition);
+
+  // Filter legends by matching position group
+  const positionLegends = legends.filter(l => {
+    const pos = l.position || '';
+    if (isAttacker) return ATTACKER_POSITIONS.includes(pos);
+    if (MIDFIELDER_POSITIONS.includes(playerPosition)) return MIDFIELDER_POSITIONS.includes(pos) || ATTACKER_POSITIONS.includes(pos);
+    return true; // defenders/GK: compare with anyone
+  });
+
+  if (positionLegends.length === 0) return null;
+
   // First, try to find a legend who played at the same club
-  const clubLegends = legends.filter(l => {
+  const clubLegends = positionLegends.filter(l => {
     const name = l.name.toLowerCase();
     const club = playerClub.toLowerCase();
-    // Check if legend is associated with the club
     if (club.includes('spezia') && (name.includes('nzola') || name.includes('verde'))) return true;
+    if (club.includes('chelsea') && (name.includes('drogba') || name.includes('lampard') || name.includes('hazard') || name.includes('costa') || name.includes('terry'))) return true;
     if (club.includes('real madrid') && (name.includes('ronaldo') || name.includes('raul') || name.includes('puskas') || name.includes('di stefano'))) return true;
     if (club.includes('barcelona') && (name.includes('messi') || name.includes('ronaldinho') || name.includes('cruyff') || name.includes('xavi') || name.includes('iniesta'))) return true;
     if (club.includes('manchester') && (name.includes('rooney') || name.includes('giggs') || name.includes('beckham') || name.includes('best'))) return true;
@@ -272,28 +363,24 @@ function findBestLegendComparison(
   });
 
   if (clubLegends.length > 0) {
-    // Pick the closest legend in terms of goals
-    const sorted = clubLegends.sort((a, b) => 
+    const sorted = clubLegends.sort((a, b) =>
       Math.abs(a.goals - playerGoals) - Math.abs(b.goals - playerGoals)
     );
     return { legend: sorted[0], type: 'club_legend', value: playerGoals };
   }
 
-  // Otherwise, find legend closest in goals
-  const goalSorted = [...legends].sort((a, b) => 
+  // Find legend closest in goals (attackers) or assists (midfielders)
+  const goalSorted = [...positionLegends].sort((a, b) =>
     Math.abs(a.goals - playerGoals) - Math.abs(b.goals - playerGoals)
   );
-  
-  // Find legend closest in assists
-  const assistSorted = [...legends].sort((a, b) => 
+  const assistSorted = [...positionLegends].sort((a, b) =>
     Math.abs(a.assists - playerAssists) - Math.abs(b.assists - playerAssists)
   );
 
-  // Pick the better match
   const goalDiff = Math.abs(goalSorted[0].goals - playerGoals);
   const assistDiff = Math.abs(assistSorted[0].assists - playerAssists);
 
-  if (goalDiff <= assistDiff) {
+  if (isAttacker && goalDiff <= assistDiff) {
     return { legend: goalSorted[0], type: 'goals', value: playerGoals };
   } else {
     return { legend: assistSorted[0], type: 'assists', value: playerAssists };
@@ -309,6 +396,8 @@ function generateMilestonePosts(
   const seasons = data.seasons || [];
   const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Your Player';
   const playerClub = data.my_player_profile?.currentclub || 'Unknown';
+  const POS_MAP: Record<string, string> = { '0':'GK','2':'RWB','3':'RB','4':'CB','5':'CB','6':'CB','7':'LB','8':'LWB','10':'CDM','12':'RM','14':'CM','16':'LM','18':'CAM','23':'RW','24':'ST','26':'LW' };
+  const playerPosition = POS_MAP[String(profile.preferredposition1)] || 'RW';
   const totalGoals = data.total_goals || 0;
   const totalAssists = data.total_assists || 0;
   const totalApps = seasons.reduce((sum: number, s: any) => sum + (s.apps || 0), 0);
@@ -319,7 +408,7 @@ function generateMilestonePosts(
   // Check if we've hit any milestones
   for (const milestone of milestones) {
     if (totalApps >= milestone) {
-      const comparison = findBestLegendComparison(totalGoals, totalAssists, totalApps, playerClub, legends);
+      const comparison = findBestLegendComparison(totalGoals, totalAssists, totalApps, playerClub, playerPosition, legends);
       if (comparison) {
         const { legend, type, value } = comparison;
         
@@ -808,7 +897,8 @@ export const SocialMediaView: React.FC = () => {
     const legendDMs = generateLegendDMs(hofPoints, playerName, playerClub, playerAge);
     const perfDMs = generatePerformanceDMs(matchRating, hofPoints, playerName, playerClub, playerAge);
     const teammateDM = generateTeammateDM(data, playerName, playerClub, playerAge);
-    const dms = [...perfDMs, ...legendDMs, ...STATIC_DMS];
+    const eosDMs = generateEndOfSeasonDMs(data, playerName, playerClub);
+    const dms = [...eosDMs, ...perfDMs, ...legendDMs, ...STATIC_DMS];
     if (teammateDM) dms.unshift(teammateDM);
     return dms;
   }, [hofPoints]);
