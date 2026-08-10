@@ -6384,14 +6384,24 @@
       "iconType": "champions"
     },
     {
-      "id": "t_league",
-      "title": "League Champion",
-      "category": "Club",
+      "id": "t_goldenboot",
+      "title": "Golden Boot",
+      "category": "Individual",
       "quantity": 0,
       "yearsWon": [],
-      "description": "Domestic league title winner.",
-      "tier": "Platinum",
-      "iconType": "league"
+      "description": "Top scorer in the league.",
+      "tier": "Gold",
+      "iconType": "goldenboot"
+    },
+    {
+      "id": "t_potm",
+      "title": "Player of the Month",
+      "category": "Individual",
+      "quantity": 0,
+      "yearsWon": [],
+      "description": "Monthly award for outstanding performances.",
+      "tier": "Gold",
+      "iconType": "potm"
     }
   ],
   "league_stats": {

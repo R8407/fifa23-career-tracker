@@ -28,6 +28,7 @@ const TROPHY_ASSETS: Record<string, TrophyAsset> = {
   national: { kind: 'img', src: eplImg, blend: 'multiply' },
   cup: { kind: 'img', src: eplImg, blend: 'multiply' },
   europaleague: { kind: 'img', src: uclImg, blend: 'screen' },
+  potm: { kind: 'img', src: motmImg, blend: 'multiply' },
 };
 
 const TrophyVisual: React.FC<{

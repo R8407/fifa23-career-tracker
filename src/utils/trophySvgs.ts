@@ -614,6 +614,69 @@ export const TROPHY_SVGS: Record<string, string> = {
       <ellipse cx="60" cy="132" rx="20" ry="5" fill="#C0C0C0"/>
     </svg>
   `,
+  
+  potm: `
+    <svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="potmGold" x1="25" y1="0" x2="95" y2="150" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFFACD"/>
+          <stop offset="15%" stop-color="#FFD700"/>
+          <stop offset="35%" stop-color="#FFC125"/>
+          <stop offset="50%" stop-color="#FFD700"/>
+          <stop offset="65%" stop-color="#DAA520"/>
+          <stop offset="85%" stop-color="#B8860B"/>
+          <stop offset="100%" stop-color="#8B6914"/>
+        </linearGradient>
+        <linearGradient id="potmShine" x1="40" y1="20" x2="60" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+          <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="potm3d" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+          <feOffset dx="3" dy="6" result="offsetBlur"/>
+          <feFlood flood-color="#000000" flood-opacity="0.35" result="color"/>
+          <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+          <feMerge>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      <!-- Ground shadow -->
+      <ellipse cx="60" cy="142" rx="30" ry="8" fill="#000" opacity="0.3"/>
+      
+      <!-- Calendar body -->
+      <rect x="25" y="25" width="70" height="90" rx="8" fill="url(#potmGold)" stroke="#8B6914" stroke-width="2" filter="url(#potm3d)"/>
+      
+      <!-- Calendar top bar -->
+      <rect x="25" y="25" width="70" height="20" rx="8" fill="#B8860B" stroke="#8B6914" stroke-width="1"/>
+      <rect x="25" y="37" width="70" height="8" fill="#B8860B"/>
+      
+      <!-- Calendar rings -->
+      <circle cx="40" cy="30" r="4" fill="#FFFACD" stroke="#DAA520" stroke-width="1"/>
+      <circle cx="80" cy="30" r="4" fill="#FFFACD" stroke="#DAA520" stroke-width="1"/>
+      
+      <!-- Star in center of calendar -->
+      <path d="M60 55 L65 72 L83 72 L69 82 L74 99 L60 89 L46 99 L51 82 L37 72 L55 72 Z" 
+            fill="url(#potmGold)" stroke="#FFFACD" stroke-width="1"/>
+      <path d="M60 60 L63 72 L76 72 L66 79 L70 91 L60 83 L50 91 L54 79 L44 72 L57 72 Z" 
+            fill="#FFFACD" opacity="0.3"/>
+      
+      <!-- Shine -->
+      <ellipse cx="48" cy="55" rx="12" ry="8" fill="url(#potmShine)" transform="rotate(-20 48 55)"/>
+      
+      <!-- Edge highlight -->
+      <path d="M32 40 Q28 65 32 95" stroke="#FFFACD" stroke-width="1.5" fill="none" opacity="0.4"/>
+      
+      <!-- Base/stand -->
+      <rect x="50" y="118" width="20" height="15" rx="2" fill="#B8860B" stroke="#8B6914" stroke-width="1.5"/>
+      <rect x="52" y="120" width="16" height="11" fill="#DAA520"/>
+      <rect x="45" y="131" width="30" height="8" rx="3" fill="#8B6914" stroke="#6B4F12" stroke-width="1"/>
+      <rect x="47" y="129" width="26" height="6" rx="2" fill="#B8860B"/>
+    </svg>
+  `,
 };
 
 // Helper to get SVG as data URI
