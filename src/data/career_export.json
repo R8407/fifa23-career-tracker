@@ -6392,16 +6392,6 @@
       "description": "Top scorer in the league.",
       "tier": "Gold",
       "iconType": "goldenboot"
-    },
-    {
-      "id": "t_potm",
-      "title": "Player of the Month",
-      "category": "Individual",
-      "quantity": 0,
-      "yearsWon": [],
-      "description": "Monthly award for outstanding performances.",
-      "tier": "Gold",
-      "iconType": "potm"
     }
   ],
   "league_stats": {

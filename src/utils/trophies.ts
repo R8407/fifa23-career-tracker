@@ -16,8 +16,7 @@ export const TROPHY_IMAGES: Record<string, string> = {
   league: leagueImg,
   cup: cupImg,
   national: worldCupImg,
-  europaleague: uclImg,
-  potm: motmImg
+  europaleague: uclImg
 };
 
 /**

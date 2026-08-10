@@ -231,7 +231,7 @@ export interface TrophyItem {
   yearsWon: string[];
   description: string;
   tier: 'Gold' | 'Platinum' | 'Diamond';
-  iconType: 'champions' | 'ballondor' | 'league' | 'cup' | 'goldenboot' | 'national' | 'worldcup' | 'manofmatch' | 'assistking' | 'europaleague' | 'potm';
+  iconType: 'champions' | 'ballondor' | 'league' | 'cup' | 'goldenboot' | 'national' | 'worldcup' | 'manofmatch' | 'assistking' | 'europaleague';
   imagePath?: string;
 }
 
