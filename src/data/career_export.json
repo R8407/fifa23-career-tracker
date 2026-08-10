@@ -6402,6 +6402,36 @@
       "description": "Domestic league title winner.",
       "tier": "Platinum",
       "iconType": "league"
+    },
+    {
+      "id": "t_cup",
+      "title": "Domestic Cup",
+      "category": "Club",
+      "quantity": 0,
+      "yearsWon": [],
+      "description": "Domestic cup competition winner.",
+      "tier": "Gold",
+      "iconType": "cup"
+    },
+    {
+      "id": "t_uel",
+      "title": "UEFA Europa League",
+      "category": "Club",
+      "quantity": 0,
+      "yearsWon": [],
+      "description": "European second-tier club competition.",
+      "tier": "Platinum",
+      "iconType": "europaleague"
+    },
+    {
+      "id": "t_goldenboot",
+      "title": "Golden Boot",
+      "category": "Individual",
+      "quantity": 0,
+      "yearsWon": [],
+      "description": "Top scorer in the league.",
+      "tier": "Gold",
+      "iconType": "goldenboot"
     }
   ],
   "league_stats": {
