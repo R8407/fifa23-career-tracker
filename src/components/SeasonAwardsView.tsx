@@ -31,8 +31,9 @@ function isSeasonCompleted(season: SeasonData): boolean {
 function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[]): SeasonAwardData {
   const leagueGoals = season.goals;
   const isCompleted = isSeasonCompleted(season);
-  const isGoldenBootWinner = leagueGoals >= LEAGUE_GOALS_TO_WIN_BOOT;
-  const isPOTY = season.avgRating >= MIN_RATING_FOR_POTY;
+  // Only award if season is complete (30+ matches played)
+  const isGoldenBootWinner = isCompleted && leagueGoals >= LEAGUE_GOALS_TO_WIN_BOOT;
+  const isPOTY = isCompleted && season.avgRating >= MIN_RATING_FOR_POTY;
 
   // Rank goals vs other seasons
   const goalRanks = [...allSeasons].sort((a, b) => b.goals - a.goals);
@@ -42,17 +43,17 @@ function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[]): Seas
   const ratingRanks = [...allSeasons].sort((a, b) => b.avgRating - a.avgRating);
   const ratingRank = ratingRanks.findIndex(s => s.id === season.id) + 1;
 
-  // Best XI determination based on avg rating
+  // Best XI determination based on avg rating (only if season complete)
   const ratingThreshold = 7.2;
-  const inBestXi = season.avgRating >= ratingThreshold;
+  const inBestXi = isCompleted && season.avgRating >= ratingThreshold;
 
-  // Young player (age <= 23)
-  const isYoungPlayer = season.age <= 23;
+  // Young player (age <= 23, only if season complete)
+  const isYoungPlayer = isCompleted && season.age <= 23;
 
-  // Assist king
+  // Assist king (only if season complete)
   const assistRanks = [...allSeasons].sort((a, b) => b.assists - a.assists);
   const assistRank = assistRanks.findIndex(s => s.id === season.id) + 1;
-  const isAssistKing = season.assists >= 10 && assistRank <= 3;
+  const isAssistKing = isCompleted && season.assists >= 10 && assistRank <= 3;
 
   return {
     goldenBoot: {

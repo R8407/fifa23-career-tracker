@@ -6367,11 +6367,9 @@
       "id": "t_assistking",
       "title": "Assist King - Serie A",
       "category": "Individual",
-      "quantity": 1,
-      "yearsWon": [
-        "2023/2024"
-      ],
-      "description": "Finished as Serie A's top assist provider with 24 assists.",
+      "quantity": 0,
+      "yearsWon": [],
+      "description": "Finished as Serie A's top assist provider.",
       "tier": "Gold",
       "iconType": "assistking"
     },
