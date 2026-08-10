@@ -181,6 +181,25 @@ function convertRawDump(raw: any): CareerExportSchema {
   } as any;
 }
 
+function getSnapshot(data: any): string {
+  const profile = data?.my_player_profile || {};
+  const seasons = data?.seasons || [];
+  const trophies = (data?.trophies || []).map((t: any) => `${t.type}:${t.quantity}`).join(',');
+  const motmTotal = seasons.reduce((s: number, sn: any) => s + (sn.motm || 0), 0);
+  return JSON.stringify({
+    goals: data?.total_goals || 0,
+    assists: data?.total_assists || 0,
+    apps: data?.total_appearances || 0,
+    ovr: profile?.overallrating,
+    motm: motmTotal,
+    trophies,
+    daysLeft: data?.days_until_season_end,
+    matchesPlayed: data?.matches_played,
+    latestDate: data?.latest_match_date,
+    seasonCount: seasons.length,
+  });
+}
+
 export default function App() {
   const [player, setPlayer] = useState<PlayerData>(() => getMergedPlayerData());
   const [activeTab, setActiveTab] = useState<string>('overview');
@@ -188,6 +207,29 @@ export default function App() {
   const [isIconicModalOpen, setIsIconicModalOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<{ title: string; subtitle: string; bonusPoints: number } | null>(null);
   const [notifications, setNotifications] = useState<Record<string, boolean>>({});
+
+  // Poll for career data changes and set unread flags
+  useEffect(() => {
+    let lastSnapshot = localStorage.getItem('career_data_snapshot') || '';
+    const poll = async () => {
+      try {
+        const now = Date.now();
+        const resp = await fetch(`/career_export.json?t=${now}`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const snap = getSnapshot(data);
+        if (lastSnapshot && snap !== lastSnapshot) {
+          localStorage.setItem('career_news_unread', 'true');
+          localStorage.setItem('career_social_unread', 'true');
+        }
+        lastSnapshot = snap;
+        localStorage.setItem('career_data_snapshot', snap);
+      } catch {}
+    };
+    poll();
+    const interval = setInterval(poll, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Check for unread notifications
   useEffect(() => {
@@ -202,9 +244,21 @@ export default function App() {
       } catch {}
     };
     checkNotifications();
-    const interval = setInterval(checkNotifications, 5000);
+    const interval = setInterval(checkNotifications, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Clear unread flags when tabs are viewed
+  useEffect(() => {
+    if (activeTab === 'news') {
+      localStorage.removeItem('career_news_unread');
+      setNotifications(prev => ({ ...prev, news: false }));
+    }
+    if (activeTab === 'social') {
+      localStorage.removeItem('career_social_unread');
+      setNotifications(prev => ({ ...prev, social: false }));
+    }
+  }, [activeTab]);
 
   const handleToggleSound = () => {
     const next = !soundEnabled;
@@ -248,6 +302,10 @@ export default function App() {
     }
     // Reload player data from the uploaded JSON
     setPlayer(getMergedPlayerData());
+    // Update snapshot and trigger unread
+    localStorage.setItem('career_data_snapshot', getSnapshot(finalData));
+    localStorage.setItem('career_news_unread', 'true');
+    localStorage.setItem('career_social_unread', 'true');
     setNotification({
       title: '📤 JSON UPLOADED',
       subtitle: `Successfully loaded career data for ${finalData.my_player_profile.firstname} ${finalData.my_player_profile.lastname}`,
