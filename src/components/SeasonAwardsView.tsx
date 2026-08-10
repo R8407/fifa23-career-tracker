@@ -23,15 +23,15 @@ interface SeasonAwardData {
 const LEAGUE_GOALS_TO_WIN_BOOT = 20;
 const MIN_RATING_FOR_POTY = 8.0;
 
-// A season is considered complete if the player has played 30+ matches
-function isSeasonCompleted(season: SeasonData): boolean {
-  return season.apps >= 30;
+// A season is considered complete if 10-15 days or less remain
+function isSeasonCompleted(daysRemaining: number): boolean {
+  return daysRemaining <= 15;
 }
 
-function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[]): SeasonAwardData {
+function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[], daysRemaining: number): SeasonAwardData {
   const leagueGoals = season.goals;
-  const isCompleted = isSeasonCompleted(season);
-  // Only award if season is complete (30+ matches played)
+  const isCompleted = isSeasonCompleted(daysRemaining);
+  // Only award if season is complete (10-15 days or less remaining)
   const isGoldenBootWinner = isCompleted && leagueGoals >= LEAGUE_GOALS_TO_WIN_BOOT;
   const isPOTY = isCompleted && season.avgRating >= MIN_RATING_FOR_POTY;
 
@@ -110,8 +110,8 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
 
   const awards = useMemo(() => {
     if (!currentSeason) return null;
-    return computeSeasonAwards(currentSeason, seasons);
-  }, [currentSeason, seasons]);
+    return computeSeasonAwards(currentSeason, seasons, daysRemaining);
+  }, [currentSeason, seasons, daysRemaining]);
 
   // Persist awards
   const [persistedAwards, setPersistedAwards] = useState<Record<string, SeasonAwardData>>(() => {
@@ -153,11 +153,12 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
 
   // All seasons with computed awards for the overview
   const allAwards = useMemo(() => {
-    return seasons.map(s => ({
+    return seasons.map((s, idx) => ({
       season: s,
-      awards: computeSeasonAwards(s, seasons),
+      // First season is current (use actual daysRemaining), past seasons are complete (0 days)
+      awards: computeSeasonAwards(s, seasons, idx === 0 ? daysRemaining : 0),
     }));
-  }, [seasons]);
+  }, [seasons, daysRemaining]);
 
   // Summary stats across all seasons
   const totalGoldenBoots = allAwards.filter(a => a.awards.goldenBoot.won).length;
@@ -394,7 +395,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
 
             {/* Assist King */}
             <AwardCard
-              title="Assist King"
+              title={`Assist King - ${currentSeason.league}`}
               icon={<TrendingUp className="w-6 h-6" />}
               won={awards.assistKing.won}
               rank={awards.assistKing.rank}

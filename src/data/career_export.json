@@ -6365,11 +6365,11 @@
     },
     {
       "id": "t_assistking",
-      "title": "Assist King - Serie A",
+      "title": "Assist King",
       "category": "Individual",
       "quantity": 0,
       "yearsWon": [],
-      "description": "Finished as Serie A's top assist provider.",
+      "description": "Finished as the league's top assist provider.",
       "tier": "Gold",
       "iconType": "assistking"
     },
