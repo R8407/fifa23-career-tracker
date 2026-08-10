@@ -34,12 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
     const interval = setInterval(() => {
       try {
         const stored = parseInt(localStorage.getItem('career_legacy_points') || '0', 10);
-        if (stored < 80) {
-          localStorage.setItem('career_legacy_points', '80');
-          setHofPoints(80);
-        } else {
-          setHofPoints(stored);
-        }
+        setHofPoints(stored);
       } catch {}
     }, 2000);
     return () => clearInterval(interval);
