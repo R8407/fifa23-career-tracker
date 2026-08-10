@@ -109,20 +109,29 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     }
 
     // League-specific records: only applicable if player has played in that league
-    const leagueMap: Record<string, string> = {
-      'rec_pl_': 'Premier League', 'rec_laliga_': 'La Liga',
-      'rec_bundesliga_': 'Bundesliga', 'rec_seriea_': 'Serie A',
-      'rec_ligue1_': 'Ligue 1',
+    const leagueMap: Record<string, string[]> = {
+      'rec_pl_': ['Premier League', 'Premier League '],
+      'rec_laliga_': ['La Liga', 'LaLiga'],
+      'rec_bundesliga_': ['Bundesliga'],
+      'rec_seriea_': ['Serie A', 'Serie A TIM'],
+      'rec_ligue1_': ['Ligue 1', 'Ligue 1 '],
     };
-    for (const [prefix, leagueName] of Object.entries(leagueMap)) {
+    for (const [prefix, leagueNames] of Object.entries(leagueMap)) {
       if (rec.id.startsWith(prefix)) {
-        const stats = leagueStats[leagueName];
-        if (!stats) return { value: 0, isApplicable: false };
-        if (rec.id.includes('single_season_goals')) return { value: stats.bestSeasonGoals, isApplicable: true };
-        if (rec.id.includes('single_season_assists')) return { value: stats.bestSeasonAssists, isApplicable: true };
-        if (rec.id.includes('alltime_goals')) return { value: stats.goals, isApplicable: true };
-        if (rec.id.includes('alltime_assists')) return { value: stats.assists, isApplicable: true };
-        if (rec.id.includes('most_caps')) return { value: stats.apps, isApplicable: true };
+        // Check if user has played in any of the league name variants
+        let foundStats = null;
+        for (const leagueName of leagueNames) {
+          if (leagueStats[leagueName]) {
+            foundStats = leagueStats[leagueName];
+            break;
+          }
+        }
+        if (!foundStats) return { value: 0, isApplicable: false };
+        if (rec.id.includes('single_season_goals')) return { value: foundStats.bestSeasonGoals, isApplicable: true };
+        if (rec.id.includes('single_season_assists')) return { value: foundStats.bestSeasonAssists, isApplicable: true };
+        if (rec.id.includes('alltime_goals')) return { value: foundStats.goals, isApplicable: true };
+        if (rec.id.includes('alltime_assists')) return { value: foundStats.assists, isApplicable: true };
+        if (rec.id.includes('most_caps')) return { value: foundStats.apps, isApplicable: true };
         return { value: 0, isApplicable: true };
       }
     }

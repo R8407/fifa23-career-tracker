@@ -13,6 +13,7 @@ import {
 } from '../utils/legendUnlock';
 import { generateFanReactions, FanReaction } from '../utils/fanReactions';
 import { FanComment } from '../utils/newsLlm';
+import { TOP_100_LEGENDS } from '../data/mockData';
 
 interface FeedPost {
   id: string;
@@ -213,6 +214,161 @@ function seededRandom(seed: string): number {
     hash = hash & hash;
   }
   return Math.abs(hash);
+}
+
+// Milestone comparison post types
+interface MilestonePost {
+  id: string;
+  type: 'milestone_comparison';
+  author: string;
+  handle: string;
+  flag: string;
+  verified: boolean;
+  content: string;
+  likes: number;
+  replies: number;
+  timeAgo: string;
+  fanComments?: FanComment[];
+  comparison: {
+    playerName: string;
+    playerGoals: number;
+    playerAssists: number;
+    playerApps: number;
+    legendName: string;
+    legendGoals: number;
+    legendAssists: number;
+    legendApps: number;
+    legendFlag: string;
+    legendEra: string;
+    legendAchievement: string;
+    milestoneType: 'goals' | 'assists' | 'apps' | 'club_legend';
+    milestoneValue: number;
+  };
+}
+
+// Find the best legend to compare against
+function findBestLegendComparison(
+  playerGoals: number,
+  playerAssists: number,
+  playerApps: number,
+  playerClub: string,
+  legends: any[]
+): { legend: any; type: 'goals' | 'assists' | 'apps' | 'club_legend'; value: number } | null {
+  // First, try to find a legend who played at the same club
+  const clubLegends = legends.filter(l => {
+    const name = l.name.toLowerCase();
+    const club = playerClub.toLowerCase();
+    // Check if legend is associated with the club
+    if (club.includes('spezia') && (name.includes('nzola') || name.includes('verde'))) return true;
+    if (club.includes('real madrid') && (name.includes('ronaldo') || name.includes('raul') || name.includes('puskas') || name.includes('di stefano'))) return true;
+    if (club.includes('barcelona') && (name.includes('messi') || name.includes('ronaldinho') || name.includes('cruyff') || name.includes('xavi') || name.includes('iniesta'))) return true;
+    if (club.includes('manchester') && (name.includes('rooney') || name.includes('giggs') || name.includes('beckham') || name.includes('best'))) return true;
+    if (club.includes('liverpool') && (name.includes('gerrard') || name.includes('rush') || name.includes('dalglish'))) return true;
+    if (club.includes('bayern') && (name.includes('müller') || name.includes('beckenbauer') || name.includes('rummenigge'))) return true;
+    if (club.includes('juventus') && (name.includes('del piero') || name.includes('trezeguet') || name.includes('nedved') || name.includes('buffon'))) return true;
+    if (club.includes('milan') && (name.includes('maldini') || name.includes('van basten') || name.includes('shevchenko') || name.includes('pirlo'))) return true;
+    if (club.includes('inter') && (name.includes('meazza') || name.includes('zanetti') || name.includes('ronaldo naz'))) return true;
+    return false;
+  });
+
+  if (clubLegends.length > 0) {
+    // Pick the closest legend in terms of goals
+    const sorted = clubLegends.sort((a, b) => 
+      Math.abs(a.goals - playerGoals) - Math.abs(b.goals - playerGoals)
+    );
+    return { legend: sorted[0], type: 'club_legend', value: playerGoals };
+  }
+
+  // Otherwise, find legend closest in goals
+  const goalSorted = [...legends].sort((a, b) => 
+    Math.abs(a.goals - playerGoals) - Math.abs(b.goals - playerGoals)
+  );
+  
+  // Find legend closest in assists
+  const assistSorted = [...legends].sort((a, b) => 
+    Math.abs(a.assists - playerAssists) - Math.abs(b.assists - playerAssists)
+  );
+
+  // Pick the better match
+  const goalDiff = Math.abs(goalSorted[0].goals - playerGoals);
+  const assistDiff = Math.abs(assistSorted[0].assists - playerAssists);
+
+  if (goalDiff <= assistDiff) {
+    return { legend: goalSorted[0], type: 'goals', value: playerGoals };
+  } else {
+    return { legend: assistSorted[0], type: 'assists', value: playerAssists };
+  }
+}
+
+// Check for milestones and generate comparison posts
+function generateMilestonePosts(
+  data: any,
+  legends: any[]
+): MilestonePost[] {
+  const profile = data.my_player_profile || {};
+  const seasons = data.seasons || [];
+  const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Your Player';
+  const playerClub = data.my_player_profile?.currentclub || 'Unknown';
+  const totalGoals = data.total_goals || 0;
+  const totalAssists = data.total_assists || 0;
+  const totalApps = seasons.reduce((sum: number, s: any) => sum + (s.apps || 0), 0);
+
+  const milestonePosts: MilestonePost[] = [];
+  const milestones = [25, 50, 100, 150, 200, 300, 500];
+  
+  // Check if we've hit any milestones
+  for (const milestone of milestones) {
+    if (totalApps >= milestone) {
+      const comparison = findBestLegendComparison(totalGoals, totalAssists, totalApps, playerClub, legends);
+      if (comparison) {
+        const { legend, type, value } = comparison;
+        
+        let content = '';
+        if (type === 'club_legend') {
+          content = `${playerName} has reached ${totalApps} appearances for ${playerClub}! The last player to hit this milestone at the club was ${legend.name} (${legend.era}). Fan debate: Is ${playerName} on track to match ${legend.name}'s legacy?`;
+        } else if (type === 'goals') {
+          content = `${playerName} hits ${totalGoals} career goals at just ${totalApps} appearances! For comparison, ${legend.name} had ${legend.goals} goals at the same stage of his career. The chase is ON.`;
+        } else {
+          content = `${playerName} reaches ${totalAssists} career assists! ${legend.name} finished his career with ${legend.assists} assists. Can ${playerName} surpass the legend?`;
+        }
+
+        milestonePosts.push({
+          id: `milestone_${milestone}_${type}`,
+          type: 'milestone_comparison',
+          author: 'Football Daily',
+          handle: '@FootballDaily',
+          flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}',
+          verified: true,
+          content,
+          likes: Math.floor(seededRandom(`milestone_${milestone}`) % 8000) + 1000,
+          replies: Math.floor(seededRandom(`milestone_replies_${milestone}`) % 500) + 100,
+          timeAgo: '2h',
+          fanComments: [
+            { name: 'Marcus R.', handle: '@MarcusR_Football', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', text: `${playerName} is ${type === 'goals' ? 'scoring' : type === 'assists' ? 'creating' : 'playing'} at a legendary pace!` },
+            { name: 'Luca B.', handle: '@LucaB_Tactics', flag: '\u{1F1EE}\u{E0067}', text: `At ${legend.name}'s age, he had ${type === 'goals' ? legend.goals : type === 'assists' ? legend.assists : legend.appearances} ${type === 'goals' ? 'goals' : type === 'assists' ? 'assists' : 'appearances'}. The comparison is real.` },
+            { name: 'Jake T.', handle: '@JakeT_Sports', flag: '\u{1F1FA}\u{E0067}', text: `This is why we watch football. History in the making.` },
+          ],
+          comparison: {
+            playerName,
+            playerGoals: totalGoals,
+            playerAssists: totalAssists,
+            playerApps: totalApps,
+            legendName: legend.name,
+            legendGoals: legend.goals,
+            legendAssists: legend.assists,
+            legendApps: legend.appearances,
+            legendFlag: legend.flag,
+            legendEra: legend.era,
+            legendAchievement: legend.notableAchievement,
+            milestoneType: type,
+            milestoneValue: value,
+          },
+        });
+      }
+    }
+  }
+
+  return milestonePosts;
 }
 
 function generatePosts(data: any, hofPoints: number = 0): FeedPost[] {
@@ -621,7 +777,24 @@ export const SocialMediaView: React.FC = () => {
 
   const posts = useMemo(() => {
     const data = careerExportData as any;
-    return generatePosts(data, hofPoints);
+    const regularPosts = generatePosts(data, hofPoints);
+    const milestonePosts = generateMilestonePosts(data, TOP_100_LEGENDS);
+    // Interleave milestone posts with regular posts
+    const allPosts: (FeedPost | MilestonePost)[] = [];
+    let milestoneIdx = 0;
+    for (let i = 0; i < regularPosts.length; i++) {
+      allPosts.push(regularPosts[i]);
+      if (milestoneIdx < milestonePosts.length && (i === 1 || i === 3)) {
+        allPosts.push(milestonePosts[milestoneIdx]);
+        milestoneIdx++;
+      }
+    }
+    // Add any remaining milestone posts
+    while (milestoneIdx < milestonePosts.length) {
+      allPosts.push(milestonePosts[milestoneIdx]);
+      milestoneIdx++;
+    }
+    return allPosts;
   }, [hofPoints]);
 
   // Generate all DMs (legend + static + performance-triggered)
@@ -824,11 +997,140 @@ export const SocialMediaView: React.FC = () => {
           )}
 
           {posts.map(post => {
+            const isMilestone = 'type' in post && post.type === 'milestone_comparison';
             const isLiked = likedPosts.has(post.id);
             const likeCount = isLiked ? post.likes + 1 : post.likes;
             const hasFanComments = post.fanComments && post.fanComments.length > 0;
             const isCommentsExpanded = expandedComments.has(post.id);
             
+            // Milestone comparison post (phone-sized)
+            if (isMilestone) {
+              const milestone = post as MilestonePost;
+              return (
+                <div key={milestone.id} className="bg-gradient-to-b from-zinc-900 via-zinc-900 to-zinc-950 border-2 border-amber-500/40 rounded-3xl overflow-hidden shadow-lg shadow-amber-500/10">
+                  {/* Header */}
+                  <div className="p-4 border-b border-zinc-800">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-lg">{milestone.flag}</div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-bold text-white">{milestone.author}</span>
+                          {milestone.verified && <span className="text-blue-400 text-xs">&#10003;</span>}
+                          <span className="text-xs text-zinc-500">{milestone.handle}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-600">{milestone.timeAgo}</span>
+                      </div>
+                      <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold rounded-full border border-amber-500/30">
+                        MILESTONE
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Comparison Content */}
+                  <div className="p-5">
+                    <p className="text-sm text-zinc-300 mb-4">{milestone.content}</p>
+                    
+                    {/* Side-by-side comparison */}
+                    <div className="bg-zinc-950/80 rounded-2xl p-4 border border-zinc-800">
+                      <div className="grid grid-cols-3 gap-4 text-center">
+                        {/* Player */}
+                        <div>
+                          <div className="text-xs text-zinc-500 mb-1">YOU</div>
+                          <div className="text-2xl font-black text-white">{milestone.comparison.playerGoals}</div>
+                          <div className="text-[10px] text-zinc-500">Goals</div>
+                          <div className="text-lg font-bold text-amber-400 mt-1">{milestone.comparison.playerAssists}</div>
+                          <div className="text-[10px] text-zinc-500">Assists</div>
+                          <div className="text-xs text-zinc-400 mt-1">{milestone.comparison.playerApps} Apps</div>
+                        </div>
+
+                        {/* VS */}
+                        <div className="flex items-center justify-center">
+                          <div className="text-3xl font-black text-zinc-700">VS</div>
+                        </div>
+
+                        {/* Legend */}
+                        <div>
+                          <div className="text-xs text-zinc-500 mb-1">LEGEND</div>
+                          <div className="text-lg font-bold text-white">{milestone.comparison.legendName}</div>
+                          <div className="text-xs text-zinc-400">{milestone.comparison.legendFlag} {milestone.comparison.legendEra}</div>
+                          <div className="text-2xl font-black text-zinc-300 mt-1">{milestone.comparison.legendGoals}</div>
+                          <div className="text-[10px] text-zinc-500">Goals</div>
+                          <div className="text-lg font-bold text-zinc-400 mt-1">{milestone.comparison.legendAssists}</div>
+                          <div className="text-[10px] text-zinc-500">Assists</div>
+                        </div>
+                      </div>
+
+                      {/* Achievement */}
+                      <div className="mt-4 pt-3 border-t border-zinc-800 text-center">
+                        <div className="text-[10px] text-zinc-500 uppercase">Legend Achievement</div>
+                        <div className="text-xs text-amber-400 mt-1">{milestone.comparison.legendAchievement}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action bar */}
+                  <div className="px-5 pb-4">
+                    <div className="flex items-center gap-6">
+                      <button
+                        onClick={() => toggleLike(milestone.id)}
+                        className={`flex items-center gap-1.5 text-xs transition-colors cursor-pointer ${isLiked ? 'text-red-400' : 'text-zinc-500 hover:text-red-400'}`}
+                      >
+                        <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-red-400' : ''}`} /> {formatNumber(likeCount)}
+                      </button>
+                      <button 
+                        onClick={() => {
+                          if (hasFanComments) {
+                            setExpandedComments(prev => {
+                              const next = new Set(prev);
+                              if (next.has(milestone.id)) {
+                                next.delete(milestone.id);
+                              } else {
+                                next.add(milestone.id);
+                              }
+                              return next;
+                            });
+                          }
+                        }}
+                        className={`flex items-center gap-1.5 text-xs transition-colors ${hasFanComments ? 'text-amber-400 hover:text-amber-300 cursor-pointer' : 'text-zinc-500 hover:text-blue-400'}`}
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" /> {formatNumber(milestone.replies)}
+                        {hasFanComments && (
+                          <span className="ml-1 px-1.5 py-0.5 bg-amber-500/20 text-amber-400 text-[9px] font-bold rounded-full">
+                            {milestone.fanComments!.length} COMMENT{milestone.fanComments!.length > 1 ? 'S' : ''}
+                          </span>
+                        )}
+                      </button>
+                      <button className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-green-400 transition-colors">
+                        <Share2 className="w-3.5 h-3.5" /> Share
+                      </button>
+                    </div>
+
+                    {/* Expandable Fan Comments */}
+                    {hasFanComments && isCommentsExpanded && (
+                      <div className="mt-4 pt-4 border-t border-zinc-800 space-y-3">
+                        <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Fan Comments</div>
+                        {milestone.fanComments!.map((comment, idx) => (
+                          <div key={idx} className="flex gap-2 pl-2">
+                            <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 text-sm">
+                              {comment.flag}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-bold text-white">{comment.name}</span>
+                                <span className="text-[10px] text-zinc-500">{comment.handle}</span>
+                              </div>
+                              <p className="text-xs text-zinc-400 mt-0.5">{comment.text}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            }
+
+            // Regular post
             return (
               <div key={post.id} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 hover:border-zinc-700 transition-all">
                 <div className="flex gap-3">
