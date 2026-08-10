@@ -23,9 +23,9 @@ interface SeasonAwardData {
 const LEAGUE_GOALS_TO_WIN_BOOT = 20;
 const MIN_RATING_FOR_POTY = 8.0;
 
-// A season is considered complete if 10-15 days or less remain
+// A season is considered complete at the first week of the last month (~25 days or less remain)
 function isSeasonCompleted(daysRemaining: number): boolean {
-  return daysRemaining <= 15;
+  return daysRemaining <= 25;
 }
 
 function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[], daysRemaining: number): SeasonAwardData {
