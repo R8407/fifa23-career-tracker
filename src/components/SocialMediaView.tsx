@@ -93,8 +93,12 @@ function generateTeammateDM(data: any, playerName: string, playerClub: string, p
     return `Tough one today. But we move. Next game's ours.`;
   };
   
-  return {
-    id: `teammate_${teamId}_${selected.playerid}`,
+  const dmId = `teammate_${teamId}_${selected.playerid}`;
+  const saved = getPersistentDM(dmId);
+  if (saved) return saved;
+
+  const dm: DirectMessage = {
+    id: dmId,
     sender: fullName,
     handle,
     flag: '🌍',
@@ -103,6 +107,8 @@ function generateTeammateDM(data: any, playerName: string, playerClub: string, p
     timeAgo: 'Recently',
     read: true,
   };
+  savePersistentDM(dmId, dm);
+  return dm;
 }
 
 function generateLegendDMs(hofPoints: number, playerName: string, playerClub: string, playerAge: number): DirectMessage[] {
@@ -163,28 +169,37 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
   // Check if we already sent end-of-season DMs for this season
   const seasonKey = `eos_dm_${latestSeason.season || 'current'}`;
   const alreadySent = localStorage.getItem(seasonKey);
-  if (alreadySent) return [];
+  if (alreadySent) {
+    // Load from persistent store
+    const coachDM = getPersistentDM(`eos_coach_${latestSeason.season}`);
+    const agentDM = getPersistentDM(`eos_agent_${latestSeason.season}`);
+    const tmDM = getPersistentDM(`eos_tm_${latestSeason.season}`);
+    const dms: DirectMessage[] = [];
+    if (coachDM) dms.push(coachDM);
+    if (agentDM) dms.push(agentDM);
+    if (tmDM) dms.push(tmDM);
+    return dms;
+  }
 
   const dms: DirectMessage[] = [];
 
   // Coach DM
-  const coachMessages = [
-    `Season review: ${apps} appearances, ${goals} goals, ${assists} assists. ${rating >= 8.0 ? 'Outstanding season. You are becoming the player I knew you could be.' : rating >= 7.5 ? 'Very good season. Consistent performances. Keep pushing for more.' : 'Solid season. You showed moments of quality. Next season I expect more.'}${motm > 0 ? ` ${motm}x MOTM shows you can be the difference.` : ''}`,
-  ];
-  dms.push({
+  const coachDM: DirectMessage = {
     id: `eos_coach_${latestSeason.season}`,
     sender: 'Your Coach',
     handle: '@Coach',
     flag: '\u{1F1EE}\u{E0067}',
     role: 'coach',
-    content: coachMessages[0],
+    content: `Season review: ${apps} appearances, ${goals} goals, ${assists} assists. ${rating >= 8.0 ? 'Outstanding season. You are becoming the player I knew you could be.' : rating >= 7.5 ? 'Very good season. Consistent performances. Keep pushing for more.' : 'Solid season. You showed moments of quality. Next season I expect more.'}${motm > 0 ? ` ${motm}x MOTM shows you can be the difference.` : ''}`,
     timeAgo: 'End of season',
     read: false,
-  });
+  };
+  dms.push(coachDM);
+  savePersistentDM(coachDM.id, coachDM);
 
   // Agent DM
   const valueChange = rating >= 8.0 ? 'significantly' : rating >= 7.5 ? 'noticeably' : 'moderately';
-  dms.push({
+  const agentDM: DirectMessage = {
     id: `eos_agent_${latestSeason.season}`,
     sender: 'Your Agent',
     handle: '@PlayerAgent',
@@ -193,7 +208,9 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
     content: `Season complete. ${goals}G ${assists}A in ${apps} apps. Market value will increase ${valueChange}. ${rating >= 8.0 ? 'Big clubs will be watching. Let me know if you want to explore options.' : 'Keep performing and the opportunities will come.'}`,
     timeAgo: 'End of season',
     read: false,
-  });
+  };
+  dms.push(agentDM);
+  savePersistentDM(agentDM.id, agentDM);
 
   // Teammate DM (if high OVR teammate exists)
   const userOVR = parseInt(data.my_player_profile?.overallrating || '65');
@@ -202,8 +219,8 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
   if (betterTeammates.length > 0) {
     const tm = betterTeammates[0];
     const tmName = tm.commonname || `${tm.firstname || ''} ${tm.lastname || ''}`.trim() || 'Teammate';
-    dms.push({
-      id: `eos_tm_${latestSeason.season}_${tm.playerid}`,
+    const tmDM: DirectMessage = {
+      id: `eos_tm_${latestSeason.season}`,
       sender: tmName,
       handle: `@${tmName.replace(/\s/g, '')}`,
       flag: '\u{1F30D}',
@@ -211,7 +228,9 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
       content: `${playerName}, great season. ${goals > 10 ? 'Your goals were crucial for us.' : assists > 8 ? 'Those assists changed games for us.' : 'You really contributed to the team.'} Hope we play together next season too.${redCards > 0 ? ' Maybe watch the tackles though lol.' : ''}`,
       timeAgo: 'End of season',
       read: false,
-    });
+    };
+    dms.push(tmDM);
+    savePersistentDM(tmDM.id, tmDM);
   }
 
   // Mark as sent
@@ -556,6 +575,34 @@ interface ChatMessage {
 }
 
 const QUICK_EMOJIS = ['⚽', '🔥', '💪', '🙌', '😤', '😂', '🤯', '🏆', '🎯', '❤️', '💯', '🙏', '👑', '💀', '🫡', '🤝'];
+
+// Persistent DM storage - saves all DMs to localStorage
+const PERSISTENT_DMS_KEY = 'career_social_dms';
+
+function loadPersistentDMs(): Record<string, DirectMessage> {
+  try {
+    return JSON.parse(localStorage.getItem(PERSISTENT_DMS_KEY) || '{}');
+  } catch { return {}; }
+}
+
+function savePersistentDM(id: string, dm: DirectMessage): void {
+  const store = loadPersistentDMs();
+  store[id] = dm;
+  localStorage.setItem(PERSISTENT_DMS_KEY, JSON.stringify(store));
+}
+
+function getPersistentDM(id: string): DirectMessage | null {
+  const store = loadPersistentDMs();
+  return store[id] || null;
+}
+
+function markPersistentDMRead(id: string): void {
+  const store = loadPersistentDMs();
+  if (store[id]) {
+    store[id] = { ...store[id], read: true };
+    localStorage.setItem(PERSISTENT_DMS_KEY, JSON.stringify(store));
+  }
+}
 
 const ChatView: React.FC<{ selectedDM: DirectMessage; onBack: () => void; hofPoints: number }> = ({ selectedDM, onBack, hofPoints }) => {
   const [reply, setReply] = useState('');
@@ -1308,7 +1355,7 @@ export const SocialMediaView: React.FC = () => {
             {allDMs.filter(dm => dm.role === 'coach' || dm.role === 'teammate').map(dm => (
               <button
                 key={dm.id}
-                onClick={() => setSelectedDM(dm)}
+                onClick={() => { markPersistentDMRead(dm.id); setSelectedDM({ ...dm, read: true }); }}
                 className="w-full p-4 flex items-center gap-3 hover:bg-zinc-800/50 transition-colors border-b border-zinc-800/50 last:border-b-0"
               >
                 <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl flex-shrink-0">
@@ -1336,7 +1383,7 @@ export const SocialMediaView: React.FC = () => {
               return (
                 <button
                   key={dm.id}
-                  onClick={() => setSelectedDM(dm)}
+                  onClick={() => { markPersistentDMRead(dm.id); setSelectedDM({ ...dm, read: true }); }}
                   className="w-full p-4 flex items-center gap-3 hover:bg-zinc-800/50 transition-colors border-b border-zinc-800/50 last:border-b-0"
                 >
                   <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl flex-shrink-0">
