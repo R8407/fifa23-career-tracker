@@ -89,6 +89,14 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     if (rec.id === 'rec_most_career_goals') return { value: totalUserGoals, isApplicable: true };
     if (rec.id === 'rec_most_career_assists') return { value: totalUserAssists, isApplicable: true };
     if (rec.id.includes('ballondor')) return { value: userBallonDor, isApplicable: true };
+    if (rec.id === 'rec_most_motm') {
+      const motmCount = player.trophies.find(t => t.iconType === 'manofmatch')?.quantity || 0;
+      return { value: motmCount, isApplicable: true };
+    }
+    if (rec.id === 'rec_golden_boot_alltime') {
+      const goldenBootCount = player.trophies.find(t => t.iconType === 'goldenboot')?.quantity || 0;
+      return { value: goldenBootCount, isApplicable: true };
+    }
 
     // Club-specific records: only applicable if player has played for that club
     const clubMap: Record<string, string> = {
