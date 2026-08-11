@@ -1,0 +1,82 @@
+{
+  "clubs": {
+    "113974": {
+      "name": "Spezia Calcio",
+      "local_path": "public/assets/clubs/113974.webp",
+      "status": "downloaded",
+      "size_kb": 55.9
+    }
+  },
+  "competitions": {
+    "conference-league": {
+      "name": "UEFA Europa Conference League",
+      "local_path": "public/assets/competitions/conference-league.webp",
+      "status": "downloaded",
+      "size_kb": 15.8
+    },
+    "copa-italia": {
+      "name": "Coppa Italia",
+      "local_path": "public/assets/competitions/copa-italia.webp",
+      "status": "downloaded",
+      "size_kb": 49.2
+    },
+    "serie-a": {
+      "name": "Serie A TIM",
+      "local_path": "public/assets/competitions/serie-a.webp",
+      "status": "downloaded",
+      "size_kb": 45.0
+    }
+  },
+  "trophies": {
+    "conference-league": {
+      "name": "UEFA Europa Conference League",
+      "local_path": "public/assets/trophies/conference-league.webp",
+      "status": "downloaded",
+      "size_kb": 254.4
+    },
+    "copa-italia": {
+      "name": "Coppa Italia",
+      "local_path": "public/assets/trophies/copa-italia.webp",
+      "status": "downloaded",
+      "size_kb": 114.8
+    },
+    "serie-a": {
+      "name": "Serie A TIM",
+      "local_path": "public/assets/trophies/serie-a.webp",
+      "status": "downloaded",
+      "size_kb": 485.0
+    }
+  },
+  "awards": {
+    "assist-king": {
+      "name": "Assist King",
+      "local_path": "public/assets/awards/assist-king.webp",
+      "status": "downloaded",
+      "size_kb": 181.0
+    },
+    "ballon-dor": {
+      "name": "Ballon d'Or",
+      "local_path": "public/assets/awards/ballon-dor.webp",
+      "status": "downloaded",
+      "size_kb": 364.8
+    },
+    "golden-boot": {
+      "name": "Golden Boot",
+      "local_path": "public/assets/awards/golden-boot.webp",
+      "status": "downloaded",
+      "size_kb": 207.3
+    },
+    "player-of-season": {
+      "name": "Player of the Season",
+      "local_path": "public/assets/awards/player-of-season.webp",
+      "status": "downloaded",
+      "size_kb": 65.2
+    },
+    "young-player": {
+      "name": "Young Player Award",
+      "local_path": "public/assets/awards/young-player.webp",
+      "status": "downloaded",
+      "size_kb": 287.9
+    }
+  }
+}
