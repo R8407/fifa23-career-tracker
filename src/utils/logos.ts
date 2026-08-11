@@ -55,14 +55,26 @@ export function getClubLogo(clubName: string): string {
 }
 
 export function getLeagueLogo(leagueName: string): string {
-  if (REAL_LEAGUE_LOGOS[leagueName]) {
-    return REAL_LEAGUE_LOGOS[leagueName];
-  }
+  // Prefer local assets
+  const localMap: Record<string, string> = {
+    'Serie A TIM': '/assets/competitions/serie-a.webp',
+    'Serie A': '/assets/competitions/serie-a.webp',
+    'Coppa Italia': '/assets/competitions/copa-italia.webp',
+    'UEFA Europa Conference League': '/assets/competitions/conference-league.webp',
+    'Conference League': '/assets/competitions/conference-league.webp',
+  };
+  if (localMap[leagueName]) return localMap[leagueName];
+
   const lower = leagueName.toLowerCase();
+  if (lower.includes('serie')) return '/assets/competitions/serie-a.webp';
+  if (lower.includes('coppa')) return '/assets/competitions/copa-italia.webp';
+  if (lower.includes('conference')) return '/assets/competitions/conference-league.webp';
+
+  // Fallback to external URLs
+  if (REAL_LEAGUE_LOGOS[leagueName]) return REAL_LEAGUE_LOGOS[leagueName];
   if (lower.includes('la liga') || lower.includes('laliga')) return REAL_LEAGUE_LOGOS['La Liga'];
   if (lower.includes('premier')) return REAL_LEAGUE_LOGOS['Premier League'];
   if (lower.includes('champions') || lower.includes('ucl')) return REAL_LEAGUE_LOGOS['UEFA Champions League'];
-  if (lower.includes('serie')) return REAL_LEAGUE_LOGOS['Serie A'];
   if (lower.includes('ligue')) return REAL_LEAGUE_LOGOS['Ligue 1'];
   if (lower.includes('bundesliga')) return REAL_LEAGUE_LOGOS['Bundesliga'];
   if (lower.includes('world cup')) return REAL_LEAGUE_LOGOS['FIFA World Cup'];

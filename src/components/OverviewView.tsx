@@ -186,8 +186,14 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
               <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
                 <div className="text-slate-500 text-xs font-medium">Current Club</div>
-                <div className="text-sm font-medium text-white mt-1">
-                  {player.currentClub}
+                <div className="flex items-center gap-2 mt-1">
+                  <img
+                    src={`/assets/clubs/113974.webp`}
+                    alt={player.currentClub}
+                    className="w-6 h-6 object-contain"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
+                  <div className="text-sm font-medium text-white">{player.currentClub}</div>
                 </div>
               </div>
 

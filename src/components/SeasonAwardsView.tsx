@@ -345,7 +345,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Golden Boot */}
             <AwardCard
               title="Golden Boot"
-              icon={<Trophy className="w-6 h-6" />}
+              icon={<img src="/assets/awards/golden-boot.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.goldenBoot.won}
               rank={awards.goldenBoot.rank}
               total={seasons.length}
@@ -358,7 +358,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Player of the Season */}
             <AwardCard
               title="Player of the Season"
-              icon={<Star className="w-6 h-6" />}
+              icon={<img src="/assets/awards/player-of-season.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.playerOfSeason.won}
               rank={awards.playerOfSeason.rank}
               total={seasons.length}
@@ -371,7 +371,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Best XI */}
             <AwardCard
               title="League Best XI"
-              icon={<Shield className="w-6 h-6" />}
+              icon={<img src="/assets/awards/player-of-season.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.bestXi.inducted}
               rank={awards.bestXi.inducted ? 1 : 0}
               total={11}
@@ -383,7 +383,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Young Player */}
             <AwardCard
               title="Young Player of the Season"
-              icon={<Flame className="w-6 h-6" />}
+              icon={<img src="/assets/awards/young-player.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.youngPlayer.won}
               rank={awards.youngPlayer.rank}
               total={seasons.length}
@@ -396,7 +396,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Assist King */}
             <AwardCard
               title={`Assist King - ${currentSeason.league}`}
-              icon={<TrendingUp className="w-6 h-6" />}
+              icon={<img src="/assets/awards/assist-king.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.assistKing.won}
               rank={awards.assistKing.rank}
               total={seasons.length}

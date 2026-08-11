@@ -68,7 +68,10 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-slate-600">·</span>
               <span className="text-emerald-400 font-medium">{player.position}</span>
               <span className="text-slate-600">·</span>
-              <span className="text-slate-300">{player.currentClub}</span>
+              <span className="text-slate-300 flex items-center gap-1">
+                <img src="/assets/clubs/113974.webp" alt="" className="w-3.5 h-3.5 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                {player.currentClub}
+              </span>
               {player.isOnLoan && (
                 <>
                   <span className="text-slate-600">·</span>

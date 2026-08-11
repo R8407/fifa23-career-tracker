@@ -3,12 +3,6 @@ import { PlayerData, TrophyItem } from '../types';
 import { Trophy, Award, X, Sparkles, Info, Users, User, Star } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 
-import motmImg from '../../models/MOTM.webp';
-import ballondorImg from '../../models/ballon-dor..jpg';
-import eplImg from '../../models/Premier_league_trophy.jpg';
-import uclImg from '../../models/UCL.webp';
-import goldenbootImg from '../assets/images/golden_boot_trophy_1786062523925.jpg';
-
 interface TrophyRoomViewProps {
   player: PlayerData;
 }
@@ -18,19 +12,19 @@ type TrophyAsset =
   | { kind: 'img'; src: string; blend: string };
 
 const TROPHY_ASSETS: Record<string, TrophyAsset> = {
-  manofmatch: { kind: 'img', src: motmImg, blend: 'multiply' },
-  ballondor: { kind: 'img', src: ballondorImg, blend: 'multiply' },
-  league: { kind: 'img', src: eplImg, blend: 'multiply' },
-  champions: { kind: 'img', src: uclImg, blend: 'screen' },
-  goldenboot: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
-  assistking: { kind: 'img', src: goldenbootImg, blend: 'multiply' },
-  youngplayer: { kind: 'img', src: motmImg, blend: 'multiply' },
-  bestxi: { kind: 'img', src: eplImg, blend: 'multiply' },
-  worldcup: { kind: 'img', src: eplImg, blend: 'multiply' },
-  national: { kind: 'img', src: eplImg, blend: 'multiply' },
-  cup: { kind: 'img', src: eplImg, blend: 'multiply' },
-  europaleague: { kind: 'img', src: uclImg, blend: 'screen' },
-  playerofseason: { kind: 'img', src: ballondorImg, blend: 'multiply' },
+  manofmatch: { kind: 'img', src: '/assets/awards/golden-boot.webp', blend: 'multiply' },
+  ballondor: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
+  league: { kind: 'img', src: '/assets/trophies/serie-a.webp', blend: 'multiply' },
+  champions: { kind: 'img', src: '/assets/trophies/conference-league.webp', blend: 'screen' },
+  goldenboot: { kind: 'img', src: '/assets/awards/golden-boot.webp', blend: 'multiply' },
+  assistking: { kind: 'img', src: '/assets/awards/assist-king.webp', blend: 'multiply' },
+  youngplayer: { kind: 'img', src: '/assets/awards/young-player.webp', blend: 'multiply' },
+  bestxi: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
+  worldcup: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
+  national: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
+  cup: { kind: 'img', src: '/assets/trophies/copa-italia.webp', blend: 'multiply' },
+  europaleague: { kind: 'img', src: '/assets/trophies/conference-league.webp', blend: 'screen' },
+  playerofseason: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
 };
 
 const TrophyVisual: React.FC<{
