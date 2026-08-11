@@ -188,7 +188,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
                 <div className="text-slate-500 text-xs font-medium">Current Club</div>
                 <div className="flex items-center gap-2 mt-1">
                   <img
-                    src={`/assets/clubs/113974.webp`}
+                    src={`/assets/clubs/${player.currentClub === 'Chelsea' ? '5' : '113974'}.webp`}
                     alt={player.currentClub}
                     className="w-6 h-6 object-contain"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}

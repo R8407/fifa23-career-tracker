@@ -3,6 +3,19 @@ import playerNamesData from '../data/player_names.json';
 import { PlayerData, Teammate, LeaguePlayerStat, TrophyItem, SeasonData } from '../types';
 import { INITIAL_PLAYER, SQUAD_TEAMMATES, LEAGUE_UNIVERSE_DATA } from '../data/mockData';
 
+// Persistent store for completed season awards
+const COMPLETED_AWARDS_KEY = 'career_completed_awards';
+
+function loadCompletedAwards(): Record<string, { goldenBoot: number; playerOfSeason: number; bestXi: number; youngPlayer: number; assistKing: number }> {
+  try {
+    return JSON.parse(localStorage.getItem(COMPLETED_AWARDS_KEY) || '{}');
+  } catch { return {}; }
+}
+
+function saveCompletedAwards(awards: Record<string, { goldenBoot: number; playerOfSeason: number; bestXi: number; youngPlayer: number; assistKing: number }>): void {
+  localStorage.setItem(COMPLETED_AWARDS_KEY, JSON.stringify(awards));
+}
+
 // Player name lookup from FIFA database
 const PLAYER_NAMES: Record<string, string> = playerNamesData as Record<string, string>;
 
@@ -551,7 +564,9 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
   const jerseyNo = userSquadEntry?.jerseynumber ? parseInt(userSquadEntry.jerseynumber, 10) : 0;
 
   // Spezia team ID 113974 from career export
-  const teamName = exportDataFinal.my_team_id === '113974' ? 'Spezia' : 'Unknown Club';
+  // Use profile's currentClub if available, fall back to lookup
+  const teamName = (exportDataFinal as any).my_player_profile?.currentClub
+    || (exportDataFinal as any).my_team_id === '113974' ? 'Spezia' : 'Unknown Club';
 
   // Map FIFA nationality ID to name and flag
   const nationalId = profile.nationality?.toString() || '';
@@ -683,7 +698,8 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
     trophies: mergeTrophiesWithAwards(
       (exportDataFinal as any).trophies || [],
       (exportDataFinal as any).seasons || [],
-      (exportDataFinal as any).days_until_season_end ?? 0
+      (exportDataFinal as any).days_until_season_end ?? 0,
+      (exportDataFinal as any).season_is_active ?? true
     ),
     iconicMoments: [],
     isLoadedFromExportDB: true,
@@ -702,7 +718,8 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
 function mergeTrophiesWithAwards(
   baseTrophies: TrophyItem[],
   seasons: SeasonData[],
-  currentDaysRemaining: number
+  currentDaysRemaining: number,
+  seasonIsActive: boolean
 ): TrophyItem[] {
   const GOLDEN_BOOT_THRESHOLD = 20;
   const POTY_RATING = 8.0;
@@ -729,53 +746,116 @@ function mergeTrophiesWithAwards(
     return Array.from(trophyMap.values());
   }
 
+  // Load previously completed awards from localStorage
+  const completedAwards = loadCompletedAwards();
+
   // Sort seasons for ranking
   const allSeasons = [...seasons].sort((a, b) => a.id.localeCompare(b.id));
   const goalRanks = [...allSeasons].sort((a, b) => b.goals - a.goals);
   const ratingRanks = [...allSeasons].sort((a, b) => b.avgRating - a.avgRating);
   const assistRanks = [...allSeasons].sort((a, b) => b.assists - a.assists);
 
+  let newAwardsSaved = false;
+
   for (const season of allSeasons) {
-    // Past seasons are always complete; current season uses daysRemaining
+    // A season is completed if:
+    // 1. It's not the last season (previous seasons are always done), OR
+    // 2. It's the last season but daysRemaining <= 25, OR
+    // 3. It's the last season but season is no longer active
     const isLastSeason = season === allSeasons[allSeasons.length - 1];
-    const isCompleted = isLastSeason ? currentDaysRemaining <= 25 : true;
+    const isCompleted = isLastSeason
+      ? (!seasonIsActive || currentDaysRemaining <= 25)
+      : true;
+
     if (!isCompleted) continue;
+
+    // Check if we already have saved awards for this season
+    const savedAwards = completedAwards[season.season];
+    const hasSavedAwards = savedAwards && (
+      savedAwards.goldenBoot > 0 || savedAwards.playerOfSeason > 0 ||
+      savedAwards.bestXi > 0 || savedAwards.youngPlayer > 0 || savedAwards.assistKing > 0
+    );
 
     // Golden Boot
     if (season.goals >= GOLDEN_BOOT_THRESHOLD) {
       const t = ensureTrophy('goldenboot', 't_goldenboot', 'Golden Boot', 'Individual', 'Scored 20+ league goals in a single season', 'Platinum');
-      t.quantity += 1;
-      t.yearsWon.push(season.season);
+      if (!hasSavedAwards || !savedAwards.goldenBoot) {
+        t.quantity += 1;
+        t.yearsWon.push(season.season);
+        if (!completedAwards[season.season]) completedAwards[season.season] = { goldenBoot: 0, playerOfSeason: 0, bestXi: 0, youngPlayer: 0, assistKing: 0 };
+        completedAwards[season.season].goldenBoot = 1;
+        newAwardsSaved = true;
+      } else if (savedAwards.goldenBoot && !t.yearsWon.includes(season.season)) {
+        t.quantity += savedAwards.goldenBoot;
+        t.yearsWon.push(season.season);
+      }
     }
 
     // Player of the Season
     if (season.avgRating >= POTY_RATING) {
       const t = ensureTrophy('playerofseason', 't_playerofseason', 'Player of the Season', 'Individual', 'Highest average rating in the squad', 'Diamond');
-      t.quantity += 1;
-      t.yearsWon.push(season.season);
+      if (!hasSavedAwards || !savedAwards.playerOfSeason) {
+        t.quantity += 1;
+        t.yearsWon.push(season.season);
+        if (!completedAwards[season.season]) completedAwards[season.season] = { goldenBoot: 0, playerOfSeason: 0, bestXi: 0, youngPlayer: 0, assistKing: 0 };
+        completedAwards[season.season].playerOfSeason = 1;
+        newAwardsSaved = true;
+      } else if (savedAwards.playerOfSeason && !t.yearsWon.includes(season.season)) {
+        t.quantity += savedAwards.playerOfSeason;
+        t.yearsWon.push(season.season);
+      }
     }
 
     // Best XI
     if (season.avgRating >= BEST_XI_RATING) {
       const t = ensureTrophy('bestxi', 't_bestxi', 'League Best XI', 'Individual', 'Inducted into the League Best XI', 'Gold');
-      t.quantity += 1;
-      t.yearsWon.push(season.season);
+      if (!hasSavedAwards || !savedAwards.bestXi) {
+        t.quantity += 1;
+        t.yearsWon.push(season.season);
+        if (!completedAwards[season.season]) completedAwards[season.season] = { goldenBoot: 0, playerOfSeason: 0, bestXi: 0, youngPlayer: 0, assistKing: 0 };
+        completedAwards[season.season].bestXi = 1;
+        newAwardsSaved = true;
+      } else if (savedAwards.bestXi && !t.yearsWon.includes(season.season)) {
+        t.quantity += savedAwards.bestXi;
+        t.yearsWon.push(season.season);
+      }
     }
 
     // Young Player
     if (season.age <= 23 && season.avgRating >= YOUNG_PLAYER_RATING) {
       const t = ensureTrophy('youngplayer', 't_youngplayer', 'Young Player of the Season', 'Individual', 'Best young player award (under 23)', 'Gold');
-      t.quantity += 1;
-      t.yearsWon.push(season.season);
+      if (!hasSavedAwards || !savedAwards.youngPlayer) {
+        t.quantity += 1;
+        t.yearsWon.push(season.season);
+        if (!completedAwards[season.season]) completedAwards[season.season] = { goldenBoot: 0, playerOfSeason: 0, bestXi: 0, youngPlayer: 0, assistKing: 0 };
+        completedAwards[season.season].youngPlayer = 1;
+        newAwardsSaved = true;
+      } else if (savedAwards.youngPlayer && !t.yearsWon.includes(season.season)) {
+        t.quantity += savedAwards.youngPlayer;
+        t.yearsWon.push(season.season);
+      }
     }
 
     // Assist King (top 3 assists, minimum 10)
     const assistRank = assistRanks.findIndex(s => s.id === season.id) + 1;
     if (season.assists >= ASSIST_KING_MIN && assistRank <= ASSIST_KING_TOP) {
       const t = ensureTrophy('assistking', 't_assistking', 'Assist King', 'Individual', `Led the league with ${season.assists} assists`, 'Gold');
-      t.quantity += 1;
-      t.yearsWon.push(season.season);
+      if (!hasSavedAwards || !savedAwards.assistKing) {
+        t.quantity += 1;
+        t.yearsWon.push(season.season);
+        if (!completedAwards[season.season]) completedAwards[season.season] = { goldenBoot: 0, playerOfSeason: 0, bestXi: 0, youngPlayer: 0, assistKing: 0 };
+        completedAwards[season.season].assistKing = 1;
+        newAwardsSaved = true;
+      } else if (savedAwards.assistKing && !t.yearsWon.includes(season.season)) {
+        t.quantity += savedAwards.assistKing;
+        t.yearsWon.push(season.season);
+      }
     }
+  }
+
+  // Save if new awards were computed
+  if (newAwardsSaved) {
+    saveCompletedAwards(completedAwards);
   }
 
   return Array.from(trophyMap.values());

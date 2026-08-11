@@ -157,7 +157,16 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
   const seasons = data.seasons || [];
   if (seasons.length === 0) return [];
 
-  const latestSeason = seasons[seasons.length - 1];
+  // Find the last COMPLETED season (has apps > 0 and is not the active season)
+  const seasonIsActive = data.season_is_active ?? true;
+  let completedSeasons = seasons.filter((s: any) => (s.apps || 0) > 0);
+  // If current season is active, exclude it from completed seasons
+  if (seasonIsActive && completedSeasons.length > 1) {
+    completedSeasons = completedSeasons.slice(0, -1);
+  }
+  if (completedSeasons.length === 0) return [];
+
+  const latestSeason = completedSeasons[completedSeasons.length - 1];
   const goals = latestSeason.goals || 0;
   const assists = latestSeason.assists || 0;
   const apps = latestSeason.apps || 0;
@@ -237,6 +246,41 @@ function generateEndOfSeasonDMs(data: any, playerName: string, playerClub: strin
   localStorage.setItem(seasonKey, 'true');
 
   return dms;
+}
+
+// Generate welcome DM for new season
+function generateNewSeasonWelcomeDM(data: any, playerName: string, playerClub: string): DirectMessage | null {
+  const seasons = data.seasons || [];
+  if (seasons.length === 0) return null;
+
+  const latestSeason = seasons[seasons.length - 1];
+  const seasonIsActive = data.season_is_active ?? true;
+  const apps = latestSeason.apps || 0;
+
+  // Only generate if season is active and no matches played yet
+  if (!seasonIsActive || apps > 0) return null;
+
+  const welcomeKey = `welcome_dm_${latestSeason.season}`;
+  const alreadySent = localStorage.getItem(welcomeKey);
+  if (alreadySent) {
+    return getPersistentDM(`welcome_${latestSeason.season}`);
+  }
+
+  const age = latestSeason.age || 14;
+  const dm: DirectMessage = {
+    id: `welcome_${latestSeason.season}`,
+    sender: 'Your Coach',
+    handle: '@Coach',
+    flag: '\u{1F1EE}\u{E0067}',
+    role: 'coach',
+    content: `Welcome back, ${playerName}! New season at ${playerClub}. You're ${age} now${age <= 17 ? ' — still young, keep developing' : age <= 21 ? ' — entering your prime years' : ' — time to prove yourself'}. Let's make this one count. First training session starts tomorrow.`,
+    timeAgo: 'New Season',
+    read: false,
+  };
+
+  savePersistentDM(dm.id, dm);
+  localStorage.setItem(welcomeKey, 'true');
+  return dm;
 }
 
 // Generate performance-triggered DMs from unlocked legends
@@ -945,7 +989,9 @@ export const SocialMediaView: React.FC = () => {
     const perfDMs = generatePerformanceDMs(matchRating, hofPoints, playerName, playerClub, playerAge);
     const teammateDM = generateTeammateDM(data, playerName, playerClub, playerAge);
     const eosDMs = generateEndOfSeasonDMs(data, playerName, playerClub);
+    const welcomeDM = generateNewSeasonWelcomeDM(data, playerName, playerClub);
     const dms = [...eosDMs, ...perfDMs, ...legendDMs, ...STATIC_DMS];
+    if (welcomeDM) dms.unshift(welcomeDM);
     if (teammateDM) dms.unshift(teammateDM);
     return dms;
   }, [hofPoints]);
