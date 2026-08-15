@@ -5,7 +5,7 @@ import worldCupImg from '../assets/images/world_cup_trophy_1786062536361.jpg';
 import motmImg from '../assets/images/man_of_match_trophy_1786062547833.jpg';
 import leagueImg from '../assets/images/league_trophy_1786062561960.jpg';
 import cupImg from '../assets/images/cup_trophy_1786062576474.jpg';
-import europaleagueImg from '../../models/EUROPA-LEAGUE.jpg';
+import europaleagueImg from '../assets/images/europa-league.jpg';
 
 export const TROPHY_IMAGES: Record<string, string> = {
   ballondor: ballonDorImg,

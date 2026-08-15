@@ -7,10 +7,14 @@ import { HALL_OF_FAME_RECORDS } from '../data/mockData';
 import careerExportData from '../data/career_export.json';
 import { TacticalSheetView } from './TacticalSheetView';
 
-import uclImg from '../../models/UCL.webp';
-import uelImg from '../../models/EUROPA-LEAGUE.jpg';
-import leagueImg from '../../models/Premier_league_trophy.jpg';
-import cupImg from '../../models/DomesticCup.png';
+const BASE_URL = import.meta.env.BASE_URL || '';
+
+const trophyImages = {
+  ucl: `${BASE_URL}assets/images/UCL.jpg`,
+  uel: `${BASE_URL}assets/images/europa-league.jpg`,
+  league: `${BASE_URL}assets/images/premier_league.webp`,
+  cup: `${BASE_URL}assets/images/serie-a.webp`,
+};
 
 interface ClubViewProps {
   player: PlayerData;
