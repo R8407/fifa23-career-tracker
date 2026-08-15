@@ -9,3 +9,4 @@ coverage/
 
 # Large local media (not pushed to GitHub)
 public/assets/videos/*.mp4
+.vercel

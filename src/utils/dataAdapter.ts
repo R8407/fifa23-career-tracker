@@ -754,8 +754,8 @@ export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData
 // League trophy cabinet images keyed by FIFA league competition ID.
 // 13 = Premier League, 31 = Serie A.
 const LEAGUE_TROPHY_IMAGES: Record<string, string> = {
-  '13': '/assets/trophies/premier-league.webp',
-  '31': '/assets/trophies/serie-a.webp',
+  '13': '/assets/images/trophies/premier-league.webp',
+  '31': '/assets/images/trophies/serie-a.webp',
 };
 
 /**

@@ -12,19 +12,19 @@ type TrophyAsset =
   | { kind: 'img'; src: string; blend: string };
 
 const TROPHY_ASSETS: Record<string, TrophyAsset> = {
-  manofmatch: { kind: 'img', src: '/assets/awards/MOTM.jpg', blend: 'multiply' },
-  ballondor: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
-  league: { kind: 'img', src: '/assets/trophies/serie-a.webp', blend: 'multiply' },
-  champions: { kind: 'img', src: '/assets/trophies/conference-league.webp', blend: 'screen' },
-  goldenboot: { kind: 'img', src: '/assets/awards/Golden_boot.jpg', blend: 'multiply' },
-  assistking: { kind: 'img', src: '/assets/awards/Top_assist.jpg', blend: 'multiply' },
-  youngplayer: { kind: 'img', src: '/assets/awards/young-player.webp', blend: 'multiply' },
-  bestxi: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
-  worldcup: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
-  national: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
-  cup: { kind: 'img', src: '/assets/trophies/copa-italia.webp', blend: 'multiply' },
-  europaleague: { kind: 'img', src: '/assets/trophies/europa-league.jpg', blend: 'screen' },
-  playerofseason: { kind: 'img', src: '/assets/awards/POTS.webp', blend: 'multiply' },
+  manofmatch: { kind: 'img', src: '/assets/images/awards/MOTM.jpg', blend: 'multiply' },
+  ballondor: { kind: 'img', src: '/assets/images/awards/ballon-dor.webp', blend: 'multiply' },
+  league: { kind: 'img', src: '/assets/images/trophies/serie-a.webp', blend: 'multiply' },
+  champions: { kind: 'img', src: '/assets/images/trophies/conference-league.webp', blend: 'screen' },
+  goldenboot: { kind: 'img', src: '/assets/images/awards/Golden_boot.jpg', blend: 'multiply' },
+  assistking: { kind: 'img', src: '/assets/images/awards/Top_assist.jpg', blend: 'multiply' },
+  youngplayer: { kind: 'img', src: '/assets/images/awards/young-player.webp', blend: 'multiply' },
+  bestxi: { kind: 'img', src: '/assets/images/awards/player-of-season.webp', blend: 'multiply' },
+  worldcup: { kind: 'img', src: '/assets/images/awards/ballon-dor.webp', blend: 'multiply' },
+  national: { kind: 'img', src: '/assets/images/awards/player-of-season.webp', blend: 'multiply' },
+  cup: { kind: 'img', src: '/assets/images/trophies/copa-italia.webp', blend: 'multiply' },
+  europaleague: { kind: 'img', src: '/assets/images/trophies/europa-league.jpg', blend: 'screen' },
+  playerofseason: { kind: 'img', src: '/assets/images/awards/POTS.webp', blend: 'multiply' },
 };
 
 const TrophyVisual: React.FC<{

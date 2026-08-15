@@ -10,10 +10,10 @@ import { TacticalSheetView } from './TacticalSheetView';
 const BASE_URL = import.meta.env.BASE_URL || '';
 
 const trophyImages = {
-  ucl: `${BASE_URL}assets/images/UCL.jpg`,
-  uel: `${BASE_URL}assets/images/europa-league.jpg`,
-  league: `${BASE_URL}assets/images/premier_league.webp`,
-  cup: `${BASE_URL}assets/images/serie-a.webp`,
+	ucl: `${BASE_URL}assets/images/trophies/UCL.jpg`,
+  	uel: `${BASE_URL}assets/images/trophies/europa-league.jpg`,
+  	league: `${BASE_URL}assets/images/trophies/premier-league.webp`,
+  	cup: `${BASE_URL}assets/images/trophies/serie-a.webp`,
 };
 
 interface ClubViewProps {

@@ -57,18 +57,18 @@ export function getClubLogo(clubName: string): string {
 export function getLeagueLogo(leagueName: string): string {
   // Prefer local assets
   const localMap: Record<string, string> = {
-    'Serie A TIM': '/assets/competitions/serie-a.webp',
-    'Serie A': '/assets/competitions/serie-a.webp',
-    'Coppa Italia': '/assets/competitions/copa-italia.webp',
-    'UEFA Europa Conference League': '/assets/competitions/conference-league.webp',
-    'Conference League': '/assets/competitions/conference-league.webp',
+    'Serie A TIM': '/assets/images/competitions/serie-a.webp',
+    'Serie A': '/assets/images/competitions/serie-a.webp',
+    'Coppa Italia': '/assets/images/competitions/copa-italia.webp',
+    'UEFA Europa Conference League': '/assets/images/competitions/conference-league.webp',
+    'Conference League': '/assets/images/competitions/conference-league.webp',
   };
   if (localMap[leagueName]) return localMap[leagueName];
 
   const lower = leagueName.toLowerCase();
-  if (lower.includes('serie')) return '/assets/competitions/serie-a.webp';
-  if (lower.includes('coppa')) return '/assets/competitions/copa-italia.webp';
-  if (lower.includes('conference')) return '/assets/competitions/conference-league.webp';
+  if (lower.includes('serie')) return '/assets/images/competitions/serie-a.webp';
+  if (lower.includes('coppa')) return '/assets/images/competitions/copa-italia.webp';
+  if (lower.includes('conference')) return '/assets/images/competitions/conference-league.webp';
 
   // Fallback to external URLs
   if (REAL_LEAGUE_LOGOS[leagueName]) return REAL_LEAGUE_LOGOS[leagueName];
