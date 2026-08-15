@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(() => {
   return {
     // 1. Added the correct base path with forward slashes
-    base: '/fifa23-career-tracker/', 
+    base: '/', 
     
     // 2. Cleaned up the duplicate nested config blocks
     plugins: [react(), tailwindcss()],
