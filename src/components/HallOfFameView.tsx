@@ -1,10 +1,12 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { PlayerData, HallOfFameRecord, RecordCategory, RankedLegend } from '../types';
 import { HALL_OF_FAME_RECORDS, TOP_100_LEGENDS } from '../data/mockData';
 import { Award, Trophy, CheckCircle, Target, Search, ArrowUp, Zap, Sparkles, Filter, ChevronRight, User } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { audioEngine } from '../utils/audio';
 import { calculateLegendPoints } from '../utils/trophies';
+import careerExportData from '../data/career_export.json';
+import { ImmortalRecordsView } from './ImmortalRecordsView';
 
 interface HallOfFameViewProps {
   player: PlayerData;
@@ -64,7 +66,26 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     return stats;
   }, [player.seasons]);
 
-  // Per-league stats: goals, assists, apps scored while in each league
+  // Per-competition stats using competitionStats from career export (compobjid keyed)
+  const compStats = useMemo(() => {
+    const stats: Record<number, { goals: number; assists: number; apps: number; bestSeasonGoals: number; bestSeasonAssists: number }> = {};
+    for (const s of player.seasons) {
+      const csArr = (s as any).competitionStats || [];
+      for (const cs of csArr) {
+        const cid = cs.compobjid;
+        if (!cid) continue;
+        if (!stats[cid]) stats[cid] = { goals: 0, assists: 0, apps: 0, bestSeasonGoals: 0, bestSeasonAssists: 0 };
+        stats[cid].goals += cs.goals || 0;
+        stats[cid].assists += cs.assists || 0;
+        stats[cid].apps += cs.apps || 0;
+        stats[cid].bestSeasonGoals = Math.max(stats[cid].bestSeasonGoals, cs.goals || 0);
+        stats[cid].bestSeasonAssists = Math.max(stats[cid].bestSeasonAssists, cs.assists || 0);
+      }
+    }
+    return stats;
+  }, [player.seasons]);
+
+  // Per-league stats: goals, assists, apps scored while in each league (fallback for records without compobjid)
   const leagueStats = useMemo(() => {
     const stats: Record<string, { goals: number; assists: number; apps: number; bestSeasonGoals: number; bestSeasonAssists: number }> = {};
     for (const s of player.seasons) {
@@ -83,7 +104,12 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
   const currentClub = player.currentClub || 'Spezia';
   const currentLeague = player.seasons.length > 0 ? player.seasons[player.seasons.length - 1].league : '';
 
-  // Map record IDs to user's dynamic stats (club/league-aware)
+  // Current season context (used to tag every broken record so old records don't replay)
+  const currentSeasonData = player.seasons.length > 0 ? player.seasons[player.seasons.length - 1] : null;
+  const currentSeasonId = currentSeasonData?.id || 'season_unknown';
+  const currentSeasonLabel = currentSeasonData?.season || 'Unknown';
+
+  // Map record IDs to user's dynamic stats (club/league/competition-aware)
   const getRecordUserCurrent = (rec: HallOfFameRecord): { value: number; isApplicable: boolean } => {
     // Career-wide records (always applicable)
     if (rec.id === 'rec_most_career_goals') return { value: totalUserGoals, isApplicable: true };
@@ -98,13 +124,26 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       return { value: goldenBootCount, isApplicable: true };
     }
 
+    // Competition-specific records (using compobjid from career export competitionStats)
+    if (rec.compobjid && compStats[rec.compobjid]) {
+      const cs = compStats[rec.compobjid];
+      if (rec.id.includes('single_season_goals')) return { value: cs.bestSeasonGoals, isApplicable: true };
+      if (rec.id.includes('single_season_assists')) return { value: cs.bestSeasonAssists, isApplicable: true };
+      if (rec.id.includes('alltime_goals')) return { value: cs.goals, isApplicable: true };
+      if (rec.id.includes('alltime_assists')) return { value: cs.assists, isApplicable: true };
+      if (rec.id.includes('most_caps') || rec.id.includes('alltime_caps')) return { value: cs.apps, isApplicable: true };
+      return { value: cs.goals, isApplicable: true };
+    }
+    // Record has compobjid but user hasn't played that competition
+    if (rec.compobjid) return { value: 0, isApplicable: false };
+
     // Club-specific records: only applicable if player has played for that club
     const clubMap: Record<string, string> = {
       'rec_real_madrid': 'Real Madrid', 'rec_barcelona': 'FC Barcelona',
       'rec_manchester_utd': 'Manchester United', 'rec_liverpool': 'Liverpool',
       'rec_bayern': 'Bayern Munich', 'rec_juventus': 'Juventus',
       'rec_ac_milan': 'AC Milan', 'rec_inter': 'Inter Milan',
-      'rec_atletico': 'Atletico Madrid', 'rec_spezia': 'Spezia',
+      'rec_atletico': 'Atletico Madrid', 'rec_spezia': 'Spezia', 'rec_chelsea': 'Chelsea',
     };
     for (const [prefix, clubName] of Object.entries(clubMap)) {
       if (rec.id.startsWith(prefix)) {
@@ -116,7 +155,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       }
     }
 
-    // League-specific records: only applicable if player has played in that league
+    // League-specific records (fallback using league name)
     const leagueMap: Record<string, string[]> = {
       'rec_pl_': ['Premier League', 'Premier League '],
       'rec_laliga_': ['La Liga', 'LaLiga'],
@@ -126,7 +165,6 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     };
     for (const [prefix, leagueNames] of Object.entries(leagueMap)) {
       if (rec.id.startsWith(prefix)) {
-        // Check if user has played in any of the league name variants
         let foundStats = null;
         for (const leagueName of leagueNames) {
           if (leagueStats[leagueName]) {
@@ -144,23 +182,9 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       }
     }
 
-    // International/UCL records: not applicable yet
+    // International records: not applicable yet
     if (rec.id.includes('ghana') || rec.id.includes('worldcup') || rec.id.includes('world_cup')) return { value: 0, isApplicable: false };
     if (rec.id.includes('intl_') || rec.id.includes('international')) return { value: 0, isApplicable: false };
-    // UCL records: applicable if player has played in any European competition
-    if (rec.id.includes('ucl') || rec.id.includes('champions_league')) {
-      // Check if player has European competition stats
-      const hasEuropeanStats = Object.keys(leagueStats).some(league => 
-        league.includes('Champions League') || league.includes('Europa League') || league.includes('Conference League')
-      );
-      if (hasEuropeanStats) {
-        // Use career-wide stats for UCL records
-        if (rec.id.includes('alltime_goals')) return { value: totalUserGoals, isApplicable: true };
-        if (rec.id.includes('alltime_assists')) return { value: totalUserAssists, isApplicable: true };
-        return { value: 0, isApplicable: true };
-      }
-      return { value: 0, isApplicable: false };
-    }
 
     return { value: 0, isApplicable: false };
   };
@@ -178,13 +202,19 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
         remainingToBreak: Math.max(0, rec.holderRecord - userCurrent)
       };
     });
-  }, [player.seasons, player.trophies, brokenRecords, clubStats, leagueStats]);
+  }, [player.seasons, player.trophies, brokenRecords, clubStats, leagueStats, compStats]);
 
   // Only show records that are applicable (clubs/leagues played in) + career records
   const records = allRecords.filter(r => r.isApplicable);
 
-  // Auto-claim broken records that haven't been claimed yet
+  // Auto-claim broken records that haven't been claimed yet.
+  // Guarded with a ref because StrictMode double-runs effects in dev — without it,
+  // each newly broken record would be claimed twice (double legacy points + 2 news).
+  const autoClaimedOnce = useRef(false);
   useEffect(() => {
+    if (autoClaimedOnce.current) return;
+    autoClaimedOnce.current = true;
+
     for (const rec of allRecords) {
       if (rec.isBroken && !claimedRecords[rec.id]) {
         // First time detecting this record as broken - award points and generate news
@@ -192,7 +222,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
         setClaimedRecords(prev => ({ ...prev, [rec.id]: true }));
         setTotalLegacyPoints(prev => prev + rec.legacyPoints);
 
-        // Generate news
+        // Generate news with season context (tagged so old records don't replay)
         const now = new Date().toISOString().slice(0, 16).replace('T', ' ');
         const recordNews = {
           id: `record_${rec.id}_${Date.now()}`,
@@ -204,7 +234,11 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
             `Previous record: ${rec.holderName} (${rec.holderRecord} ${rec.unit}). ` +
             `Your achievement: ${rec.userCurrent} ${rec.unit}. +${rec.legacyPoints} Legacy Points earned!`,
           priority: 'high',
-          image: 'record'
+          image: 'record',
+          seasonId: currentSeasonId,
+          seasonLabel: currentSeasonLabel,
+          recordTitle: rec.title,
+          brokenAt: now
         };
 
         try {
@@ -232,7 +266,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     audioEngine.playGoldenFanfare();
     onRecordBrokenTrigger(rec.title, rec.legacyPoints);
 
-    // Generate news for record breaking
+    // Generate news for record breaking (tagged with season so old records don't replay)
     const now = new Date().toISOString().slice(0, 16).replace('T', ' ');
     const recordNews = {
       id: `record_${rec.id}_${Date.now()}`,
@@ -244,7 +278,11 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
         `Previous record: ${rec.holderName} (${rec.holderRecord} ${rec.unit}). ` +
         `Your achievement: ${rec.userCurrent} ${rec.unit}. +${rec.legacyPoints} Legacy Points earned!`,
       priority: 'high',
-      image: 'record'
+      image: 'record',
+      seasonId: currentSeasonId,
+      seasonLabel: currentSeasonLabel,
+      recordTitle: rec.title,
+      brokenAt: now
     };
 
     try {
@@ -283,22 +321,72 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     ballondOr: userBallonDor,
     worldCup: userWorldCup,
     clubTrophies: userClubTrophies,
-    popularOpinionBonus: 20,
+    popularOpinionBonus: 0,
     notableAchievement: `${userBallonDor > 0 ? 'Ballon d\'Or Winner' : 'Rising Football Prodigy'} & ${player.currentClub} Star`,
     isUser: true,
-    points: userPoints
+    points: userPoints  // Pure merit only — no record points in ranking
   };
 
-  const legendsWithPoints = TOP_100_LEGENDS.map(leg => ({
-    ...leg,
-    isUser: false,
-    points: calculateLegendPoints({
-      goals: leg.goals, assists: leg.assists, ballondOr: leg.ballondOr,
-      worldCup: leg.worldCup, championsLeague: 0, europaLeague: 0,
-      leagueTitles: 0, cupTrophies: leg.clubTrophies, goldenBoot: 0,
-      assistKing: 0, manOfTheMatch: 0, popularOpinionBonus: leg.popularOpinionBonus
-    })
-  }));
+  // Update modern active players with real game data (goals + assists)
+  const exportData = careerExportData as any;
+  const leagueStatsData = exportData.league_stats || {};
+  const topScorersList = leagueStatsData.topScorers || [];
+  const topAssistsList = leagueStatsData.topAssists || [];
+  const topScorersByLeague = exportData.top_scorers_by_league || {};
+
+  // Build lookup of real game stats for active players
+  const gameStatsMap = new Map<string, { goals: number; assists: number }>();
+  for (const s of [...topScorersList, ...topAssistsList]) {
+    const name = s.playerName || '';
+    if (!name) continue;
+    const goals = parseInt(s.goals || '0');
+    const assists = parseInt(s.assists || '0');
+    if (!gameStatsMap.has(name) || (goals + assists) > ((gameStatsMap.get(name)?.goals || 0) + (gameStatsMap.get(name)?.assists || 0))) {
+      gameStatsMap.set(name, { goals, assists });
+    }
+  }
+  // Also check top_scorers_byLeague for goals (no assists)
+  for (const [league, scorers] of Object.entries(topScorersByLeague)) {
+    for (const s of (scorers as any[])) {
+      const name = s.commonname || `${s.firstname || ''} ${s.lastname || ''}`.trim();
+      if (!name) continue;
+      const goals = parseInt(s.leaguegoals || '0');
+      if (goals <= 0) continue;
+      if (!gameStatsMap.has(name)) {
+        gameStatsMap.set(name, { goals, assists: 0 });
+      } else if (goals > (gameStatsMap.get(name)?.goals || 0)) {
+        gameStatsMap.get(name)!.goals = goals;
+      }
+    }
+  }
+
+  // Override goals/assists for modern active players found in game data
+  const legendsWithPoints = TOP_100_LEGENDS.map(leg => {
+    let goals = leg.goals;
+    let assists = leg.assists;
+    // Only add game data if player is a modern active player found in game data
+    if (leg.category === 'modern' && gameStatsMap.has(leg.name)) {
+      const gameStats = gameStatsMap.get(leg.name)!;
+      // Add current season stats to career totals
+      goals = leg.goals + gameStats.goals;
+      assists = leg.assists + gameStats.assists;
+    }
+    return {
+      ...leg,
+      goals,
+      assists,
+      isUser: false,
+      notableAchievement: leg.category === 'modern' && gameStatsMap.has(leg.name)
+        ? `${leg.notableAchievement} | +${gameStatsMap.get(leg.name)!.goals}G ${gameStatsMap.get(leg.name)!.assists}A this season`
+        : leg.notableAchievement,
+      points: calculateLegendPoints({
+        goals, assists, ballondOr: leg.ballondOr,
+        worldCup: leg.worldCup, championsLeague: 0, europaLeague: 0,
+        leagueTitles: 0, cupTrophies: leg.clubTrophies, goldenBoot: 0,
+        assistKing: 0, manOfTheMatch: 0, popularOpinionBonus: leg.popularOpinionBonus
+      })
+    };
+  });
 
   const combinedLeaderboard = [...legendsWithPoints, userLegendItem].sort((a, b) => {
     if (sortBy === 'goals_assists') return (b.goals + b.assists) - (a.goals + a.assists);
@@ -358,7 +446,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
           </div>
           <div>
             <div className="text-[10px] text-zinc-400 uppercase font-bold">Your History Rank</div>
-            <div className="text-sm font-black text-white">{totalLegacyPoints.toLocaleString()} Legacy Pts</div>
+            <div className="text-sm font-black text-white">{(totalLegacyPoints + userPoints).toLocaleString()} Legacy Pts</div>
             <div className="text-[10px] text-emerald-400 font-bold">
               {overtakenCount} Legends Overtaken
             </div>
@@ -522,7 +610,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
                             : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
                         }`}
                       >
-                        #{item.currentRank}
+                        #{item.currentRank === 1 ? 'GOAT' : item.currentRank}
                       </div>
 
                       <div>
@@ -601,138 +689,12 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
 
       {/* SUB-TAB 2: IMMORTAL RECORDS CHASE */}
       {activeTab === 'records' && (
-        <div className="space-y-4">
-          {/* Category Filter Tabs */}
-          <div className="flex flex-wrap gap-2 items-center bg-zinc-900/80 border border-zinc-800 p-2 rounded-2xl">
-            <span className="text-xs font-bold text-zinc-500 uppercase px-2 flex items-center gap-1">
-              <Filter className="w-3.5 h-3.5" /> Filter Category:
-            </span>
-            {(['All', 'UCL', 'Knockout', 'League', 'Club', 'International', 'Individual', 'Locked'] as const).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {
-                  audioEngine.playClick();
-                  setActiveCategory(cat);
-                }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-extrabold uppercase transition-all cursor-pointer ${
-                  activeCategory === cat
-                    ? 'bg-amber-500 text-zinc-950 shadow-md'
-                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Hall of Fame Records Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredRecords.map((rec) => {
-              const progressPercent = Math.min(100, Math.round((rec.userCurrent / rec.holderRecord) * 100));
-              const isLocked = !rec.isApplicable;
-
-              return (
-                <div
-                  key={rec.id}
-                  className={`p-6 rounded-2xl border transition-all relative overflow-hidden flex flex-col justify-between space-y-4 ${
-                    isLocked
-                      ? 'bg-zinc-950/80 border-zinc-800/50 opacity-60'
-                      : rec.isBroken
-                      ? 'bg-gradient-to-br from-zinc-950 via-amber-950/20 to-zinc-950 border-amber-400/80 shadow-lg shadow-amber-500/10'
-                      : 'bg-zinc-900/80 border-zinc-800 hover:border-zinc-700'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <span className={`px-2 py-0.5 border text-[10px] font-bold rounded uppercase font-mono ${
-                        isLocked
-                          ? 'bg-zinc-900 text-zinc-600 border-zinc-800'
-                          : 'bg-zinc-950 text-amber-400 border-zinc-800'
-                      }`}>
-                        {rec.category} • {rec.difficulty}
-                      </span>
-
-                      {isLocked ? (
-                        <span className="px-2.5 py-1 bg-zinc-800 text-zinc-500 font-black text-[10px] rounded-full uppercase flex items-center gap-1 shadow">
-                          🔒 LOCKED
-                        </span>
-                      ) : rec.isBroken ? (
-                        <span className="px-2.5 py-1 bg-amber-500 text-zinc-950 font-black text-[10px] rounded-full uppercase flex items-center gap-1 shadow">
-                          <CheckCircle className="w-3 h-3" /> RECORD BROKEN
-                        </span>
-                      ) : (
-                        <span className="px-2 py-0.5 bg-zinc-950 text-zinc-400 font-bold text-[10px] rounded border border-zinc-800 uppercase">
-                          CHASE ACTIVE
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className={`text-base font-black ${isLocked ? 'text-zinc-600' : 'text-white'}`}>{rec.title}</h3>
-                    <p className={`text-xs mt-1 ${isLocked ? 'text-zinc-700' : 'text-zinc-400'}`}>{rec.description}</p>
-                    
-                    {isLocked && (
-                      <p className="text-[10px] text-zinc-600 mt-2 font-mono">
-                        🔒 Play for {rec.holderClub || 'this club'} to unlock this record
-                      </p>
-                    )}
-                  </div>
-
-                  <div className={`bg-zinc-950 p-3.5 rounded-xl border space-y-2 font-mono text-xs ${
-                    isLocked ? 'border-zinc-900 opacity-50' : 'border-zinc-800'
-                  }`}>
-                    <div className="flex justify-between items-center">
-                      <span className="text-zinc-500">Record Holder:</span>
-                      <span className={`font-bold ${isLocked ? 'text-zinc-600' : 'text-white'}`}>
-                        {rec.holderName} ({rec.holderRecord} {rec.unit})
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between items-center">
-                      <span className="text-zinc-500">Your Current:</span>
-                      <span className={`font-black ${isLocked ? 'text-zinc-700' : rec.isBroken ? 'text-amber-400' : 'text-zinc-200'}`}>
-                        {isLocked ? '--' : `${rec.userCurrent} ${rec.unit}`}
-                      </span>
-                    </div>
-
-                    {!isLocked && (
-                      <div className="w-full bg-zinc-900 h-2.5 rounded-full overflow-hidden mt-2">
-                        <div
-                          className={`h-full transition-all duration-500 ${
-                            rec.isBroken ? 'bg-gradient-to-r from-amber-400 to-yellow-300' : 'bg-blue-500'
-                          }`}
-                          style={{ width: `${progressPercent}%` }}
-                        ></div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <span className={`text-[10px] font-mono font-bold ${isLocked ? 'text-zinc-700' : 'text-amber-400'}`}>
-                      {isLocked ? '🔒 LOCKED' : `+${rec.legacyPoints} Legacy Points`}
-                    </span>
-
-                    {isLocked ? (
-                      <span className="text-xs font-bold text-zinc-600 flex items-center gap-1">
-                        🔒 LOCKED
-                      </span>
-                    ) : !rec.isBroken ? (
-                      <button
-                        onClick={() => handleSimulateRecordAttempt(rec)}
-                        className="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-zinc-950 font-extrabold text-xs rounded-xl shadow transition-all cursor-pointer flex items-center gap-1.5 active:scale-95"
-                      >
-                        <Target className="w-3.5 h-3.5" /> Chase Record
-                      </button>
-                    ) : (
-                      <span className="text-xs font-bold text-amber-300 flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5" /> History Rewritten
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <ImmortalRecordsView
+          records={records}
+          allRecords={allRecords}
+          brokenRecords={brokenRecords}
+          onBreakRecord={handleSimulateRecordAttempt}
+        />
       )}
     </div>
   );

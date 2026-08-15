@@ -3,6 +3,7 @@ import { PlayerData } from '../types';
 import { TrendingUp, Flame, Zap, AlertTriangle, ShieldAlert, Activity } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import careerExportData from '../data/career_export.json';
+import { AttributeRadar } from './AttributeRadar';
 
 interface GrowthCurveViewProps {
   player: PlayerData;
@@ -63,8 +64,8 @@ function generateRealCurve(seasons: any[], currentAge: number, currentOvr: numbe
     }
   }
 
-  // Also add current OVR for current age if not in seasons
-  if (!ratingsByAge[currentAge] && currentOvr > 40) {
+  // Always use profile's current OVR for current age (season overall may be stale from Lua export)
+  if (currentOvr > 40) {
     ratingsByAge[currentAge] = currentOvr;
   }
 
@@ -183,6 +184,26 @@ export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
           <div className="w-3 h-3 rounded-full bg-emerald-500" />
           <span className="text-xs text-zinc-400 font-bold">Current Age</span>
         </div>
+      </div>
+
+      {/* Attribute Radar */}
+      <div className="bg-zinc-900/80 border border-zinc-800 p-6 rounded-2xl">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+            Current Attribute Profile
+          </span>
+          <span className="text-xs text-zinc-400 font-mono">
+            OVR <strong className="text-white">{currentOvr}</strong> | POT <strong className="text-emerald-400">{potential}</strong>
+          </span>
+        </div>
+        <AttributeRadar attributes={{
+          pace: player.attributes.pace,
+          shooting: player.attributes.shooting,
+          passing: player.attributes.passing,
+          dribbling: player.attributes.dribbling,
+          defending: player.attributes.defending,
+          physical: player.attributes.physical,
+        }} />
       </div>
 
       {/* Main Chart Card */}

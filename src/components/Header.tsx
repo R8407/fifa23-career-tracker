@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Trophy, Volume2, VolumeX, Sparkles, UserPen, Flame, Zap, Upload } from 'lucide-react';
 import { PlayerData } from '../types';
 import { audioEngine } from '../utils/audio';
+import { calculateLegendPoints } from '../utils/trophies';
 
 interface HeaderProps {
   player: PlayerData;
@@ -29,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
     } catch { return 0; }
   });
 
-  // Sync HoF points
+  // Sync Legacy points
   useEffect(() => {
     const interval = setInterval(() => {
       try {
@@ -44,6 +45,25 @@ export const Header: React.FC<HeaderProps> = ({
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
   const totalApps = player.seasons.reduce((acc, s) => acc + s.apps, 0);
   const totalTrophies = player.trophies.filter(t => !['manofmatch', 'assistking', 'youngplayer', 'bestxi'].includes(t.iconType)).reduce((acc, t) => acc + t.quantity, 0);
+
+  // Calculate Legend Points from stats (G+A, trophies — pure merit only)
+  const legendPoints = calculateLegendPoints({
+    goals: totalGoals,
+    assists: totalAssists,
+    ballondOr: player.trophies.find(t => t.iconType === 'ballondor')?.quantity || 0,
+    worldCup: player.trophies.find(t => t.iconType === 'worldcup')?.quantity || 0,
+    championsLeague: player.trophies.find(t => t.iconType === 'champions')?.quantity || 0,
+    europaLeague: player.trophies.find(t => t.iconType === 'europaleague')?.quantity || 0,
+    leagueTitles: player.trophies.filter(t => t.iconType === 'league').reduce((acc, t) => acc + t.quantity, 0),
+    cupTrophies: player.trophies.filter(t => t.iconType === 'cup').reduce((acc, t) => acc + t.quantity, 0),
+    goldenBoot: player.trophies.find(t => t.iconType === 'goldenboot')?.quantity || 0,
+    assistKing: player.trophies.find(t => t.iconType === 'assistking')?.quantity || 0,
+    manOfTheMatch: player.trophies.find(t => t.iconType === 'manofmatch')?.quantity || 0,
+    popularOpinionBonus: 0  // Not used in ranking
+  });
+
+  // Legacy Points = Pure merit (no record points in ranking)
+  const totalLegacyDisplay = legendPoints;
 
   return (
     <header className="sticky top-0 z-40 bg-[#0f172a] border-b border-slate-800 px-4 lg:px-6 py-3">
@@ -60,7 +80,7 @@ export const Header: React.FC<HeaderProps> = ({
                 Career Legacy Hub
               </h1>
               <span className="px-2 py-0.5 text-xs font-medium bg-slate-800 text-slate-300 rounded">
-                {hofPoints} HoF Pts
+                {totalLegacyDisplay} Legacy Pts
               </span>
             </div>
             <p className="text-xs text-slate-400 flex items-center gap-1.5">

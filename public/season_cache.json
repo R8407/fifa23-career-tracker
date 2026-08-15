@@ -1,0 +1,191 @@
+[
+  {
+    "id": "season_1",
+    "season": "2023/2024",
+    "age": 15,
+    "club": "Spezia",
+    "clubId": "113974",
+    "league": "Serie A TIM",
+    "leagueId": "31",
+    "clubBadgeColor": "bg-zinc-800",
+    "apps": 41,
+    "goals": 15,
+    "assists": 28,
+    "avgRating": 8.27,
+    "overall": 73,
+    "yellowCards": 1,
+    "redCards": 0,
+    "trophies": [],
+    "individualAwards": [
+      {
+        "name": "Young Player of the Year",
+        "season": "2023/2024"
+      },
+      {
+        "name": "League XI",
+        "season": "2023/2024"
+      },
+      {
+        "name": "Assist King",
+        "season": "2023/2024"
+      },
+      {
+        "name": "Team of the Week",
+        "season": "2023/2024"
+      },
+      {
+        "name": "Player of the Month",
+        "season": "2023/2024"
+      }
+    ],
+    "highlights": "15 goals, 28 assists in 41 appearances",
+    "xG": 0,
+    "xA": 0,
+    "keyPassesPerGame": 0,
+    "dribblesPerGame": 0,
+    "competitionStats": [],
+    "motm": 15
+  },
+  {
+    "id": "season_2",
+    "season": "2024/2025",
+    "age": 16,
+    "club": "Chelsea",
+    "clubId": "5",
+    "league": "Premier League",
+    "leagueId": "13",
+    "clubBadgeColor": "bg-zinc-800",
+    "apps": 59,
+    "goals": 50,
+    "assists": 57,
+    "avgRating": 7.86,
+    "overall": 73,
+    "yellowCards": 0,
+    "redCards": 0,
+    "trophies": [
+      "Premier League",
+      "UEFA Europa League"
+    ],
+    "individualAwards": [
+      {
+        "name": "European Golden Shoe",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Team of the Week",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Player of the Month",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Player of the Tournament",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Player of the Season",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Assist King",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Young Player of the Tournament",
+        "season": "2024/2025"
+      },
+      {
+        "name": "League XI",
+        "season": "2024/2025"
+      },
+      {
+        "name": "Young Player of the Year",
+        "season": "2024/2025"
+      }
+    ],
+    "highlights": "49 goals, 54 assists in 55 appearances",
+    "xG": 0,
+    "xA": 0,
+    "keyPassesPerGame": 0,
+    "dribblesPerGame": 0,
+    "competitionStats": [
+      {
+        "compobjid": 1828,
+        "competition": "UEFA Europa Conference League",
+        "teamid": 5,
+        "apps": 3,
+        "goals": 0,
+        "assists": 3,
+        "avgRating": 6.73,
+        "yellow": 0,
+        "red": 0,
+        "motm": 0,
+        "clean_sheets": 0,
+        "goals_conceded": 2,
+        "saves": 0
+      },
+      {
+        "compobjid": 819,
+        "competition": "Competition 819",
+        "teamid": 5,
+        "apps": 37,
+        "goals": 35,
+        "assists": 37,
+        "avgRating": 7.99,
+        "yellow": 0,
+        "red": 0,
+        "motm": 20,
+        "clean_sheets": 17,
+        "goals_conceded": 39,
+        "saves": 0
+      },
+      {
+        "compobjid": 179,
+        "competition": "UEFA Europa League",
+        "teamid": 5,
+        "apps": 13,
+        "goals": 10,
+        "assists": 11,
+        "avgRating": 7.73,
+        "yellow": 0,
+        "red": 0,
+        "motm": 7,
+        "clean_sheets": 7,
+        "goals_conceded": 12,
+        "saves": 0
+      },
+      {
+        "compobjid": 633,
+        "competition": "Competition 633",
+        "teamid": 5,
+        "apps": 2,
+        "goals": 0,
+        "assists": 4,
+        "avgRating": 7.75,
+        "yellow": 0,
+        "red": 0,
+        "motm": 1,
+        "clean_sheets": 1,
+        "goals_conceded": 5,
+        "saves": 0
+      },
+      {
+        "compobjid": 437,
+        "competition": "Competition 437",
+        "teamid": 5,
+        "apps": 4,
+        "goals": 5,
+        "assists": 2,
+        "avgRating": 8.05,
+        "yellow": 0,
+        "red": 0,
+        "motm": 4,
+        "clean_sheets": 2,
+        "goals_conceded": 3,
+        "saves": 0
+      }
+    ],
+    "motm": 32
+  }
+]

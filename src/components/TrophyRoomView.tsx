@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PlayerData, TrophyItem } from '../types';
-import { Trophy, Award, X, Sparkles, Info, Users, User, Star } from 'lucide-react';
+import { Trophy, Award, X, Sparkles, Info, Users, Globe } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 
 interface TrophyRoomViewProps {
@@ -12,26 +12,29 @@ type TrophyAsset =
   | { kind: 'img'; src: string; blend: string };
 
 const TROPHY_ASSETS: Record<string, TrophyAsset> = {
-  manofmatch: { kind: 'img', src: '/assets/awards/golden-boot.webp', blend: 'multiply' },
+  manofmatch: { kind: 'img', src: '/assets/awards/MOTM.jpg', blend: 'multiply' },
   ballondor: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
   league: { kind: 'img', src: '/assets/trophies/serie-a.webp', blend: 'multiply' },
   champions: { kind: 'img', src: '/assets/trophies/conference-league.webp', blend: 'screen' },
-  goldenboot: { kind: 'img', src: '/assets/awards/golden-boot.webp', blend: 'multiply' },
-  assistking: { kind: 'img', src: '/assets/awards/assist-king.webp', blend: 'multiply' },
+  goldenboot: { kind: 'img', src: '/assets/awards/Golden_boot.jpg', blend: 'multiply' },
+  assistking: { kind: 'img', src: '/assets/awards/Top_assist.jpg', blend: 'multiply' },
   youngplayer: { kind: 'img', src: '/assets/awards/young-player.webp', blend: 'multiply' },
   bestxi: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
   worldcup: { kind: 'img', src: '/assets/awards/ballon-dor.webp', blend: 'multiply' },
   national: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
   cup: { kind: 'img', src: '/assets/trophies/copa-italia.webp', blend: 'multiply' },
-  europaleague: { kind: 'img', src: '/assets/trophies/conference-league.webp', blend: 'screen' },
-  playerofseason: { kind: 'img', src: '/assets/awards/player-of-season.webp', blend: 'multiply' },
+  europaleague: { kind: 'img', src: '/assets/trophies/europa-league.jpg', blend: 'screen' },
+  playerofseason: { kind: 'img', src: '/assets/awards/POTS.webp', blend: 'multiply' },
 };
 
 const TrophyVisual: React.FC<{
   iconType: string;
+  imagePath?: string;
   className?: string;
-}> = ({ iconType, className = '' }) => {
-  const asset = TROPHY_ASSETS[iconType] || TROPHY_ASSETS.league;
+}> = ({ iconType, imagePath, className = '' }) => {
+  const asset = imagePath
+    ? { kind: 'img' as const, src: imagePath, blend: 'multiply' }
+    : (TROPHY_ASSETS[iconType] || TROPHY_ASSETS.league);
 
   if (asset.kind === 'svg') {
     return (
@@ -61,6 +64,7 @@ const TrophyDisplay: React.FC<{
 }> = ({ trophy, onClick }) => {
   const count = trophy.quantity;
   const alwaysOne = trophy.iconType === 'manofmatch';
+  const imagePath = trophy.imagePath;
 
   return (
     <div
@@ -75,6 +79,7 @@ const TrophyDisplay: React.FC<{
             <div className="w-24 h-28 flex items-center justify-center drop-shadow-[0_12px_20px_rgba(0,0,0,0.4)] group-hover:drop-shadow-[0_16px_28px_rgba(234,179,8,0.5)] transition-all duration-300">
               <TrophyVisual
                 iconType={trophy.iconType}
+                imagePath={imagePath}
                 className="w-full h-full group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -87,6 +92,7 @@ const TrophyDisplay: React.FC<{
                 <div className="w-20 h-24 flex items-center justify-center drop-shadow-[0_10px_16px_rgba(0,0,0,0.35)] group-hover:drop-shadow-[0_14px_24px_rgba(234,179,8,0.45)] transition-all duration-300">
                   <TrophyVisual
                     iconType={trophy.iconType}
+                    imagePath={imagePath}
                     className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -98,18 +104,19 @@ const TrophyDisplay: React.FC<{
           <div className="flex items-end">
             <div className="relative -mr-4 z-0 opacity-50 transform -rotate-8 scale-85">
               <div className="w-16 h-20 drop-shadow-lg">
-                <TrophyVisual iconType={trophy.iconType} className="w-full h-full" />
+                <TrophyVisual iconType={trophy.iconType} imagePath={imagePath} className="w-full h-full" />
               </div>
             </div>
             <div className="relative -ml-4 z-0 opacity-50 transform rotate-8 scale-85">
               <div className="w-16 h-20 drop-shadow-lg">
-                <TrophyVisual iconType={trophy.iconType} className="w-full h-full" />
+                <TrophyVisual iconType={trophy.iconType} imagePath={imagePath} className="w-full h-full" />
               </div>
             </div>
             <div className="relative z-10 trophy-glow">
               <div className="w-24 h-28 flex items-center justify-center drop-shadow-[0_14px_24px_rgba(0,0,0,0.45)] group-hover:drop-shadow-[0_18px_32px_rgba(234,179,8,0.55)] transition-all duration-300">
                 <TrophyVisual
                   iconType={trophy.iconType}
+                  imagePath={imagePath}
                   className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -135,37 +142,59 @@ const TrophyDisplay: React.FC<{
   );
 };
 
-const TrophyShelf: React.FC<{
+const WOOD_SHELF_STYLE: React.CSSProperties = {
+  background: 'linear-gradient(to bottom, #8a5a2b, #6b4423 45%, #4a2f17 55%, #3a2511)',
+  boxShadow: 'inset 0 1px 0 rgba(255,215,150,0.35), inset 0 -1px 0 rgba(0,0,0,0.5), 0 6px 10px rgba(0,0,0,0.5)',
+};
+
+const WOOD_FRAME_STYLE: React.CSSProperties = {
+  background: 'linear-gradient(180deg, #7a4e26 0%, #5a3717 45%, #3e2610 100%)',
+  boxShadow: 'inset 0 1px 0 rgba(255,215,150,0.25), inset 0 -1px 0 rgba(0,0,0,0.6)',
+};
+
+const WOOD_POST_H_STYLE: React.CSSProperties = {
+  background: 'linear-gradient(90deg, #7a4e26 0%, #5a3717 50%, #3e2610 100%)',
+  boxShadow: 'inset 0 1px 0 rgba(255,215,150,0.2)',
+};
+
+const CabinetShelf: React.FC<{
   title: string;
   icon: React.ReactNode;
   trophies: TrophyItem[];
   onSelect: (t: TrophyItem) => void;
-}> = ({ title, icon, trophies, onSelect }) => (
-  <div className="bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950 border border-zinc-700 rounded-2xl overflow-hidden shadow-2xl">
-    <div className="relative p-6">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 bg-amber-500/15 blur-3xl pointer-events-none" />
+  emptyText: string;
+}> = ({ title, icon, trophies, onSelect, emptyText }) => (
+  <div className="relative rounded-lg overflow-hidden">
+    {/* alcove back wall */}
+    <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-zinc-900/70 to-zinc-950/90 border-x border-zinc-700/40" />
 
-      <div className="flex items-center gap-2 mb-4">
-        {icon}
-        <h3 className="text-sm font-black text-white uppercase tracking-wider">{title}</h3>
-        <span className="px-2 py-0.5 bg-amber-500/15 text-amber-400 text-[10px] font-bold rounded-full border border-amber-500/20">
-          {trophies.reduce((a, t) => a + t.quantity, 0)}
-        </span>
-      </div>
-
-      <div className="relative mx-auto max-w-3xl border border-zinc-600/30 rounded-xl bg-zinc-950/50 p-6">
-        <div className="absolute top-0 left-4 w-px h-full bg-gradient-to-b from-white/10 via-white/5 to-transparent pointer-events-none" />
-        <div className="absolute top-0 right-4 w-px h-full bg-gradient-to-b from-white/5 via-white/3 to-transparent pointer-events-none" />
-
-        <div className="flex items-end justify-center gap-6 flex-wrap py-4">
-          {trophies.map((trophy) => (
-            <TrophyDisplay key={trophy.id} trophy={trophy} onClick={() => onSelect(trophy)} />
-          ))}
-        </div>
-      </div>
+    {/* label bar */}
+    <div className="relative flex items-center gap-2 px-3 pt-2 pb-1">
+      {icon}
+      <span className="text-[10px] font-black uppercase tracking-widest text-amber-100/90">{title}</span>
+      <span className="ml-auto px-2 py-0.5 bg-amber-500/15 text-amber-400 text-[10px] font-bold rounded-full border border-amber-500/20">
+        {trophies.reduce((a, t) => a + t.quantity, 0)}
+      </span>
     </div>
 
-    <div className="h-4 bg-gradient-to-r from-amber-950/40 via-amber-900/30 to-amber-950/40 border-t border-amber-800/20" />
+    {/* trophy area */}
+    <div className="relative flex items-end justify-center gap-4 flex-wrap px-4 pb-2 min-h-[150px]">
+      {trophies.length > 0 ? (
+        trophies.map((trophy) => (
+          <TrophyDisplay key={trophy.id} trophy={trophy} onClick={() => onSelect(trophy)} />
+        ))
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="text-center opacity-70">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">{emptyText}</p>
+            <p className="text-[9px] text-zinc-700 mt-1">Empty shelf</p>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* wooden shelf board */}
+    <div className="relative h-2.5 mx-1 mb-1 rounded-sm" style={WOOD_SHELF_STYLE} />
   </div>
 );
 
@@ -177,15 +206,24 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
     setSelectedTrophy(t);
   };
 
-  const wonTrophies = player.trophies.filter(t => t.quantity > 0);
+  // All-time club trophies (League, Cup, UCL, Europa League, etc.)
+  const clubTrophies = player.trophies.filter(t =>
+    t.category === 'Club' && t.quantity > 0
+  );
 
-  const teamTrophies = wonTrophies.filter(t => t.category === 'Club' || t.category === 'International');
-  const individualTrophies = wonTrophies.filter(t => t.category === 'Individual');
-  const hasAny = teamTrophies.length > 0 || individualTrophies.length > 0;
+  // All-time international trophies (World Cup, National, etc.)
+  const internationalTrophies = player.trophies.filter(t =>
+    t.category === 'International' && t.quantity > 0
+  );
 
-  const teamCount = teamTrophies.reduce((a, t) => a + t.quantity, 0);
-  const individualCount = individualTrophies.reduce((a, t) => a + t.quantity, 0);
-  const totalTrophyCount = teamCount + individualCount;
+  // All-time individual awards (MOTM + season awards + Ballon d'Or, etc.)
+  const individualAwards = player.trophies.filter(t =>
+    t.category === 'Individual' && t.quantity > 0
+  );
+
+  const clubCount = clubTrophies.reduce((a, t) => a + t.quantity, 0);
+  const internationalCount = internationalTrophies.reduce((a, t) => a + t.quantity, 0);
+  const individualCount = individualAwards.reduce((a, t) => a + t.quantity, 0);
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -201,7 +239,7 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
                 TROPHY ROOM
               </h2>
               <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold rounded-full flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5" /> {wonTrophies.length} TYPES WON
+                <Sparkles className="w-3.5 h-3.5" /> {clubTrophies.length + internationalTrophies.length + individualAwards.length} TYPES WON
               </span>
             </div>
             <p className="text-zinc-400 text-xs mt-1">
@@ -213,8 +251,15 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
             <div className="flex items-center gap-2 bg-zinc-950 border border-amber-500/40 px-4 py-2 rounded-xl">
               <Trophy className="w-4 h-4 text-amber-400" />
               <div>
-                <div className="text-[9px] text-zinc-500 font-bold uppercase">Trophies</div>
-                <div className="text-lg font-black text-amber-300">{teamCount}</div>
+                <div className="text-[9px] text-zinc-500 font-bold uppercase">Club Trophies</div>
+                <div className="text-lg font-black text-amber-300">{clubCount}</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 bg-zinc-950 border border-sky-500/40 px-4 py-2 rounded-xl">
+              <Globe className="w-4 h-4 text-sky-400" />
+              <div>
+                <div className="text-[9px] text-zinc-500 font-bold uppercase">International</div>
+                <div className="text-lg font-black text-sky-300">{internationalCount}</div>
               </div>
             </div>
             <div className="flex items-center gap-2 bg-zinc-950 border border-purple-500/40 px-4 py-2 rounded-xl">
@@ -228,42 +273,67 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
         </div>
       </div>
 
-      {/* Empty State */}
-      {!hasAny && (
-        <div className="bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950 border border-zinc-700 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="relative p-8 min-h-[350px]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 bg-amber-500/10 blur-2xl" />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="text-center">
-                <Trophy className="w-16 h-16 text-zinc-700/50 mx-auto mb-3" />
-                <p className="text-sm font-bold text-zinc-500">Cabinet Empty</p>
-                <p className="text-[10px] text-zinc-600 mt-1">Win trophies to fill the shelves</p>
-              </div>
+      {/* Trophy Room */}
+      <div
+        className="relative overflow-hidden rounded-3xl border border-zinc-800 shadow-2xl"
+        style={{ background: 'radial-gradient(ellipse at 50% -10%, #2c2318 0%, #17130e 55%, #0e0b08 100%)' }}
+      >
+        {/* floor glow */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,215,150,0.06))' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-1.5 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, #2a1d10, #150d06)' }}
+        />
+
+        {/* cabinet */}
+        <div className="relative mx-auto max-w-4xl px-3 sm:px-6 py-8">
+          {/* crown */}
+          <div className="rounded-t-2xl border border-black/60 h-4" style={WOOD_FRAME_STYLE} />
+
+          {/* body */}
+          <div className="flex border-x border-black/50">
+            {/* left post */}
+            <div className="w-3 sm:w-5" style={WOOD_POST_H_STYLE} />
+
+            {/* shelves */}
+            <div
+              className="flex-1 space-y-3 px-1.5 sm:px-3 py-2.5"
+              style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35))' }}
+            >
+              <CabinetShelf
+                title="Club Trophies"
+                icon={<Users className="w-3.5 h-3.5 text-amber-400" />}
+                trophies={clubTrophies}
+                onSelect={handleSelectTrophy}
+                emptyText="No club trophies yet"
+              />
+              <CabinetShelf
+                title="International Trophies"
+                icon={<Globe className="w-3.5 h-3.5 text-sky-400" />}
+                trophies={internationalTrophies}
+                onSelect={handleSelectTrophy}
+                emptyText="No international trophies yet"
+              />
+              <CabinetShelf
+                title="Individual Awards"
+                icon={<Award className="w-3.5 h-3.5 text-purple-400" />}
+                trophies={individualAwards}
+                onSelect={handleSelectTrophy}
+                emptyText="No individual awards yet"
+              />
             </div>
+
+            {/* right post */}
+            <div className="w-3 sm:w-5" style={WOOD_POST_H_STYLE} />
           </div>
-          <div className="h-4 bg-gradient-to-r from-amber-950/40 via-amber-900/30 to-amber-950/40 border-t border-amber-800/20" />
+
+          {/* base */}
+          <div className="rounded-b-2xl border border-black/60 h-6" style={WOOD_FRAME_STYLE} />
         </div>
-      )}
-
-      {/* Team Trophies Shelf */}
-      {teamTrophies.length > 0 && (
-        <TrophyShelf
-          title="Team Trophies"
-          icon={<Users className="w-4 h-4 text-amber-400" />}
-          trophies={teamTrophies}
-          onSelect={handleSelectTrophy}
-        />
-      )}
-
-      {/* Individual Awards Shelf */}
-      {individualTrophies.length > 0 && (
-        <TrophyShelf
-          title="Individual Awards"
-          icon={<Award className="w-4 h-4 text-purple-400" />}
-          trophies={individualTrophies}
-          onSelect={handleSelectTrophy}
-        />
-      )}
+      </div>
 
       {/* Trophy Detail Modal */}
       {selectedTrophy && (
@@ -280,7 +350,7 @@ export const TrophyRoomView: React.FC<TrophyRoomViewProps> = ({ player }) => {
               </button>
               
               <div className="relative z-10 w-36 h-40 drop-shadow-[0_15px_30px_rgba(234,179,8,0.5)]">
-                <TrophyVisual iconType={selectedTrophy.iconType} className="w-full h-full" />
+                <TrophyVisual iconType={selectedTrophy.iconType} imagePath={selectedTrophy.imagePath} className="w-full h-full" />
               </div>
               
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/3 pointer-events-none" />

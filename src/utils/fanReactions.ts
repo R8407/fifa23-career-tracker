@@ -1,4 +1,4 @@
-import llmContextData from '../data/llm_context.json';
+import careerExportData from '../data/career_export.json';
 
 const LLM_BASE_URL = '/llm-api';
 
@@ -50,6 +50,33 @@ const FAN_PERSONAS = [
 ];
 
 // ============================================
+// Get current player data from career_export.json
+// ============================================
+function getCurrentPlayerData() {
+  const data = careerExportData as any;
+  const profile = data.my_player_profile || {};
+  const seasons = data.seasons || [];
+  const latestSeason = seasons.length > 0 ? seasons[seasons.length - 1] : null;
+
+  return {
+    name: `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Unknown',
+    team: profile.currentClub || 'Unknown',
+    position: profile.preferredposition1 === '23' ? 'RW' : 'CM',
+    overall: parseInt(profile.overallrating || '65'),
+    goals: latestSeason?.goals || 0,
+    assists: latestSeason?.assists || 0,
+    appearances: latestSeason?.apps || 0,
+    age: latestSeason?.age || 16,
+    totalGoals: data.total_goals || 0,
+    totalAssists: data.total_assists || 0,
+    totalApps: data.total_appearances || 0,
+    season: latestSeason?.season || '2024/2025',
+    motm: latestSeason?.motm || 0,
+    avgRating: latestSeason?.avgRating || 0,
+  };
+}
+
+// ============================================
 // Likes/Shares = Pure frontend math from HoF
 // ============================================
 function calculateEngagement(hofPoints: number): { baseLikes: number; baseShares: number } {
@@ -72,139 +99,221 @@ function jitter(value: number, range: number): number {
 // ============================================
 export async function generateFanReactions(
   postContent: string,
-  hofPoints: number
+  hofPoints: number,
+  category?: PostCategory
 ): Promise<FanReaction[]> {
   const { baseLikes, baseShares } = calculateEngagement(hofPoints);
-  const context = llmContextData as any;
-  const user = context.user_player || {};
-  const elite = context.elite_players || [];
+  const player = getCurrentPlayerData();
 
-  const userStats = [
-    `Name: ${user.name || 'Unknown'}`,
-    `Team: ${user.team || 'Unknown'}`,
-    `Position: ${user.position || 'Unknown'}`,
-    `Overall: ${user.overall || '??'} OVR`,
-    `Goals: ${user.goals ?? 0}`,
-    `Assists: ${user.assists ?? 0}`,
-    `Appearances: ${user.appearances ?? 0}`,
-    `Age: ${user.age ?? '??'}`,
-  ].join(' | ');
-
-  const eliteBlock = elite.slice(0, 10).map((p: any) =>
-    `- ${p.name}: ${p.position}, ${p.overall} OVR, ${p.team}, ${p.goals ?? 0}G ${p.assists ?? 0}A`
-  ).join('\n');
-
-  const legendsBlock = LEGEND_RECORDS.join('\n');
-
-  const prompt = `Generate 6 football fan comments reacting to a post. Be brutal, honest, funny.
-
-Player: ${user.name}, ${user.team}, ${user.position}, ${user.overall} OVR, ${user.goals}G ${user.assists}A, age ${user.age}
-Post: "${postContent}"
-
-6th commenter Kai_H8R is a permanent hater who always finds something negative.
-
-Return ONLY a JSON array of 6 objects with "text" field (under 20 words each):
-[{"text":"..."},{"text":"..."},{"text":"..."},{"text":"..."},{"text":"..."},{"text":"...hating"}]`;
-
+  // If LLM is available, try it first
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
-
-    const res = await fetch(`${LLM_BASE_URL}/v1/chat/completions`, {
+    const resp = await fetch(`${LLM_BASE_URL}/v1/chat/completions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'phi3',
-        messages: [{ role: 'user', content: prompt }],
+        model: 'local',
+        messages: [{
+          role: 'user',
+          content: `Generate 6 football fan comments reacting to a post. Be brutal, honest, funny.
+
+Player: ${player.name}, ${player.team}, ${player.position}, ${player.overall} OVR
+Season stats: ${player.goals}G ${player.assists}A in ${player.appearances} apps
+Career stats: ${player.totalGoals}G ${player.totalAssists}A
+Age: ${player.age}
+
+Post: "${postContent}"
+Category: ${category || 'general'}
+
+Fan personas: ${FAN_PERSONAS.map(f => `${f.name} (${f.type})`).join(', ')}
+
+Rules:
+1. Each comment 1-2 sentences max
+2. Mix of agree/disagree/hot takes
+3. One hater always (Kai_H8R)
+4. Use player's ACTUAL stats
+5. Be realistic - some fans are harsh
+
+Return JSON array of 6 objects with: name, handle, flag, text`
+        }],
         temperature: 0.9,
-        max_tokens: 300,
-        stream: false,
+        max_tokens: 500,
       }),
-      signal: controller.signal,
+      signal: AbortSignal.timeout(15000),
     });
-    clearTimeout(timeout);
 
-    if (!res.ok) throw new Error('LLM request failed');
-    const data: LLMResponse = await res.json();
-    let content = data.choices[0]?.message?.content || '';
-
-    content = content
-      .replace(/```json/g, '')
-      .replace(/```/g, '')
-      .replace(/<\|[^|]*\|>/g, '')
-      .trim();
-
-    const jsonMatch = content.match(/\[[\s\S]*\]/);
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[0]);
-      return parsed.map((item: any, i: number) => {
-        let text = item.text || 'Great post!';
-        // Strip leaked instruction labels from LLM output
-        text = text.replace(/^(Kai_H8R|Marco T|Liam O'Brien|Carlos Mendoza|Jean-Pierre D|Tommy Wright)\s*[:]\s*/i, '');
-        return {
-          name: FAN_PERSONAS[i].name,
-          handle: FAN_PERSONAS[i].handle,
-          flag: FAN_PERSONAS[i].flag,
-          text,
-          likes: jitter(baseLikes, Math.floor(baseLikes * 0.15)),
-          shares: jitter(baseShares, Math.floor(baseShares * 0.15)),
-        };
-      });
+    if (resp.ok) {
+      const data: LLMResponse = await resp.json();
+      const content = data.choices?.[0]?.message?.content || '';
+      const match = content.match(/\[[\s\S]*\]/);
+      if (match) {
+        const parsed = JSON.parse(match[0]);
+        if (Array.isArray(parsed) && parsed.length >= 6) {
+          return parsed.slice(0, 6).map((c: any, i: number) => ({
+            name: c.name || FAN_PERSONAS[i].name,
+            handle: c.handle || FAN_PERSONAS[i].handle,
+            flag: c.flag || FAN_PERSONAS[i].flag,
+            text: c.text || '',
+            likes: jitter(baseLikes, Math.floor(baseLikes * 0.15)),
+            shares: jitter(baseShares, Math.floor(baseShares * 0.15)),
+          }));
+        }
+      }
     }
-  } catch (e) {
-    console.log('[FanReactions] LLM unavailable, using fallback');
+  } catch {
+    console.log('[FanReactions] LLM unavailable, using category-based fallback');
   }
 
-  return getStatBasedFallback(postContent, user, elite, baseLikes, baseShares);
+  return getCategoryBasedFallback(postContent, category || 'general', baseLikes, baseShares);
 }
 
 // ============================================
-// Fallback when LLM is offline
+// Category-Based Fallback - context-aware reactions
 // ============================================
-function getStatBasedFallback(
+function getCategoryBasedFallback(
   post: string,
-  user: any,
-  elite: any[],
+  category: PostCategory,
   baseLikes: number,
   baseShares: number
 ): FanReaction[] {
-  const name = user.name || 'this guy';
-  const goals = user.goals ?? 0;
-  const assists = user.assists ?? 0;
-  const ovr = user.overall ?? 65;
-  const team = user.team || 'Spezia';
-  const age = user.age ?? 14;
-  const apps = user.appearances ?? 0;
+  const player = getCurrentPlayerData();
+  const { name, team, position, overall, goals, assists, appearances, age, totalGoals, totalAssists, motm, avgRating } = player;
   const postLower = post.toLowerCase();
 
-  // Detect which legend they mentioned
+  // Detect legend mentions — works across ALL categories
   const mentionedLegend = findMentionedLegend(postLower);
 
   let comments: string[];
 
-  if (mentionedLegend) {
-    comments = getLegendComments(mentionedLegend, name, goals, assists, ovr, team, age);
-  } else if (isCompliment(postLower)) {
-    comments = [
-      `${goals} goals and ${assists} assists at ${age} years old. This kid is SPECIAL.`,
-      `${name} at ${ovr} OVR doing this at ${team}. The rise is real.`,
-      `${assists} assists — name another youngster with better output. I will wait.`,
-      `The ${team} fans are witnessing history. ${name} is the real deal.`,
-      `${age} years old with ${goals}G ${assists}A. The ceiling is SCARY.`,
-    ];
-  } else {
-    // Generic post
-    comments = [
-      `${name} has ${goals} goals and ${assists} assists this season. Not bad at all.`,
-      `${ovr} OVR at ${team} — room to grow but the talent is there.`,
-      `${assists} assists shows real vision. The kid can play.`,
-      `${age} years old putting up numbers at ${team}. Respect.`,
-      `${goals}G ${assists}A in ${apps} appearances. Solid output for a youngster.`,
-    ];
+  switch (category) {
+    case 'legend_comparison':
+      if (mentionedLegend) {
+        comments = getLegendComments(mentionedLegend, name, goals, assists, overall, team, age);
+      } else {
+        comments = [
+          `${name} comparing himself to legends? ${totalGoals}G ${totalAssists}A career. Legends have 500+ goals.`,
+          `The disrespect to actual legends. ${name} has 0 Ballon d'Ors, 0 UCLs.`,
+          `${goals} goals this season and you're talking about all-time greatness? Stay humble.`,
+          `${age} years old with ${totalGoals} career goals. Messi had 91 in ONE year. Delete this.`,
+          `${name} is good but let's not get carried away. Legends are built over decades.`,
+          `Comparing ${overall} OVR to 90+ legends? The gap is MASSIVE. Facts don't lie.`,
+        ];
+      }
+      break;
+
+    case 'self_praise':
+      comments = [
+        `${name} celebrating ${goals}G ${assists}A at ${team}? DESERVED. The stats speak.`,
+        `${motm}x MOTM this season. ${name} is putting in WORK. Let him cook!`,
+        `${totalGoals}G ${totalAssists}A career total at age ${age}. The trajectory is INSANE.`,
+        `${avgRating} average rating. Consistency is what separates good from GREAT.`,
+        `${assists} assists shows elite vision. ${name} is the real deal at ${team}.`,
+        `${age} years old and already a key player. The future is BRIGHT.`,
+      ];
+      break;
+
+    case 'hot_take':
+      comments = [
+        `This is a SCORCHING take. ${name} at ${overall} OVR saying this? Wild.`,
+        `Hot take alert! ${goals} goals and suddenly everyone's a philosopher.`,
+        `The audacity! But... ${assists} assists does give him some credibility.`,
+        `I respect the confidence but ${totalGoals}G doesn't make you an authority.`,
+        `This take is so hot it's melting my screen. ${name} needs to relax.`,
+        `Bold words from someone with ${totalGoals} career goals. I'm listening though.`,
+      ];
+      break;
+
+    case 'club_loyalty':
+      comments = [
+        `${name} showing love to ${team}! The fans appreciate a loyal player.`,
+        `This is what you want to see — a player who CARES about the badge.`,
+        `${team} are lucky to have ${name}. ${goals}G ${assists}A this season proves it.`,
+        `Loyalty in modern football is RARE. ${name} gets it.`,
+        `${team} fans, cherish this man. ${totalGoals}G ${totalAssists}A and counting.`,
+        `Building a legacy at ${team} — that's how you become a club LEGEND.`,
+      ];
+      break;
+
+    case 'trophy_chase':
+      comments = [
+        `${name} hunting trophies at ${team}! ${goals}G ${assists}A to make it happen.`,
+        `The trophy chase is ON. ${name} needs silverware to validate the talent.`,
+        `${motm}x MOTM — ${name} is doing everything possible to win trophies.`,
+        `${team} need to build around ${name}. ${totalGoals}G ${totalAssists}A shows he's the guy.`,
+        `Trophies define legacy. ${name} has the talent, now he needs the hardware.`,
+        `With ${goals} goals this season, ${name} is carrying ${team} towards silverware.`,
+      ];
+      break;
+
+    case 'transfer_talk':
+      comments = [
+        `${name} at ${team} — but for how long? ${goals}G ${assists}A will attract suitors.`,
+        `${overall} OVR and ${totalGoals}G ${totalAssists}A. Top clubs should be monitoring this.`,
+        `If ${name} keeps putting up ${goals}G ${assists}A, bigger clubs will come calling.`,
+        `${team} better lock ${name} down. This talent won't stay under the radar.`,
+        `Transfer rumors incoming! ${age} years old with ${totalAssists} assists is ELITE potential.`,
+        `${name} at ${team} is a stepping stone. The big clubs are watching.`,
+      ];
+      break;
+
+    case 'form_check':
+      comments = [
+        `${name}'s form: ${goals}G ${assists}A in ${appearances} apps. That's ${avgRating} avg rating.`,
+        `${motm}x MOTM this season. ${name} is in INCREDIBLE form.`,
+        `${goals} goals in ${appearances} games — that's a goal every ${(appearances/goals || 1).toFixed(1)} games.`,
+        `${assists} assists shows ${name} is creating chances consistently.`,
+        `${avgRating} average rating. ${name}'s form is ELITE right now.`,
+        `${totalGoals}G ${totalAssists}A career — ${name} is peaking at the right time.`,
+      ];
+      break;
+
+    case 'rivalry':
+      comments = [
+        `${name} calling out rivals? With ${goals}G ${assists}A, he's got the stats to back it up.`,
+        `The rivalry heats up! ${name} wants all the smoke.`,
+        `${overall} OVR vs his rivals — ${name} is holding his own.`,
+        `Competition breeds excellence. ${name} with ${goals} goals is stepping up.`,
+        `${name} talking trash? ${totalAssists} assists says he can back it up.`,
+        `Rivalry activated! ${name} is ready to prove he's the best.`,
+      ];
+      break;
+
+    case 'international':
+      comments = [
+        `${name} representing Wales! ${totalGoals}G ${totalAssists}A at club level — imagine for country.`,
+        `Wales' golden boy! ${age} years old and already a key player.`,
+        `${name} putting Wales on the map! ${goals}G at ${team} translates to international success.`,
+        `International duty is where legends are made. ${name} has the talent.`,
+        `Wales need ${name} to deliver. ${totalAssists} assists shows he can create.`,
+        `${name} flying the Welsh flag! ${overall} OVR and rising.`,
+      ];
+      break;
+
+    default: // general
+      comments = [
+        `${name} has ${goals} goals and ${assists} assists at ${team} this season. Not bad at all.`,
+        `${overall} OVR at ${team} — room to grow but the talent is there.`,
+        `${assists} assists shows real vision. The kid can play at the highest level.`,
+        `${age} years old putting up numbers at ${team}. Respect.`,
+        `${goals}G ${assists}A in ${appearances} appearances. Solid output for a youngster.`,
+        `${totalGoals}G ${totalAssists}A career total. The trajectory is UP.`,
+      ];
+      break;
   }
 
-  // 6th person is always the hater - always find something negative
-  const haterComment = getHaterComment(name, goals, assists, ovr, team, age, apps, postLower, mentionedLegend);
+  // If a legend is mentioned in ANY non-legend_comparison category, inject legend context into 2 comments
+  // For form_check, only allow modern/active players
+  if (mentionedLegend && category !== 'legend_comparison') {
+    const shouldInject = category === 'form_check' ? isModernPlayer(mentionedLegend) : true;
+    if (shouldInject) {
+      const legendRoasts = getLegendComments(mentionedLegend, name, goals, assists, overall, team, age);
+      // Replace comment index 1 and 4 with legend-specific ones
+      comments[1] = legendRoasts[0];
+      comments[4] = legendRoasts[1];
+    }
+  }
+
+  // 6th person is always the hater
+  const haterComment = getHaterComment(name, goals, assists, overall, team, age, appearances, postLower, mentionedLegend);
 
   const allComments = [...comments.slice(0, 5), haterComment];
 
@@ -239,6 +348,22 @@ function findMentionedLegend(postLower: string): string | null {
     'ramos': 'Sergio Ramos',
     'lineker': 'Gary Lineker',
     'ferdinand': 'Rio Ferdinand',
+    'salah': 'Mohamed Salah',
+    'de bruyne': 'Kevin De Bruyne',
+    'kdb': 'Kevin De Bruyne',
+    'kane': 'Harry Kane',
+    'son': 'Heung-min Son',
+    'van dijk': 'Virgil van Dijk',
+    'modric': 'Luka Modrić',
+    'de gea': 'David De Gea',
+    'benzema': 'Karim Benzema',
+    'lewandowski': 'Robert Lewandowski',
+    'pogba': 'Paul Pogba',
+    'griezmann': 'Antoine Griezmann',
+    'brahim': 'Brahim Díaz',
+    'foden': 'Phil Foden',
+    'saka': 'Bukayo Saka',
+    'palmer': 'Cole Palmer',
   };
   for (const [key, value] of Object.entries(legendMap)) {
     if (postLower.includes(key)) return value;
@@ -250,6 +375,51 @@ function isCompliment(postLower: string): boolean {
   const positive = ['great', 'amazing', 'good', 'best', 'love', 'proud', 'happy', 'record', 'break', 'top', 'scored', 'winning'];
   return positive.some(w => postLower.includes(w));
 }
+
+function isStatComparison(postLower: string): boolean {
+  const comparison = ['better', 'worse', 'compare', 'vs', 'versus', 'than', 'best player', 'who is', 'overrated', 'underrated'];
+  return comparison.some(w => postLower.includes(w));
+}
+
+function isAchievement(postLower: string): boolean {
+  const achievement = ['assist', 'goal', 'career', 'milestone', 'record', 'broke', 'hit', 'reached', 'century', 'hat-trick', 'hattrick', 'motm', 'man of the match'];
+  return achievement.some(w => postLower.includes(w));
+}
+
+// ============================================
+// Post Categories for contextual fan reactions
+// ============================================
+export type PostCategory =
+  | 'hot_take'
+  | 'legend_comparison'
+  | 'self_praise'
+  | 'club_loyalty'
+  | 'trophy_chase'
+  | 'transfer_talk'
+  | 'form_check'
+  | 'rivalry'
+  | 'international'
+  | 'general';
+
+export interface PostCategoryOption {
+  id: PostCategory;
+  label: string;
+  description: string;
+  icon: string;
+}
+
+export const POST_CATEGORIES: PostCategoryOption[] = [
+  { id: 'hot_take', label: 'Hot Take', description: 'Bold opinion, controversial statement', icon: '🔥' },
+  { id: 'legend_comparison', label: 'Legend Comparison', description: 'Comparing yourself to all-time greats', icon: '👑' },
+  { id: 'self_praise', label: 'Self Praise', description: 'Celebrating your own achievements', icon: '⭐' },
+  { id: 'club_loyalty', label: 'Club Loyalty', description: 'Love for your current or past club', icon: '🏟️' },
+  { id: 'trophy_chase', label: 'Trophy Chase', description: 'Hunting silverware and records', icon: '🏆' },
+  { id: 'transfer_talk', label: 'Transfer Talk', description: 'Rumours, moves, career decisions', icon: '✈️' },
+  { id: 'form_check', label: 'Form Check', description: 'Current season performance discussion', icon: '📊' },
+  { id: 'rivalry', label: 'Rivalry', description: 'Calling out competitors', icon: '⚔️' },
+  { id: 'international', label: 'International Duty', description: 'National team pride', icon: '🏴󠁧󠁢󠁷󠁬󠁳󠁿' },
+  { id: 'general', label: 'General', description: 'Casual football talk', icon: '💬' },
+];
 
 function getLegendComments(
   legend: string,
@@ -303,6 +473,27 @@ function getLegendComments(
       `${goals}G and you mention Zidane? He has a Ballon d'Or and World Cup. Be quiet.`,
       `Zidane headbutted Materazzi in a World Cup Final. ${name} plays for Spezia. Log off.`,
     ],
+    'Mohamed Salah': [
+      `${name} has ${goals} goals. Salah has 200+ PL goals. You're not close.`,
+      `${assists} assists vs Salah's 160+ PL goals. Different tier entirely.`,
+      `${ovr} OVR at ${team}. Salah was winning the Golden Boot at your age. Pipe down.`,
+      `${goals}G ${assists}A and you think you're better than Salah? He has a PL, UCL, and 3x Golden Boots.`,
+      `Salah has 3 Golden Boots and a UCL. ${name} has ${goals} goals. Be humble.`,
+    ],
+    'Kevin De Bruyne': [
+      `${name} has ${assists} assists. KDB has 100+ PL assists. Sit down.`,
+      `${assists} assists vs De Bruyne's 170+ career assists. Not comparable.`,
+      `${ovr} OVR at ${team}. KDB was running Man City's midfield at your age.`,
+      `${goals}G ${assists}A and comparing to KDB? He has 2 PL Player of the Years. Pipe down.`,
+      `De Bruyne has 6 PL titles and a UCL. ${name} has ${assists} assists. Log off.`,
+    ],
+    'Harry Kane': [
+      `${name} has ${goals} goals. Kane has 200+ PL goals and is Bayern's striker. Different level.`,
+      `${assists} assists vs Kane's 213 PL goals. Not even close.`,
+      `${ovr} OVR at ${team}. Kane was scoring 30+ PL seasons at your age.`,
+      `${goals}G ${assists}A and comparing to Kane? He has 3 Golden Boots. Be quiet.`,
+      `Kane has 300+ career goals. ${name} has ${goals}. The gap is MASSIVE.`,
+    ],
   };
 
   return legendStats[legend] || [
@@ -312,6 +503,18 @@ function getLegendComments(
     `${goals}G ${assists}A and you think you're on ${legend}'s level? Stats say no.`,
     `${legend} has trophies. ${name} has ${goals} goals. End the debate.`,
   ];
+}
+
+const MODERN_PLAYERS = new Set([
+  'Mohamed Salah', 'Erling Haaland', 'Kylian Mbappé', 'Kevin De Bruyne',
+  'Harry Kane', 'Heung-min Son', 'Virgil van Dijk', 'Luka Modrić',
+  'David De Gea', 'Karim Benzema', 'Robert Lewandowski', 'Paul Pogba',
+  'Antoine Griezmann', 'Brahim Díaz', 'Phil Foden', 'Bukayo Saka',
+  'Cole Palmer', 'Jude Bellingham', 'Neymar',
+]);
+
+function isModernPlayer(legend: string): boolean {
+  return MODERN_PLAYERS.has(legend);
 }
 
 function getHaterComment(

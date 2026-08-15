@@ -267,17 +267,23 @@ export default function App() {
   };
 
   const handleAddIconicMoment = (moment: IconicMoment) => {
-    setPlayer(prev => ({
-      ...prev,
-      iconicMoments: [moment, ...(prev.iconicMoments || [])]
-    }));
+    setPlayer(prev => {
+      const moments = [moment, ...(prev.iconicMoments || [])];
+      try {
+        localStorage.setItem('career_iconic_moments', JSON.stringify(moments));
+      } catch {}
+      return { ...prev, iconicMoments: moments };
+    });
   };
 
   const handleDeleteIconicMoment = (id: string) => {
-    setPlayer(prev => ({
-      ...prev,
-      iconicMoments: (prev.iconicMoments || []).filter(m => m.id !== id)
-    }));
+    setPlayer(prev => {
+      const moments = (prev.iconicMoments || []).filter(m => m.id !== id);
+      try {
+        localStorage.setItem('career_iconic_moments', JSON.stringify(moments));
+      } catch {}
+      return { ...prev, iconicMoments: moments };
+    });
   };
 
   const handleUploadJson = (data: any) => {
@@ -409,6 +415,8 @@ export default function App() {
               player={player}
               onNavigateTab={setActiveTab}
               onOpenIconicModal={() => setIsIconicModalOpen(true)}
+              onAddIconicMoment={handleAddIconicMoment}
+              onDeleteIconicMoment={handleDeleteIconicMoment}
             />
           )}
 

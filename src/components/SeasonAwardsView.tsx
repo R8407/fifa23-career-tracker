@@ -19,21 +19,30 @@ interface SeasonAwardData {
   isCompleted: boolean;
 }
 
-// League golden boot thresholds for "winning"
-const LEAGUE_GOALS_TO_WIN_BOOT = 20;
-const MIN_RATING_FOR_POTY = 8.0;
+// Awards are announced when 25-15 days remain, finalized when season ends
+function isAwardsAnnounced(daysRemaining: number): boolean {
+  return daysRemaining <= 25 && daysRemaining >= 0;
+}
 
-// A season is considered complete at the first week of the last month (~25 days or less remain)
 function isSeasonCompleted(daysRemaining: number): boolean {
-  return daysRemaining <= 25;
+  return daysRemaining <= 0;
 }
 
 function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[], daysRemaining: number): SeasonAwardData {
   const leagueGoals = season.goals;
   const isCompleted = isSeasonCompleted(daysRemaining);
-  // Only award if season is complete (10-15 days or less remaining)
-  const isGoldenBootWinner = isCompleted && leagueGoals >= LEAGUE_GOALS_TO_WIN_BOOT;
-  const isPOTY = isCompleted && season.avgRating >= MIN_RATING_FOR_POTY;
+  const isAnnounced = isAwardsAnnounced(daysRemaining);
+
+  // Awards come ONLY from the game's real individualAwards data (career_export) —
+  // not rating thresholds, which aren't the game's source of truth.
+  const awardList = (season as any).individualAwards || [];
+  const awardNames = new Set(awardList.map((a: any) => (typeof a === 'string' ? a : a.name)));
+
+  const isGoldenBootWinner = isAnnounced && (awardNames.has('Golden Boot') || awardNames.has('European Golden Shoe'));
+  const isPOTY = isAnnounced && awardNames.has('Player of the Season');
+  const inBestXi = isAnnounced && awardNames.has('League XI');
+  const isYoungPlayer = isAnnounced && awardNames.has('Young Player of the Year');
+  const isAssistKing = isAnnounced && awardNames.has('Assist King');
 
   // Rank goals vs other seasons
   const goalRanks = [...allSeasons].sort((a, b) => b.goals - a.goals);
@@ -43,17 +52,9 @@ function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[], daysR
   const ratingRanks = [...allSeasons].sort((a, b) => b.avgRating - a.avgRating);
   const ratingRank = ratingRanks.findIndex(s => s.id === season.id) + 1;
 
-  // Best XI determination based on avg rating (only if season complete)
-  const ratingThreshold = 7.2;
-  const inBestXi = isCompleted && season.avgRating >= ratingThreshold;
-
-  // Young player (age <= 23, only if season complete)
-  const isYoungPlayer = isCompleted && season.age <= 23;
-
-  // Assist king (only if season complete)
+  // Assist rank vs other seasons
   const assistRanks = [...allSeasons].sort((a, b) => b.assists - a.assists);
   const assistRank = assistRanks.findIndex(s => s.id === season.id) + 1;
-  const isAssistKing = isCompleted && season.assists >= 10 && assistRank <= 3;
 
   return {
     goldenBoot: {
@@ -73,7 +74,7 @@ function computeSeasonAwards(season: SeasonData, allSeasons: SeasonData[], daysR
       inducted: inBestXi,
     },
     youngPlayer: {
-      won: isYoungPlayer && season.avgRating >= 7.5,
+      won: isYoungPlayer,
       rank: ratingRank,
     },
     assistKing: {
@@ -345,12 +346,12 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Golden Boot */}
             <AwardCard
               title="Golden Boot"
-              icon={<img src="/assets/awards/golden-boot.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
+              icon={<img src="/assets/awards/Golden_boot.jpg" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.goldenBoot.won}
               rank={awards.goldenBoot.rank}
               total={seasons.length}
               detail={`${awards.goldenBoot.goals} goals`}
-              subtext={awards.goldenBoot.won ? 'Golden Boot Winner!' : `${LEAGUE_GOALS_TO_WIN_BOOT}+ goals to win`}
+              subtext={awards.goldenBoot.won ? 'Golden Boot Winner!' : 'Not won this season'}
               color="amber"
               isCompleted={awards.isCompleted}
             />
@@ -358,12 +359,12 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Player of the Season */}
             <AwardCard
               title="Player of the Season"
-              icon={<img src="/assets/awards/player-of-season.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
+              icon={<img src="/assets/awards/POTS.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.playerOfSeason.won}
               rank={awards.playerOfSeason.rank}
               total={seasons.length}
               detail={`${awards.playerOfSeason.rating.toFixed(1)} avg rating`}
-              subtext={awards.playerOfSeason.won ? 'Player of the Season!' : `${MIN_RATING_FOR_POTY}+ rating to win`}
+              subtext={awards.playerOfSeason.won ? 'Player of the Season!' : 'Not won this season'}
               color="purple"
               isCompleted={awards.isCompleted}
             />
@@ -376,7 +377,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
               rank={awards.bestXi.inducted ? 1 : 0}
               total={11}
               detail={`${awards.bestXi.position} • ${awards.bestXi.rating.toFixed(1)} rating`}
-              subtext={awards.bestXi.inducted ? 'Inducted into Best XI!' : '7.2+ rating to earn spot'}
+              subtext={awards.bestXi.inducted ? 'Inducted into Best XI!' : 'Not selected this season'}
               color="emerald"
             />
 
@@ -388,7 +389,7 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
               rank={awards.youngPlayer.rank}
               total={seasons.length}
               detail={`Age ${currentSeason.age}`}
-              subtext={awards.youngPlayer.won ? 'Young Player Award!' : 'Under 23 with 7.5+ rating'}
+              subtext={awards.youngPlayer.won ? 'Young Player Award!' : 'Not won this season'}
               color="cyan"
               isCompleted={awards.isCompleted}
             />
@@ -396,12 +397,12 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
             {/* Assist King */}
             <AwardCard
               title={`Assist King - ${currentSeason.league}`}
-              icon={<img src="/assets/awards/assist-king.webp" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
+              icon={<img src="/assets/awards/Top_assist.jpg" alt="" className="w-6 h-6 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
               won={awards.assistKing.won}
               rank={awards.assistKing.rank}
               total={seasons.length}
               detail={`${awards.assistKing.assists} assists`}
-              subtext={awards.assistKing.won ? 'Assist King!' : '10+ assists & top 3 to win'}
+              subtext={awards.assistKing.won ? 'Assist King!' : 'Not won this season'}
               color="blue"
               isCompleted={awards.isCompleted}
             />
@@ -427,12 +428,15 @@ export const SeasonAwardsView: React.FC<SeasonAwardsViewProps> = ({ player }) =>
               {currentSeason.individualAwards.length > 0 && (
                 <div className="mt-3 pt-3 border-t border-zinc-800 space-y-1.5">
                   <div className="text-[10px] text-zinc-500 uppercase font-bold">Individual Awards</div>
-                  {currentSeason.individualAwards.map((a, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-zinc-300">
-                      <span className="text-amber-400">⭐</span>
-                      {a}
-                    </div>
-                  ))}
+                  {currentSeason.individualAwards.map((a, i) => {
+                    const awardName = typeof a === 'string' ? a : a.name;
+                    return (
+                      <div key={i} className="flex items-center gap-2 text-xs text-zinc-300">
+                        <span className="text-amber-400">⭐</span>
+                        {awardName}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>

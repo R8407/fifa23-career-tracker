@@ -5,6 +5,12 @@
       "local_path": "public/assets/clubs/113974.webp",
       "status": "downloaded",
       "size_kb": 55.9
+    },
+    "Chelsea": {
+      "name": "Chelsea",
+      "local_path": "public/assets/clubs/Chelsea.png",
+      "status": "downloaded",
+      "size_kb": 26.9
     }
   },
   "competitions": {
@@ -28,17 +34,17 @@
     }
   },
   "trophies": {
-    "conference-league": {
-      "name": "UEFA Europa Conference League",
-      "local_path": "public/assets/trophies/conference-league.webp",
+    "europa-league": {
+      "name": "Europa League",
+      "local_path": "public/assets/trophies/europa-league.jpg",
       "status": "downloaded",
-      "size_kb": 254.4
+      "size_kb": 115.2
     },
-    "copa-italia": {
-      "name": "Coppa Italia",
-      "local_path": "public/assets/trophies/copa-italia.webp",
+    "premier-league": {
+      "name": "Premier League",
+      "local_path": "public/assets/trophies/premier-league.webp",
       "status": "downloaded",
-      "size_kb": 114.8
+      "size_kb": 119.6
     },
     "serie-a": {
       "name": "Serie A TIM",
@@ -48,23 +54,41 @@
     }
   },
   "awards": {
+    "Golden_boot": {
+      "name": "Golden_Boot",
+      "local_path": "public/assets/awards/Golden_boot.jpg",
+      "status": "downloaded",
+      "size_kb": 55.8
+    },
+    "MOTM": {
+      "name": "Motm",
+      "local_path": "public/assets/awards/MOTM.jpg",
+      "status": "downloaded",
+      "size_kb": 114.7
+    },
+    "POTS": {
+      "name": "Pots",
+      "local_path": "public/assets/awards/POTS.webp",
+      "status": "downloaded",
+      "size_kb": 21.8
+    },
+    "Top_assist": {
+      "name": "Top_Assist",
+      "local_path": "public/assets/awards/Top_assist.jpg",
+      "status": "downloaded",
+      "size_kb": 34.9
+    },
     "assist-king": {
       "name": "Assist King",
       "local_path": "public/assets/awards/assist-king.webp",
       "status": "downloaded",
-      "size_kb": 181.0
+      "size_kb": 29.1
     },
     "ballon-dor": {
       "name": "Ballon d'Or",
       "local_path": "public/assets/awards/ballon-dor.webp",
       "status": "downloaded",
       "size_kb": 364.8
-    },
-    "golden-boot": {
-      "name": "Golden Boot",
-      "local_path": "public/assets/awards/golden-boot.webp",
-      "status": "downloaded",
-      "size_kb": 207.3
     },
     "player-of-season": {
       "name": "Player of the Season",
@@ -76,7 +100,7 @@
       "name": "Young Player Award",
       "local_path": "public/assets/awards/young-player.webp",
       "status": "downloaded",
-      "size_kb": 287.9
+      "size_kb": 35.4
     }
   }
 }

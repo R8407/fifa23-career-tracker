@@ -602,7 +602,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 140,
     legacyPoints: 15,
     description: 'The greatest UCL goalscoring record in history.',
-    holderClub: 'Real Madrid / Man Utd'
+    holderClub: 'Real Madrid / Man Utd',
+    compobjid: 181
   },
   {
     id: 'rec_ucl_alltime_assists',
@@ -617,7 +618,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 42,
     legacyPoints: 12,
     description: 'Most assists in Champions League history.',
-    holderClub: 'Real Madrid / Man Utd'
+    holderClub: 'Real Madrid / Man Utd',
+    compobjid: 181
   },
   {
     id: 'rec_ucl_single_season_goals',
@@ -632,7 +634,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 17,
     legacyPoints: 10,
     description: '17 goals in a single Champions League campaign (2013/14).',
-    holderClub: 'Real Madrid'
+    holderClub: 'Real Madrid',
+    compobjid: 181
   },
   {
     id: 'rec_ucl_single_season_assists',
@@ -647,7 +650,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 9,
     legacyPoints: 8,
     description: 'Record for most assists in a single Champions League campaign.',
-    holderClub: 'Liverpool (2017/18)'
+    holderClub: 'Liverpool (2017/18)',
+    compobjid: 181
   },
   {
     id: 'rec_ucl_hattricks',
@@ -662,7 +666,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 8,
     legacyPoints: 10,
     description: 'Most Champions League hat-tricks in career.',
-    holderClub: 'Real Madrid'
+    holderClub: 'Real Madrid',
+    compobjid: 181
   },
   {
     id: 'rec_ucl_finals_goals',
@@ -677,7 +682,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 7,
     legacyPoints: 10,
     description: 'Most goals scored across all European Cup/UCL final appearances.',
-    holderClub: 'Real Madrid'
+    holderClub: 'Real Madrid',
+    compobjid: 181
   },
 
   // === LEAGUE RECORDS ===
@@ -694,7 +700,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 36,
     legacyPoints: 8,
     description: '36 goals in a 38-game Premier League season.',
-    holderClub: 'Manchester City (2022/23)'
+    holderClub: 'Manchester City (2022/23)',
+    compobjid: 819
   },
   {
     id: 'rec_pl_single_season_assists',
@@ -709,7 +716,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 20,
     legacyPoints: 7,
     description: '20 assists in a single Premier League campaign.',
-    holderClub: 'Arsenal (2002/03)'
+    holderClub: 'Arsenal (2002/03)',
+    compobjid: 819
   },
   {
     id: 'rec_pl_alltime_goals',
@@ -724,7 +732,8 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     remainingToBreak: 260,
     legacyPoints: 15,
     description: 'All-time Premier League top scorer record.',
-    holderClub: 'Blackburn / Newcastle'
+    holderClub: 'Blackburn / Newcastle',
+    compobjid: 819
   },
   {
     id: 'rec_laliga_single_season_goals',
@@ -924,6 +933,124 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     holderClub: 'Black Stars Ghana'
   },
 
+  // === EUROPA LEAGUE RECORDS ===
+  {
+    id: 'rec_uel_single_season_goals',
+    title: 'Most Europa League Goals in One Season',
+    category: 'UEFA',
+    holderName: 'Radamel Falcao',
+    holderRecord: 17,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 17,
+    legacyPoints: 8,
+    description: '17 goals in a single Europa League campaign.',
+    holderClub: 'FC Porto (2010/11)',
+    compobjid: 179
+  },
+  {
+    id: 'rec_uel_single_season_assists',
+    title: 'Most Europa League Assists in One Season',
+    category: 'UEFA',
+    holderName: 'Santi Cazorla',
+    holderRecord: 8,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 8,
+    legacyPoints: 7,
+    description: '8 assists in a single Europa League campaign.',
+    holderClub: 'Arsenal (2012/13)',
+    compobjid: 179
+  },
+  {
+    id: 'rec_uel_alltime_goals',
+    title: 'Europa League All-Time Top Scorer',
+    category: 'UEFA',
+    holderName: 'Henrik Larsson',
+    holderRecord: 40,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Legendary',
+    isBroken: false,
+    remainingToBreak: 40,
+    legacyPoints: 12,
+    description: 'All-time Europa League/UEFA Cup top scorer.',
+    holderClub: 'Celtic / Barcelona',
+    compobjid: 179
+  },
+
+  // === EUROPA CONFERENCE LEAGUE RECORDS ===
+  {
+    id: 'rec_uecl_single_season_goals',
+    title: 'Most Conference League Goals in One Season',
+    category: 'UEFA',
+    holderName: 'Various',
+    holderRecord: 10,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 10,
+    legacyPoints: 6,
+    description: '10 goals in a single Europa Conference League campaign.',
+    holderClub: 'Various',
+    compobjid: 1828
+  },
+  {
+    id: 'rec_uecl_single_season_assists',
+    title: 'Most Conference League Assists in One Season',
+    category: 'UEFA',
+    holderName: 'Various',
+    holderRecord: 7,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 7,
+    legacyPoints: 5,
+    description: '7 assists in a single Europa Conference League campaign.',
+    holderClub: 'Various',
+    compobjid: 1828
+  },
+
+  // === CARABAO CUP RECORDS ===
+  {
+    id: 'rec_carabao_single_season_goals',
+    title: 'Most Carabao Cup Goals in One Season',
+    category: 'Cup',
+    holderName: 'Various',
+    holderRecord: 6,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Hard',
+    isBroken: false,
+    remainingToBreak: 6,
+    legacyPoints: 4,
+    description: '6 goals in a single Carabao Cup campaign.',
+    holderClub: 'Various',
+    compobjid: 633
+  },
+  {
+    id: 'rec_carabao_single_season_assists',
+    title: 'Most Carabao Cup Assists in One Season',
+    category: 'Cup',
+    holderName: 'Various',
+    holderRecord: 5,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Hard',
+    isBroken: false,
+    remainingToBreak: 5,
+    legacyPoints: 3,
+    description: '5 assists in a single Carabao Cup campaign.',
+    holderClub: 'Various',
+    compobjid: 633
+  },
+
   // === CLUB RECORDS ===
   {
     id: 'rec_real_madrid_alltime_goals',
@@ -1105,6 +1232,68 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     legacyPoints: 5,
     description: 'Most assists in a single Serie A season for Spezia.',
     holderClub: 'Spezia Calcio'
+  },
+
+  // === CHELSEA SEASONAL RECORDS ===
+  {
+    id: 'rec_chelsea_alltime_goals',
+    title: 'Chelsea All-Time Top Scorer',
+    category: 'Club',
+    holderName: 'Frank Lampard',
+    holderRecord: 211,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Legendary',
+    isBroken: false,
+    remainingToBreak: 211,
+    legacyPoints: 12,
+    description: 'All-time top scorer for Chelsea FC.',
+    holderClub: 'Chelsea'
+  },
+  {
+    id: 'rec_chelsea_alltime_assists',
+    title: 'Chelsea All-Time Assists Leader',
+    category: 'Club',
+    holderName: 'Frank Lampard',
+    holderRecord: 102,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 102,
+    legacyPoints: 10,
+    description: 'Most assists in Chelsea FC history.',
+    holderClub: 'Chelsea'
+  },
+  {
+    id: 'rec_chelsea_single_season_goals',
+    title: 'Chelsea Most Goals in One Season',
+    category: 'Club',
+    holderName: 'Jimmy Floyd Hasselbaink',
+    holderRecord: 26,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 26,
+    legacyPoints: 8,
+    description: 'Most goals in a single Premier League season for Chelsea.',
+    holderClub: 'Chelsea (2000/01)'
+  },
+  {
+    id: 'rec_chelsea_single_season_assists',
+    title: 'Chelsea Most Assists in One Season',
+    category: 'Club',
+    holderName: 'Eden Hazard',
+    holderRecord: 15,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 15,
+    legacyPoints: 8,
+    description: 'Most assists in a single Premier League season for Chelsea.',
+    holderClub: 'Chelsea (2018/19)'
   },
 
   // === REAL MADRID SEASONAL RECORDS ===
@@ -1770,9 +1959,9 @@ export const LEAGUE_UNIVERSE_DATA: Record<string, { scorers: LeaguePlayerStat[];
 };
 
 export const TOP_100_LEGENDS: RankedLegend[] = [
-  { id: 'leg_1', name: 'Lionel Messi', era: '2004-2024', nationality: 'Argentina', flag: '🇦🇷', position: 'RW', goals: 838, assists: 374, appearances: 1069, ballondOr: 8, worldCup: 1, clubTrophies: 44, popularOpinionBonus: 100, notableAchievement: '8 Ballon d\'Ors & 2022 World Cup Champion' },
-  { id: 'leg_2', name: 'Cristiano Ronaldo', era: '2002-Pres', nationality: 'Portugal', flag: '🇵🇹', position: 'ST', goals: 895, assists: 252, appearances: 1230, ballondOr: 5, worldCup: 0, clubTrophies: 33, popularOpinionBonus: 100, notableAchievement: 'All-Time Champions League & International Top Scorer' },
-  { id: 'leg_3', name: 'Pelé', era: '1956-1977', nationality: 'Brazil', flag: '🇧🇷', position: 'ST', goals: 762, assists: 360, appearances: 831, ballondOr: 7, worldCup: 3, clubTrophies: 26, popularOpinionBonus: 95, notableAchievement: '3-Time FIFA World Cup Winner' },
+  { id: 'leg_1', name: 'Lionel Messi', era: '2004-2024', nationality: 'Argentina', flag: '🇦🇷', position: 'RW', goals: 838, assists: 374, appearances: 1069, ballondOr: 8, worldCup: 1, clubTrophies: 44, popularOpinionBonus: 100, notableAchievement: '8 Ballon d\'Ors & 2022 World Cup Champion', clubs: ['Barcelona', 'Paris Saint-Germain', 'Inter Miami'] },
+  { id: 'leg_2', name: 'Cristiano Ronaldo', era: '2002-Pres', nationality: 'Portugal', flag: '🇵🇹', position: 'ST', goals: 895, assists: 252, appearances: 1230, ballondOr: 5, worldCup: 0, clubTrophies: 33, popularOpinionBonus: 100, notableAchievement: 'All-Time Champions League & International Top Scorer', clubs: ['Manchester United', 'Real Madrid', 'Juventus', 'Al Nassr'] },
+  { id: 'leg_3', name: 'Pelé', era: '1956-1977', nationality: 'Brazil', flag: '🇧🇷', position: 'ST', goals: 762, assists: 360, appearances: 831, ballondOr: 7, worldCup: 3, clubTrophies: 26, popularOpinionBonus: 95, notableAchievement: '3-Time FIFA World Cup Winner', clubs: ['Santos', 'New York Cosmos'] },
   { id: 'leg_4', name: 'Diego Maradona', era: '1976-1997', nationality: 'Argentina', flag: '🇦🇷', position: 'CAM', goals: 345, assists: 210, appearances: 680, ballondOr: 2, worldCup: 1, clubTrophies: 9, popularOpinionBonus: 110, notableAchievement: '1986 World Cup Solo Genius & Napoli Hero' },
   { id: 'leg_5', name: 'Johan Cruyff', era: '1964-1984', nationality: 'Netherlands', flag: '🇳🇱', position: 'CF', goals: 425, assists: 230, appearances: 710, ballondOr: 3, worldCup: 0, clubTrophies: 22, popularOpinionBonus: 85, notableAchievement: 'Father of Total Football & 3x Ballon d\'Or' },
   { id: 'leg_6', name: 'Zinedine Zidane', era: '1989-2006', nationality: 'France', flag: '🇫🇷', position: 'CAM', goals: 125, assists: 140, appearances: 863, ballondOr: 1, worldCup: 1, clubTrophies: 13, popularOpinionBonus: 95, notableAchievement: '1998 World Cup & 2002 UCL Volley Maestro' },
@@ -1783,7 +1972,7 @@ export const TOP_100_LEGENDS: RankedLegend[] = [
   { id: 'leg_11', name: 'Ferenc Puskás', era: '1943-1966', nationality: 'Hungary', flag: '🇭🇺', position: 'ST', goals: 708, assists: 200, appearances: 756, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 80, notableAchievement: 'Galloping Major - 5x European Cup Winner' },
   { id: 'leg_12', name: 'Alfredo Di Stéfano', era: '1945-1966', nationality: 'Argentina', flag: '🇦🇷', position: 'CF', goals: 509, assists: 130, appearances: 731, ballondOr: 2, worldCup: 0, clubTrophies: 22, popularOpinionBonus: 85, notableAchievement: '5 Consecutive European Cups with Real Madrid' },
   { id: 'leg_13', name: 'Michel Platini', era: '1972-1987', nationality: 'France', flag: '🇫🇷', position: 'CAM', goals: 353, assists: 150, appearances: 696, ballondOr: 3, worldCup: 0, clubTrophies: 11, popularOpinionBonus: 70, notableAchievement: '3 Consecutive Ballon d\'Or Titles (1983-1985)' },
-  { id: 'leg_14', name: 'Thierry Henry', era: '1994-2014', nationality: 'France', flag: '🇫🇷', position: 'ST', goals: 411, assists: 206, appearances: 908, ballondOr: 0, worldCup: 1, clubTrophies: 17, popularOpinionBonus: 75, notableAchievement: 'Invincibles Leader & 4x Premier League Golden Boot' },
+  { id: 'leg_14', name: 'Thierry Henry', era: '1994-2014', nationality: 'France', flag: '🇫🇷', position: 'ST', goals: 411, assists: 206, appearances: 908, ballondOr: 0, worldCup: 1, clubTrophies: 17, popularOpinionBonus: 75, notableAchievement: 'Invincibles Leader & 4x Premier League Golden Boot', clubs: ['Monaco', 'Juventus', 'Arsenal', 'Barcelona', 'New York Red Bulls'] },
   { id: 'leg_15', name: 'Andrés Iniesta', era: '2001-2024', nationality: 'Spain', flag: '🇪🇸', position: 'CM', goals: 90, assists: 172, appearances: 932, ballondOr: 0, worldCup: 1, clubTrophies: 37, popularOpinionBonus: 85, notableAchievement: '2010 World Cup Final Winner & Sextuple Champion' },
   { id: 'leg_16', name: 'Marco van Basten', era: '1981-1995', nationality: 'Netherlands', flag: '🇳🇱', position: 'ST', goals: 300, assists: 95, appearances: 489, ballondOr: 3, worldCup: 0, clubTrophies: 14, popularOpinionBonus: 75, notableAchievement: '3x Ballon d\'Or & Legendary Euro 1988 Volley' },
   { id: 'leg_17', name: 'Xavi Hernández', era: '1998-2019', nationality: 'Spain', flag: '🇪🇸', position: 'CM', goals: 115, assists: 212, appearances: 916, ballondOr: 0, worldCup: 1, clubTrophies: 31, popularOpinionBonus: 80, notableAchievement: 'Mastermind of Tiki-Taka World & Euro Dominance' },
@@ -1803,26 +1992,26 @@ export const TOP_100_LEGENDS: RankedLegend[] = [
   { id: 'leg_31', name: 'Ruud Gullit', era: '1979-1998', nationality: 'Netherlands', flag: '🇳🇱', position: 'CM', goals: 219, assists: 125, appearances: 636, ballondOr: 1, worldCup: 0, clubTrophies: 15, popularOpinionBonus: 60, notableAchievement: '1987 Ballon d\'Or & AC Milan European Legend' },
   { id: 'leg_32', name: 'Kylian Mbappé', era: '2015-Pres', nationality: 'France', flag: '🇫🇷', position: 'ST', goals: 330, assists: 150, appearances: 480, ballondOr: 0, worldCup: 1, clubTrophies: 18, popularOpinionBonus: 65, notableAchievement: '2018 World Cup Winner & 2022 World Cup Final Hat-Trick', category: 'modern' },
   { id: 'leg_33', name: 'Erling Haaland', era: '2017-Pres', nationality: 'Norway', flag: '🇳🇴', position: 'ST', goals: 260, assists: 50, appearances: 310, ballondOr: 0, worldCup: 0, clubTrophies: 7, popularOpinionBonus: 50, notableAchievement: 'Premier League Single-Season Goal Record (36)', category: 'modern' },
-  { id: 'leg_34', name: 'Dennis Bergkamp', era: '1986-2006', nationality: 'Netherlands', flag: '🇳🇱', position: 'CF', goals: 272, assists: 178, appearances: 701, ballondOr: 0, worldCup: 0, clubTrophies: 11, popularOpinionBonus: 60, notableAchievement: 'Non-Flying Dutchman & Invincibles Architect' },
-  { id: 'leg_35', name: 'Steven Gerrard', era: '1998-2016', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 212, assists: 160, appearances: 737, ballondOr: 0, worldCup: 0, clubTrophies: 9, popularOpinionBonus: 60, notableAchievement: 'Miracle of Istanbul 2005 Captain' },
-  { id: 'leg_36', name: 'Frank Lampard', era: '1995-2016', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 303, assists: 175, appearances: 810, ballondOr: 0, worldCup: 0, clubTrophies: 13, popularOpinionBonus: 60, notableAchievement: 'Highest Goalscoring Midfielder in Premier League History' },
+  { id: 'leg_34', name: 'Dennis Bergkamp', era: '1986-2006', nationality: 'Netherlands', flag: '🇳🇱', position: 'CF', goals: 272, assists: 178, appearances: 701, ballondOr: 0, worldCup: 0, clubTrophies: 11, popularOpinionBonus: 60, notableAchievement: 'Non-Flying Dutchman & Invincibles Architect', clubs: ['Ajax', 'Inter Milan', 'Arsenal'] },
+  { id: 'leg_35', name: 'Steven Gerrard', era: '1998-2016', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 212, assists: 160, appearances: 737, ballondOr: 0, worldCup: 0, clubTrophies: 9, popularOpinionBonus: 60, notableAchievement: 'Miracle of Istanbul 2005 Captain', clubs: ['Liverpool', 'LA Galaxy'] },
+  { id: 'leg_36', name: 'Frank Lampard', era: '1995-2016', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 303, assists: 175, appearances: 810, ballondOr: 0, worldCup: 0, clubTrophies: 13, popularOpinionBonus: 60, notableAchievement: 'Highest Goalscoring Midfielder in Premier League History', clubs: ['West Ham United', 'Chelsea', 'Manchester City', 'New York City FC'] },
   { id: 'leg_37', name: 'Andrea Pirlo', era: '1995-2017', nationality: 'Italy', flag: '🇮🇹', position: 'CM', goals: 86, assists: 128, appearances: 774, ballondOr: 0, worldCup: 1, clubTrophies: 16, popularOpinionBonus: 65, notableAchievement: '2006 World Cup Winner & Deep-Lying Playmaker Maestro' },
-  { id: 'leg_38', name: 'Paul Scholes', era: '1993-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 155, assists: 112, appearances: 718, ballondOr: 0, worldCup: 0, clubTrophies: 25, popularOpinionBonus: 60, notableAchievement: '11x Premier League Champion with Man Utd' },
+  { id: 'leg_38', name: 'Paul Scholes', era: '1993-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CM', goals: 155, assists: 112, appearances: 718, ballondOr: 0, worldCup: 0, clubTrophies: 25, popularOpinionBonus: 60, notableAchievement: '11x Premier League Champion with Man Utd', clubs: ['Manchester United'] },
   { id: 'leg_39', name: 'Sergio Ramos', era: '2004-2024', nationality: 'Spain', flag: '🇪🇸', position: 'CB', goals: 138, assists: 48, appearances: 881, ballondOr: 0, worldCup: 1, clubTrophies: 25, popularOpinionBonus: 65, notableAchievement: '93rd Minute Champions League Hero & 4x UCL' },
   { id: 'leg_40', name: 'Paolo Maldini', era: '1984-2009', nationality: 'Italy', flag: '🇮🇹', position: 'CB', goals: 40, assists: 45, appearances: 902, ballondOr: 0, worldCup: 0, clubTrophies: 26, popularOpinionBonus: 75, notableAchievement: '5x Champions League / European Cup Winner with AC Milan' },
   { id: 'leg_41', name: 'Clarence Seedorf', era: '1992-2014', nationality: 'Netherlands', flag: '🇳🇱', position: 'CM', goals: 138, assists: 120, appearances: 862, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 55, notableAchievement: 'Won UCL with 3 Different Clubs (Ajax, Real Madrid, Milan)' },
-  { id: 'leg_42', name: 'Ryan Giggs', era: '1990-2014', nationality: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', position: 'LW', goals: 168, assists: 250, appearances: 1032, ballondOr: 0, worldCup: 0, clubTrophies: 34, popularOpinionBonus: 55, notableAchievement: 'Most Assists in Premier League History (162)' },
-  { id: 'leg_43', name: 'Gareth Bale', era: '2006-2023', nationality: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', position: 'RW', goals: 226, assists: 137, appearances: 554, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 60, notableAchievement: '5x Champions League Winner & 2018 Bicycle Kick Final' },
-  { id: 'leg_44', name: 'Mohamed Salah', era: '2010-Pres', nationality: 'Egypt', flag: '🇪🇬', position: 'RW', goals: 320, assists: 150, appearances: 530, ballondOr: 0, worldCup: 0, clubTrophies: 9, popularOpinionBonus: 55, notableAchievement: '3x Premier League Golden Boot & Egyptian King', category: 'modern' },
-  { id: 'leg_45', name: 'Kevin De Bruyne', era: '2008-Pres', nationality: 'Belgium', flag: '🇧🇪', position: 'CM', goals: 170, assists: 255, appearances: 613, ballondOr: 0, worldCup: 0, clubTrophies: 17, popularOpinionBonus: 60, notableAchievement: 'Premier League Treble Winner & Assist Record Holder', category: 'modern' },
-  { id: 'leg_46', name: 'Sergio Agüero', era: '2003-2021', nationality: 'Argentina', flag: '🇦🇷', position: 'ST', goals: 426, assists: 118, appearances: 646, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 55, notableAchievement: 'Iconic AGÜEROOO 93:20 Title Goal' },
-  { id: 'leg_47', name: 'Harry Kane', era: '2009-Pres', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 380, assists: 92, appearances: 600, ballondOr: 0, worldCup: 0, clubTrophies: 1, popularOpinionBonus: 45, notableAchievement: '3x Premier League Golden Boot & World Cup Golden Boot', category: 'modern' },
-  { id: 'leg_48', name: 'David Beckham', era: '1992-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'RW', goals: 146, assists: 220, appearances: 719, ballondOr: 0, worldCup: 0, clubTrophies: 19, popularOpinionBonus: 80, notableAchievement: 'Most Famous Footballer & 6x Premier League Winner' },
-  { id: 'leg_49', name: 'Patrick Vieira', era: '1994-2011', nationality: 'France', flag: '🇫🇷', position: 'CDM', goals: 68, assists: 60, appearances: 683, ballondOr: 0, worldCup: 1, clubTrophies: 14, popularOpinionBonus: 55, notableAchievement: 'Invincibles Captain & 1998 World Cup Winner' },
-  { id: 'leg_50', name: 'Didier Drogba', era: '1998-2018', nationality: 'Ivory Coast', flag: '🇨🇮', position: 'ST', goals: 350, assists: 110, appearances: 698, ballondOr: 0, worldCup: 0, clubTrophies: 14, popularOpinionBonus: 60, notableAchievement: '2012 UCL Final Hero & Chelsea All-Time Top Scorer' },
+  { id: 'leg_42', name: 'Ryan Giggs', era: '1990-2014', nationality: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', position: 'LW', goals: 168, assists: 250, appearances: 1032, ballondOr: 0, worldCup: 0, clubTrophies: 34, popularOpinionBonus: 55, notableAchievement: 'Most Assists in Premier League History (162)', clubs: ['Manchester United'] },
+  { id: 'leg_43', name: 'Gareth Bale', era: '2006-2023', nationality: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', position: 'RW', goals: 226, assists: 137, appearances: 554, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 60, notableAchievement: '5x Champions League Winner & 2018 Bicycle Kick Final', clubs: ['Southampton', 'Tottenham Hotspur', 'Real Madrid', 'Los Angeles FC'] },
+  { id: 'leg_44', name: 'Mohamed Salah', era: '2010-Pres', nationality: 'Egypt', flag: '🇪🇬', position: 'RW', goals: 320, assists: 150, appearances: 530, ballondOr: 0, worldCup: 0, clubTrophies: 9, popularOpinionBonus: 55, notableAchievement: '3x Premier League Golden Boot & Egyptian King', category: 'modern', clubs: ['Basel', 'Chelsea', 'Fiorentina', 'Roma', 'Liverpool'] },
+  { id: 'leg_45', name: 'Kevin De Bruyne', era: '2008-Pres', nationality: 'Belgium', flag: '🇧🇪', position: 'CM', goals: 170, assists: 255, appearances: 613, ballondOr: 0, worldCup: 0, clubTrophies: 17, popularOpinionBonus: 60, notableAchievement: 'Premier League Treble Winner & Assist Record Holder', category: 'modern', clubs: ['Genk', 'Chelsea', 'Wolfsburg', 'Manchester City'] },
+  { id: 'leg_46', name: 'Sergio Agüero', era: '2003-2021', nationality: 'Argentina', flag: '🇦🇷', position: 'ST', goals: 426, assists: 118, appearances: 646, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 55, notableAchievement: 'Iconic AGÜEROOO 93:20 Title Goal', clubs: ['Independiente', 'Atletico Madrid', 'Manchester City', 'Barcelona'] },
+  { id: 'leg_47', name: 'Harry Kane', era: '2009-Pres', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 380, assists: 92, appearances: 600, ballondOr: 0, worldCup: 0, clubTrophies: 1, popularOpinionBonus: 45, notableAchievement: '3x Premier League Golden Boot & World Cup Golden Boot', category: 'modern', clubs: ['Tottenham Hotspur', 'Bayern Munich'] },
+  { id: 'leg_48', name: 'David Beckham', era: '1992-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'RW', goals: 146, assists: 220, appearances: 719, ballondOr: 0, worldCup: 0, clubTrophies: 19, popularOpinionBonus: 80, notableAchievement: 'Most Famous Footballer & 6x Premier League Winner', clubs: ['Manchester United', 'Real Madrid', 'LA Galaxy', 'Paris Saint-Germain'] },
+  { id: 'leg_49', name: 'Patrick Vieira', era: '1994-2011', nationality: 'France', flag: '🇫🇷', position: 'CDM', goals: 68, assists: 60, appearances: 683, ballondOr: 0, worldCup: 1, clubTrophies: 14, popularOpinionBonus: 55, notableAchievement: 'Invincibles Captain & 1998 World Cup Winner', clubs: ['Arsenal', 'Juventus', 'Inter Milan', 'Manchester City', 'New York City FC'] },
+  { id: 'leg_50', name: 'Didier Drogba', era: '1998-2018', nationality: 'Ivory Coast', flag: '🇨🇮', position: 'ST', goals: 350, assists: 110, appearances: 698, ballondOr: 0, worldCup: 0, clubTrophies: 14, popularOpinionBonus: 60, notableAchievement: '2012 UCL Final Hero & Chelsea All-Time Top Scorer', clubs: ['Marseille', 'Chelsea', 'Shanghai Shenhua', 'Galatasaray', 'Phoenix Rising'] },
   { id: 'leg_51', name: 'Samuel Eto\'o', era: '1997-2019', nationality: 'Cameroon', flag: '🇨🇲', position: 'ST', goals: 435, assists: 140, appearances: 690, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 55, notableAchievement: '4x African Player of the Year & 2x UCL Winner' },
-  { id: 'leg_52', name: 'Alan Shearer', era: '1988-2006', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 422, assists: 95, appearances: 682, ballondOr: 0, worldCup: 0, clubTrophies: 6, popularOpinionBonus: 50, notableAchievement: 'Premier League All-Time Top Scorer (260 goals)' },
-  { id: 'leg_53', name: 'Michael Owen', era: '1996-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 280, assists: 85, appearances: 482, ballondOr: 1, worldCup: 0, clubTrophies: 10, popularOpinionBonus: 50, notableAchievement: '2001 Ballon d\'Or & Youngest Ballon d\'Or Winner' },
+  { id: 'leg_52', name: 'Alan Shearer', era: '1988-2006', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 422, assists: 95, appearances: 682, ballondOr: 0, worldCup: 0, clubTrophies: 6, popularOpinionBonus: 50, notableAchievement: 'Premier League All-Time Top Scorer (260 goals)', clubs: ['Southampton', 'Blackburn Rovers', 'Newcastle United'] },
+  { id: 'leg_53', name: 'Michael Owen', era: '1996-2013', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'ST', goals: 280, assists: 85, appearances: 482, ballondOr: 1, worldCup: 0, clubTrophies: 10, popularOpinionBonus: 50, notableAchievement: '2001 Ballon d\'Or & Youngest Ballon d\'Or Winner', clubs: ['Liverpool', 'Real Madrid', 'Newcastle United', 'Manchester United', 'Stoke City'] },
   { id: 'leg_54', name: 'David Trezeguet', era: '1994-2015', nationality: 'France', flag: '🇫🇷', position: 'ST', goals: 370, assists: 95, appearances: 635, ballondOr: 0, worldCup: 1, clubTrophies: 15, popularOpinionBonus: 50, notableAchievement: '2006 World Cup Final Golden Goal & Juventus Legend' },
   { id: 'leg_55', name: 'Alessandro Del Piero', era: '1993-2014', nationality: 'Italy', flag: '🇮🇹', position: 'CF', goals: 346, assists: 130, appearances: 756, ballondOr: 0, worldCup: 1, clubTrophies: 17, popularOpinionBonus: 65, notableAchievement: 'Juventus All-Time Top Scorer & 2006 World Cup Hero' },
   { id: 'leg_56', name: 'Raúl', era: '1994-2015', nationality: 'Spain', flag: '🇪🇸', position: 'CF', goals: 420, assists: 155, appearances: 894, ballondOr: 0, worldCup: 0, clubTrophies: 22, popularOpinionBonus: 55, notableAchievement: 'Real Madrid All-Time UCL Top Scorer (71 goals)' },
@@ -1855,27 +2044,25 @@ export const TOP_100_LEGENDS: RankedLegend[] = [
   { id: 'leg_83', name: 'Bixente Lizarazu', era: '1988-2006', nationality: 'France', flag: '🇫🇷', position: 'LB', goals: 30, assists: 45, appearances: 565, ballondOr: 0, worldCup: 1, clubTrophies: 12, popularOpinionBonus: 40, notableAchievement: 'World Cup, Euros, UCL & Bundesliga Winner' },
   { id: 'leg_84', name: 'Johan Neeskens', era: '1970-1991', nationality: 'Netherlands', flag: '🇳🇱', position: 'CM', goals: 150, assists: 80, appearances: 551, ballondOr: 0, worldCup: 0, clubTrophies: 12, popularOpinionBonus: 45, notableAchievement: 'Total Football Pioneer & 1974 World Cup Final Goals' },
   { id: 'leg_85', name: 'Tom Finney', era: '1946-1960', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'LW', goals: 218, assists: 90, appearances: 433, ballondOr: 0, worldCup: 0, clubTrophies: 3, popularOpinionBonus: 45, notableAchievement: 'Preston North End Legend & 6x Football League XI' },
-  { id: 'leg_86', name: 'Karl-Heinz Schnellinger', era: '1958-1975', nationality: 'Germany', flag: '🇩🇪', position: 'LB', goals: 30, assists: 40, appearances: 412, ballondOr: 0, worldCup: 0, clubTrophies: 8, popularOpinionBonus: 30, notableAchievement: 'AC Milan & West Germany Legend' },
+  { id: 'leg_86', name: 'Lilian Thuram', era: '1992-2008', nationality: 'France', flag: '🇫🇷', position: 'CB', goals: 15, assists: 25, appearances: 780, ballondOr: 0, worldCup: 1, clubTrophies: 14, popularOpinionBonus: 50, notableAchievement: 'France All-Time Most Capped Player & 1998 World Cup Winner' },
   { id: 'leg_87', name: 'George Weah', era: '1985-2003', nationality: 'Liberia', flag: '🇱🇷', position: 'ST', goals: 285, assists: 80, appearances: 471, ballondOr: 1, worldCup: 0, clubTrophies: 11, popularOpinionBonus: 50, notableAchievement: '1995 Ballon d\'Or & Only African to Win It' },
   { id: 'leg_88', name: 'Jürgen Klinsmann', era: '1981-1998', nationality: 'Germany', flag: '🇩🇪', position: 'ST', goals: 328, assists: 100, appearances: 558, ballondOr: 0, worldCup: 1, clubTrophies: 10, popularOpinionBonus: 45, notableAchievement: '1990 World Cup Winner & 1996 Euro Winner' },
   { id: 'leg_89', name: 'Bernd Schuster', era: '1978-1997', nationality: 'Germany', flag: '🇩🇪', position: 'CAM', goals: 180, assists: 120, appearances: 534, ballondOr: 0, worldCup: 0, clubTrophies: 10, popularOpinionBonus: 40, notableAchievement: 'Der Blonde Engel & Barcelona/Real Madrid Legend' },
   { id: 'leg_90', name: 'Rudi Völler', era: '1982-2000', nationality: 'Germany', flag: '🇩🇪', position: 'ST', goals: 260, assists: 80, appearances: 525, ballondOr: 0, worldCup: 1, clubTrophies: 8, popularOpinionBonus: 40, notableAchievement: '1990 World Cup Winner & 3x Bundesliga Champion' },
   { id: 'leg_91', name: 'Francesco Totti', era: '1993-2017', nationality: 'Italy', flag: '🇮🇹', position: 'CF', goals: 316, assists: 150, appearances: 786, ballondOr: 0, worldCup: 1, clubTrophies: 6, popularOpinionBonus: 60, notableAchievement: 'Roma All-Time Top Scorer & 2006 World Cup Winner' },
-  { id: 'leg_92', name: 'George Weah', era: '1985-2003', nationality: 'Liberia', flag: '🇱🇷', position: 'ST', goals: 328, assists: 100, appearances: 471, ballondOr: 1, worldCup: 0, clubTrophies: 12, popularOpinionBonus: 55, notableAchievement: '1995 Ballon d\'Or & First African to Win It' },
-  { id: 'leg_93', name: 'Steven Pienaar', era: '1998-2016', nationality: 'South Africa', flag: '🇿🇦', position: 'CM', goals: 65, assists: 80, appearances: 390, ballondOr: 0, worldCup: 0, clubTrophies: 3, popularOpinionBonus: 25, notableAchievement: 'Everton Fan Favorite & 2010 World Cup Host Star' },
-  { id: 'leg_94', name: 'Abedi Pele', era: '1980-2000', nationality: 'Ghana', flag: '🇬🇭', position: 'CAM', goals: 180, assists: 90, appearances: 452, ballondOr: 0, worldCup: 0, clubTrophies: 8, popularOpinionBonus: 35, notableAchievement: '3x African Footballer of the Year & Marseille Legend' },
-  { id: 'leg_95', name: 'Jay-Jay Okocha', era: '1993-2012', nationality: 'Nigeria', flag: '🇳🇬', position: 'CAM', goals: 95, assists: 80, appearances: 506, ballondOr: 0, worldCup: 0, clubTrophies: 5, popularOpinionBonus: 45, notableAchievement: 'Most Entertaining Player of His Generation' },
-  { id: 'leg_96', name: 'Nwankwo Kanu', era: '1993-2012', nationality: 'Nigeria', flag: '🇳🇬', position: 'CF', goals: 120, assists: 80, appearances: 475, ballondOr: 0, worldCup: 0, clubTrophies: 8, popularOpinionBonus: 35, notableAchievement: 'Olympic Gold Medalist & Champions League Winner' },
-  { id: 'leg_97', name: 'Yakubu', era: '1999-2015', nationality: 'Nigeria', flag: '🇳🇬', position: 'ST', goals: 180, assists: 50, appearances: 420, ballondOr: 0, worldCup: 0, clubTrophies: 4, popularOpinionBonus: 25, notableAchievement: 'Premier League Veteran & 3x African Cup Winner' },
-  { id: 'leg_98', name: 'Asamoah Gyan', era: '2003-2019', nationality: 'Ghana', flag: '🇬🇭', position: 'ST', goals: 175, assists: 60, appearances: 425, ballondOr: 0, worldCup: 0, clubTrophies: 5, popularOpinionBonus: 30, notableAchievement: 'Ghana All-Time Top Scorer & 2010 World Cup Hero' },
-  { id: 'leg_99', name: 'Michael Essien', era: '2000-2016', nationality: 'Ghana', flag: '🇬🇭', position: 'CDM', goals: 60, assists: 50, appearances: 445, ballondOr: 0, worldCup: 0, clubTrophies: 10, popularOpinionBonus: 35, notableAchievement: 'Chelsea Midfield General & 2010 UCL Final Starter' },
-  { id: 'leg_100', name: 'Sulley Muntari', era: '2002-2016', nationality: 'Ghana', flag: '🇬🇭', position: 'CM', goals: 55, assists: 40, appearances: 450, ballondOr: 0, worldCup: 0, clubTrophies: 6, popularOpinionBonus: 25, notableAchievement: 'Inter Milan Treble Winner & 2010 World Cup Star' },
+  { id: 'leg_92', name: 'Andriy Shevchenko', era: '1994-2012', nationality: 'Ukraine', flag: '🇺🇦', position: 'ST', goals: 375, assists: 100, appearances: 680, ballondOr: 1, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 60, notableAchievement: '2003 Ballon d\'Or & AC Milan All-Time Top Scorer' },
+  { id: 'leg_93', name: 'Gianluigi Buffon', era: '1995-2023', nationality: 'Italy', flag: '🇮🇹', position: 'GK', goals: 0, assists: 0, appearances: 975, ballondOr: 0, worldCup: 1, clubTrophies: 24, popularOpinionBonus: 70, notableAchievement: 'Most Clean Sheets in History & 2006 World Cup Winner' },
+  { id: 'leg_94', name: 'Fernando Torres', era: '2001-2019', nationality: 'Spain', flag: '🇪🇸', position: 'ST', goals: 320, assists: 110, appearances: 700, ballondOr: 0, worldCup: 1, clubTrophies: 12, popularOpinionBonus: 55, notableAchievement: '2010 World Cup Winner & Euro 2008 Golden Boot' },
+  { id: 'leg_95', name: 'Gianfranco Zola', era: '1989-2005', nationality: 'Italy', flag: '🇮🇹', position: 'CF', goals: 250, assists: 100, appearances: 630, ballondOr: 0, worldCup: 0, clubTrophies: 10, popularOpinionBonus: 55, notableAchievement: 'Chelsea Greatest Ever Player & 1997 Football Writers POTY' },
+  { id: 'leg_96', name: 'Ruud van Nistelrooy', era: '1998-2012', nationality: 'Netherlands', flag: '🇳🇱', position: 'ST', goals: 350, assists: 75, appearances: 630, ballondOr: 0, worldCup: 0, clubTrophies: 16, popularOpinionBonus: 55, notableAchievement: 'UCL All-Time Top 10 Scorer & 4x Premier League Golden Boot' },
+  { id: 'leg_97', name: 'Gabriel Batistuta', era: '1988-2005', nationality: 'Argentina', flag: '🇦🇷', position: 'ST', goals: 350, assists: 70, appearances: 600, ballondOr: 0, worldCup: 1, clubTrophies: 10, popularOpinionBonus: 60, notableAchievement: 'Roma All-Time Top Scorer & 1994 World Cup Finalist' },
+  { id: 'leg_98', name: 'Luis Figo', era: '1990-2009', nationality: 'Portugal', flag: '🇵🇹', position: 'RW', goals: 180, assists: 150, appearances: 800, ballondOr: 1, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 65, notableAchievement: '2000 Ballon d\'Or & Record-Breaking Barca to Madrid Transfer' },
+  { id: 'leg_99', name: 'Pavel Nedvěd', era: '1992-2009', nationality: 'Czech Republic', flag: '🇨🇿', position: 'CM', goals: 150, assists: 100, appearances: 680, ballondOr: 1, worldCup: 0, clubTrophies: 14, popularOpinionBonus: 55, notableAchievement: '2003 Ballon d\'Or & Juventus Midfield Engine' },
+  { id: 'leg_100', name: 'Eric Cantona', era: '1983-1997', nationality: 'France', flag: '🇫🇷', position: 'CF', goals: 230, assists: 100, appearances: 520, ballondOr: 0, worldCup: 0, clubTrophies: 12, popularOpinionBonus: 75, notableAchievement: 'King Eric - Man Utd Revolution & 4x Premier League Winner' },
   // === MODERN PLAYERS (Active 88+ OVR or Well-Known) ===
-  { id: 'mod_1', name: 'Vinícius Jr.', era: '2017-Pres', nationality: 'Brazil', flag: '🇧🇷', position: 'LW', goals: 140, assists: 80, appearances: 350, ballondOr: 0, worldCup: 0, clubTrophies: 12, popularOpinionBonus: 55, notableAchievement: '2024 UCL Final Goal & 2x La Liga Champion', category: 'modern' },
   { id: 'mod_2', name: 'Jude Bellingham', era: '2020-Pres', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CAM', goals: 70, assists: 50, appearances: 280, ballondOr: 0, worldCup: 0, clubTrophies: 6, popularOpinionBonus: 50, notableAchievement: '2024 La Liga Champion & Golden Boy Winner', category: 'modern' },
   { id: 'mod_3', name: 'Bukayo Saka', era: '2019-Pres', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'RW', goals: 85, assists: 60, appearances: 300, ballondOr: 0, worldCup: 0, clubTrophies: 3, popularOpinionBonus: 45, notableAchievement: 'Arsenal Star Boy & 2022 World Cup Penalty Redemption', category: 'modern' },
-  { id: 'mod_4', name: 'Phil Foden', era: '2017-Pres', nationality: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', position: 'CAM', goals: 80, assists: 55, appearances: 310, ballondOr: 0, worldCup: 0, clubTrophies: 14, popularOpinionBonus: 45, notableAchievement: '2024 Treble Winner & FWA Footballer of the Year', category: 'modern' },
-  { id: 'mod_5', name: 'Lamine Yamal', era: '2023-Pres', nationality: 'Spain', flag: '🇪🇸', position: 'RW', goals: 25, assists: 20, appearances: 100, ballondOr: 0, worldCup: 0, clubTrophies: 3, popularOpinionBonus: 40, notableAchievement: 'Youngest Euro Scorer & 2024 Kopa Trophy', category: 'modern' },
-  { id: 'mod_6', name: 'Florian Wirtz', era: '2020-Pres', nationality: 'Germany', flag: '🇩🇪', position: 'CAM', goals: 55, assists: 50, appearances: 220, ballondOr: 0, worldCup: 0, clubTrophies: 4, popularOpinionBonus: 40, notableAchievement: 'Bundesliga Wonderkid & 2024 Kopa Trophy Nominee', category: 'modern' },
-  { id: 'mod_7', name: 'Brennan Johnson', era: '2021-Pres', nationality: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', position: 'RW', goals: 45, assists: 30, appearances: 200, ballondOr: 0, worldCup: 0, clubTrophies: 2, popularOpinionBonus: 30, notableAchievement: 'Wales International & Tottenham Hotspur Star', category: 'modern' }
+  { id: 'mod_5', name: 'Edinson Cavani', era: '2003-2023', nationality: 'Uruguay', flag: '🇺🇾', position: 'ST', goals: 450, assists: 100, appearances: 700, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 50, notableAchievement: 'PSG All-Time Top Scorer & 6x European Golden Shoe Nominee', category: 'modern' },
+  { id: 'mod_6', name: 'Arjen Robben', era: '2000-2019', nationality: 'Netherlands', flag: '🇳🇱', position: 'RW', goals: 310, assists: 160, appearances: 650, ballondOr: 0, worldCup: 0, clubTrophies: 26, popularOpinionBonus: 60, notableAchievement: '2013 UCL Final Winner & Bundesliga Dominator', category: 'modern' },
+  { id: 'mod_7', name: 'Frank Rijkaard', era: '1980-1995', nationality: 'Netherlands', flag: '🇳🇱', position: 'CDM', goals: 105, assists: 70, appearances: 680, ballondOr: 0, worldCup: 0, clubTrophies: 18, popularOpinionBonus: 55, notableAchievement: '1988 Euro Winner & AC Milan European Legend', category: 'modern' }
 ];

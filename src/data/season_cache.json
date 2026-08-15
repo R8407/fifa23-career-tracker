@@ -1,0 +1,41 @@
+[
+  {
+    "id": "season_1",
+    "season": "2023/2024",
+    "age": 15,
+    "club": "Spezia",
+    "clubId": "113974",
+    "league": "Serie A TIM",
+    "leagueId": "31",
+    "clubBadgeColor": "bg-zinc-800",
+    "apps": 41,
+    "goals": 15,
+    "assists": 31,
+    "avgRating": 7.75,
+    "overall": 73,
+    "yellowCards": 1,
+    "redCards": 0,
+    "trophies": [],
+    "individualAwards": [
+      {
+        "name": "Young Player of the Year",
+        "season": "2023/2024"
+      },
+      {
+        "name": "League XI",
+        "season": "2023/2024"
+      },
+      {
+        "name": "Assist King",
+        "season": "2023/2024"
+      }
+    ],
+    "highlights": "15 goals, 28 assists in 41 appearances",
+    "xG": 0,
+    "xA": 0,
+    "keyPassesPerGame": 0,
+    "dribblesPerGame": 0,
+    "competitionStats": [],
+    "motm": 15
+  }
+]

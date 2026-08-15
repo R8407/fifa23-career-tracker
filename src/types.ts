@@ -83,7 +83,7 @@ export interface SeasonData {
   yellowCards: number;
   redCards: number;
   trophies: string[];
-  individualAwards: string[];
+  individualAwards: (string | { name: string; season: string })[];
   highlights: string;
   xG: number;
   xA: number;
@@ -163,8 +163,8 @@ export interface LegendComparison {
   };
 }
 
-export type RecordDifficulty = 'Easy' | 'Elite' | 'Legendary';
-export type RecordCategory = 'UCL' | 'Knockout' | 'League' | 'Club' | 'International' | 'Individual';
+export type RecordDifficulty = 'Easy' | 'Hard' | 'Elite' | 'Legendary';
+export type RecordCategory = 'UCL' | 'Knockout' | 'League' | 'Club' | 'International' | 'Individual' | 'UEFA' | 'Cup';
 
 export interface HallOfFameRecord {
   id: string;
@@ -181,6 +181,7 @@ export interface HallOfFameRecord {
   legacyPoints: number;
   description: string;
   holderClub?: string;
+  compobjid?: number; // FIFA competition ID for competition-specific records (e.g., 819 = Premier League)
 }
 
 export interface RankedLegend {
@@ -201,6 +202,7 @@ export interface RankedLegend {
   popularOpinionBonus: number;
   notableAchievement: string;
   category?: 'legend' | 'modern';
+  clubs?: string[];
   attributes?: {
     pace: number;
     shooting: number;
@@ -221,6 +223,8 @@ export interface IconicMoment {
   impactTag: string;
   matchResult?: string;
   imageUrl?: string;
+  videoUrl?: string;
+  mediaType?: 'image' | 'video';
 }
 
 export interface TrophyItem {

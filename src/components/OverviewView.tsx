@@ -3,14 +3,18 @@ import { PlayerData, IconicMoment } from '../types';
 import { Trophy, Flame, Zap, Award, Star, TrendingUp, Shield, Crown, Sparkles, ChevronLeft, ChevronRight, Play, Pause, Plus } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import { getLeagueLogo } from '../utils/logos';
+import playerOverviewImg from '../assets/images/player_overview.png';
+import { MemoriesView } from './MemoriesView';
 
 interface OverviewViewProps {
   player: PlayerData;
   onNavigateTab: (tabId: string) => void;
   onOpenIconicModal?: () => void;
+  onAddIconicMoment?: (moment: IconicMoment) => void;
+  onDeleteIconicMoment?: (id: string) => void;
 }
 
-export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTab, onOpenIconicModal }) => {
+export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTab, onOpenIconicModal, onAddIconicMoment, onDeleteIconicMoment }) => {
   const totalGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
   const totalApps = player.seasons.reduce((acc, s) => acc + s.apps, 0);
@@ -59,192 +63,103 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Hero Player Card Section */}
-      <div className="relative overflow-hidden bg-[#1e293b] border border-slate-700 rounded-xl p-6">
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {/* Left: FIFA Style Player Card Badge */}
-          <div className="lg:col-span-4 flex justify-center">
-            <div className="relative w-64 sm:w-72 bg-gradient-to-b from-emerald-500 via-emerald-600 to-emerald-700 p-1 rounded-xl">
-              <div className="bg-[#0f172a] rounded-[10px] p-5 text-center relative overflow-hidden">
-                {/* FIFA Card Header */}
-                <div className="flex items-start justify-between">
-                  <div className="text-left">
-                    <div className="text-4xl font-black text-white tracking-tight leading-none font-mono">
-                      {player.overall}
-                    </div>
-                    <div className="text-sm font-bold text-slate-300 uppercase mt-0.5">
-                      {player.position}
-                    </div>
-                    <div className="mt-2 text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
-                      POT: {player.potential}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-end gap-1.5">
-                    <span className="text-2xl">{player.nationalityFlag}</span>
-                    <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-1 rounded">{player.currentClub}</span>
-                    {player.isOnLoan && (
-                      <span className="text-[10px] font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-                        ON LOAN from {player.parentClub}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Player Avatar */}
-                <div className="my-4 relative h-36 flex items-center justify-center">
-                  <div className="w-28 h-28 rounded-full bg-slate-800 border-2 border-slate-600 flex items-center justify-center relative overflow-hidden">
-                    {player.headassetid ? (
-                      <img
-                        src={`/miniface/${player.headassetid}.png`}
-                        alt={player.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const fallback = target.nextElementSibling as HTMLElement;
-                          if (fallback) fallback.style.display = 'flex';
-                        }}
-                      />
-                    ) : null}
-                    <div className={`w-full h-full items-center justify-center text-3xl font-bold text-emerald-400 ${player.headassetid ? 'hidden' : 'flex'}`}>
-                      {player.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                    </div>
-                    <div className="absolute -bottom-2 bg-emerald-500 text-white font-bold text-xs px-2.5 py-0.5 rounded-full">
-                      #{player.jerseyNumber}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Player Name */}
-                <h2 className="text-2xl font-bold text-white">
-                  {player.name}
-                </h2>
-                <p className="text-xs text-emerald-400 font-medium mb-3">
-                  "{player.nickname}"
-                </p>
-
-                {/* Core Attributes Line */}
-                <div className="grid grid-cols-6 gap-1 pt-3 border-t border-slate-700 text-xs font-mono">
-                  <div>
-                    <div className="text-slate-500 text-xs">PAC</div>
-                    <div className="font-medium text-white">{player.attributes.pace}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500 text-xs">SHO</div>
-                    <div className="font-medium text-white">{player.attributes.shooting}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500 text-xs">PAS</div>
-                    <div className="font-medium text-white">{player.attributes.passing}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500 text-xs">DRI</div>
-                    <div className="font-medium text-white">{player.attributes.dribbling}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500 text-xs">DEF</div>
-                    <div className="font-medium text-white">{player.attributes.defending}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500 text-xs">PHY</div>
-                    <div className="font-medium text-white">{player.attributes.physical}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="relative overflow-hidden rounded-xl border border-slate-700 bg-[#0f172a]">
+        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] min-h-[420px]">
+          {/* Left: Player Image */}
+          <div className="relative bg-gradient-to-b from-slate-800 to-[#0f172a] flex items-center justify-center p-4">
+            <img
+              src={playerOverviewImg}
+              alt={player.name}
+              className="w-full h-full max-h-[400px] object-contain drop-shadow-2xl"
+            />
           </div>
 
-          {/* Right: Detailed Career Metadata & Contract */}
-          <div className="lg:col-span-8 space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {parseInt(player.overall) >= 80 && (
-                <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-medium rounded flex items-center gap-1.5">
-                  <Crown className="w-3.5 h-3.5" /> WORLD CLASS
-                </span>
-              )}
-              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
-                Age: <strong className="text-white">{player.age}</strong>
-              </span>
-              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
-                Foot: <strong className="text-white">{player.preferredFoot}</strong>
-              </span>
-              <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-medium rounded flex items-center gap-1">
-                Debut: <strong className="text-white">{player.debutYear}</strong>
-              </span>
+          {/* Right: Stats */}
+          <div className="p-6 flex flex-col justify-between">
+            {/* Top row: OVR + POT */}
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="text-6xl font-black text-white leading-none font-mono">
+                  {player.overall}
+                </div>
+                <div className="text-sm font-bold text-slate-300 uppercase mt-1">
+                  {player.position}
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-black text-white">
+                  POT: {player.potential}
+                </div>
+                <div className="flex items-center gap-2 mt-1 justify-end">
+                  <span className="text-xl">{player.nationalityFlag}</span>
+                  <span className="text-sm font-medium text-white bg-slate-800 px-2 py-0.5 rounded">
+                    {player.currentClub}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            {/* Middle: Name + info */}
+            <div className="my-4">
+              <h1 className="text-3xl font-bold text-white tracking-tight">
                 {player.name}
               </h1>
-              <p className="text-slate-400 text-sm mt-1 max-w-xl">
-                Managing an elite career archive. From initial professional debut to world champion and Ballon d'Or glory with {player.currentClub}.
-              </p>
-            </div>
-
-            {/* Financial & Club Info */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
-                <div className="text-slate-500 text-xs font-medium">Current Club</div>
-                <div className="flex items-center gap-2 mt-1">
-                  <img
-                    src={`/assets/clubs/${player.currentClub === 'Chelsea' ? '5' : '113974'}.webp`}
-                    alt={player.currentClub}
-                    className="w-6 h-6 object-contain"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
-                  <div className="text-sm font-medium text-white">{player.currentClub}</div>
-                </div>
-              </div>
-
-              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
-                <div className="text-slate-500 text-xs font-medium">Market Value</div>
-                <div className="text-sm font-medium text-emerald-400 mt-1">
-                  {player.marketValue}
-                </div>
-              </div>
-
-              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
-                <div className="text-slate-500 text-xs font-medium">Contract Wage</div>
-                <div className="text-sm font-medium text-white mt-1">
-                  {player.weeklySalary}
-                </div>
-              </div>
-
-              <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
-                <div className="text-slate-500 text-xs font-medium">Height / Weight</div>
-                <div className="text-sm font-medium text-white mt-1">
-                  {player.height} • {player.weight}
-                </div>
+              <div className="flex items-center gap-3 mt-2">
+                <span className="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
+                  #{player.jerseyNumber}
+                </span>
+                <span className="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
+                  Age: {player.age}
+                </span>
+                <span className="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
+                  {player.preferredFoot} Foot
+                </span>
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="pt-2 flex flex-wrap gap-3">
-              <button
-                onClick={() => {
-                  audioEngine.playClick();
-                  onNavigateTab('halloffame');
-                }}
-                className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer uppercase tracking-wider"
-              >
-                <Award className="w-4 h-4" />
-                <span>CHASE HALL OF FAME RECORDS</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  audioEngine.playClick();
-                  onNavigateTab('compare');
-                }}
-                className="px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-bold text-xs rounded-xl transition-all flex items-center gap-2 cursor-pointer uppercase tracking-wider"
-              >
-                <Star className="w-4 h-4 text-amber-400" />
-                <span>COMPARE VS 50 LEGENDS</span>
-              </button>
+            {/* Bottom: Face Stats */}
+            <div className="grid grid-cols-6 gap-2 bg-slate-800/50 rounded-lg p-3 border border-slate-700/50">
+              {[
+                { label: 'PAC', value: player.attributes.pace },
+                { label: 'SHO', value: player.attributes.shooting },
+                { label: 'PAS', value: player.attributes.passing },
+                { label: 'DRI', value: player.attributes.dribbling },
+                { label: 'DEF', value: player.attributes.defending },
+                { label: 'PHY', value: player.attributes.physical },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-[10px] text-slate-500 font-medium">{stat.label}</div>
+                  <div className="text-lg font-black text-white font-mono">{stat.value}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="flex flex-wrap gap-3">
+        <button
+          onClick={() => {
+            audioEngine.playClick();
+            onNavigateTab('halloffame');
+          }}
+          className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer uppercase tracking-wider"
+        >
+          <Award className="w-4 h-4" />
+          <span>CHASE HALL OF FAME RECORDS</span>
+        </button>
+
+        <button
+          onClick={() => {
+            audioEngine.playClick();
+            onNavigateTab('compare');
+          }}
+          className="px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-bold text-xs rounded-xl transition-all flex items-center gap-2 cursor-pointer uppercase tracking-wider"
+        >
+          <Star className="w-4 h-4 text-amber-400" />
+          <span>COMPARE VS 50 LEGENDS</span>
+        </button>
       </div>
 
       {/* FEATURED ICONIC MOMENTS SLIDESHOW CAROUSEL */}
@@ -369,6 +284,15 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
             />
           ))}
         </div>
+      </div>
+
+      {/* MEMORIES SECTION - Videos & Images */}
+      <div className="bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 border border-amber-500/30 rounded-2xl p-6">
+        <MemoriesView
+          moments={player.iconicMoments || []}
+          onAddMoment={onAddIconicMoment || (() => {})}
+          onDeleteMoment={onDeleteIconicMoment || (() => {})}
+        />
       </div>
 
       {/* Career Summary Big Metric Cards */}

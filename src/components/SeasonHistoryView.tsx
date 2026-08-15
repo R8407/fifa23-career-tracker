@@ -116,14 +116,17 @@ export const SeasonHistoryView: React.FC<SeasonHistoryViewProps> = ({ player }) 
                   </span>
                 ))}
 
-                {s.individualAwards.map((aw) => (
-                  <span
-                    key={aw}
-                    className="px-2.5 py-1 bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[10px] font-bold rounded-lg flex items-center gap-1"
-                  >
-                    <Award className="w-3 h-3 text-amber-400" /> {aw}
-                  </span>
-                ))}
+                {s.individualAwards.map((aw, i) => {
+                  const awardName = typeof aw === 'string' ? aw : aw.name;
+                  return (
+                    <span
+                      key={i}
+                      className="px-2.5 py-1 bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[10px] font-bold rounded-lg flex items-center gap-1"
+                    >
+                      <Award className="w-3 h-3 text-amber-400" /> {awardName}
+                    </span>
+                  );
+                })}
 
                 <ChevronRight className="w-5 h-5 text-zinc-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
               </div>
@@ -256,11 +259,14 @@ export const SeasonHistoryView: React.FC<SeasonHistoryViewProps> = ({ player }) 
                     <Trophy className="w-3.5 h-3.5" /> {t}
                   </span>
                 ))}
-                {selectedSeason.individualAwards.map(a => (
-                  <span key={a} className="px-3 py-1 bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-bold rounded-lg flex items-center gap-1.5">
-                    <Star className="w-3.5 h-3.5" /> {a}
-                  </span>
-                ))}
+                {selectedSeason.individualAwards.map((a, i) => {
+                  const awardName = typeof a === 'string' ? a : a.name;
+                  return (
+                    <span key={i} className="px-3 py-1 bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-bold rounded-lg flex items-center gap-1.5">
+                      <Star className="w-3.5 h-3.5" /> {awardName}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
