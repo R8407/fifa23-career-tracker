@@ -1,11 +1,16 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
+    // 1. Added the correct base path with forward slashes
+    base: '/fifa23-career-tracker/', 
+    
+    // 2. Cleaned up the duplicate nested config blocks
     plugins: [react(), tailwindcss()],
+    
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
