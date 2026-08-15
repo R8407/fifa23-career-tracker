@@ -30,10 +30,10 @@ const CLUB_TABS: { id: ClubTab; label: string; icon: React.ReactNode }[] = [
 ];
 
 const TROPHY_IMAGES: Record<string, { src: string; label: string }> = {
-  ucl: { src: uclImg, label: 'UCL' },
-  uel: { src: uelImg, label: 'UEL' },
-  league: { src: leagueImg, label: 'League' },
-  cup: { src: cupImg, label: 'Cup' },
+  ucl: { src: trophyImages.ucl, label: 'UCL' },
+  uel: { src: trophyImages.uel, label: 'UEL' },
+  league: { src: trophyImages.league, label: 'League' },
+  cup: { src: trophyImages.cup, label: 'Cup' },
 };
 
 interface ClubHistoryEntry {
