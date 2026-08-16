@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Upload, X, Film, Image as ImageIcon, Trash2, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Pause, Upload, X, Film, Image as ImageIcon, Trash2, Plus, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { toBlobURL } from '@ffmpeg/util';
 import { IconicMoment } from '../types';
 import { audioEngine } from '../utils/audio';
 
@@ -7,6 +9,59 @@ interface MemoriesViewProps {
   moments: IconicMoment[];
   onAddMoment: (moment: IconicMoment) => void;
   onDeleteMoment: (id: string) => void;
+}
+
+const COMPRESS_THRESHOLD = 50 * 1024 * 1024; // 50MB
+const TARGET_SIZE_MB = 20;
+
+async function compressVideo(file: File): Promise<string> {
+  const ffmpeg = new FFmpeg();
+  await ffmpeg.load({
+    coreURL: await toBlobURL(`https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js`, 'text/javascript'),
+    wasmURL: await toBlobURL(`https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm`, 'application/wasm'),
+  });
+
+  await ffmpeg.writeFile('input.mp4', new Uint8Array(await file.arrayBuffer()));
+
+  // Calculate target bitrate: target_size_bits / duration
+  const duration = await getVideoDuration(file);
+  const targetBits = TARGET_SIZE_MB * 8 * 1024 * 1024;
+  const videoBitrate = Math.floor((targetBits / duration) * 0.85); // 85% for video, 15% for audio
+
+  await ffmpeg.exec([
+    '-i', 'input.mp4',
+    '-c:v', 'libx264', '-b:v', `${videoBitrate}`,
+    '-preset', 'fast',
+    '-c:a', 'aac', '-b:a', '64k',
+    '-y', 'output.mp4',
+  ]);
+
+  const data = await ffmpeg.readFile('output.mp4');
+  const blob = new Blob([data], { type: 'video/mp4' });
+
+  // Cleanup
+  await ffmpeg.deleteFile('input.mp4');
+  await ffmpeg.deleteFile('output.mp4');
+  ffmpeg.terminate();
+
+  return new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.readAsDataURL(blob);
+  });
+}
+
+function getVideoDuration(file: File): Promise<number> {
+  return new Promise((resolve) => {
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    video.onloadedmetadata = () => {
+      URL.revokeObjectURL(video.src);
+      resolve(video.duration);
+    };
+    video.onerror = () => resolve(60); // fallback
+    video.src = URL.createObjectURL(file);
+  });
 }
 
 // Known video files in public/assets/videos/
@@ -25,6 +80,8 @@ export const MemoriesView: React.FC<MemoriesViewProps> = ({ moments, onAddMoment
   const [uploadImpactTag, setUploadImpactTag] = useState('');
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadPreview, setUploadPreview] = useState<string | null>(null);
+  const [isCompressing, setIsCompressing] = useState(false);
+  const [compressProgress, setCompressProgress] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -44,13 +101,37 @@ export const MemoriesView: React.FC<MemoriesViewProps> = ({ moments, onAddMoment
     ...moments.filter(m => !KNOWN_VIDEOS.some(v => m.id === `video_${v.filename}`)),
   ];
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     
     setUploadFile(file);
-    const url = URL.createObjectURL(file);
-    setUploadPreview(url);
+    const isVideo = file.type.startsWith('video/');
+    
+    // Compress videos over 50MB
+    if (isVideo && file.size > COMPRESS_THRESHOLD) {
+      setIsCompressing(true);
+      setCompressProgress('Compressing video...');
+      try {
+        const base64 = await compressVideo(file);
+        setUploadPreview(base64);
+        setCompressProgress(`Compressed from ${(file.size / 1024 / 1024).toFixed(0)}MB to ~${TARGET_SIZE_MB}MB`);
+      } catch (err) {
+        console.error('Compression failed:', err);
+        setCompressProgress('Compression failed, using original');
+        // Fallback to original
+        const reader = new FileReader();
+        reader.onload = () => setUploadPreview(reader.result as string);
+        reader.readAsDataURL(file);
+      } finally {
+        setIsCompressing(false);
+      }
+    } else {
+      // Images and small videos: convert directly
+      const reader = new FileReader();
+      reader.onload = () => setUploadPreview(reader.result as string);
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleUpload = () => {
@@ -338,22 +419,30 @@ export const MemoriesView: React.FC<MemoriesViewProps> = ({ moments, onAddMoment
                   className="w-full mt-1 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500"
                 />
               </div>
+
+              {/* Compression Progress */}
+              {(isCompressing || compressProgress) && (
+                <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs ${isCompressing ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'}`}>
+                  {isCompressing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <span className="text-emerald-400">&#10003;</span>}
+                  {isCompressing ? compressProgress : compressProgress}
+                </div>
+              )}
             </div>
 
             {/* Footer */}
             <div className="p-4 border-t border-zinc-800 flex justify-end gap-2">
               <button
-                onClick={() => setShowUpload(false)}
+                onClick={() => { setShowUpload(false); setIsCompressing(false); setCompressProgress(''); }}
                 className="px-4 py-2 text-sm text-zinc-400 hover:text-white transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleUpload}
-                disabled={!uploadFile || !uploadTitle.trim()}
+                disabled={!uploadFile || !uploadTitle.trim() || isCompressing}
                 className="px-4 py-2 bg-amber-500 text-zinc-950 rounded-lg text-sm font-bold hover:bg-amber-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                Add Moment
+                {isCompressing ? 'Compressing...' : 'Add Moment'}
               </button>
             </div>
           </div>
