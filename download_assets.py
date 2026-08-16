@@ -16,8 +16,8 @@ from pathlib import Path
 from typing import Optional
 
 BASE_DIR = Path(__file__).parent
-ASSETS_DIR = BASE_DIR / 'public' / 'assets'
-MANIFEST_PATH = ASSETS_DIR / 'manifest.json'
+ASSETS_DIR = BASE_DIR / 'public' / 'assets' / 'images'
+MANIFEST_PATH = BASE_DIR / 'public' / 'assets' / 'manifest.json'
 
 # Assets directories
 DIRS = {

@@ -650,8 +650,23 @@ export function SocialMediaView() {
       });
     }
 
-    // Legend DMs: only if I follow them AND my legacy >= theirs
-    for (const legend of allAccounts.filter(a => a.accountType === 'legend' && isLegendMutual(a.legendId!))) {
+    // Legend DMs: trigger when player surpasses them in legacy (no follow required)
+    for (const legend of allAccounts.filter(a => a.accountType === 'legend')) {
+      if (!legend.legendId) continue;
+      const legendLegacy = calculateLegendPoints({
+        goals: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.goals || 0),
+        assists: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.assists || 0),
+        ballondOr: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.ballondOr || 0),
+        worldCup: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.worldCup || 0),
+        championsLeague: 0,
+        europaLeague: 0,
+        leagueTitles: 0,
+        cupTrophies: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.clubTrophies || 0),
+        goldenBoot: 0,
+        assistKing: 0,
+        manOfTheMatch: 0,
+      });
+      if (totalLegacyPoints < legendLegacy) continue;
       const dmId = `dm_${legend.id}`;
       dms.push({
         id: dmId,
@@ -667,7 +682,7 @@ export function SocialMediaView() {
     }
 
     return dms;
-  }, [totalLegacyPoints, currentClub, allAccounts, isMutualFollow, isLegendMutual, readDMs]);
+  }, [totalLegacyPoints, currentClub, allAccounts, isMutualFollow, readDMs]);
 
   const unreadCount = allDMs.filter(d => !d.read).length;
 
@@ -691,6 +706,19 @@ export function SocialMediaView() {
   useEffect(() => {
     localStorage.setItem('career_dm_read', JSON.stringify([...readDMs]));
   }, [readDMs]);
+
+  // Save all state on unmount (safety net for rapid tab switches)
+  useEffect(() => {
+    return () => {
+      try {
+        localStorage.setItem('career_social_following', JSON.stringify([...followingList]));
+        localStorage.setItem('career_social_manual_followers', JSON.stringify([...manualFollowers]));
+        localStorage.setItem('career_legend_conversations', JSON.stringify(legendConversations));
+        localStorage.setItem('career_dm_conversations', JSON.stringify(dmConversations));
+        localStorage.setItem('career_dm_read', JSON.stringify([...readDMs]));
+      } catch { /* ignore quota errors */ }
+    };
+  }, [followingList, manualFollowers, legendConversations, dmConversations, readDMs]);
 
   const toggleFollow = (id: string) => {
     setFollowingList(prev => {

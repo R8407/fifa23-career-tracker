@@ -13,7 +13,7 @@ const trophyImages = {
 	ucl: `${BASE_URL}assets/images/trophies/UCL.jpg`,
   	uel: `${BASE_URL}assets/images/trophies/europa-league.jpg`,
   	league: `${BASE_URL}assets/images/trophies/premier-league.webp`,
-  	cup: `${BASE_URL}assets/images/trophies/serie-a.webp`,
+  	cup: `${BASE_URL}assets/images/competitions/copa-italia.webp`,
 };
 
 interface ClubViewProps {

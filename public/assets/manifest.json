@@ -2,13 +2,13 @@
   "clubs": {
     "113974": {
       "name": "Spezia Calcio",
-      "local_path": "public/assets/clubs/113974.webp",
+      "local_path": "public/assets/images/clubs/113974.webp",
       "status": "downloaded",
       "size_kb": 55.9
     },
     "Chelsea": {
       "name": "Chelsea",
-      "local_path": "public/assets/clubs/Chelsea.png",
+      "local_path": "public/assets/images/clubs/Chelsea.png",
       "status": "downloaded",
       "size_kb": 26.9
     }
@@ -16,19 +16,19 @@
   "competitions": {
     "conference-league": {
       "name": "UEFA Europa Conference League",
-      "local_path": "public/assets/competitions/conference-league.webp",
+      "local_path": "public/assets/images/competitions/conference-league.webp",
       "status": "downloaded",
       "size_kb": 15.8
     },
     "copa-italia": {
       "name": "Coppa Italia",
-      "local_path": "public/assets/competitions/copa-italia.webp",
+      "local_path": "public/assets/images/competitions/copa-italia.webp",
       "status": "downloaded",
       "size_kb": 49.2
     },
     "serie-a": {
       "name": "Serie A TIM",
-      "local_path": "public/assets/competitions/serie-a.webp",
+      "local_path": "public/assets/images/competitions/serie-a.webp",
       "status": "downloaded",
       "size_kb": 45.0
     }
@@ -36,69 +36,75 @@
   "trophies": {
     "europa-league": {
       "name": "Europa League",
-      "local_path": "public/assets/trophies/europa-league.jpg",
+      "local_path": "public/assets/images/trophies/europa-league.jpg",
       "status": "downloaded",
       "size_kb": 115.2
     },
     "premier-league": {
       "name": "Premier League",
-      "local_path": "public/assets/trophies/premier-league.webp",
+      "local_path": "public/assets/images/trophies/premier-league.webp",
       "status": "downloaded",
       "size_kb": 119.6
     },
     "serie-a": {
       "name": "Serie A TIM",
-      "local_path": "public/assets/trophies/serie-a.webp",
+      "local_path": "public/assets/images/trophies/serie-a.webp",
       "status": "downloaded",
       "size_kb": 485.0
+    },
+    "UCL": {
+      "name": "UEFA Champions League",
+      "local_path": "public/assets/images/trophies/UCL.jpg",
+      "status": "downloaded",
+      "size_kb": 98.3
     }
   },
   "awards": {
     "Golden_boot": {
       "name": "Golden_Boot",
-      "local_path": "public/assets/awards/Golden_boot.jpg",
+      "local_path": "public/assets/images/awards/Golden_boot.jpg",
       "status": "downloaded",
       "size_kb": 55.8
     },
     "MOTM": {
       "name": "Motm",
-      "local_path": "public/assets/awards/MOTM.jpg",
+      "local_path": "public/assets/images/awards/MOTM.jpg",
       "status": "downloaded",
       "size_kb": 114.7
     },
     "POTS": {
       "name": "Pots",
-      "local_path": "public/assets/awards/POTS.webp",
+      "local_path": "public/assets/images/awards/POTS.webp",
       "status": "downloaded",
       "size_kb": 21.8
     },
     "Top_assist": {
       "name": "Top_Assist",
-      "local_path": "public/assets/awards/Top_assist.jpg",
+      "local_path": "public/assets/images/awards/Top_assist.jpg",
       "status": "downloaded",
       "size_kb": 34.9
     },
     "assist-king": {
       "name": "Assist King",
-      "local_path": "public/assets/awards/assist-king.webp",
+      "local_path": "public/assets/images/awards/assist-king.webp",
       "status": "downloaded",
       "size_kb": 29.1
     },
     "ballon-dor": {
       "name": "Ballon d'Or",
-      "local_path": "public/assets/awards/ballon-dor.webp",
+      "local_path": "public/assets/images/awards/ballon-dor.webp",
       "status": "downloaded",
       "size_kb": 364.8
     },
     "player-of-season": {
       "name": "Player of the Season",
-      "local_path": "public/assets/awards/player-of-season.webp",
+      "local_path": "public/assets/images/awards/player-of-season.webp",
       "status": "downloaded",
       "size_kb": 65.2
     },
     "young-player": {
       "name": "Young Player Award",
-      "local_path": "public/assets/awards/young-player.webp",
+      "local_path": "public/assets/images/awards/young-player.webp",
       "status": "downloaded",
       "size_kb": 35.4
     }
