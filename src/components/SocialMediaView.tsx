@@ -87,6 +87,71 @@ function timeAgoToHours(timeAgo: string): number {
   return 24;
 }
 
+// ─── Legend DM Greetings ─────────────────────────────────────────────────────
+// Personalized first DM based on legend's position, achievements, and player stats
+
+function getLegendGreeting(
+  legend: { name: string; position: string; nationality: string; notableAchievement: string; clubs?: string[]; goals: number; assists: number; clubTrophies: number },
+  playerGoals: number,
+  playerAssists: number,
+  playerClub: string,
+): string {
+  const clubMatch = legend.clubs?.some(c => c.toLowerCase().includes(playerClub.toLowerCase()));
+  const isStriker = ['ST', 'CF', 'CAM'].includes(legend.position);
+  const isDefender = ['CB', 'LB', 'RB', 'CDM'].includes(legend.position);
+  const isMidfielder = ['CM', 'CAM', 'CDM'].includes(legend.position) && !isDefender;
+  const isWinger = ['LW', 'RW'].includes(legend.position);
+
+  // Club connection greeting
+  if (clubMatch) {
+    return [
+      `${playerClub} is close to my heart. I had some of my best years there. Seeing what you're doing now — ${playerGoals}G and ${playerAssists}A — that's special. Keep making us proud 💙`,
+      `I wore the ${playerClub} shirt with pride, and you're adding to its legacy. At your age with those numbers, you remind me of myself. Let's talk sometime 🏆`,
+      `Welcome to my DMs, young baller. ${playerClub} means everything to me. Your ${playerGoals}G and ${playerAssists}A — you're building something real there 🔥`,
+    ][Math.abs(legend.goals + legend.assists) % 3];
+  }
+
+  // Position-based greeting
+  if (isDefender) {
+    return [
+      `I've been watching your career from the backline. ${playerGoals}G and ${playerAssists}A — that's output I respect. ${legend.notableAchievement} taught me that consistency beats everything 💪`,
+      `Defending is about positioning and heart. I see both in your game. At your age with those numbers at ${playerClub}, you've got time to build something great ${'🛡️'}`,
+      `${playerClub} is lucky to have you. ${playerGoals} goals and ${playerAssists} assists — keep building and you'll reach the top 🏆`,
+    ][Math.abs(legend.goals) % 3];
+  }
+
+  if (isStriker) {
+    return [
+      `You've got ${playerGoals}G and ${playerAssists}A — that's the kind of output I respect. At your age I was hungry for more. Keep that fire burning ${playerGoals > 30 ? '🔥' : '⚽'}`,
+      `A striker who can also create? ${playerAssists}A shows you see the game differently. I was the same way. ${legend.notableAchievement} — that's what hard work gives you 👑`,
+      `I scored ${legend.goals} in my career. It started with nights like yours — hungry, fearless, ${playerGoals}G already at ${playerClub}. The ceiling is unlimited 💪`,
+    ][Math.abs(legend.assists) % 3];
+  }
+
+  if (isWinger) {
+    return [
+      `${playerAssists}A and ${playerGoals}G from the wing? That's real output. Pace, creativity, end product — you're building the complete package 🔥`,
+      `Out wide, you need to be unpredictable. I made my career beating defenders. Your numbers at ${playerClub} remind me of myself at that age ${'⚡'}`,
+      `I've been watching your career. ${playerGoals} goals and ${playerAssists} assists from the wing — keep developing and you'll reach the top 🏆`,
+    ][Math.abs(legend.goals + legend.assists * 2) % 3];
+  }
+
+  if (isMidfielder) {
+    return [
+      `Controlling the midfield takes vision. ${playerAssists}A shows you've got it. My ${legend.notableAchievement} — and you're building your own story 🧠`,
+      `I know what it takes to dominate from midfield. Your ${playerGoals}G and ${playerAssists}A at ${playerClub} — you're on the right path. Let's chat ⚽`,
+      `At your age with those numbers, you remind me of myself. I spent years perfecting my craft. ${legend.notableAchievement}. The journey is just beginning 💪`,
+    ][Math.abs(legend.goals * 2) % 3];
+  }
+
+  // Default greeting
+  return [
+    `I've been watching your career. At ${playerClub} with ${playerGoals}G and ${playerAssists}A — you remind me of myself at your age. Keep going ${'🏆'}`,
+    `I see something special in you. ${legend.notableAchievement} taught me that hard work beats everything. You've got the talent — now put in the work 🔥`,
+    `Welcome, young baller. ${playerGoals}G and ${playerAssists}A at your age is impressive. I had to fight for everything I got. Let's talk about your journey 💪`,
+  ][Math.abs(legend.goals + legend.assists + legend.clubTrophies) % 3];
+}
+
 // ─── Fame / Follower Count System ───────────────────────────────────────────
 // Base followers grow with legacy points - higher fame = more followers
 
@@ -469,6 +534,18 @@ export function SocialMediaView() {
   const playerName = `${profile.firstname || 'Ethan'} ${profile.lastname || 'Ampadu'}`.trim();
   const currentClub = profile.currentClub || 'Chelsea';
   const userOVR = parseInt(profile.overallrating || '73');
+  const userAge = 14 + (data.seasons?.length || 1);
+
+  // Real player career stats (for LLM context)
+  const totalGoals = useMemo(() => (data.seasons || []).reduce((s: number, sn: any) => s + (sn.goals || 0), 0), []);
+  const totalAssists = useMemo(() => (data.seasons || []).reduce((s: number, sn: any) => s + (sn.assists || 0), 0), []);
+  const totalApps = useMemo(() => (data.seasons || []).reduce((s: number, sn: any) => s + (sn.apps || 0), 0), []);
+  const totalMOTM = useMemo(() => (data.seasons || []).reduce((s: number, sn: any) => s + (sn.motm || 0), 0), []);
+  const avgRating = useMemo(() => {
+    const seasons = data.seasons || [];
+    const ratings = seasons.map((s: any) => parseFloat(s.avgRating || '0')).filter((r: number) => r > 0);
+    return ratings.length > 0 ? (ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length).toFixed(1) : '7.0';
+  }, []);
 
   // Feed posts
   const posts = useMemo(() => generateFeedPosts(), []);
@@ -653,28 +730,31 @@ export function SocialMediaView() {
     // Legend DMs: trigger when player surpasses them in legacy (no follow required)
     for (const legend of allAccounts.filter(a => a.accountType === 'legend')) {
       if (!legend.legendId) continue;
+      const legendData = TOP_100_LEGENDS.find(l => l.id === legend.legendId);
+      if (!legendData) continue;
       const legendLegacy = calculateLegendPoints({
-        goals: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.goals || 0),
-        assists: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.assists || 0),
-        ballondOr: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.ballondOr || 0),
-        worldCup: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.worldCup || 0),
+        goals: legendData.goals,
+        assists: legendData.assists,
+        ballondOr: legendData.ballondOr,
+        worldCup: legendData.worldCup,
         championsLeague: 0,
         europaLeague: 0,
         leagueTitles: 0,
-        cupTrophies: (TOP_100_LEGENDS.find(l => l.id === legend.legendId)?.clubTrophies || 0),
+        cupTrophies: legendData.clubTrophies,
         goldenBoot: 0,
         assistKing: 0,
         manOfTheMatch: 0,
       });
       if (totalLegacyPoints < legendLegacy) continue;
       const dmId = `dm_${legend.id}`;
+      const greeting = getLegendGreeting(legendData, totalGoals, totalAssists, currentClub);
       dms.push({
         id: dmId,
         sender: legend.name,
         handle: legend.handle,
         flag: legend.flag,
         role: 'legend',
-        content: `I have been watching your career. At your age with your numbers, you remind me of myself. Keep going.`,
+        content: greeting,
         timeAgo: '1w',
         read: readDMs.has(dmId),
         legendId: legend.legendId,
@@ -791,13 +871,18 @@ export function SocialMediaView() {
     });
 
     try {
+      const playerStats = { name: playerName, ovr: userOVR, goals: totalGoals, assists: totalAssists, avgRating, motm: totalMOTM, club: currentClub, age: userAge, apps: totalApps };
       if (selectedDM.legendId) {
+        const legendChatHistory = (legendConversations[selectedDM.legendId]?.messages || []).map(m => ({ role: m.role, content: m.content }));
         const reply = await generateDMReply(
           selectedDM.sender,
           selectedDM.role,
+          selectedDM.content,
           sentMessage,
-          '',
-          { name: playerName, ovr: userOVR, goals: 0, assists: 0, avgRating: '0', motm: 0, club: currentClub, age: 16 }
+          playerStats,
+          legendChatHistory,
+          undefined,
+          selectedDM.legendId,
         );
         const newConv: LegendConversation = {
           legendId: selectedDM.legendId,
@@ -813,16 +898,18 @@ export function SocialMediaView() {
         setLegendConversations(prev => ({ ...prev, [selectedDM.legendId!]: newConv }));
       } else {
         // Coach, teammates, stars — generate reply and store in dmConversations
+        const userChatHistory = (dmConversations[dmId] || []).slice(-6);
         const reply = await generateDMReply(
           selectedDM.sender,
           selectedDM.role,
+          selectedDM.content,
           sentMessage,
-          '',
-          { name: playerName, ovr: userOVR, goals: 0, assists: 0, avgRating: '0', motm: 0, club: currentClub, age: 16 }
+          playerStats,
+          userChatHistory,
         );
         setDmConversations(prev => {
           const next = { ...prev };
-          next[dmId] = [...(next[dmId] || []), { role: 'assistant' as const, content: reply }];
+          next[dmId] = [...(next[dmId] || []), { role: 'user' as const, content: sentMessage }, { role: 'assistant' as const, content: reply }];
           return next;
         });
         // Persist to localStorage
@@ -833,6 +920,28 @@ export function SocialMediaView() {
       console.log('[DM] Error:', e);
     }
     setDmTyping(false);
+  };
+
+  const clearChat = () => {
+    if (!selectedDM) return;
+    if (selectedDM.legendId) {
+      setLegendConversations(prev => {
+        const next = { ...prev };
+        delete next[selectedDM.legendId!];
+        return next;
+      });
+    } else {
+      setDmConversations(prev => {
+        const next = { ...prev };
+        delete next[selectedDM.id];
+        return next;
+      });
+    }
+    setReadDMs(prev => {
+      const next = new Set(prev);
+      next.delete(selectedDM.id);
+      return next;
+    });
   };
 
   const clearNotifications = (tab: SocialTab) => {
@@ -1293,7 +1402,9 @@ export function SocialMediaView() {
 
             {/* Mutual Follow DMs */}
             {allDMs.filter(dm => dm.role !== 'coach').map(dm => {
-              const conv = dmConversations[dm.id] || [];
+              const conv = dm.legendId
+                ? (legendConversations[dm.legendId]?.messages || []).map(m => ({ role: m.role, content: m.content }))
+                : (dmConversations[dm.id] || []);
               const lastMsg = conv.length > 0 ? conv[conv.length - 1].content : dm.content;
               return (
               <button key={dm.id} onClick={() => { setSelectedDM({ ...dm, read: true }); setReadDMs(prev => new Set([...prev, dm.id])); }}
@@ -1345,6 +1456,7 @@ export function SocialMediaView() {
                 }`}>{selectedDM.role}</span>
               </div>
             </div>
+            <button onClick={clearChat} className="text-zinc-500 hover:text-red-400 transition-colors text-xs px-2 py-1 rounded hover:bg-red-500/10" title="Clear chat">Clear</button>
           </div>
 
           {/* Chat Messages */}
@@ -1359,7 +1471,7 @@ export function SocialMediaView() {
               </div>
             </div>
 
-            {(dmConversations[selectedDM.id] || []).map((msg, i) => (
+            {((selectedDM.legendId ? (legendConversations[selectedDM.legendId]?.messages || []).map(m => ({ role: m.role as 'user' | 'assistant', content: m.content })) : dmConversations[selectedDM.id]) || []).map((msg, i) => (
               <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                 <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-sm flex-shrink-0">
                   {msg.role === 'user' ? '\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E006F}\u{E007C}\u{E0067}\u{E007F}' : selectedDM.flag}

@@ -1,4 +1,5 @@
 import { buildPlayerContext } from './playerContext';
+import { TOP_100_LEGENDS } from '../data/mockData';
 
 const LLM_BASE_URL = '/llm-api';
 
@@ -15,62 +16,260 @@ interface LLMResponse {
   }>;
 }
 
-// Legend career facts - REAL-WORLD data (not from career DB)
-const LEGEND_CAREERS: Record<string, {
-  titles: string[], ucl: number, ballon: number, clubs: string[],
-  caps?: number, goals?: number, nationality: string, position: string
-}> = {
-  cristiano_ronaldo: { titles: ['5x UCL', '7x League', '5x Ballon d\'Or', 'Euro 2016'], ucl: 5, ballon: 5, clubs: ['Sporting', 'Man United', 'Real Madrid', 'Juventus', 'Al Nassr'], caps: 217, goals: 130, nationality: 'Portugal', position: 'ST' },
-  lionel_messi: { titles: ['4x UCL', '12x La Liga', '8x Ballon d\'Or', 'World Cup 2022'], ucl: 4, ballon: 8, clubs: ['Barcelona', 'PSG', 'Inter Miami'], caps: 187, goals: 108, nationality: 'Argentina', position: 'RW' },
-  kylian_mbappe: { titles: ['1x UCL', '6x Ligue 1', 'World Cup 2018'], ucl: 1, ballon: 0, clubs: ['Monaco', 'PSG', 'Real Madrid'], caps: 80, goals: 48, nationality: 'France', position: 'ST' },
-  erling_haaland: { titles: ['1x UCL', '2x PL', '1x Bundesliga'], ucl: 1, ballon: 0, clubs: ['Salzburg', 'Dortmund', 'Man City'], caps: 30, goals: 32, nationality: 'Norway', position: 'ST' },
-  jude_bellingham: { titles: ['1x UCL', '1x La Liga', '1x Bundesliga'], ucl: 1, ballon: 0, clubs: ['Birmingham', 'Dortmund', 'Real Madrid'], caps: 40, goals: 6, nationality: 'England', position: 'CAM' },
-  sergio_ramos: { titles: ['4x UCL', '5x La Liga', '2x Euro', '1x World Cup'], ucl: 4, ballon: 0, clubs: ['Sevilla', 'Real Madrid', 'PSG'], caps: 180, goals: 23, nationality: 'Spain', position: 'CB' },
-  thierry_henry: { titles: ['1x UCL', '2x PL', '1x La Liga', 'World Cup 1998'], ucl: 1, ballon: 0, clubs: ['Monaco', 'Juventus', 'Arsenal', 'Barcelona'], caps: 123, goals: 51, nationality: 'France', position: 'ST' },
-  ronaldinho: { titles: ['1x UCL', '2x La Liga', '1x Ballon d\'Or', 'World Cup 2002'], ucl: 1, ballon: 1, clubs: ['PSG', 'Barcelona', 'AC Milan'], caps: 97, goals: 33, nationality: 'Brazil', position: 'RW' },
-  andrea_pirlo: { titles: ['2x UCL', '6x Serie A', '1x World Cup'], ucl: 2, ballon: 0, clubs: ['Brescia', 'Inter', 'AC Milan', 'Juventus'], caps: 116, goals: 13, nationality: 'Italy', position: 'CM' },
-  zinedine_zidane: { titles: ['1x UCL', '1x La Liga', '2x Serie A', '1x Ballon d\'Or', 'World Cup 1998'], ucl: 1, ballon: 1, clubs: ['Bordeaux', 'Juventus', 'Real Madrid'], caps: 108, goals: 31, nationality: 'France', position: 'CAM' },
-  paolo_maldini: { titles: ['5x UCL', '7x Serie A'], ucl: 5, ballon: 0, clubs: ['AC Milan'], caps: 126, goals: 7, nationality: 'Italy', position: 'CB' },
-  xavi: { titles: ['4x UCL', '8x La Liga', 'World Cup 2010', 'Euro 2008', 'Euro 2012'], ucl: 4, ballon: 0, clubs: ['Barcelona', 'Al Sadd'], caps: 133, goals: 13, nationality: 'Spain', position: 'CM' },
-  gary_lineker: { titles: ['1x FA Cup', '1x Copa del Rey', 'WC 1990 Golden Boot'], ucl: 0, ballon: 0, clubs: ['Leicester', 'Everton', 'Barcelona', 'Tottenham'], caps: 80, goals: 48, nationality: 'England', position: 'ST' },
-  rio_ferdinand: { titles: ['1x UCL', '6x Premier League'], ucl: 1, ballon: 0, clubs: ['West Ham', 'Leeds', 'Man United', 'QPR'], caps: 81, goals: 3, nationality: 'England', position: 'CB' },
-  david_brooks: { titles: [], ucl: 0, ballon: 0, clubs: ['Sheffield United', 'Bournemouth', 'Hibernian'], caps: 15, goals: 2, nationality: 'Wales', position: 'RW' },
-  jorge_mendes: { titles: [], ucl: 0, ballon: 0, clubs: [], nationality: 'Portugal', position: 'Agent' },
-  your_coach: { titles: [], ucl: 0, ballon: 0, clubs: [], nationality: 'Italy', position: 'Manager' },
-};
-
-function findCareer(senderName: string) {
-  const senderLower = senderName.toLowerCase();
-  for (const [id, data] of Object.entries(LEGEND_CAREERS)) {
-    const nameParts = id.split('_').join(' ');
-    if (senderLower.includes(nameParts) || nameParts.includes(senderLower)) {
-      return { id, ...data };
-    }
-  }
-  return null;
+interface PlayerData {
+  name: string;
+  ovr: number;
+  goals: number;
+  assists: number;
+  avgRating: string;
+  motm: number;
+  club: string;
+  age: number;
+  apps?: number;
+  position?: string;
 }
 
-// Build focused context for LLM
-function buildFocusedContext(context: ReturnType<typeof buildPlayerContext>, senderName: string): string {
-  const lines: string[] = [];
-  const career = findCareer(senderName);
+// ============================================
+// Legend DM generation — 4 contexts
+// ============================================
 
-  // 1. User player info (compact)
-  lines.push(`Player: ${context.userPlayer.name}, ${context.userPlayer.team}, ${context.userPlayer.position}, ${context.userPlayer.overall} OVR, age ${context.userPlayer.age}`);
-  lines.push(`Stats: ${context.userPlayer.goals}G ${context.userPlayer.assists}A in ${context.userPlayer.appearances} apps, avg ${context.userPlayer.avgRating}`);
+function findLegend(legendId: string) {
+  return TOP_100_LEGENDS.find(l => l.id === legendId) || null;
+}
 
-  // 2. Legend's own career (compact)
-  if (career) {
-    lines.push(`${senderName}: ${career.position}, ${career.nationality}, UCL:${career.ucl}, Ballon d'Or:${career.ballon}, clubs: ${career.clubs.slice(0, 3).join(', ')}`);
+function positionAdvice(position: string): string {
+  const advice: Record<string, string[]> = {
+    ST: ['Stay clinical in the box. One chance is all you need.', 'Movement off the ball creates goals before the pass even comes.', 'Work on your weaker foot — it doubles your threat.'],
+    RW: ['Use your pace to stretch defenses wide, then cut inside.', 'Crossing and dribbling in tight spaces will separate you from the rest.', 'Defenders fear unpredictability — change pace, change angle.'],
+    LW: ['Take your man on 1v1 and deliver quality into the box.', 'The best wingers combine speed with decision-making.', 'Track back when you lose it — that is what elite wide players do.'],
+    CAM: ['Dictate the tempo. See the pass before anyone else.', 'Your vision is your weapon — find pockets and exploit them.', 'Work on your long-range shooting. Midfielders who score from distance are feared.'],
+    CM: ['Control the midfield. Keep it simple when needed, ambitious when the moment comes.', 'Box-to-box is about timing — know when to push and when to hold.', 'Your engine is everything. Fitness wins midfield battles.'],
+    CDM: ['Read the game. Anticipation beats reaction every time.', 'Protect the back four. A good tackle changes the whole match.', 'Distribution from deep is underrated — start attacks with one pass.'],
+    CB: ['Defending is about positioning, not just tackles.', 'Stay calm under pressure. The best defenders make it look easy.', 'Build from the back — modern centre-backs need good feet.'],
+    LB: ['Overlaps can unlock entire defenses. Time your runs.', 'Defensive discipline first, attack second. That is the mark of a great fullback.', 'Your delivery into the box is as important as any midfielder.'],
+    RB: ['Balance attack and defense — you need to do both at the highest level.', 'One-v-one defending is an art. Stay on your feet.', 'Getting forward creates overloads. Use it wisely.'],
+    GK: ['Command your box. A goalkeeper who organizes is worth 10 outfield players.', 'Distribution is part of the modern game. Play with your feet.', 'Stay focused for 90 minutes. One moment of concentration wins matches.'],
+  };
+  const options = advice[position] || advice.CM;
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function buildLegendContext4(legend: ReturnType<typeof findLegend> & object, player: PlayerData): {
+  careerStats: string;
+  roleAdvice: string;
+  bestMoment: string;
+  playerComparison: string;
+} {
+  const l = legend as NonNullable<ReturnType<typeof findLegend>>;
+  const careerStats = `${l.name} played as ${l.position} from ${l.nationality}. Career: ${l.goals}G, ${l.assists}A in ${l.appearances} appearances. ${l.ballondOr}x Ballon d'Or, ${l.worldCup}x World Cup, ${l.clubTrophies} club trophies.`;
+  const roleAdvice = positionAdvice(l.position);
+  const bestMoment = l.notableAchievement;
+  const playerComparison = buildPlayerComparison(l, player);
+  return { careerStats, roleAdvice, bestMoment, playerComparison };
+}
+
+function buildPlayerComparison(l: NonNullable<ReturnType<typeof findLegend>>, player: PlayerData): string {
+  const parts: string[] = [];
+
+  parts.push(`${player.name} is ${player.age} years old, ${player.ovr} OVR at ${player.club}. Career so far: ${player.goals}G, ${player.assists}A in ${player.apps || '?'} apps.`);
+
+  if (l.clubs && l.clubs.length > 0) {
+    const clubMatch = l.clubs.some(c => c.toLowerCase().includes(player.club.toLowerCase()));
+    if (clubMatch) {
+      parts.push(`${player.club} is close to my heart. I had some of my best years there.`);
+    } else if (player.age <= 22) {
+      parts.push(`At your age I was still developing. You have time on your side — but don't waste it.`);
+    }
   }
 
-  // 3. Top players (compact, only 5)
-  lines.push('Top players:');
-  context.elitePlayers.slice(0, 5).forEach(p => {
-    lines.push(`- ${p.name} (${p.overall} OVR, ${p.team}) ${p.goals}G ${p.assists}A`);
-  });
+  if (player.goals > 30) {
+    parts.push(`Those goal numbers at your age are impressive. I was scoring too at that stage.`);
+  } else if (player.assists > 25) {
+    parts.push(`Creating like that takes real vision. The goals will come if you keep pushing.`);
+  }
 
-  return lines.join('\n');
+  if (l.position === player.position || !player.position) {
+    parts.push(`We play the same position. I know what it takes to reach the top from there.`);
+  }
+
+  return parts.join(' ');
+}
+
+// Build rich system prompt for legend DMs (4 contexts)
+function buildLegendSystemPrompt(
+  senderName: string,
+  legendData: NonNullable<ReturnType<typeof findLegend>>,
+  contexts: ReturnType<typeof buildLegendContext4>
+): string {
+  return `You are ${senderName}, a football legend (${legendData.nationality}, ${legendData.position}, era ${legendData.era}).
+
+YOUR CAREER:
+${contexts.careerStats}
+Your defining moment: ${contexts.bestMoment}
+
+ADVICE FROM YOUR POSITION (${legendData.position}):
+${contexts.roleAdvice}
+
+THE PLAYER YOU ARE TALKING TO:
+${contexts.playerComparison}
+
+RULES:
+- Speak as ${senderName} in first person, natural and conversational
+- Reference YOUR career and achievements naturally
+- Give career advice that fits YOUR position and experience
+- Mention the player's stats and relate them to your own journey
+- If the player plays at one of YOUR old clubs, mention it warmly
+- Keep it under 40 words, use 1 emoji
+- Never break character or mention being AI`;
+}
+
+// ============================================
+// Template fallback (no LLM needed)
+// ============================================
+
+function getTemplateReply(
+  legendData: NonNullable<ReturnType<typeof findLegend>>,
+  player: PlayerData,
+  _userMessage: string,
+  chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>,
+): string {
+  const l = legendData;
+  const contexts = buildLegendContext4(l, player);
+  const isFirstMessage = !chatHistory || chatHistory.length === 0;
+
+  // Position-specific reply templates
+  const replyTemplates: Record<string, string[]> = {
+    ST: [
+      `You scored ${player.goals} goals already? At your age I was hungry for more. Keep that instinct sharp ${player.goals > 20 ? '🔥' : '⚽'}`,
+      `Goals win games, mentality wins titles. You've got the talent — now build the mindset ${player.ovr >= 80 ? '👑' : '💪'}`,
+      `I know what it takes to lead the line. ${contexts.roleAdvice} The goals will follow ${player.goals > 30 ? '🏆' : '⚽'}`,
+    ],
+    RW: [
+      `${player.assists} assists shows you see the game differently. I was the same way on the wing — pace and vision ${player.assists > 20 ? '🔥' : '💨'}`,
+      `Out wide, you need to be fearless. Take your man on, deliver the ball, and never stop running ${contexts.roleAdvice} ${'⚽'}`,
+      `I made my career beating defenders 1v1. At ${player.age} you're right on track ${player.ovr >= 80 ? '👑' : '🎯'}`,
+    ],
+    LW: [
+      `Creativity on the left is a gift. ${contexts.roleAdvice} Your ${player.assists}A shows you're using it well ${player.assists > 20 ? '🔥' : '⚡'}`,
+      `I remember being your age — everything felt possible. Use that energy, stay hungry ${player.goals > 20 ? '⚽' : '💪'}`,
+      `The best wingers combine art with intensity. You've got ${player.goals}G and ${player.assists}A — keep building ${'🏆'}`,
+    ],
+    CAM: [
+      `Dictating play from midfield is the hardest job in football. Your ${player.assists}A says you're doing it right ${player.assists > 25 ? '🧠' : '⚽'}`,
+      `${contexts.roleAdvice} I spent years perfecting that balance between creativity and responsibility ${'🎯'}`,
+      `At ${player.age}, controlling the tempo like that takes real intelligence. You remind me of myself at that age ${player.ovr >= 80 ? '👑' : '💪'}`,
+    ],
+    CM: [
+      `Box-to-box is about knowing when to push and when to hold. Your ${player.goals}G and ${player.assists}A shows you're finding that balance ${'⚽'}`,
+      `I was the same at your age — running everywhere, wanting to do everything. ${contexts.roleAdvice} ${player.ovr >= 80 ? '👑' : '💪'}`,
+      `The midfield is the heart of the team. You're pumping life into yours ${'🔥'}`,
+    ],
+    CDM: [
+      `Protecting the defense is a thankless job, but when done right, everyone notices. You're doing it right ${player.motm > 10 ? '🏆' : '🛡️'}`,
+      `${contexts.roleAdvice} I learned that the hard way over 800+ appearances ${'💪'}`,
+      `Reading the game at ${player.age} — that's rare. Keep developing that instinct ${player.ovr >= 80 ? '👑' : '🎯'}`,
+    ],
+    CB: [
+      `Defending is about positioning, not just tackles. Your ${player.motm} MOTM awards show you're reading the game well ${player.motm > 10 ? '🛡️' : '💪'}`,
+      `I spent my whole career at the back. ${contexts.roleAdvice} Stay hungry ${'🏆'}`,
+      `Centre-backs don't always get the glory, but the best ones change matches. You're on that path ${player.ovr >= 80 ? '👑' : '💪'}`,
+    ],
+    LB: [
+      `Overlapping from fullback can unlock entire defenses. ${contexts.roleAdvice} Your engine is what matters most ${'⚡'}`,
+      `The modern fullback does everything. Attack, defend, deliver. You're building that complete game ${player.assists > 15 ? '🔥' : '💪'}`,
+      `I know how demanding it is to play both ways. At ${player.age}, you're handling it well ${'⚽'}`,
+    ],
+    RB: [
+      `${contexts.roleAdvice} Balance is everything on the right side ${player.assists > 15 ? '⚡' : '💪'}`,
+      `Fullback is the hardest position in football today. You're taking it on at ${player.age} — respect ${'🏆'}`,
+      `Defend first, attack second. But when you do get forward, make it count ${player.assists > 15 ? '🔥' : '⚽'}`,
+    ],
+    GK: [
+      `Goalkeeping is about moments. Stay focused for the full 90 and you'll make the saves that matter ${'🧤'}`,
+      `At ${player.age}, commanding your box like that takes confidence. You've got it ${player.motm > 5 ? '🏆' : '💪'}`,
+      `${contexts.roleAdvice} Distribution from the back changes how the whole team plays ${'⚽'}`,
+    ],
+  };
+
+  const templates = replyTemplates[l.position] || replyTemplates.CM;
+
+  // Context-aware selection based on conversation state
+  if (isFirstMessage) {
+    // First reply after user's first message
+    const idx = Math.abs(hashCode(player.name + l.name)) % templates.length;
+    return templates[idx];
+  }
+
+  const lastUserMsg = chatHistory?.filter(m => m.role === 'user').slice(-1)[0]?.content?.toLowerCase() || '';
+
+  // React to what the user said
+  if (lastUserMsg.includes('career') || lastUserMsg.includes('stats') || lastUserMsg.includes('numbers')) {
+    return `In my career I had ${l.goals}G and ${l.assists}A in ${l.appearances} appearances. ${l.clubTrophies} club trophies, ${l.ballondOr > 0 ? `${l.ballondOr}x Ballon d'Or, ` : ''}${l.worldCup > 0 ? `${l.worldCup}x World Cup` : 'no World Cup'}. ${l.notableAchievement} ${templates[0].slice(-2)}`;
+  }
+
+  if (lastUserMsg.includes('club') || lastUserMsg.includes('transfer') || lastUserMsg.includes('sign')) {
+    if (l.clubs && l.clubs.length > 0) {
+      const clubLine = l.clubs.some(c => c.toLowerCase().includes(player.club.toLowerCase()))
+        ? `You're already at ${player.club} — I loved my time there.`
+        : `If you ever get the chance to play for ${l.clubs[0]}, take it. It changed my life.`;
+      return `${clubLine} ${templates[0].slice(-2)}`;
+    }
+  }
+
+  if (lastUserMsg.includes('advice') || lastUserMsg.includes('tip') || lastUserMsg.includes('help')) {
+    return `${contexts.roleAdvice} That's what got me through my career ${templates[0].slice(-2)}`;
+  }
+
+  if (lastUserMsg.includes('thanks') || lastUserMsg.includes('thank') || lastUserMsg.includes('🙏')) {
+    return [
+      `Anytime, young baller. The future is yours ${l.worldCup > 0 ? '🏆' : '⚽'}`,
+      `Keep going. I'll be watching your progress ${player.ovr >= 80 ? '👑' : '💪'}`,
+      `That's what legends are for. Reach out anytime ${'🤝'}`,
+    ][Math.floor(Math.random() * 3)];
+  }
+
+  if (lastUserMsg.includes('best') || lastUserMsg.includes('peak') || lastUserMsg.includes('moment')) {
+    return `My best moment? ${l.notableAchievement}. That feeling never leaves you ${'🏆'}`;
+  }
+
+  // Default: pick a template based on hash for variety
+  const idx = Math.abs(hashCode(player.name + l.name + String(chatHistory?.length || 0))) % templates.length;
+  return templates[idx];
+}
+
+function hashCode(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
+// ============================================
+// Non-legend fallbacks (coaches, teammates, etc.)
+// ============================================
+
+function getRoleFallbackReply(role: string, player: PlayerData): string {
+  const replies: Record<string, string[]> = {
+    legend: [
+      `You scored ${player.goals}G and ${player.assists}A? At your age that's special. Keep pushing ${player.goals > 30 ? '🔥' : '⚽'}`,
+      `I see something in you that reminds me of myself at that age. Stay hungry ${player.ovr >= 80 ? '👑' : '💪'}`,
+      `The work you put in now determines where you end up. I've been there — trust the grind ${'🏆'}`,
+    ],
+    agent: [
+      `Your value is going up with every performance. ${player.goals}G and ${player.assists}A at ${player.age} — we have options ${player.ovr >= 80 ? '💰' : '📋'}`,
+      `Big moves coming. Stay ready and keep performing ${'🔥'}`,
+      `Focus on your game. The transfers handle themselves when the numbers are this good ${player.goals > 20 ? '⚽' : '💪'}`,
+    ],
+    coach: [
+      `Your development has been impressive. ${player.goals}G and ${player.assists}A — keep this trajectory ${player.ovr >= 80 ? '🏆' : '💪'}`,
+      `Stay focused and disciplined. You're building something special at ${player.club} ${'🎯'}`,
+      `I am pleased with your growth. At ${player.age}, you have time on your side ${player.ovr >= 80 ? '👑' : '🙌'}`,
+    ],
+  };
+  const options = replies[role] || replies.legend;
+  return options[Math.floor(Math.random() * options.length)];
 }
 
 // ============================================
@@ -90,44 +289,41 @@ export async function generateDMReply(
   senderRole: string,
   originalMessage: string,
   playerReply: string,
-  playerData: {
-    name: string;
-    ovr: number;
-    goals: number;
-    assists: number;
-    avgRating: string;
-    motm: number;
-    club: string;
-    age: number;
-  },
+  playerData: PlayerData,
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>,
-  personalityToken?: string
+  personalityToken?: string,
+  legendId?: string,
 ): Promise<string> {
-  const context = buildPlayerContext();
-  const focusedDB = buildFocusedContext(context, senderName);
+  const legendData = legendId ? findLegend(legendId) : null;
 
-  // Get persona from token
-  const persona = personalityToken
-    ? personalityToken.split('\n').filter((l: string) => l.trim()).slice(0, 3).join(' ')
-    : `You are ${senderName}.`;
-
-  const systemPrompt = `You are ${senderName}. Reply naturally in under 30 words. Use 1 emoji.`;
-
-  const messages: LLMMessage[] = [
-    { role: 'system', content: systemPrompt },
-    { role: 'assistant', content: originalMessage },
-    { role: 'user', content: `${playerReply}\n\nContext: ${focusedDB}` },
-  ];
-
-  if (chatHistory) {
-    for (const msg of chatHistory.slice(-3)) {
-      messages.splice(-1, 0, { role: msg.role === 'user' ? 'user' : 'assistant', content: msg.content });
-    }
+  // ── Template fallback (always works, no LLM needed) ──
+  if (!legendData) {
+    // Non-legend roles: use role-based fallback
+    return getRoleFallbackReply(senderRole, playerData);
   }
 
+  // For legends, try LLM first with rich context, fall back to smart templates
+  const contexts = buildLegendContext4(legendData, playerData);
+
+  // Try LLM
   try {
+    const context = buildPlayerContext();
+    const systemPrompt = buildLegendSystemPrompt(senderName, legendData, contexts);
+
+    const messages: LLMMessage[] = [
+      { role: 'system', content: systemPrompt },
+      { role: 'assistant', content: originalMessage },
+      { role: 'user', content: playerReply || 'What do you think about my career so far?' },
+    ];
+
+    if (chatHistory) {
+      for (const msg of chatHistory.slice(-6)) {
+        messages.splice(-1, 0, { role: msg.role === 'user' ? 'user' : 'assistant', content: msg.content });
+      }
+    }
+
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     const res = await fetch(`${LLM_BASE_URL}/v1/chat/completions`, {
       method: 'POST',
@@ -135,8 +331,8 @@ export async function generateDMReply(
       body: JSON.stringify({
         model: 'phi3',
         messages,
-        temperature: 0.7,
-        max_tokens: 150,
+        temperature: 0.8,
+        max_tokens: 200,
         stream: false,
       }),
       signal: controller.signal,
@@ -145,22 +341,17 @@ export async function generateDMReply(
 
     if (!res.ok) throw new Error('LLM request failed');
     const data: LLMResponse = await res.json();
-    let content = data.choices[0]?.message?.content || getFallbackReply(senderRole);
+    let content = data.choices[0]?.message?.content || '';
 
     // Aggressive cleaning of Phi-3-mini output
     content = content
-      // Remove special tokens
       .replace(/<\|assistant\|>/g, '')
       .replace(/<\|end\|>/g, '')
       .replace(/<\|user\|>/g, '')
       .replace(/<\|system\|>/g, '')
       .replace(/\|/g, '')
-      // Remove answer prefixes
       .replace(/^-+\s*answer:?.*$/gm, '')
-      // Remove meta-text Phi-3 likes to add
       .split(/\(Note:/i)[0]
-      .split(/As\s+(Cristiano|Lionel|Rio|Gary|Thierry|Ronaldinho|Andrea|Zinedine|Paolo|Xavi|Kylian|Erling|Jude|Sergio|Jorge|David)/i)[0]
-      // Remove everything after system prompt markers
       .split(/##\s*DATABASE/i)[0]
       .split(/##\s*YOUR PLAYER/i)[0]
       .split(/##\s*YOUR CAREER/i)[0]
@@ -168,45 +359,17 @@ export async function generateDMReply(
       .split(/##\s*RULES/i)[0]
       .split(/---------EXAMPLE---------/i)[0]
       .split(/-----------EXAMPLE-----------/i)[0]
-      // Remove any remaining markdown headers
       .replace(/^##.*$/gm, '')
-      // Clean up
       .replace(/\n{3,}/g, '\n\n')
       .trim();
 
-    // If response is too short or empty, use fallback
-    if (content.length < 5) {
-      return getFallbackReply(senderRole);
+    if (content.length >= 10) {
+      return content;
     }
-
-    return content;
   } catch {
-    return getFallbackReply(senderRole);
+    // LLM unavailable — fall through to template
   }
-}
 
-function getFallbackReply(role: string): string {
-  const replies: Record<string, string[]> = {
-    legend: [
-      'Keep working hard. The best is yet to come ⚽🔥',
-      'I see something special in you 💪',
-      'Focus on what you can control 🎯',
-      'The grind never stops. Keep going 🏆',
-      'Trust the process, young king 👑',
-    ],
-    agent: [
-      'Your value is increasing with every game 💰',
-      'We have options on the table 📋',
-      'Focus on your performances ⚽',
-      'Big moves coming. Stay ready 🔥',
-    ],
-    coach: [
-      'Good attitude. Keep this up 💪',
-      'Stay focused and disciplined 🎯',
-      'I am pleased with your development ⚽',
-      'You are growing every day. Proud of you 🙌',
-    ],
-  };
-  const options = replies[role] || replies.legend;
-  return options[Math.floor(Math.random() * options.length)];
+  // ── Smart template fallback for legends ──
+  return getTemplateReply(legendData, playerData, playerReply, chatHistory);
 }
