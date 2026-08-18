@@ -1,4 +1,5 @@
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from './dataAdapter';
+import { FIFA_POSITION_MAP } from './dataAdapter';
 
 const LLM_BASE_URL = '/llm-api';
 
@@ -53,7 +54,7 @@ const FAN_PERSONAS = [
 // Get current player data from career_export.json
 // ============================================
 function getCurrentPlayerData() {
-  const data = careerExportData as any;
+  const data = getActiveCareerData() as any;
   const profile = data.my_player_profile || {};
   const seasons = data.seasons || [];
   const latestSeason = seasons.length > 0 ? seasons[seasons.length - 1] : null;
@@ -61,16 +62,16 @@ function getCurrentPlayerData() {
   return {
     name: `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Unknown',
     team: profile.currentClub || 'Unknown',
-    position: profile.preferredposition1 === '23' ? 'RW' : 'CM',
-    overall: parseInt(profile.overallrating || '65'),
+    position: profile.preferredposition1 ? (FIFA_POSITION_MAP[profile.preferredposition1] || 'CM') : 'CM',
+    overall: parseInt(profile.overallrating || '0'),
     goals: latestSeason?.goals || 0,
     assists: latestSeason?.assists || 0,
     appearances: latestSeason?.apps || 0,
-    age: latestSeason?.age || 16,
+    age: latestSeason?.age || 0,
     totalGoals: data.total_goals || 0,
     totalAssists: data.total_assists || 0,
     totalApps: data.total_appearances || 0,
-    season: latestSeason?.season || '2024/2025',
+    season: latestSeason?.season || 'Current',
     motm: latestSeason?.motm || 0,
     avgRating: latestSeason?.avgRating || 0,
   };
@@ -279,12 +280,12 @@ function getCategoryBasedFallback(
 
     case 'international':
       comments = [
-        `${name} representing Wales! ${totalGoals}G ${totalAssists}A at club level — imagine for country.`,
-        `Wales' golden boy! ${age} years old and already a key player.`,
-        `${name} putting Wales on the map! ${goals}G at ${team} translates to international success.`,
+        `${name} representing ${player.team}! ${totalGoals}G ${totalAssists}A at club level — imagine for country.`,
+        `${player.team}'s golden boy! ${age} years old and already a key player.`,
+        `${name} putting ${player.team} on the map! ${goals}G at ${team} translates to international success.`,
         `International duty is where legends are made. ${name} has the talent.`,
-        `Wales need ${name} to deliver. ${totalAssists} assists shows he can create.`,
-        `${name} flying the Welsh flag! ${overall} OVR and rising.`,
+        `${player.team} need ${name} to deliver. ${totalAssists} assists shows he can create.`,
+        `${name} flying the flag! ${overall} OVR and rising.`,
       ];
       break;
 
@@ -417,7 +418,7 @@ export const POST_CATEGORIES: PostCategoryOption[] = [
   { id: 'transfer_talk', label: 'Transfer Talk', description: 'Rumours, moves, career decisions', icon: '✈️' },
   { id: 'form_check', label: 'Form Check', description: 'Current season performance discussion', icon: '📊' },
   { id: 'rivalry', label: 'Rivalry', description: 'Calling out competitors', icon: '⚔️' },
-  { id: 'international', label: 'International Duty', description: 'National team pride', icon: '🏴󠁧󠁢󠁷󠁬󠁳󠁿' },
+  { id: 'international', label: 'International Duty', description: 'National team pride', icon: '🌍' },
   { id: 'general', label: 'General', description: 'Casual football talk', icon: '💬' },
 ];
 
@@ -450,13 +451,13 @@ function getLegendComments(
       `${assists} assists? Haaland has more goals than that in HALF a season.`,
       `${ovr} OVR at ${team}. Haaland was at Dortmund destroying Bundesliga at your age.`,
       `${goals}G ${assists}A vs Haaland's 52 goals in 2022/23. Different tier.`,
-      `Haaland broke the PL scoring record. ${name} plays for Spezia. Be real.`,
+      `Haaland broke the PL scoring record. ${name} plays for ${team}. Be real.`,
     ],
     'Kylian Mbappé': [
       `${name} has ${goals} goals. Mbappé has a World Cup winner's medal at 19. Sit down.`,
       `${assists} assists vs Mbappé's 48 international goals. Pipe down.`,
       `${ovr} OVR at ${team}. Mbappé was tearing up Ligue 1 at your age.`,
-      `${goals}G ${assists}A and comparing to Mbappé? He has a World Cup. You have Spezia.`,
+      `${goals}G ${assists}A and comparing to Mbappé? He has a World Cup. You have ${team}.`,
       `Mbappé scored in a World Cup Final at 19. ${name} has ${goals} career goals. Stop.`,
     ],
     'Thierry Henry': [
@@ -471,7 +472,7 @@ function getLegendComments(
       `${assists} assists vs Zidane's World Cup Final goal. Different level.`,
       `${ovr} OVR at ${team}. Zidane was running Juventus' midfield at your age.`,
       `${goals}G and you mention Zidane? He has a Ballon d'Or and World Cup. Be quiet.`,
-      `Zidane headbutted Materazzi in a World Cup Final. ${name} plays for Spezia. Log off.`,
+      `Zidane headbutted Materazzi in a World Cup Final. ${name} plays for ${team}. Log off.`,
     ],
     'Mohamed Salah': [
       `${name} has ${goals} goals. Salah has 200+ PL goals. You're not close.`,
@@ -545,7 +546,7 @@ function getHaterComment(
   if (isCompliment(postLower)) {
     const haterCompliments = [
       `${ovr} OVR at ${team}. That is a mid rating for a mid team. But sure, celebrate.`,
-      `${goals}G ${assists}A and people are acting like he invented football. It is ${team}, not Real Madrid.`,
+      `${goals}G ${assists}A and people are acting like he invented football. It is ${team}, not one of the elite clubs.`,
       `${assists} assists? Half of those are probably simple passes. Do not hype this up.`,
       `${age} years old at ${team}. If he was at a real club, he would be benched. Facts.`,
       `${apps} appearances and ${goals} goals. That is a goal every ${Math.round(apps / Math.max(goals, 1))} games. Not impressive.`,

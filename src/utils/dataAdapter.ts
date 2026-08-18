@@ -3,6 +3,25 @@ import playerNamesData from '../data/player_names.json';
 import { PlayerData, Teammate, LeaguePlayerStat, TrophyItem, SeasonData } from '../types';
 import { INITIAL_PLAYER, SQUAD_TEAMMATES, LEAGUE_UNIVERSE_DATA } from '../data/mockData';
 import { calculateLegendPoints } from './trophies';
+import { getActiveSaveData } from './saveManager';
+
+/**
+ * Returns the active career export data.
+ * Priority: 1) active save (localStorage), 2) localStorage upload, 3) static import.
+ * Components should use this instead of importing careerExportData directly.
+ */
+export function getActiveCareerData(): any {
+  // 1. Check if a save is active
+  const saveData = getActiveSaveData();
+  if (saveData) return saveData;
+  // 2. Check if user uploaded JSON via the upload button
+  try {
+    const uploaded = localStorage.getItem('career_export_json');
+    if (uploaded) return JSON.parse(uploaded);
+  } catch {}
+  // 3. Fallback to static import
+  return careerExportData;
+}
 
 // Player name lookup from FIFA database
 const PLAYER_NAMES: Record<string, string> = playerNamesData as Record<string, string>;
@@ -191,7 +210,7 @@ function fifaBirthdateToAge(birthdate: string): number {
 /**
  * FIFA nationality ID to country name mapping (partial - covers common IDs)
  */
-const FIFA_NATIONALITY_MAP: Record<string, { name: string; flag: string }> = {
+export const FIFA_NATIONALITY_MAP: Record<string, { name: string; flag: string }> = {
   '7': { name: 'Argentina', flag: '🇦🇷' },
   '11': { name: 'Belgium', flag: '🇧🇪' },
   '14': { name: 'Brazil', flag: '🇧🇷' },
@@ -533,29 +552,28 @@ const FIFA_NATIONALITY_MAP: Record<string, { name: string; flag: string }> = {
  * keeps rich historical career timeline and iconics intact while overwriting real-time properties safely.
  */
 export function getMergedPlayerData(exportData?: CareerExportSchema): PlayerData {
-  const data = exportData || careerExportData as CareerExportSchema;
+  const data = exportData || getActiveCareerData() as CareerExportSchema;
   const exportDataFinal = data;
   const profile = exportDataFinal.my_player_profile;
-  const rawOverall = parseInt(profile.overallrating, 10) || 65;
-  const rawPotential = parseInt(profile.potential, 10) || 81;
+  const rawOverall = parseInt(profile.overallrating, 10) || 0;
+  const rawPotential = parseInt(profile.potential, 10) || 0;
   const rawHeight = profile.height ? `${profile.height} cm` : 'N/A';
   const rawWeight = profile.weight ? `${profile.weight} kg` : 'N/A';
   const prefFoot = profile.preferredfoot === '2' ? 'Left' : profile.preferredfoot === '1' ? 'Right' : 'Both';
-  const posText = FIFA_POSITION_MAP[profile.preferredposition1] || 'RW';
-  const nameText = formatPlayerName(profile) !== 'Unknown Player' ? formatPlayerName(profile) : 'Ampadu';
+  const posText = FIFA_POSITION_MAP[profile.preferredposition1] || 'Unknown';
+  const nameText = formatPlayerName(profile) !== 'Unknown Player' ? formatPlayerName(profile) : '';
 
   // Calculate age from latest season data (career export tracks per-season age)
   const seasons = (exportDataFinal as any).seasons || [];
   const latestSeason = seasons.length > 0 ? seasons[seasons.length - 1] : null;
-  const age = latestSeason?.age || 14;
+  const age = latestSeason?.age || 0;
 
   // Find squad entry for user player if available
   const userSquadEntry = exportDataFinal.my_squad?.find(p => p.playerid === exportDataFinal.my_player_id);
   const jerseyNo = userSquadEntry?.jerseynumber ? parseInt(userSquadEntry.jerseynumber, 10) : 0;
 
   // Use profile's currentClub if available, fall back to lookup
-  const teamName = (exportDataFinal as any).my_player_profile?.currentClub
-    || ((exportDataFinal as any).my_team_id === '113974' ? 'Spezia' : 'Unknown Club');
+  const teamName = (exportDataFinal as any).my_player_profile?.currentClub || 'Unknown Club';
 
   // Map FIFA nationality ID to name and flag
   const nationalId = profile.nationality?.toString() || '';
@@ -861,7 +879,7 @@ function mergeTrophiesWithAwards(
  * Transforms real squad array from career_export.json into full squad UI data
  */
 export function getExportSquad(exportData?: CareerExportSchema): Teammate[] {
-  const data = exportData || careerExportData as CareerExportSchema;
+  const data = exportData || getActiveCareerData() as CareerExportSchema;
   const exportDataFinal = data;
   if (!exportDataFinal.my_squad || exportDataFinal.my_squad.length === 0) {
     return SQUAD_TEAMMATES;
@@ -878,7 +896,7 @@ export function getExportSquad(exportData?: CareerExportSchema): Teammate[] {
     if (!name) {
       name = `${pos} #${member.jerseynumber || idx + 1}`;
     }
-    const rating = parseInt(member.overallrating, 10) || 75;
+    const rating = parseInt(member.overallrating, 10) || 0;
     const goals = parseInt(member.leaguegoals, 10) || 0;
     const apps = parseInt(member.leagueappearances, 10) || 0;
 
@@ -887,8 +905,8 @@ export function getExportSquad(exportData?: CareerExportSchema): Teammate[] {
       name: name,
       position: pos,
       rating: rating,
-      nationality: isUser ? 'Wales' : (FIFA_NATIONALITY_MAP[member.nationality]?.name || `${(data as any).my_player_profile?.currentClub || 'Unknown'} / ${pos}`),
-      flag: isUser ? '🏴󠁧󠁢󠁷󠁬󠁳󠁿' : (FIFA_NATIONALITY_MAP[member.nationality]?.flag || '⚽'),
+      nationality: FIFA_NATIONALITY_MAP[member.nationality]?.name || 'Unknown',
+      flag: FIFA_NATIONALITY_MAP[member.nationality]?.flag || '⚽',
       role: pos === 'GK' ? 'Goalkeeper' : pos.includes('B') ? 'Defender' : pos.includes('M') ? 'Midfielder' : 'Attacker',
       isUserPlayer: isUser,
       appsThisSeason: apps,

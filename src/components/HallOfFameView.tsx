@@ -5,7 +5,7 @@ import { Award, Trophy, CheckCircle, Target, Search, ArrowUp, Zap, Sparkles, Fil
 import confetti from 'canvas-confetti';
 import { audioEngine } from '../utils/audio';
 import { calculateLegendPoints } from '../utils/trophies';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { ImmortalRecordsView } from './ImmortalRecordsView';
 
 interface HallOfFameViewProps {
@@ -101,7 +101,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
   }, [player.seasons]);
 
   // Current club and league
-  const currentClub = player.currentClub || 'Spezia';
+  const currentClub = player.currentClub || 'Unknown Club';
   const currentLeague = player.seasons.length > 0 ? player.seasons[player.seasons.length - 1].league : '';
 
   // Current season context (used to tag every broken record so old records don't replay)
@@ -143,7 +143,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       'rec_manchester_utd': 'Manchester United', 'rec_liverpool': 'Liverpool',
       'rec_bayern': 'Bayern Munich', 'rec_juventus': 'Juventus',
       'rec_ac_milan': 'AC Milan', 'rec_inter': 'Inter Milan',
-      'rec_atletico': 'Atletico Madrid', 'rec_spezia': 'Spezia', 'rec_chelsea': 'Chelsea',
+      'rec_atletico': 'Atletico Madrid',
     };
     for (const [prefix, clubName] of Object.entries(clubMap)) {
       if (rec.id.startsWith(prefix)) {
@@ -328,7 +328,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
   };
 
   // Update modern active players with real game data (goals + assists)
-  const exportData = careerExportData as any;
+  const exportData = getActiveCareerData() as any;
   const leagueStatsData = exportData.league_stats || {};
   const topScorersList = leagueStatsData.topScorers || [];
   const topAssistsList = leagueStatsData.topAssists || [];

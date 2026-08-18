@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Flame, Trophy, TrendingUp, Star, Award, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { TOP_100_LEGENDS } from '../data/mockData';
 import { generateLLMPunditCards, PunditCard } from '../utils/newsLlm';
 
@@ -172,7 +172,7 @@ function getSpotlightMilestones(data: any, count: number = 4): SpotlightMileston
   const assists = data.total_assists || 0;
   const apps = data.total_appearances || 0;
   const seasons = data.seasons || [];
-  const ovr = parseInt(profile.overallrating || '65');
+  const ovr = parseInt(profile.overallrating || '0');
   const motmTotal = seasons.reduce((sum: number, s: any) => sum + (s.motm || 0), 0);
   const avgRating = seasons.length > 0
     ? (seasons.reduce((sum: number, s: any) => sum + (parseFloat(s.avgRating) || 0), 0) / seasons.length)
@@ -533,10 +533,11 @@ function generateTemplatePunditCards(data: any): PunditCard[] {
   const profile = data.my_player_profile || {};
   const goals = data.total_goals || 0;
   const assists = data.total_assists || 0;
-  const ovr = parseInt(profile.overallrating || '65');
+  const ovr = parseInt(profile.overallrating || '0');
   const seasons = data.seasons || [];
   const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Your Player';
   const playerClub = profile.currentClub || 'Unknown Club';
+  const playerNationality = profile.nationality || 'Unknown';
   const motmTotal = seasons.reduce((sum: number, s: any) => sum + (s.motm || 0), 0);
   const avgRating = seasons.length > 0
     ? (seasons.reduce((sum: number, s: any) => sum + (parseFloat(s.avgRating) || 0), 0) / seasons.length).toFixed(2)
@@ -579,7 +580,7 @@ function generateTemplatePunditCards(data: any): PunditCard[] {
       const takes = [
         { headline: `THE MOST EXCITING YOUNG PLAYER IN WORLD FOOTBALL`, detail: `${playerName} at ${ovr} OVR. The ceiling is unlimited!` },
         { headline: `${playerClub.toUpperCase()}'S GREATEST PLAYER`, detail: `${goals}G ${assists}A — rewriting history!` },
-        { headline: `WALES' GOLDEN BOY`, detail: `Carrying Welsh football on his shoulders!` },
+        { headline: `${playerNationality.toUpperCase()}'S FINEST`, detail: `Representing ${playerNationality} at the highest level!` },
         { headline: `THE NUMBERS DON'T LIE`, detail: `${avgRating} avg rating. Consistently dominant!` },
       ];
       const take = takes[seed % takes.length];
@@ -826,7 +827,7 @@ export const NewsFeed: React.FC = () => {
   const [spotlightVersion, setSpotlightVersion] = useState(0);
   const [spotlightIndex, setSpotlightIndex] = useState(0);
 
-  const data = careerExportData as any;
+  const data = getActiveCareerData() as any;
   const profile = data.my_player_profile || {};
   const seasons = data.seasons || [];
   const newsItems = useMemo(() => (data.news || []) as any[], [data]);

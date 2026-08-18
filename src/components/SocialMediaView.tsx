@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { MessageSquare, Heart, MessageCircle, Share2, Send, Star, Lock, ChevronDown, PenLine, Users, Search, X, UserPlus } from 'lucide-react';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { generateDMReply, isLLMAvailable } from '../utils/llm';
 import { LEGENDS, Legend, LegendTier } from '../data/legends';
 import { isLegendUnlocked, getLegendConversation, saveLegendConversation, getUnlockedLegends, LegendConversation } from '../utils/legendUnlock';
@@ -8,6 +8,7 @@ import { generateFanReactions, FanReaction, PostCategory, POST_CATEGORIES } from
 import { FanComment } from '../utils/newsLlm';
 import { TOP_100_LEGENDS } from '../data/mockData';
 import { calculateLegendPoints } from '../utils/trophies';
+import { FIFA_NATIONALITY_MAP } from '../utils/dataAdapter';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -174,9 +175,9 @@ function formatFollowerCount(count: number): string {
 // ─── Social Accounts Database ───────────────────────────────────────────────
 
 function buildSocialAccounts(): SocialAccount[] {
-  const data = careerExportData as any;
+  const data = getActiveCareerData() as any;
   const profile = data.my_player_profile || {};
-  const currentClub = profile.currentClub || 'Chelsea';
+  const currentClub = profile.currentClub || 'Unknown Club';
   const accounts: SocialAccount[] = [];
 
   // Teammates
@@ -246,13 +247,15 @@ function buildSocialAccounts(): SocialAccount[] {
 // ─── Feed Post Generation ───────────────────────────────────────────────────
 
 function generateFeedPosts(): FeedPost[] {
-  const data = careerExportData as any;
+  const data = getActiveCareerData() as any;
   const profile = data.my_player_profile || {};
-  const playerName = `${profile.firstname || 'Ethan'} ${profile.lastname || 'Ampadu'}`.trim();
-  const currentClub = profile.currentClub || 'Chelsea';
+  const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Unknown Player';
+  const currentClub = profile.currentClub || 'Unknown Club';
   const seasons = data.seasons || [];
   const prevSeason = seasons[1] || {};
   const posts: FeedPost[] = [];
+  // Dynamic flag from player nationality
+  const playerFlag = (FIFA_NATIONALITY_MAP as any)[profile.nationality?.toString() || '']?.flag || '⚽';
 
   const totalGoals = seasons.reduce((s: number, sn: any) => s + (sn.goals || 0), 0);
   const totalAssists = seasons.reduce((s: number, sn: any) => s + (sn.assists || 0), 0);
@@ -262,7 +265,7 @@ function generateFeedPosts(): FeedPost[] {
       id: 'player_career_stats',
       author: playerName,
       handle: `@${playerName.replace(/\s/g, '')}`,
-      flag: '🏴󠁧󠁢󠁳󠁯󠁼󠁧󠁿',
+      flag: playerFlag,
       verified: true,
       content: `${totalGoals} goals and ${totalAssists} assists across ${seasons.length} season${seasons.length > 1 ? 's' : ''}. The journey continues at ${currentClub}. 🔥`,
       likes: Math.floor(Math.random() * 5000) + 500,
@@ -277,7 +280,7 @@ function generateFeedPosts(): FeedPost[] {
       id: 'prev_season_recap',
       author: playerName,
       handle: `@${playerName.replace(/\s/g, '')}`,
-      flag: '🏴󠁧󠁢󠁳󠁯󠁼󠁧󠁿',
+      flag: playerFlag,
       verified: true,
       content: `Last season at ${prevSeason.club}: ${prevSeason.goals}G, ${prevSeason.assists}A in ${prevSeason.apps} apps. ${prevSeason.individualAwards?.length || 0} individual awards. Time to do it again. \u{1F4AA}`,
       likes: Math.floor(Math.random() * 8000) + 1000,
@@ -499,7 +502,7 @@ export function SocialMediaView() {
   // Legacy points — pure merit (G+A + trophies only)
   const legendPoints = useMemo(() => {
     try {
-      const d = careerExportData as any;
+      const d = getActiveCareerData() as any;
       const seasons = d.seasons || [];
       const trophies = d.trophies || [];
       const totalGoals = seasons.reduce((s: number, sn: any) => s + (sn.goals || 0), 0);
@@ -529,12 +532,14 @@ export function SocialMediaView() {
   const totalLegacyPoints = legendPoints;
 
   // Player data
-  const data = careerExportData as any;
+  const data = getActiveCareerData() as any;
   const profile = data.my_player_profile || {};
-  const playerName = `${profile.firstname || 'Ethan'} ${profile.lastname || 'Ampadu'}`.trim();
-  const currentClub = profile.currentClub || 'Chelsea';
-  const userOVR = parseInt(profile.overallrating || '73');
+  const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Unknown Player';
+  const currentClub = profile.currentClub || 'Unknown Club';
+  const userOVR = parseInt(profile.overallrating || '0');
   const userAge = 14 + (data.seasons?.length || 1);
+  // Dynamic flag from player nationality
+  const playerFlag = (FIFA_NATIONALITY_MAP as any)[profile.nationality?.toString() || '']?.flag || '⚽';
 
   // Real player career stats (for LLM context)
   const totalGoals = useMemo(() => (data.seasons || []).reduce((s: number, sn: any) => s + (sn.goals || 0), 0), []);
@@ -1045,7 +1050,7 @@ export function SocialMediaView() {
             <div className="bg-zinc-900/80 border border-amber-500/30 rounded-2xl overflow-hidden">
               <div className="p-4">
                 <div className="flex gap-3">
-                  <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center flex-shrink-0 text-lg">{'🏴󠁧󠁢󠁳󠁯󠁼󠁧󠁿'}</div>
+                  <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center flex-shrink-0 text-lg">{playerFlag}</div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold text-white">{playerName}</span>

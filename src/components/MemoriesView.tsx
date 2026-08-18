@@ -65,10 +65,7 @@ function getVideoDuration(file: File): Promise<number> {
 }
 
 // Known video files in public/assets/videos/
-const KNOWN_VIDEOS = [
-  { filename: 'chelsea_1_epl.mp4', title: 'First Premier League Title', description: 'Lifted the Premier League trophy with Chelsea.', year: '2025', competition: 'Premier League', impactTag: 'EPL CHAMPION' },
-  { filename: 'chelsea_1_UEL.mp4', title: 'Europa League Triumph', description: 'Chelsea lift the UEFA Europa League trophy.', year: '2025', competition: 'UEFA Europa League', impactTag: 'EUROPA CHAMPION' },
-];
+const KNOWN_VIDEOS: { filename: string; title: string; description: string; year: string; competition: string; impactTag: string }[] = [];
 
 export const MemoriesView: React.FC<MemoriesViewProps> = ({ moments, onAddMoment, onDeleteMoment }) => {
   const [selectedMoment, setSelectedMoment] = useState<IconicMoment | null>(null);

@@ -154,7 +154,7 @@ export const TacticalSheetView: React.FC<TacticalSheetViewProps> = ({ player }) 
           <span className="text-zinc-400 font-medium">Team Synergy:</span>
           <span className="text-emerald-400 font-extrabold font-mono text-sm">
             {assignedPlayers.length > 0 
-              ? `${Math.round(assignedPlayers.reduce((sum, p) => sum + (p.chemistryLink || 75), 0) / assignedPlayers.length)}% CHEMISTRY`
+              ? `${Math.round(assignedPlayers.reduce((sum, p) => sum + (p.chemistryLink || 0), 0) / assignedPlayers.length)}% CHEMISTRY`
               : '—'}
           </span>
         </div>

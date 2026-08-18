@@ -24,6 +24,7 @@ import { TrophyRoomView } from './components/TrophyRoomView';
 import { RecordsProjectionsView } from './components/RecordsProjectionsView';
 import { SeasonAwardsView } from './components/SeasonAwardsView';
 import { IconicMomentsModal } from './components/IconicMomentsModal';
+import { SaveManagerModal } from './components/SaveManagerModal';
 import { Trophy, Award, Sparkles, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { audioEngine } from './utils/audio';
@@ -84,15 +85,15 @@ function convertRawDump(raw: any): CareerExportSchema {
   const myProfile = {
     playerid: myPlayerId,
     firstname: careerUser.firstname || playerProfile.firstname || '',
-    lastname: careerUser.surname || playerProfile.lastname || 'Ampadu',
+    lastname: careerUser.surname || playerProfile.lastname || '',
     commonname: careerUser.commonname || playerProfile.commonname || '',
-    overallrating: String(playerProfile.overallrating || 65),
-    potential: String(playerProfile.potential || 81),
-    height: String(playerProfile.height || 181),
-    weight: String(playerProfile.weight || 75),
-    preferredfoot: String(playerProfile.preferredfoot || 1),
-    birthdate: String(playerProfile.birthdate || 155198),
-    preferredposition1: String(playerProfile.preferredposition1 || 23),
+    overallrating: String(playerProfile.overallrating || 0),
+    potential: String(playerProfile.potential || 0),
+    height: String(playerProfile.height || 0),
+    weight: String(playerProfile.weight || 0),
+    preferredfoot: String(playerProfile.preferredfoot || 0),
+    birthdate: String(playerProfile.birthdate || 0),
+    preferredposition1: String(playerProfile.preferredposition1 || 0),
     nationality: nat[0],
   };
 
@@ -111,10 +112,10 @@ function convertRawDump(raw: any): CareerExportSchema {
       firstname: full.firstname || link.firstname,
       lastname: full.lastname || link.lastname,
       commonname: full.commonname || link.commonname,
-      overallrating: String(full.overallrating || 70),
-      potential: String(full.potential || 75),
-      height: String(full.height || 180),
-      weight: String(full.weight || 75),
+      overallrating: String(full.overallrating || 0),
+      potential: String(full.potential || 0),
+      height: String(full.height || 0),
+      weight: String(full.weight || 0),
       preferredfoot: String(full.preferredfoot || 1),
       birthdate: String(full.birthdate || 150000),
       preferredposition1: String(full.preferredposition1 || 14),
@@ -130,8 +131,8 @@ function convertRawDump(raw: any): CareerExportSchema {
         playerid: String(p.playerid),
         firstname: p.firstname, lastname: p.lastname, commonname: p.commonname,
         overallrating: String(p.overallrating), potential: String(p.potential || p.overallrating),
-        height: String(p.height || 180), weight: String(p.weight || 75),
-        preferredfoot: String(p.preferredfoot || 1), birthdate: String(p.birthdate || 150000),
+        height: String(p.height || 0), weight: String(p.weight || 0),
+        preferredfoot: String(p.preferredfoot || 0), birthdate: String(p.birthdate || 0),
         preferredposition1: String(p.preferredposition1 || 0),
         teamname: link?.teamname || 'Unknown',
       });
@@ -151,9 +152,9 @@ function convertRawDump(raw: any): CareerExportSchema {
     leagueScorers[leagueName].push({
       playerid: String(link.playerid),
       firstname: full.firstname, lastname: full.lastname, commonname: full.commonname,
-      overallrating: String(full.overallrating || 70), potential: String(full.potential || 75),
-      height: String(full.height || 180), weight: String(full.weight || 75),
-      preferredfoot: String(full.preferredfoot || 1), birthdate: String(full.birthdate || 150000),
+      overallrating: String(full.overallrating || 0), potential: String(full.potential || 0),
+      height: String(full.height || 0), weight: String(full.weight || 0),
+      preferredfoot: String(full.preferredfoot || 0), birthdate: String(full.birthdate || 0),
       preferredposition1: String(link.position ?? full.preferredposition1 ?? 0),
       teamname: link.teamname || 'Unknown',
       leaguegoals: String(goals),
@@ -205,6 +206,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isIconicModalOpen, setIsIconicModalOpen] = useState<boolean>(false);
+  const [isSaveManagerOpen, setIsSaveManagerOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<{ title: string; subtitle: string; bonusPoints: number } | null>(null);
   const [notifications, setNotifications] = useState<Record<string, boolean>>({});
 
@@ -319,6 +321,22 @@ export default function App() {
     });
   };
 
+  const handleSaveDataLoaded = (careerExport: any) => {
+    try {
+      localStorage.removeItem('career_export_json');
+      localStorage.setItem('career_export_json', JSON.stringify(careerExport));
+    } catch {}
+    setPlayer(getMergedPlayerData());
+    localStorage.setItem('career_data_snapshot', getSnapshot(careerExport));
+    localStorage.setItem('career_news_unread', 'true');
+    localStorage.setItem('career_social_unread', 'true');
+    setNotification({
+      title: '💾 SAVE LOADED',
+      subtitle: `Loaded career data for ${careerExport?.my_player_profile?.firstname || 'Unknown'} ${careerExport?.my_player_profile?.lastname || ''}`,
+      bonusPoints: 0
+    });
+  };
+
   const handleRecordBrokenTrigger = (recordTitle: string, bonusPoints: number) => {
     setPlayer(prev => ({
       ...prev,
@@ -393,6 +411,7 @@ export default function App() {
         soundEnabled={soundEnabled}
         onToggleSound={handleToggleSound}
         onOpenIconicModal={() => setIsIconicModalOpen(true)}
+        onOpenSaveManager={() => setIsSaveManagerOpen(true)}
         onSimulateSeason={handleSimulateSeason}
         onUploadJson={handleUploadJson}
         activeTab={activeTab}
@@ -480,6 +499,12 @@ export default function App() {
         onClose={() => setIsIconicModalOpen(false)}
         onAddMoment={handleAddIconicMoment}
         onDeleteMoment={handleDeleteIconicMoment}
+      />
+
+      <SaveManagerModal
+        isOpen={isSaveManagerOpen}
+        onClose={() => setIsSaveManagerOpen(false)}
+        onDataLoaded={handleSaveDataLoaded}
       />
 
       {/* Milestone Notification Toast */}

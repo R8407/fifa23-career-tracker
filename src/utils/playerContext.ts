@@ -1,5 +1,5 @@
 import llmContextData from '../data/llm_context.json';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from './dataAdapter';
 
 export interface PlayerContextEntry {
   name: string;
@@ -57,7 +57,7 @@ export interface PlayerContext {
 
 export function buildPlayerContext(): PlayerContext {
   const data = llmContextData as any;
-  const careerData = careerExportData as any;
+  const careerData = getActiveCareerData() as any;
   const leagueStats = careerData?.league_stats || {};
 
   return {
@@ -65,9 +65,9 @@ export function buildPlayerContext(): PlayerContext {
       name: 'Unknown',
       team: 'Unknown',
       position: 'MF',
-      overall: 70,
-      potential: 75,
-      age: 16,
+      overall: 0,
+      potential: 0,
+      age: 0,
       goals: 0,
       assists: 0,
       appearances: 0,
@@ -76,7 +76,7 @@ export function buildPlayerContext(): PlayerContext {
     elitePlayers: (data.elite_players || []).map((p: any) => ({
       name: p.name || 'Unknown',
       position: p.position || 'ST',
-      overall: p.overall || 85,
+      overall: p.overall || 0,
       team: p.team || 'Unknown',
       goals: p.goals || 0,
       assists: p.assists || 0,

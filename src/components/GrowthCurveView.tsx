@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { PlayerData } from '../types';
 import { TrendingUp, Flame, Zap, AlertTriangle, ShieldAlert, Activity } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { AttributeRadar } from './AttributeRadar';
 
 interface GrowthCurveViewProps {
@@ -16,7 +16,7 @@ function generateExpectedCurve(potential: number) {
   const peakAge = 27;
   const declineStart = 31;
   const maxAge = 38;
-  const startOvr = 55;
+  const startOvr = Math.max(45, potential - 30);
 
   for (let age = 14; age <= maxAge; age++) {
     let rating: number;
@@ -57,7 +57,7 @@ function generateRealCurve(seasons: any[], currentAge: number, currentOvr: numbe
   // Build map of actual OVR ratings from season data
   const ratingsByAge: Record<number, number> = {};
   for (const s of seasons) {
-    const age = s.age || (14 + parseInt(s.id?.split('_')[1] || '0'));
+    const age = s.age || (16 + parseInt(s.id?.split('_')[1] || '0'));
     const ovr = s.overall || (s.avgRating > 10 ? Math.round(s.avgRating) : null);
     if (ovr && ovr > 40) {
       ratingsByAge[age] = ovr;
@@ -82,15 +82,15 @@ function generateRealCurve(seasons: any[], currentAge: number, currentOvr: numbe
 
 export const GrowthCurveView: React.FC<GrowthCurveViewProps> = ({ player }) => {
   const [selectedStat, setSelectedStat] = useState<'overall' | 'pace' | 'shooting' | 'passing' | 'dribbling' | 'physical'>('overall');
-  const [targetAge, setTargetAge] = useState<number>(player.age || 15);
+  const [targetAge, setTargetAge] = useState<number>(player.age || 16);
 
   // Get real data from export
-  const exportData = careerExportData as any;
+  const exportData = getActiveCareerData() as any;
   const playerProfile = exportData.my_player_profile || {};
   const seasons = exportData.seasons || [];
-  const currentOvr = player.overall || playerProfile.overallrating || 69;
-  const potential = player.potential || playerProfile.potential || 81;
-  const currentAge = player.age || 15;
+  const currentOvr = player.overall || playerProfile.overallrating || 0;
+  const potential = player.potential || playerProfile.potential || 0;
+  const currentAge = player.age || 16;
 
   // Generate both curves
   const expectedCurve = useMemo(() => generateExpectedCurve(potential), [potential]);

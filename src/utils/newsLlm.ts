@@ -68,8 +68,8 @@ function buildPlayerStatsBlock(data: any): string {
   const goals = data.total_goals || 0;
   const assists = data.total_assists || 0;
   const apps = data.total_appearances || 0;
-  const ovr = parseInt(profile.overallrating || '65');
-  const pot = parseInt(profile.potential || '81');
+  const ovr = parseInt(profile.overallrating || '0');
+  const pot = parseInt(profile.potential || '0');
   const seasons = data.seasons || [];
   const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Unknown';
   const motmTotal = seasons.reduce((sum: number, s: any) => sum + (s.motm || 0), 0);
@@ -182,7 +182,7 @@ export async function generateLLMFanComments(headline: string, details: string):
 
   const prompt = `You are generating 2 fan comments reacting to a football news headline. Be authentic, varied, and reference real stats.
 
-PLAYER: ${user.name || 'Unknown'} | ${user.team || 'Unknown'} | ${user.position || 'Unknown'} | ${user.overall || 65} OVR
+PLAYER: ${user.name || 'Unknown'} | ${user.team || 'Unknown'} | ${user.position || 'Unknown'} | ${user.overall || 0} OVR
 STATS: ${user.goals ?? 0} goals, ${user.assists ?? 0} assists in ${user.appearances ?? 0} apps
 
 NEWS: "${headline}"

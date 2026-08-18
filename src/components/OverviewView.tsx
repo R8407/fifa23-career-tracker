@@ -26,13 +26,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
     : [
         {
           id: 'im_default',
-          title: 'Scored Winning Goal in FIFA World Cup Final',
-          description: 'Curled a 118th-minute extra-time winner past the keeper to secure the trophy.',
-          year: '2026',
-          competition: 'FIFA World Cup',
-          opponent: 'France',
-          matchResult: 'Ghana 3 - 2 France (AET)',
-          impactTag: 'WORLD CUP FINAL WINNER',
+          title: 'Career-defining moment awaits',
+          description: 'Step onto the pitch and write your own story.',
+          year: '',
+          competition: '',
+          opponent: '',
+          matchResult: '',
+          impactTag: '',
           imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'
         }
       ];
@@ -439,7 +439,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
           <p className="text-xs text-zinc-400 leading-relaxed border-t border-zinc-800/80 pt-3">
             {player.isLoadedFromExportDB
               ? `Your journey at ${player.currentClub} begins now. Build your legacy through consistent performances.`
-              : 'Your current GOAT trajectory puts you in company with icons like Kaká, Ronaldinho, and Henry. 14 records broken toward immortality.'}
+              : 'Your journey starts here. Play matches and build your legacy.'}
           </p>
         </div>
 
@@ -454,11 +454,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
                 <p className="text-xs text-zinc-400">
                   {player.isLoadedFromExportDB
                     ? `First professional season at ${player.currentClub}`
-                    : 'Peak performance campaign at Real Madrid'}
+                    : 'No season data loaded'}
                 </p>
               </div>
               <span className="px-2.5 py-1 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg">
-                {player.isLoadedFromExportDB ? 'SEASON 1' : 'AVG RATING: 8.6'}
+                {player.isLoadedFromExportDB ? 'SEASON 1' : 'NO DATA'}
               </span>
             </div>
 
@@ -492,11 +492,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
               </div>
             ) : (
               <div className="bg-zinc-950/60 p-3.5 rounded-xl border border-amber-500/20 text-xs text-zinc-300 space-y-1.5">
-                <div className="flex items-center gap-2 font-bold text-amber-400">
-                  <Trophy className="w-4 h-4" /> Ballon d'Or Winner (2029)
+                <div className="flex items-center gap-2 font-bold text-zinc-500">
+                  <Trophy className="w-4 h-4" /> No milestones yet
                 </div>
-                <p className="text-zinc-400 text-xs leading-relaxed">
-                  "Scored a historic hat-trick in the Champions League Final against Manchester City; crowned Europe's best footballer."
+                <p className="text-zinc-600 text-xs leading-relaxed">
+                  Load career data to see your highlights and achievements.
                 </p>
               </div>
             )}
@@ -506,7 +506,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
             <span className="text-zinc-500">
               {player.isLoadedFromExportDB
                 ? `Age ${player.age} (${player.overall} OVR) → Potential (${player.potential} OVR)`
-                : 'Career Trajectory: Age 18 (72 OVR) → Age 27 (91 OVR)'}
+                : `Age ${player.age || '?'} (${player.overall || '?'} OVR) → Potential (${player.potential || '?'} OVR)`}
             </span>
             <button
               onClick={() => onNavigateTab('seasons')}

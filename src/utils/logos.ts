@@ -51,7 +51,7 @@ export function getClubLogo(clubName: string): string {
   if (lower.includes('milan')) return REAL_CLUB_LOGOS['AC Milan'];
   if (lower.includes('inter')) return REAL_CLUB_LOGOS['Inter Milan'];
 
-  return REAL_CLUB_LOGOS['Real Madrid']; // Default high quality Real Madrid crest
+  return '';
 }
 
 export function getLeagueLogo(leagueName: string): string {

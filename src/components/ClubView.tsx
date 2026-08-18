@@ -4,7 +4,7 @@ import { getExportSquad } from '../utils/dataAdapter';
 import { Shield, X, Trophy, Star, TrendingUp, ChevronRight, Crown, Target } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import { HALL_OF_FAME_RECORDS } from '../data/mockData';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { TacticalSheetView } from './TacticalSheetView';
 
 const BASE_URL = import.meta.env.BASE_URL || '';
@@ -75,7 +75,7 @@ interface ClubRecord {
 
 export const ClubView: React.FC<ClubViewProps> = ({ player }) => {
   const [activeTab, setActiveTab] = useState<ClubTab>('formation');
-  const exportData = careerExportData as any;
+  const exportData = getActiveCareerData() as any;
   const clubHistory: ClubHistoryEntry[] = exportData.club_history || [];
 
   return (
@@ -281,7 +281,7 @@ const ClubHistoryTab: React.FC<{ clubHistory: ClubHistoryEntry[]; player: Player
 // POST-DEPARTURE TAB
 // ============================================
 const PostDepartureTab: React.FC<{ clubHistory: ClubHistoryEntry[] }> = ({ clubHistory }) => {
-  const exportData = careerExportData as any;
+  const exportData = getActiveCareerData() as any;
   const postDeparture = exportData.post_departure || {};
   
   const departedClubs = clubHistory.filter(c => !c.isCurrentClub);

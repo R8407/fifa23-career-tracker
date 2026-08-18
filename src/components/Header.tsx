@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Trophy, Volume2, VolumeX, Sparkles, UserPen, Flame, Zap, Upload } from 'lucide-react';
+import { Trophy, Volume2, VolumeX, Sparkles, UserPen, Flame, Zap, Upload, FolderOpen } from 'lucide-react';
 import { PlayerData } from '../types';
 import { audioEngine } from '../utils/audio';
 import { calculateLegendPoints } from '../utils/trophies';
+import { getActiveSave } from '../utils/saveManager';
 
 interface HeaderProps {
   player: PlayerData;
   soundEnabled: boolean;
   onToggleSound: () => void;
   onOpenIconicModal: () => void;
+  onOpenSaveManager: () => void;
   onSimulateSeason: () => void;
   onUploadJson: (data: any) => void;
   activeTab: string;
@@ -19,6 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   onToggleSound,
   onOpenIconicModal,
+  onOpenSaveManager,
   onSimulateSeason,
   onUploadJson,
   activeTab
@@ -89,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-emerald-400 font-medium">{player.position}</span>
               <span className="text-slate-600">·</span>
               <span className="text-slate-300 flex items-center gap-1">
-                <img src={`/assets/images/clubs/${player.currentClub === 'Chelsea' ? 'Chelsea.png' : '113974.webp'}`} alt="" className="w-3.5 h-3.5 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                <img src={`/assets/images/clubs/${player.currentClub?.replace(/\s+/g, '_') || 'unknown'}.webp`} alt="" className="w-3.5 h-3.5 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                 {player.currentClub}
               </span>
               {player.isOnLoan && (
@@ -163,6 +166,20 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Upload className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Upload JSON</span>
+          </button>
+
+          {/* Save Manager Button */}
+          <button
+            onClick={onOpenSaveManager}
+            title="Manage career saves"
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-medium border rounded-lg transition-colors cursor-pointer ${
+              getActiveSave()
+                ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-amber-500/40'
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border-slate-700'
+            }`}
+          >
+            <FolderOpen className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">{getActiveSave() || 'Saves'}</span>
           </button>
 
           {/* Iconic Moments Button */}

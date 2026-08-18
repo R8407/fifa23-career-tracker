@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { PlayerData } from '../types';
-import careerExportData from '../data/career_export.json';
+import { getActiveCareerData } from '../utils/dataAdapter';
 import { Globe, Trophy, Flame, Award, Star } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 import { getLeagueLogo } from '../utils/logos';
@@ -13,7 +13,7 @@ const TOP_5_LEAGUES = ['Premier League', 'La Liga', 'Bundesliga', 'Serie A', 'Li
 
 export const LeagueUniverseView: React.FC<LeagueUniverseViewProps> = ({ player }) => {
   const { leagueScorers, leagueKeys } = useMemo(() => {
-    const exportData = careerExportData as any;
+    const exportData = getActiveCareerData() as any;
     const topScorers = exportData.top_scorers_by_league || {};
     const leagueStats = exportData.league_stats || {};
     

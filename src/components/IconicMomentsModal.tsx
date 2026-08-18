@@ -261,7 +261,7 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
                   type="text"
                   value={matchResult}
                   onChange={(e) => setMatchResult(e.target.value)}
-                  placeholder="e.g. Ghana 3 - 2 France (AET)"
+                  placeholder="e.g. Team A 2 - 1 Team B"
                   className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-amber-400"
                 />
               </div>
