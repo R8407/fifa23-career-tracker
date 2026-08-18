@@ -485,6 +485,36 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     description: 'Become your national team\'s all-time leading goalscorer.',
     holderClub: 'National Team'
   },
+  {
+    id: 'rec_ghana_most_caps',
+    title: 'National Team Most Caps',
+    category: 'International',
+    holderName: 'André Ayew',
+    holderRecord: 120,
+    unit: 'caps',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 120,
+    legacyPoints: 8,
+    description: 'Most international appearances for Ghana.',
+    holderClub: 'National Team'
+  },
+  {
+    id: 'rec_ghana_alltime_assists',
+    title: 'National Team All-Time Assists Leader',
+    category: 'International',
+    holderName: 'Sulley Muntari',
+    holderRecord: 20,
+    unit: 'assists',
+    userCurrent: 0,
+    difficulty: 'Hard',
+    isBroken: false,
+    remainingToBreak: 20,
+    legacyPoints: 6,
+    description: 'Most assists in Ghana national team history.',
+    holderClub: 'National Team'
+  },
 
   // === EUROPA LEAGUE RECORDS ===
   {
@@ -932,6 +962,51 @@ export const HALL_OF_FAME_RECORDS: HallOfFameRecord[] = [
     legacyPoints: 8,
     description: 'Most assists in a single season for Liverpool.',
     holderClub: 'Liverpool'
+  },
+  {
+    id: 'rec_rayo_alltime_goals',
+    title: 'Rayo Vallecano All-Time Top Scorer',
+    category: 'Club',
+    holderName: 'Piti',
+    holderRecord: 48,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Hard',
+    isBroken: false,
+    remainingToBreak: 48,
+    legacyPoints: 8,
+    description: 'All-time top scorer for Rayo Vallecano across all competitions.',
+    holderClub: 'Rayo Vallecano'
+  },
+  {
+    id: 'rec_rayo_laliga_goals',
+    title: 'Rayo Vallecano LaLiga All-Time Top Scorer',
+    category: 'Club',
+    holderName: 'Álvaro García',
+    holderRecord: 30,
+    unit: 'goals',
+    userCurrent: 0,
+    difficulty: 'Hard',
+    isBroken: false,
+    remainingToBreak: 30,
+    legacyPoints: 7,
+    description: 'Most LaLiga goals in Rayo Vallecano history.',
+    holderClub: 'Rayo Vallecano'
+  },
+  {
+    id: 'rec_rayo_laliga_caps',
+    title: 'Rayo Vallecano Most LaLiga Appearances',
+    category: 'Club',
+    holderName: 'Óscar Trejo',
+    holderRecord: 333,
+    unit: 'caps',
+    userCurrent: 0,
+    difficulty: 'Elite',
+    isBroken: false,
+    remainingToBreak: 333,
+    legacyPoints: 8,
+    description: 'Most appearances in Rayo Vallecano history.',
+    holderClub: 'Rayo Vallecano'
   },
 
   // === INDIVIDUAL AWARDS ===

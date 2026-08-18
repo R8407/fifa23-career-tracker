@@ -244,6 +244,7 @@ export const FIFA_NATIONALITY_MAP: Record<string, { name: string; flag: string }
   '104': { name: 'Italy', flag: '🇮🇹' },
   '107': { name: 'Czech Republic', flag: '🇨🇿' },
   '110': { name: 'Sweden', flag: '🇸🇪' },
+  '117': { name: 'Ghana', flag: '🇬🇭' },
   '122': { name: 'Cameroon', flag: '🇨🇲' },
   '123': { name: 'Ivory Coast', flag: '🇨🇮' },
   '126': { name: 'Senegal', flag: '🇸🇳' },

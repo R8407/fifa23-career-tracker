@@ -15,14 +15,22 @@ interface OverviewViewProps {
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTab, onOpenIconicModal, onAddIconicMoment, onDeleteIconicMoment }) => {
+  const [customImage, setCustomImage] = useState<string | null>(() => localStorage.getItem('player_overview_image'));
+
+  useEffect(() => {
+    const handler = () => setCustomImage(localStorage.getItem('player_overview_image'));
+    window.addEventListener('player-image-changed', handler);
+    return () => window.removeEventListener('player-image-changed', handler);
+  }, []);
+
   const totalGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
   const totalAssists = player.seasons.reduce((acc, s) => acc + s.assists, 0);
   const totalApps = player.seasons.reduce((acc, s) => acc + s.apps, 0);
   const totalTrophies = player.trophies.filter(t => t.category === 'Club' || t.category === 'International').reduce((acc, t) => acc + t.quantity, 0);
 
   // Iconic Moments Carousel state
-  const moments = player.iconicMoments && player.iconicMoments.length > 0
-    ? player.iconicMoments
+  const moments = (player.iconicMoments || []).filter(m => m && m.title && m.id).length > 0
+    ? player.iconicMoments.filter(m => m && m.title && m.id)
     : [
         {
           id: 'im_default',
@@ -68,7 +76,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
           {/* Left: Player Image */}
           <div className="relative bg-gradient-to-b from-slate-800 to-[#0f172a] flex items-center justify-center p-4">
             <img
-              src={playerOverviewImg}
+              src={customImage || playerOverviewImg}
               alt={player.name}
               className="w-full h-full max-h-[400px] object-contain drop-shadow-2xl"
             />

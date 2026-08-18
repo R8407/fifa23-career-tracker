@@ -18,6 +18,7 @@ export interface SaveData {
   meta: SaveMeta;
   careerExport: any;
   seasonCache?: any;
+  iconicMoments?: any[];
 }
 
 /** List all save names */
@@ -54,8 +55,15 @@ export function saveCareerData(name: string, careerExport: any, seasonCache?: an
     playerClub: careerExport?.my_player_profile?.currentClub || undefined,
   };
 
+  // Include iconic moments from localStorage
+  let iconicMoments: any[] = [];
+  try {
+    const stored = localStorage.getItem('career_iconic_moments');
+    if (stored) iconicMoments = JSON.parse(stored);
+  } catch {}
+
   // Store the data
-  localStorage.setItem(`career_save_${name}`, JSON.stringify({ meta, careerExport, seasonCache }));
+  localStorage.setItem(`career_save_${name}`, JSON.stringify({ meta, careerExport, seasonCache, iconicMoments }));
 
   // Update index
   const saves = listSaves().filter(s => s.name !== name);
@@ -68,7 +76,12 @@ export function loadSave(name: string): SaveData | null {
   try {
     const raw = localStorage.getItem(`career_save_${name}`);
     if (!raw) return null;
-    return JSON.parse(raw);
+    const data = JSON.parse(raw);
+    // Restore iconic moments to localStorage
+    if (data.iconicMoments && Array.isArray(data.iconicMoments)) {
+      localStorage.setItem('career_iconic_moments', JSON.stringify(data.iconicMoments));
+    }
+    return data;
   } catch {
     return null;
   }
@@ -121,4 +134,38 @@ export function exportSaveAsJson(name: string): Blob | null {
 /** Check if a save name already exists */
 export function saveExists(name: string): boolean {
   return listSaves().some(s => s.name === name);
+}
+
+/** Auto-save current state (iconic moments + player data) to a backup slot */
+export function autoSaveCurrentState(careerExport: any, seasonCache?: any): void {
+  const AUTO_SAVE_KEY = '__auto_backup';
+  let iconicMoments: any[] = [];
+  try {
+    const stored = localStorage.getItem('career_iconic_moments');
+    if (stored) iconicMoments = JSON.parse(stored);
+  } catch {}
+
+  const playerName = careerExport?.my_player_profile
+    ? `${careerExport.my_player_profile.firstname || ''} ${careerExport.my_player_profile.lastname || ''}`.trim() || 'Unknown'
+    : 'Unknown';
+  const seasons = careerExport?.seasons || [];
+  const currentSeason = seasons.length > 0 ? seasons[seasons.length - 1].season : 'unknown';
+
+  const meta: SaveMeta = {
+    name: AUTO_SAVE_KEY,
+    createdAt: Date.now(),
+    playerName,
+    playerClub: careerExport?.my_player_profile?.currentClub || undefined,
+  };
+
+  localStorage.setItem(`career_save_${AUTO_SAVE_KEY}`, JSON.stringify({
+    meta, careerExport, seasonCache, iconicMoments,
+    _autoSaveSeason: currentSeason,
+    _autoSaveDate: new Date().toISOString(),
+  }));
+}
+
+/** Get the auto-save data */
+export function getAutoSave(): SaveData | null {
+  return loadSave('__auto_backup');
 }

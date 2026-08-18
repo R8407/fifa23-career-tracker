@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Flame, Trophy, TrendingUp, Star, Award, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getActiveCareerData } from '../utils/dataAdapter';
+import { getActiveCareerData, FIFA_NATIONALITY_MAP } from '../utils/dataAdapter';
 import { TOP_100_LEGENDS } from '../data/mockData';
 import { generateLLMPunditCards, PunditCard } from '../utils/newsLlm';
 
@@ -537,7 +537,7 @@ function generateTemplatePunditCards(data: any): PunditCard[] {
   const seasons = data.seasons || [];
   const playerName = `${profile.firstname || ''} ${profile.lastname || ''}`.trim() || 'Your Player';
   const playerClub = profile.currentClub || 'Unknown Club';
-  const playerNationality = profile.nationality || 'Unknown';
+  const playerNationality = FIFA_NATIONALITY_MAP[profile.nationality?.toString() || '']?.name || profile.nationality || 'Unknown';
   const motmTotal = seasons.reduce((sum: number, s: any) => sum + (s.motm || 0), 0);
   const avgRating = seasons.length > 0
     ? (seasons.reduce((sum: number, s: any) => sum + (parseFloat(s.avgRating) || 0), 0) / seasons.length).toFixed(2)

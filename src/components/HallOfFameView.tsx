@@ -17,6 +17,17 @@ const LEGACY_STORAGE_KEY = 'career_broken_records';
 const LEGACY_POINTS_KEY = 'career_legacy_points';
 const RECORD_NEWS_KEY = 'career_record_news';
 const CLAIMED_RECORDS_KEY = 'career_claimed_records';
+const GHANA_STATS_KEY_PREFIX = 'ghana_intl_stats_';
+
+function getGhanaStats(playerName: string): { goals: number; assists: number; caps: number } {
+  try {
+    return JSON.parse(localStorage.getItem(`${GHANA_STATS_KEY_PREFIX}${playerName}`) || '{"goals":0,"assists":0,"caps":0}');
+  } catch { return { goals: 0, assists: 0, caps: 0 }; }
+}
+
+function setGhanaStats(playerName: string, stats: { goals: number; assists: number; caps: number }) {
+  localStorage.setItem(`${GHANA_STATS_KEY_PREFIX}${playerName}`, JSON.stringify(stats));
+}
 
 export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecordBrokenTrigger }) => {
   const [activeTab, setActiveTab] = useState<'leaderboard' | 'records'>('leaderboard');
@@ -42,6 +53,9 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
   useEffect(() => { localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(brokenRecords)); }, [brokenRecords]);
   useEffect(() => { localStorage.setItem(LEGACY_POINTS_KEY, String(totalLegacyPoints)); }, [totalLegacyPoints]);
   useEffect(() => { localStorage.setItem(CLAIMED_RECORDS_KEY, JSON.stringify(claimedRecords)); }, [claimedRecords]);
+
+  // Force re-render when Ghana stats are edited manually
+  const [ghanaStatsVersion, setGhanaStatsVersion] = useState(0);
 
   // User stats calculation
   const totalUserGoals = player.seasons.reduce((acc, s) => acc + s.goals, 0);
@@ -144,6 +158,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       'rec_bayern': 'Bayern Munich', 'rec_juventus': 'Juventus',
       'rec_ac_milan': 'AC Milan', 'rec_inter': 'Inter Milan',
       'rec_atletico': 'Atletico Madrid',
+      'rec_rayo': 'Rayo Vallecano',
     };
     for (const [prefix, clubName] of Object.entries(clubMap)) {
       if (rec.id.startsWith(prefix)) {
@@ -158,7 +173,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
     // League-specific records (fallback using league name)
     const leagueMap: Record<string, string[]> = {
       'rec_pl_': ['Premier League', 'Premier League '],
-      'rec_laliga_': ['La Liga', 'LaLiga'],
+      'rec_laliga_': ['La Liga', 'LaLiga', 'LaLiga Santander'],
       'rec_bundesliga_': ['Bundesliga'],
       'rec_seriea_': ['Serie A', 'Serie A TIM'],
       'rec_ligue1_': ['Ligue 1', 'Ligue 1 '],
@@ -182,8 +197,19 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       }
     }
 
-    // International records: not applicable yet
-    if (rec.id.includes('ghana') || rec.id.includes('worldcup') || rec.id.includes('world_cup')) return { value: 0, isApplicable: false };
+    // Ghana national team records: only applicable if player's nationality is Ghana
+    if (rec.id.includes('ghana')) {
+      const isGhanaian = player.nationality === 'Ghana' || player.nationality === '117';
+      if (!isGhanaian) return { value: 0, isApplicable: false };
+      const ghanaStats = getGhanaStats(player.name || '');
+      if (rec.id.includes('alltime_goals')) return { value: ghanaStats.goals, isApplicable: true };
+      if (rec.id.includes('alltime_assists')) return { value: ghanaStats.assists, isApplicable: true };
+      if (rec.id.includes('most_caps') || rec.id.includes('alltime_caps')) return { value: ghanaStats.caps, isApplicable: true };
+      return { value: 0, isApplicable: true };
+    }
+
+    // Other international records: not applicable yet
+    if (rec.id.includes('worldcup') || rec.id.includes('world_cup')) return { value: 0, isApplicable: false };
     if (rec.id.includes('intl_') || rec.id.includes('international')) return { value: 0, isApplicable: false };
 
     return { value: 0, isApplicable: false };
@@ -202,7 +228,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
         remainingToBreak: Math.max(0, rec.holderRecord - userCurrent)
       };
     });
-  }, [player.seasons, player.trophies, brokenRecords, clubStats, leagueStats, compStats]);
+  }, [player.seasons, player.trophies, player.nationality, brokenRecords, clubStats, leagueStats, compStats, ghanaStatsVersion]);
 
   // Only show records that are applicable (clubs/leagues played in) + career records
   const records = allRecords.filter(r => r.isApplicable);
@@ -292,6 +318,15 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
       // Notify NewsFeed to re-read localStorage
       window.dispatchEvent(new Event('career-record-news-changed'));
     } catch { /* ignore */ }
+  };
+
+  const handleEditGhanaStat = (recId: string, value: number) => {
+    const stats = getGhanaStats(player.name || '');
+    if (recId.includes('alltime_goals')) stats.goals = value;
+    else if (recId.includes('alltime_assists')) stats.assists = value;
+    else if (recId.includes('most_caps') || recId.includes('alltime_caps')) stats.caps = value;
+    setGhanaStats(player.name || '', stats);
+    setGhanaStatsVersion(v => v + 1);
   };
 
   const userPoints = calculateLegendPoints({
@@ -694,6 +729,7 @@ export const HallOfFameView: React.FC<HallOfFameViewProps> = ({ player, onRecord
           allRecords={allRecords}
           brokenRecords={brokenRecords}
           onBreakRecord={handleSimulateRecordAttempt}
+          onEditValue={handleEditGhanaStat}
         />
       )}
     </div>

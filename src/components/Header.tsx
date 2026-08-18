@@ -11,6 +11,7 @@ interface HeaderProps {
   onToggleSound: () => void;
   onOpenIconicModal: () => void;
   onOpenSaveManager: () => void;
+  onOpenEditPlayer: () => void;
   onSimulateSeason: () => void;
   onUploadJson: (data: any) => void;
   activeTab: string;
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSound,
   onOpenIconicModal,
   onOpenSaveManager,
+  onOpenEditPlayer,
   onSimulateSeason,
   onUploadJson,
   activeTab
@@ -127,6 +129,16 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2 self-end md:self-auto">
+          {/* Edit Player Button */}
+          <button
+            onClick={onOpenEditPlayer}
+            title="Edit player profile"
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 rounded-lg transition-colors cursor-pointer"
+          >
+            <UserPen className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Edit Player</span>
+          </button>
+
           {/* Sound Toggle */}
           <button
             onClick={onToggleSound}

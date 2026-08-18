@@ -7,3 +7,9 @@ coverage/
 .env*
 !.env.example
 .vercel
+
+# Career saves (auto-generated)
+saves/
+
+# Career saves (auto-generated)
+../saves/

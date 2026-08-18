@@ -1,4 +1,5 @@
 import llmContextData from '../data/llm_context.json';
+import { FIFA_NATIONALITY_MAP } from './dataAdapter';
 
 const LLM_BASE_URL = '/llm-api';
 
@@ -80,7 +81,7 @@ function buildPlayerStatsBlock(data: any): string {
   const seasonGoals = latestSeason ? (latestSeason.goals || 0) : 0;
   const seasonAssists = latestSeason ? (latestSeason.assists || 0) : 0;
   const team = profile.currentClub || 'Unknown';
-  const nationality = profile.nationality || 'Unknown';
+  const nationality = FIFA_NATIONALITY_MAP[profile.nationality?.toString() || '']?.name || profile.nationality || 'Unknown';
 
   return `PLAYER: ${playerName}
 TEAM: ${team} | NATIONALITY: ${nationality}

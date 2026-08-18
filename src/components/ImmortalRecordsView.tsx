@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Trophy, Target, CheckCircle, Sparkles, Lock, ChevronDown, ChevronRight, Award } from 'lucide-react';
+import { Trophy, Target, CheckCircle, Sparkles, Lock, ChevronDown, ChevronRight, Award, Pencil, Check } from 'lucide-react';
 import { HallOfFameRecord, RecordCategory } from '../types';
 import { audioEngine } from '../utils/audio';
 
@@ -8,6 +8,7 @@ interface ImmortalRecordsViewProps {
   allRecords: HallOfFameRecord[];
   brokenRecords: Record<string, boolean>;
   onBreakRecord: (rec: HallOfFameRecord) => void;
+  onEditValue?: (recId: string, value: number) => void;
 }
 
 // Competition groupings with icons and colors
@@ -26,9 +27,21 @@ const RecordCard: React.FC<{
   rec: HallOfFameRecord;
   isBroken: boolean;
   onBreak: () => void;
-}> = ({ rec, isBroken, onBreak }) => {
+  onEdit?: (value: number) => void;
+}> = ({ rec, isBroken, onBreak, onEdit }) => {
   const progressPercent = Math.min(100, Math.round((rec.userCurrent / rec.holderRecord) * 100));
   const isClose = progressPercent >= 70 && !isBroken;
+  const isGhanaRecord = rec.id.includes('ghana');
+  const [editing, setEditing] = useState(false);
+  const [editValue, setEditValue] = useState(String(rec.userCurrent));
+
+  const handleSave = () => {
+    const num = parseInt(editValue, 10);
+    if (!isNaN(num) && num >= 0 && onEdit) {
+      onEdit(num);
+    }
+    setEditing(false);
+  };
 
   return (
     <div className={`relative p-4 rounded-xl border transition-all ${
@@ -69,9 +82,37 @@ const RecordCard: React.FC<{
         </div>
         <div className="flex justify-between items-center">
           <span className="text-zinc-500">Your Best</span>
-          <span className={`font-black ${isBroken ? 'text-amber-400' : 'text-zinc-200'}`}>
-            {rec.userCurrent} {rec.unit}
-          </span>
+          {editing ? (
+            <div className="flex items-center gap-1">
+              <input
+                type="number"
+                min="0"
+                value={editValue}
+                onChange={e => setEditValue(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleSave(); if (e.key === 'Escape') setEditing(false); }}
+                autoFocus
+                className="w-16 px-1 py-0.5 bg-zinc-800 border border-zinc-600 rounded text-white text-xs font-mono text-right focus:outline-none focus:border-amber-500"
+              />
+              <button onClick={handleSave} className="p-0.5 text-amber-400 hover:text-amber-300 cursor-pointer">
+                <Check className="w-3 h-3" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1">
+              <span className={`font-black ${isBroken ? 'text-amber-400' : 'text-zinc-200'}`}>
+                {rec.userCurrent} {rec.unit}
+              </span>
+              {isGhanaRecord && onEdit && (
+                <button
+                  onClick={() => { setEditValue(String(rec.userCurrent)); setEditing(true); }}
+                  className="p-0.5 text-zinc-600 hover:text-amber-400 transition-colors cursor-pointer"
+                  title="Edit manually"
+                >
+                  <Pencil className="w-3 h-3" />
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -123,6 +164,7 @@ export const ImmortalRecordsView: React.FC<ImmortalRecordsViewProps> = ({
   allRecords,
   brokenRecords,
   onBreakRecord,
+  onEditValue,
 }) => {
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
@@ -235,6 +277,7 @@ export const ImmortalRecordsView: React.FC<ImmortalRecordsViewProps> = ({
                     rec={rec}
                     isBroken={!!brokenRecords[rec.id]}
                     onBreak={() => onBreakRecord(rec)}
+                    onEdit={onEditValue ? (val) => onEditValue(rec.id, val) : undefined}
                   />
                 ))}
               </div>

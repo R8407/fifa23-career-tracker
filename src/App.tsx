@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { PlayerData, SeasonData } from './types';
 import { INITIAL_PLAYER } from './data/mockData';
 import { getMergedPlayerData } from './utils/dataAdapter';
+import { autoSaveCurrentState } from './utils/saveManager';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { OverviewView } from './components/OverviewView';
@@ -25,6 +26,7 @@ import { RecordsProjectionsView } from './components/RecordsProjectionsView';
 import { SeasonAwardsView } from './components/SeasonAwardsView';
 import { IconicMomentsModal } from './components/IconicMomentsModal';
 import { SaveManagerModal } from './components/SaveManagerModal';
+import { EditPlayerModal } from './components/EditPlayerModal';
 import { Trophy, Award, Sparkles, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { audioEngine } from './utils/audio';
@@ -45,12 +47,32 @@ const TOP_5_LEAGUE_IDS: Record<number, string> = {
 };
 
 const COUNTRY_MAP: Record<number, [string, string]> = {
-  1: ['Argentina', '🇦🇷'], 3: ['Belgium', '🇧🇪'], 4: ['Brazil', '🇧🇷'],
-  7: ['England', '🏴󠁧󠁢󠁥󠁮󠁧󠁿'], 9: ['France', '🇫🇷'], 10: ['Germany', '🇩🇪'],
-  14: ['Italy', '🇮🇹'], 15: ['Netherlands', '🇳🇱'], 17: ['Norway', '🇳🇴'],
-  19: ['Portugal', '🇵🇹'], 23: ['Spain', '🇪🇸'], 25: ['Switzerland', '🇨🇭'],
-  26: ['Turkey', '🇹🇷'], 28: ['Uruguay', '🇺🇾'], 29: ['USA', '🇺🇸'],
-  30: ['Wales', '🏴󠁧󠁢󠁷󠁬󠁳󠁿'], 55: ['Canada', '🇨🇦'],
+  1: ['Albania', '🇦🇱'], 3: ['Armenia', '🇦🇲'], 4: ['Austria', '🇦🇹'],
+  7: ['Belgium', '🇧🇪'], 8: ['Bosnia & Herzegovina', '🇧🇦'], 9: ['Bulgaria', '🇧🇬'],
+  10: ['Croatia', '🇭🇷'], 11: ['Cyprus', '🇨🇾'], 12: ['Czech Republic', '🇨🇿'],
+  13: ['Denmark', '🇩🇰'], 14: ['England', '🏴󠁧󠁢󠁥󠁮󠁧󠁿'], 17: ['Finland', '🇫🇮'],
+  18: ['France', '🇫🇷'], 20: ['Georgia', '🇬🇪'], 21: ['Germany', '🇩🇪'],
+  22: ['Greece', '🇬🇷'], 23: ['Hungary', '🇭🇺'], 24: ['Iceland', '🇮🇸'],
+  25: ['Republic of Ireland', '🇮🇪'], 26: ['Israel', '🇮🇱'], 27: ['Italy', '🇮🇹'],
+  34: ['Netherlands', '🇳🇱'], 35: ['Northern Ireland', '🇬🇧'], 36: ['Norway', '🇳🇴'],
+  37: ['Poland', '🇵🇱'], 38: ['Portugal', '🇵🇹'], 39: ['Romania', '🇷🇴'],
+  40: ['Russia', '🇷🇺'], 42: ['Scotland', '🏴󠁧󠁢󠁳󠁣󠁴󠁿'], 43: ['Slovakia', '🇸🇰'],
+  44: ['Slovenia', '🇸🇮'], 45: ['Spain', '🇪🇸'], 46: ['Sweden', '🇸🇪'],
+  47: ['Switzerland', '🇨🇭'], 48: ['Turkey', '🇹🇷'], 49: ['Ukraine', '🇺🇦'],
+  50: ['Wales', '🏴󠁧󠁢󠁷󠁬󠁳󠁿'], 51: ['Serbia', '🇷🇸'],
+  52: ['Argentina', '🇦🇷'], 53: ['Bolivia', '🇧🇴'], 54: ['Brazil', '🇧🇷'],
+  55: ['Chile', '🇨🇱'], 56: ['Colombia', '🇨🇴'], 57: ['Ecuador', '🇪🇨'],
+  58: ['Paraguay', '🇵🇾'], 59: ['Peru', '🇵🇪'], 60: ['Uruguay', '🇺🇾'],
+  61: ['Venezuela', '🇻🇪'], 70: ['Canada', '🇨🇦'], 72: ['Costa Rica', '🇨🇷'],
+  82: ['Jamaica', '🇯🇲'], 83: ['Mexico', '🇲🇽'], 95: ['USA', '🇺🇸'],
+  97: ['Algeria', '🇩🇿'], 98: ['Angola', '🇦🇴'], 99: ['Benin', '🇧🇯'],
+  100: ['Botswana', '🇧🇼'], 101: ['Burkina Faso', '🇧🇫'], 103: ['Cameroon', '🇨🇲'],
+  108: ['Ivory Coast', '🇨🇮'], 110: ['DR Congo', '🇨🇩'], 111: ['Egypt', '🇪🇬'],
+  117: ['Ghana', '🇬🇭'], 120: ['Kenya', '🇰🇪'], 126: ['Mali', '🇲🇱'],
+  129: ['Morocco', '🇲🇦'], 133: ['Nigeria', '🇳🇬'], 136: ['Senegal', '🇸🇳'],
+  140: ['South Africa', '🇿🇦'], 145: ['Tunisia', '🇹🇳'], 147: ['Zambia', '🇿🇲'],
+  148: ['Zimbabwe', '🇿🇼'], 155: ['China PR', '🇨🇳'], 163: ['Japan', '🇯🇵'],
+  167: ['Republic of Korea', '🇰🇷'], 195: ['Australia', '🇦🇺'],
 };
 
 function resolveName(p: any): string {
@@ -207,6 +229,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isIconicModalOpen, setIsIconicModalOpen] = useState<boolean>(false);
   const [isSaveManagerOpen, setIsSaveManagerOpen] = useState<boolean>(false);
+  const [isEditPlayerOpen, setIsEditPlayerOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<{ title: string; subtitle: string; bonusPoints: number } | null>(null);
   const [notifications, setNotifications] = useState<Record<string, boolean>>({});
 
@@ -262,6 +285,27 @@ export default function App() {
     }
   }, [activeTab]);
 
+  // Auto-save state before page unload
+  useEffect(() => {
+    const handleUnload = () => {
+      try {
+        autoSaveCurrentState(player as any);
+      } catch {}
+    };
+    window.addEventListener('beforeunload', handleUnload);
+    return () => window.removeEventListener('beforeunload', handleUnload);
+  }, [player]);
+
+  // Periodic auto-save every 60 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      try {
+        autoSaveCurrentState(player as any);
+      } catch {}
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [player]);
+
   const handleToggleSound = () => {
     const next = !soundEnabled;
     audioEngine.enabled = next;
@@ -273,6 +317,7 @@ export default function App() {
       const moments = [moment, ...(prev.iconicMoments || [])];
       try {
         localStorage.setItem('career_iconic_moments', JSON.stringify(moments));
+        autoSaveCurrentState(prev as any);
       } catch {}
       return { ...prev, iconicMoments: moments };
     });
@@ -283,6 +328,7 @@ export default function App() {
       const moments = (prev.iconicMoments || []).filter(m => m.id !== id);
       try {
         localStorage.setItem('career_iconic_moments', JSON.stringify(moments));
+        autoSaveCurrentState(prev as any);
       } catch {}
       return { ...prev, iconicMoments: moments };
     });
@@ -412,6 +458,7 @@ export default function App() {
         onToggleSound={handleToggleSound}
         onOpenIconicModal={() => setIsIconicModalOpen(true)}
         onOpenSaveManager={() => setIsSaveManagerOpen(true)}
+        onOpenEditPlayer={() => setIsEditPlayerOpen(true)}
         onSimulateSeason={handleSimulateSeason}
         onUploadJson={handleUploadJson}
         activeTab={activeTab}
@@ -506,6 +553,14 @@ export default function App() {
         onClose={() => setIsSaveManagerOpen(false)}
         onDataLoaded={handleSaveDataLoaded}
       />
+
+      {isEditPlayerOpen && (
+        <EditPlayerModal
+          player={player}
+          onSave={(updated) => setPlayer(prev => ({ ...prev, ...updated }))}
+          onClose={() => setIsEditPlayerOpen(false)}
+        />
+      )}
 
       {/* Milestone Notification Toast */}
       {notification && (

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { PlayerData, Position } from '../types';
-import { X, Check, UserPen } from 'lucide-react';
+import { X, Check, UserPen, Upload, Trash2 } from 'lucide-react';
 import { audioEngine } from '../utils/audio';
 
 interface EditPlayerModalProps {
@@ -17,6 +17,29 @@ export const EditPlayerModal: React.FC<EditPlayerModalProps> = ({ player, onSave
   const [nationality, setNationality] = useState(player.nationality);
   const [jerseyNumber, setJerseyNumber] = useState(player.jerseyNumber);
   const [preferredFoot, setPreferredFoot] = useState<'Left' | 'Right' | 'Both'>(player.preferredFoot);
+  const [previewImage, setPreviewImage] = useState<string | null>(() => localStorage.getItem('player_overview_image'));
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      setPreviewImage(dataUrl);
+      localStorage.setItem('player_overview_image', dataUrl);
+      window.dispatchEvent(new Event('player-image-changed'));
+      audioEngine.playClick();
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleImageRemove = () => {
+    setPreviewImage(null);
+    localStorage.removeItem('player_overview_image');
+    window.dispatchEvent(new Event('player-image-changed'));
+    audioEngine.playClick();
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +74,48 @@ export const EditPlayerModal: React.FC<EditPlayerModalProps> = ({ player, onSave
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+          {/* Player Image Upload */}
+          <div>
+            <label className="block text-zinc-400 font-bold uppercase mb-1">Player Image</label>
+            <div className="flex items-center gap-3">
+              <div
+                className="w-20 h-20 rounded-xl border border-zinc-800 bg-zinc-900 flex items-center justify-center overflow-hidden cursor-pointer shrink-0"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {previewImage ? (
+                  <img src={previewImage} alt="Player" className="w-full h-full object-cover" />
+                ) : (
+                  <Upload className="w-6 h-6 text-zinc-600" />
+                )}
+              </div>
+              <div className="flex-1 space-y-1.5">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full py-2 bg-zinc-900 text-zinc-300 font-bold rounded-xl border border-zinc-800 hover:border-amber-400 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <Upload className="w-3.5 h-3.5" /> {previewImage ? 'Replace Image' : 'Upload Image'}
+                </button>
+                {previewImage && (
+                  <button
+                    type="button"
+                    onClick={handleImageRemove}
+                    className="w-full py-2 bg-zinc-900 text-red-400 font-bold rounded-xl border border-zinc-800 hover:border-red-500 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" /> Remove Image
+                  </button>
+                )}
+              </div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+            </div>
+          </div>
+
           <div>
             <label className="block text-zinc-400 font-bold uppercase mb-1">Player Name</label>
             <input
