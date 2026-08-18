@@ -85,8 +85,7 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
   })();
 
   const presetVideos = [
-    { name: 'Chelsea UCL Goal', path: `${playerVideoFolder}/chelsea_1_epl.mp4` },
-    { name: 'Chelsea UEL Goal', path: `${playerVideoFolder}/chelsea_1_UEL.mp4` }
+    { name: 'La Liga Debut & Goal', path: `${playerVideoFolder}/first_la_liga_debut_and_goal.mp4` }
   ];
 
   return (
