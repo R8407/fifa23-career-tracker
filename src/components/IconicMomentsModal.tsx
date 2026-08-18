@@ -5,6 +5,7 @@ import { audioEngine } from '../utils/audio';
 
 interface IconicMomentsModalProps {
   player: PlayerData;
+  playerId?: string;
   isOpen: boolean;
   onClose: () => void;
   onAddMoment: (moment: IconicMoment) => void;
@@ -13,6 +14,7 @@ interface IconicMomentsModalProps {
 
 export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
   player,
+  playerId,
   isOpen,
   onClose,
   onAddMoment,
@@ -29,6 +31,8 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
   const [impactTag, setImpactTag] = useState('CHAMPIONS LEAGUE WINNER');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
+  const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
 
   if (!isOpen) return null;
 
@@ -47,7 +51,9 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
       matchResult: matchResult.trim() || undefined,
       impactTag: impactTag.trim().toUpperCase() || 'CAREER HIGHLIGHT',
       description: description.trim(),
-      imageUrl: imageUrl.trim() || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'
+      imageUrl: mediaType === 'image' ? (imageUrl.trim() || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80') : undefined,
+      videoUrl: mediaType === 'video' ? videoUrl.trim() || undefined : undefined,
+      mediaType: mediaType
     };
 
     onAddMoment(newMoment);
@@ -58,6 +64,8 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
     setOpponent('');
     setMatchResult('');
     setImageUrl('');
+    setVideoUrl('');
+    setMediaType('image');
     setActiveTab('list');
   };
 
@@ -67,6 +75,18 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
     'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80'
+  ];
+
+  // Player-specific video folder: /assets/videos/{name}_{id}/
+  const playerVideoFolder = (() => {
+    const name = (player.name || 'unknown').toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+    const id = playerId || '0';
+    return `/assets/videos/${name}_${id}`;
+  })();
+
+  const presetVideos = [
+    { name: 'Chelsea UCL Goal', path: `${playerVideoFolder}/chelsea_1_epl.mp4` },
+    { name: 'Chelsea UEL Goal', path: `${playerVideoFolder}/chelsea_1_UEL.mp4` }
   ];
 
   return (
@@ -131,13 +151,17 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
                   className="bg-zinc-900/90 border border-zinc-800 hover:border-amber-500/50 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all group"
                 >
                   <div className="flex items-center gap-4">
-                    {m.imageUrl && (
+                    {m.mediaType === 'video' && m.videoUrl ? (
+                      <div className="w-16 h-16 rounded-xl bg-zinc-800 border border-amber-500/30 shrink-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      </div>
+                    ) : m.imageUrl ? (
                       <img
                         src={m.imageUrl}
                         alt=""
                         className="w-16 h-16 rounded-xl object-cover border border-amber-500/30 shrink-0"
                       />
-                    )}
+                    ) : null}
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-bold rounded uppercase font-mono">
@@ -282,21 +306,79 @@ export const IconicMomentsModal: React.FC<IconicMomentsModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-zinc-300 uppercase mb-1.5">
-                  Select Photo Backdrop
+                  Media Type
                 </label>
-                <div className="grid grid-cols-5 gap-2">
-                  {presetImages.map((img, idx) => (
-                    <img
-                      key={idx}
-                      src={img}
-                      alt=""
-                      onClick={() => setImageUrl(img)}
-                      className={`w-full h-14 object-cover rounded-xl cursor-pointer border-2 transition-all ${
-                        imageUrl === img ? 'border-amber-400 scale-105 shadow-md' : 'border-zinc-800 opacity-60 hover:opacity-100'
-                      }`}
-                    />
-                  ))}
+                <div className="flex gap-2 mb-3">
+                  <button
+                    type="button"
+                    onClick={() => setMediaType('image')}
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
+                      mediaType === 'image'
+                        ? 'bg-amber-500/20 border-amber-400 text-amber-300'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <Camera className="w-4 h-4 inline mr-1" /> Photo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMediaType('video')}
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
+                      mediaType === 'video'
+                        ? 'bg-amber-500/20 border-amber-400 text-amber-300'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <svg className="w-4 h-4 inline mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Video
+                  </button>
                 </div>
+
+                {mediaType === 'image' ? (
+                  <>
+                    <label className="block text-xs font-bold text-zinc-300 uppercase mb-1.5">
+                      Select Photo Backdrop
+                    </label>
+                    <div className="grid grid-cols-5 gap-2">
+                      {presetImages.map((img, idx) => (
+                        <img
+                          key={idx}
+                          src={img}
+                          alt=""
+                          onClick={() => setImageUrl(img)}
+                          className={`w-full h-14 object-cover rounded-xl cursor-pointer border-2 transition-all ${
+                            imageUrl === img ? 'border-amber-400 scale-105 shadow-md' : 'border-zinc-800 opacity-60 hover:opacity-100'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <label className="block text-xs font-bold text-zinc-300 uppercase mb-1.5">
+                      Select Video
+                    </label>
+                    <div className="space-y-2">
+                      {presetVideos.map((vid, idx) => (
+                        <div
+                          key={idx}
+                          onClick={() => setVideoUrl(vid.path)}
+                          className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3 ${
+                            videoUrl === vid.path
+                              ? 'bg-amber-500/20 border-amber-400'
+                              : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+                          }`}
+                        >
+                          <svg className="w-5 h-5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                          <div>
+                            <div className="text-xs font-bold text-white">{vid.name}</div>
+                            <div className="text-[10px] text-zinc-500 font-mono">{vid.path}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="pt-2">

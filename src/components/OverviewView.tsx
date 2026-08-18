@@ -229,8 +229,24 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
 
         {/* Slide Display Card */}
         <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-zinc-950 via-zinc-900 to-black border border-zinc-800 min-h-[220px] flex flex-col md:flex-row items-center gap-6 p-6 shadow-inner">
-          {/* Photo Backdrop preview */}
-          {currentMoment.imageUrl && (
+          {/* Photo or Video Backdrop preview */}
+          {currentMoment.mediaType === 'video' && currentMoment.videoUrl ? (
+            <div className="relative w-full md:w-72 h-48 rounded-xl overflow-hidden shrink-0 border border-amber-500/30 shadow-lg group">
+              <video
+                src={currentMoment.videoUrl}
+                controls
+                autoPlay
+                muted
+                loop
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-amber-300 font-bold pointer-events-none">
+                <span>{currentMoment.competition}</span>
+                <span>{currentMoment.year}</span>
+              </div>
+            </div>
+          ) : currentMoment.imageUrl ? (
             <div className="relative w-full md:w-72 h-48 rounded-xl overflow-hidden shrink-0 border border-amber-500/30 shadow-lg group">
               <img
                 src={currentMoment.imageUrl}
@@ -243,7 +259,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ player, onNavigateTa
                 <span>{currentMoment.year}</span>
               </div>
             </div>
-          )}
+          ) : null}
 
           {/* Slide Description Details */}
           <div className="flex-1 space-y-3">

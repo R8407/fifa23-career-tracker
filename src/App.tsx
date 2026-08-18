@@ -225,6 +225,12 @@ function getSnapshot(data: any): string {
 
 export default function App() {
   const [player, setPlayer] = useState<PlayerData>(() => getMergedPlayerData());
+  const [playerId, setPlayerId] = useState<string>(() => {
+    try {
+      const data = getActiveCareerData();
+      return data?.my_player_id || '';
+    } catch { return ''; }
+  });
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isIconicModalOpen, setIsIconicModalOpen] = useState<boolean>(false);
@@ -542,6 +548,7 @@ export default function App() {
       {/* Custom Iconic Moments Documentation Modal */}
       <IconicMomentsModal
         player={player}
+        playerId={playerId}
         isOpen={isIconicModalOpen}
         onClose={() => setIsIconicModalOpen(false)}
         onAddMoment={handleAddIconicMoment}
